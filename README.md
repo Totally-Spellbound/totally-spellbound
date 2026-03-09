@@ -19,23 +19,15 @@ git clone https://github.com/Totally-Spellbound/totally-spellbound.git
 cd totally-spellbound
 ```
 
-### 2. Authenticate with Shopify
-
-Log in to the Shopify CLI. This will open a browser window for authentication:
-
-```sh
-shopify auth login --store totally-spellbound-2
-```
-
-You need a staff account or collaborator access on the **totally-spellbound-2** store.
-
-### 3. Start developing
+### 2. Start developing
 
 ```sh
 npm run dev
 ```
 
-This runs `shopify theme dev` against the `totally-spellbound-2` store. It will:
+This runs `shopify theme dev` against the `totally-spellbound-2` store. On first run, the CLI will prompt you to log in via your browser. You need a staff account or collaborator access on the store.
+
+Once authenticated, it will:
 
 - Upload the theme as a development theme
 - Start a local dev server with hot reload
