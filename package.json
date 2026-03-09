@@ -1,0 +1,13 @@
+{
+  "name": "totally-spellbound",
+  "version": "1.0.0",
+  "description": "Totally Spellbound Shopify theme",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev --store totally-spellbound-2",
+    "push": "shopify theme push --store totally-spellbound-2",
+    "pull": "shopify theme pull --store totally-spellbound-2",
+    "check": "shopify theme check",
+    "share": "shopify theme share --store totally-spellbound-2"
+  }
+}
