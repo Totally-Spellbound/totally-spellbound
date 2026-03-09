@@ -4,11 +4,8 @@ Shopify theme for the [Totally Spellbound](https://totally-spellbound-2.myshopif
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) (for npm scripts)
-- [Shopify CLI](https://shopify.dev/docs/storefronts/themes/tools/cli) — install with:
-  ```sh
-  npm install -g @shopify/cli @shopify/theme
-  ```
+- [Node.js](https://nodejs.org/) (v18+)
+- [Ruby](https://www.ruby-lang.org/) (required by Shopify CLI)
 
 ## Getting started
 
@@ -19,19 +16,54 @@ git clone https://github.com/Totally-Spellbound/totally-spellbound.git
 cd totally-spellbound
 ```
 
-### 2. Start developing
+### 2. Install dependencies
+
+Install the Shopify CLI and theme tools:
+
+```sh
+npm install -g @shopify/cli @shopify/theme
+```
+
+Verify it installed correctly:
+
+```sh
+shopify version
+```
+
+### 3. Log in to Shopify
+
+Authenticate with the Totally Spellbound store:
+
+```sh
+shopify theme dev --store totally-spellbound-2
+```
+
+On first run, this will open a browser window asking you to log in to your Shopify Partners or staff account. You need staff or collaborator access on the **totally-spellbound-2** store. Once you authenticate, the CLI will remember your session for future commands.
+
+### 4. Develop
+
+After login, the dev server starts automatically. For subsequent sessions just run:
 
 ```sh
 npm run dev
 ```
 
-This runs `shopify theme dev` against the `totally-spellbound-2` store. On first run, the CLI will prompt you to log in via your browser. You need a staff account or collaborator access on the store.
-
-Once authenticated, it will:
+This will:
 
 - Upload the theme as a development theme
-- Start a local dev server with hot reload
+- Start a local dev server with hot reload at `http://127.0.0.1:9292`
 - Give you a preview URL to view changes in real time
+
+### Troubleshooting auth
+
+If your session expires or you need to re-authenticate:
+
+```sh
+shopify auth logout
+shopify theme dev --store totally-spellbound-2
+```
+
+This will re-trigger the browser login flow.
 
 ## Available scripts
 
