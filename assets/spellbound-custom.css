@@ -108,3 +108,71 @@ body {
 .spellbound-no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* ========================= */
+/* Product Page Overrides     */
+/* ========================= */
+
+/* Product page price */
+.product-information .price .money,
+.product-information .price__current .money {
+  font-family: var(--font-heading--family);
+  font-weight: 300;
+  font-size: 1.875rem;
+  letter-spacing: 0.05em;
+}
+
+/* Product page Add to Cauldron button */
+.product-information .add-to-cart-button,
+.product-information button.add-to-cart-button {
+  position: relative;
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 1.5rem 2rem;
+  border: none;
+  overflow: hidden;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+.product-information .add-to-cart-button:hover,
+.product-information button.add-to-cart-button:hover {
+  background: #fde68a;
+  color: #000000;
+}
+
+/* Product description italic styling */
+.product-information .rte p {
+  font-style: italic;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Square Wishlist app button styling */
+.wishlist-button-container button,
+.sqw-wishlist-btn,
+[class*="wishlist"] button {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  background: transparent !important;
+  color: rgba(255,255,255,0.4) !important;
+  padding: 1.25rem !important;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.wishlist-button-container button:hover,
+.sqw-wishlist-btn:hover,
+[class*="wishlist"] button:hover {
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,0.2) !important;
+}

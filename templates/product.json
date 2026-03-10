@@ -1,5 +1,9 @@
 {
   "sections": {
+    "product_nav": {
+      "type": "spellbound-product-nav",
+      "settings": {}
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -419,6 +423,7 @@
     }
   },
   "order": [
+    "product_nav",
     "main",
     "product_extras",
     "product_lore",

@@ -1,94 +1,19 @@
 {% comment %}
   Spellbound Product Extras
-  Injects into the Horizon product-information section via JS:
-  - "THEME • HANDMADE" amber label above title
-  - "← RETURN TO VAULT" back link above media
-  - "IN STOCK" indicator next to price
-  - Italic quote styling for description
-  - Wishlist "Mark in Grimoire" button after add-to-cart
-  - Metafield properties grid below buy buttons
-  - Element badge overlay on product image
+  Static section rendered after product-information.
+  Shows theme/handmade label and metafield properties grid.
 {% endcomment %}
 
 <style>
-  .spellbound-product-extras__source { display: none; }
-
-  /* Back link */
-  .spellbound-back-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: rgba(255,255,255,0.4);
-    text-decoration: none;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-    margin-bottom: 3rem;
-  }
-  .spellbound-back-link:hover { color: #ffffff; }
-  .spellbound-back-link svg { flex-shrink: 0; }
-
   /* Theme + handmade label */
   .spellbound-theme-label {
     color: #f59e0b;
     font-size: 10px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     display: block;
   }
-
-  /* Price row with IN STOCK */
-  .spellbound-price-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-  .spellbound-price-row__divider {
-    height: 1px;
-    flex: 1;
-    background: rgba(255,255,255,0.1);
-  }
-  .spellbound-price-row__stock {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #34d399;
-    flex-shrink: 0;
-  }
-  .spellbound-price-row__stock--out {
-    color: #ef4444;
-  }
-
-  /* Grimoire (wishlist) button */
-  .spellbound-grimoire-btn {
-    width: 100%;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: transparent;
-    color: rgba(255,255,255,0.4);
-    padding: 1.25rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-  }
-  .spellbound-grimoire-btn:hover {
-    color: #ffffff;
-    border-color: rgba(255,255,255,0.2);
-  }
-  .spellbound-grimoire-btn--active {
-    color: #fde68a;
-    border-color: rgba(253,230,138,0.3);
-  }
-  .spellbound-grimoire-btn svg { transition: fill 0.3s ease; }
 
   /* Metafield properties grid */
   .spellbound-meta-grid {
@@ -97,7 +22,7 @@
     gap: 1rem;
     border-top: 1px solid rgba(255,255,255,0.05);
     padding-top: 2.5rem;
-    margin-top: 2.5rem;
+    margin-top: 1rem;
   }
   .spellbound-meta-grid__label {
     display: block;
@@ -115,29 +40,19 @@
     padding-left: 1rem;
   }
 
-  /* Element badge overlay on product image */
-  .spellbound-image-badge {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  /* Section container */
+  .spellbound-product-extras {
+    padding: 0 1.5rem 2rem;
+    max-width: 87.5rem;
+    margin: 0 auto;
   }
-  .spellbound-image-badge__tag {
-    font-size: 8px;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
-    padding: 4px 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.8);
-    width: fit-content;
+  @media (min-width: 1024px) {
+    .spellbound-product-extras {
+      padding: 0 6rem 2rem;
+    }
   }
 
-  /* Description italic quote styling */
+  /* Description italic quote styling (CSS-only, no JS needed) */
   .product-information .product-details .rte p,
   .product-information .product-details [data-block-type="text"] .rte p {
     font-style: italic;
@@ -167,57 +82,25 @@
 {%- assign intention_clean = intention_clean | strip -%}
 {%- assign theme_clean = theme_clean | strip -%}
 
-<div class="spellbound-product-extras__source" id="spellbound-product-extras-data">
+{%- assign has_any_meta = false -%}
+{%- if planet_clean != blank or element_clean != blank or zodiac_clean != blank or chakra_clean != blank or crystal_clean != blank or intention_clean != blank or theme_clean != blank or handmade -%}
+  {%- assign has_any_meta = true -%}
+{%- endif -%}
 
-  <!-- Back link -->
-  <div id="spellbound-back-link-wrapper">
-    <a href="{{ collection.url | default: routes.all_products_collection_url }}" class="spellbound-back-link">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-      Return to Vault
-    </a>
-  </div>
+{% if theme_clean != blank or handmade or has_any_meta %}
+<div class="spellbound-product-extras">
 
-  <!-- Theme + Handmade label -->
+  {%- comment -%} Theme + Handmade label {%- endcomment -%}
   {% if theme_clean != blank or handmade %}
-  <div id="spellbound-theme-label-wrapper">
     <span class="spellbound-theme-label">
       {%- if theme_clean != blank -%}{{ theme_clean }}{%- endif -%}
       {%- if theme_clean != blank and handmade %} &bull; {% endif -%}
       {%- if handmade -%}Handmade{%- endif -%}
     </span>
-  </div>
   {% endif %}
 
-  <!-- Price row stock indicator -->
-  <div id="spellbound-stock-indicator">
-    <div class="spellbound-price-row__divider"></div>
-    {% if current_product.available %}
-      <span class="spellbound-price-row__stock">In Stock</span>
-    {% else %}
-      <span class="spellbound-price-row__stock spellbound-price-row__stock--out">Sold Out</span>
-    {% endif %}
-  </div>
-
-  <!-- Element badge for product image -->
-  {% if element_clean != blank %}
-  <div id="spellbound-image-badge-wrapper">
-    <div class="spellbound-image-badge">
-      <span class="spellbound-image-badge__tag">{{ element_clean }}</span>
-    </div>
-  </div>
-  {% endif %}
-
-  <!-- Wishlist button -->
-  <div id="spellbound-grimoire-wrapper">
-    <button class="spellbound-grimoire-btn" data-product-id="{{ current_product.id }}">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-      <span class="spellbound-grimoire-btn__label">Mark in Grimoire</span>
-    </button>
-  </div>
-
-  <!-- Metafield properties grid -->
-  {% if planet_clean != blank or element_clean != blank or zodiac_clean != blank or chakra_clean != blank or crystal_clean != blank or intention_clean != blank or theme_clean != blank or handmade %}
-  <div id="spellbound-meta-grid-wrapper">
+  {%- comment -%} Metafield properties grid {%- endcomment -%}
+  {% if has_any_meta %}
     <div class="spellbound-meta-grid">
       {% if planet_clean != blank %}
         <div>
@@ -268,119 +151,10 @@
         </div>
       {% endif %}
     </div>
-  </div>
   {% endif %}
+
 </div>
-
-<script src="{{ 'spellbound-wishlist.js' | asset_url }}" defer></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var source = document.getElementById('spellbound-product-extras-data');
-    if (!source) return;
-
-    // === 1. Back link above media ===
-    var mediaCol = document.querySelector('.product-information__media');
-    var backLink = document.getElementById('spellbound-back-link-wrapper');
-    if (mediaCol && backLink) {
-      mediaCol.style.position = 'relative';
-      mediaCol.insertBefore(backLink, mediaCol.firstChild);
-      backLink.style.display = 'block';
-    }
-
-    // === 2. Theme label above title ===
-    var detailsCol = document.querySelector('.product-details');
-    var themeLabel = document.getElementById('spellbound-theme-label-wrapper');
-    if (detailsCol && themeLabel) {
-      // Insert before the first child of the details column
-      detailsCol.insertBefore(themeLabel, detailsCol.firstChild);
-      themeLabel.style.display = 'block';
-    }
-
-    // === 3. Stock indicator next to price ===
-    var stockIndicator = document.getElementById('spellbound-stock-indicator');
-    // Find the price block inside product details
-    var priceBlock = detailsCol ? detailsCol.querySelector('[data-block-type="price"], .price') : null;
-    if (!priceBlock && detailsCol) {
-      // Try finding price via heading group
-      var allBlocks = detailsCol.querySelectorAll('[data-block-type]');
-      allBlocks.forEach(function(b) {
-        if (b.querySelector('.price') || b.querySelector('[data-block-type="price"]')) {
-          priceBlock = b;
-        }
-      });
-    }
-    if (!priceBlock) {
-      // Broader search: find the price element anywhere in product-information
-      var priceEl = document.querySelector('.product-information .price');
-      if (priceEl) priceBlock = priceEl.closest('[data-block-type]') || priceEl.parentElement;
-    }
-    if (priceBlock && stockIndicator) {
-      // Make the price container flex so stock sits on the right
-      priceBlock.style.display = 'flex';
-      priceBlock.style.alignItems = 'center';
-      priceBlock.style.gap = '1rem';
-      priceBlock.style.width = '100%';
-      priceBlock.appendChild(stockIndicator);
-      stockIndicator.style.display = 'flex';
-      stockIndicator.style.alignItems = 'center';
-      stockIndicator.style.gap = '1rem';
-      stockIndicator.style.flex = '1';
-    }
-
-    // === 4. Element badge on product image ===
-    var imageBadge = document.getElementById('spellbound-image-badge-wrapper');
-    if (mediaCol && imageBadge) {
-      // Find the first image container / gallery
-      var gallery = mediaCol.querySelector('[data-block-type="_product-media-gallery"], .product-gallery, .product-media-gallery');
-      var target = gallery || mediaCol;
-      target.style.position = 'relative';
-      target.appendChild(imageBadge);
-      imageBadge.style.display = 'block';
-      imageBadge.style.position = 'absolute';
-      imageBadge.style.top = '0';
-      imageBadge.style.left = '0';
-      imageBadge.style.zIndex = '5';
-    }
-
-    // === 5. Grimoire button + meta grid inside product-details ===
-    var grimoireWrapper = document.getElementById('spellbound-grimoire-wrapper');
-    var metaWrapper = document.getElementById('spellbound-meta-grid-wrapper');
-
-    // Find the add-to-cart form inside product-details
-    var addToCartForm = detailsCol ? detailsCol.querySelector('form button[type="submit"]') : null;
-    var formParent = addToCartForm ? addToCartForm.closest('form') : null;
-
-    // Insertion target: after the form, or at end of product-details
-    var insertTarget = formParent || (detailsCol ? detailsCol.lastElementChild : null);
-
-    if (insertTarget && grimoireWrapper) {
-      insertTarget.parentNode.insertBefore(grimoireWrapper, insertTarget.nextSibling);
-      grimoireWrapper.style.display = 'block';
-    }
-
-    if (metaWrapper) {
-      var metaInsertAfter = grimoireWrapper && grimoireWrapper.parentNode === insertTarget?.parentNode ? grimoireWrapper : insertTarget;
-      if (metaInsertAfter) {
-        metaInsertAfter.parentNode.insertBefore(metaWrapper, metaInsertAfter.nextSibling);
-        metaWrapper.style.display = 'block';
-      }
-    }
-
-    // === 7. Wrap description text in quotes ===
-    if (detailsCol) {
-      var descriptionTexts = detailsCol.querySelectorAll('.rte p');
-      descriptionTexts.forEach(function(p) {
-        var text = p.textContent.trim();
-        if (text && !text.startsWith('"') && !text.startsWith('\u201C')) {
-          p.textContent = '\u201C' + text + '\u201D';
-        }
-      });
-    }
-
-    // Clean up source container
-    source.style.display = 'none';
-  });
-</script>
+{% endif %}
 
 {% schema %}
 {
