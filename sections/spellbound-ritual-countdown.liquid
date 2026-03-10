@@ -1,0 +1,218 @@
+{% comment %}
+  Spellbound Ritual Countdown - Seasonal promo with countdown timer
+{% endcomment %}
+
+{{ 'spellbound-countdown.js' | asset_url | script_tag }}
+
+<style>
+  .spellbound-countdown {
+    padding: 8rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+  .spellbound-countdown__inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 5rem;
+  }
+  @media (min-width: 1024px) {
+    .spellbound-countdown__inner {
+      grid-template-columns: 1fr 1fr;
+      padding: 0 1.5rem;
+    }
+  }
+  .spellbound-countdown__label {
+    font-size: 10px;
+    letter-spacing: 0.6em;
+    color: #f59e0b;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .spellbound-countdown__heading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(3rem, 5vw, 6rem);
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    line-height: 1;
+  }
+  .spellbound-countdown__description {
+    color: rgba(255,255,255,0.4);
+    line-height: 1.8;
+    max-width: 24rem;
+    margin-bottom: 3rem;
+  }
+  .spellbound-countdown__timer {
+    display: flex;
+    gap: 2rem;
+  }
+  .spellbound-countdown__unit {
+    text-align: center;
+  }
+  .spellbound-countdown__value {
+    font-family: var(--font-heading--family);
+    font-size: 1.875rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+  .spellbound-countdown__unit-label {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+  .spellbound-countdown__visual {
+    position: relative;
+    aspect-ratio: 1;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .spellbound-countdown__glow {
+    position: absolute;
+    inset: 0;
+    background: #fde68a;
+    opacity: 0.05;
+    filter: blur(48px);
+    border-radius: 50%;
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.03; }
+    50% { opacity: 0.08; }
+  }
+  .spellbound-countdown__icon {
+    color: rgba(255,255,255,0.1);
+  }
+  .spellbound-countdown__icon svg {
+    width: 200px;
+    height: 200px;
+    stroke-width: 0.5;
+  }
+  .spellbound-countdown__visual-cta {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .spellbound-countdown__cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #ffffff;
+    color: #000000;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+  .spellbound-countdown__cta:hover {
+    background: #fde68a;
+  }
+</style>
+
+<section class="spellbound-countdown">
+  <div class="spellbound-countdown__inner">
+    <div>
+      {% if section.settings.label != blank %}
+        <p class="spellbound-countdown__label">{{ section.settings.label }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="spellbound-countdown__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p class="spellbound-countdown__description">{{ section.settings.description }}</p>
+      {% endif %}
+      <div class="spellbound-countdown__timer" data-countdown-target="{{ section.settings.target_date }}">
+        <div class="spellbound-countdown__unit">
+          <div class="spellbound-countdown__value" data-countdown-days>00</div>
+          <div class="spellbound-countdown__unit-label">Days</div>
+        </div>
+        <div class="spellbound-countdown__unit">
+          <div class="spellbound-countdown__value" data-countdown-hours>00</div>
+          <div class="spellbound-countdown__unit-label">Hours</div>
+        </div>
+        <div class="spellbound-countdown__unit">
+          <div class="spellbound-countdown__value" data-countdown-mins>00</div>
+          <div class="spellbound-countdown__unit-label">Mins</div>
+        </div>
+      </div>
+    </div>
+    <div class="spellbound-countdown__visual">
+      <div class="spellbound-countdown__glow"></div>
+      <div class="spellbound-countdown__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="m15 9-6 6"/>
+          <path d="M9 9h.01"/>
+          <path d="M15 15h.01"/>
+        </svg>
+      </div>
+      <div class="spellbound-countdown__visual-cta">
+        {% if section.settings.cta_label != blank %}
+          <a href="{{ section.settings.cta_link }}" class="spellbound-countdown__cta">{{ section.settings.cta_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spellbound Countdown",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Current Season"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Equinox Ritual"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "The veil is thinning. During the Equinox, all artifacts involving balance and transition gain 15% resonance."
+    },
+    {
+      "type": "text",
+      "id": "target_date",
+      "label": "Target date",
+      "info": "Format: YYYY-MM-DD",
+      "default": "2026-06-21"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Shop Ritual Gear"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spellbound Countdown"
+    }
+  ]
+}
+{% endschema %}

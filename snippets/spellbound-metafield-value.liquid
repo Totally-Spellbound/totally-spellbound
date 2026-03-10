@@ -1,0 +1,10 @@
+{% comment %}
+  Strips JSON array brackets and quotes from metafield values.
+  Usage: {% render 'spellbound-metafield-value', value: product.metafields.custom.planet %}
+{% endcomment %}
+{%- if value == blank -%}
+{%- elsif value.type == 'list.single_line_text_field' -%}
+  {{- value.value | join: ', ' -}}
+{%- else -%}
+  {{- value | replace: '["', '' | replace: '"]', '' | replace: '"', '' -}}
+{%- endif -%}

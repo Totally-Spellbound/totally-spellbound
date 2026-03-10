@@ -1,0 +1,273 @@
+{% comment %}
+  Spellbound Discovery Grid - Reusable grid for Elements/Zodiac/Chakra navigation
+{% endcomment %}
+
+<style>
+  .spellbound-discovery {
+    padding: 8rem 1.5rem;
+    background: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  @media (min-width: 1024px) {
+    .spellbound-discovery {
+      padding: 8rem 6rem;
+    }
+  }
+  .spellbound-discovery__header {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .spellbound-discovery__header {
+      text-align: left;
+    }
+  }
+  .spellbound-discovery__subtitle {
+    color: #f59e0b;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .spellbound-discovery__title {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(3rem, 5vw, 7rem);
+    color: #ffffff;
+    line-height: 1;
+  }
+  .spellbound-discovery__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .spellbound-discovery__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .spellbound-discovery__grid--cols-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .spellbound-discovery__grid--cols-6 {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .spellbound-discovery__grid--cols-7 {
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .spellbound-discovery__grid--cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .spellbound-discovery__grid--cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .spellbound-discovery__card {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+  }
+  .spellbound-discovery__card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.3;
+    transition: all 1s ease;
+  }
+  .spellbound-discovery__card:hover .spellbound-discovery__card-image {
+    opacity: 0.6;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+  }
+  .spellbound-discovery__card-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #000000, rgba(0,0,0,0.2), transparent);
+  }
+  .spellbound-discovery__card-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 1;
+  }
+  .spellbound-discovery__card-icon {
+    margin-bottom: 1rem;
+    color: rgba(253, 230, 138, 0.4);
+    transition: color 0.3s ease;
+  }
+  .spellbound-discovery__card:hover .spellbound-discovery__card-icon {
+    color: #fde68a;
+  }
+  .spellbound-discovery__card-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 0.5;
+  }
+  .spellbound-discovery__card-name {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.25rem;
+    color: #ffffff;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    text-align: center;
+  }
+  .spellbound-discovery__card-desc {
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-align: center;
+  }
+  .spellbound-discovery__card-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(245, 158, 11, 0.5);
+    transform: scaleX(0);
+    transition: transform 0.7s ease;
+  }
+  .spellbound-discovery__card:hover .spellbound-discovery__card-accent {
+    transform: scaleX(1);
+  }
+</style>
+
+<section class="spellbound-discovery">
+  <div class="spellbound-discovery__header">
+    {% if section.settings.subtitle != blank %}
+      <span class="spellbound-discovery__subtitle">{{ section.settings.subtitle }}</span>
+    {% endif %}
+    {% if section.settings.title != blank %}
+      <h2 class="spellbound-discovery__title">{{ section.settings.title }}</h2>
+    {% endif %}
+  </div>
+
+  <div class="spellbound-discovery__grid spellbound-discovery__grid--cols-{{ section.settings.columns }}">
+    {% for block in section.blocks %}
+      <a
+        href="{{ block.settings.link }}"
+        class="spellbound-discovery__card"
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.image != blank %}
+          <img
+            src="{{ block.settings.image | image_url: width: 800 }}"
+            alt="{{ block.settings.card_title | escape }}"
+            class="spellbound-discovery__card-image"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+          >
+        {% endif %}
+        <div class="spellbound-discovery__card-gradient"></div>
+        <div class="spellbound-discovery__card-content">
+          {% if block.settings.icon != blank %}
+            <div class="spellbound-discovery__card-icon">
+              {{ block.settings.icon }}
+            </div>
+          {% endif %}
+          <h3 class="spellbound-discovery__card-name">{{ block.settings.card_title }}</h3>
+          {% if block.settings.description != blank %}
+            <span class="spellbound-discovery__card-desc">{{ block.settings.description }}</span>
+          {% endif %}
+        </div>
+        <div class="spellbound-discovery__card-accent"></div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spellbound Discovery Grid",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Elements"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Foundational Forces"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Desktop columns",
+      "min": 3,
+      "max": 7,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Title",
+          "default": "Earth"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon SVG",
+          "info": "Paste an SVG icon here"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spellbound Discovery Grid",
+      "blocks": [
+        { "type": "card", "settings": { "card_title": "Earth" } },
+        { "type": "card", "settings": { "card_title": "Air" } },
+        { "type": "card", "settings": { "card_title": "Fire" } },
+        { "type": "card", "settings": { "card_title": "Water" } },
+        { "type": "card", "settings": { "card_title": "Spirit" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

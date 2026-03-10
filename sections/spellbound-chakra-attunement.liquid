@@ -1,0 +1,267 @@
+{% comment %}
+  Spellbound Chakra Attunement - Chakra spine diagram with related product cards
+{% endcomment %}
+
+<style>
+  .spellbound-chakra {
+    padding: 10rem 1.5rem;
+    background: #000000;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  @media (min-width: 1024px) {
+    .spellbound-chakra { padding: 10rem 6rem; }
+  }
+  .spellbound-chakra__heading-wrapper {
+    text-align: center;
+    margin-bottom: 8rem;
+  }
+  .spellbound-chakra__heading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(3rem, 5vw, 7rem);
+    color: #ffffff;
+    letter-spacing: -0.03em;
+  }
+  .spellbound-chakra__heading em {
+    font-family: var(--font-accent--family);
+    font-style: italic;
+  }
+  .spellbound-chakra__content {
+    max-width: 87.5rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+  @media (min-width: 1024px) {
+    .spellbound-chakra__content { flex-direction: row; }
+  }
+
+  /* Chakra spine diagram */
+  .spellbound-chakra__diagram {
+    display: flex;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+    .spellbound-chakra__diagram { width: 33.333%; }
+  }
+  .spellbound-chakra__spine {
+    position: relative;
+    width: 16rem;
+    height: 24rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .spellbound-chakra__dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    transition: all 1s ease;
+  }
+  .spellbound-chakra__dot--active {
+    transform: scale(1.5);
+    box-shadow: 0 0 20px white;
+  }
+  .spellbound-chakra__dot--root.spellbound-chakra__dot--active { background: #ef4444; }
+  .spellbound-chakra__dot--sacral.spellbound-chakra__dot--active { background: #f97316; }
+  .spellbound-chakra__dot--solar-plexus.spellbound-chakra__dot--active { background: #eab308; }
+  .spellbound-chakra__dot--heart.spellbound-chakra__dot--active { background: #22c55e; }
+  .spellbound-chakra__dot--throat.spellbound-chakra__dot--active { background: #3b82f6; }
+  .spellbound-chakra__dot--third-eye.spellbound-chakra__dot--active { background: #a855f7; }
+  .spellbound-chakra__dot--crown.spellbound-chakra__dot--active { background: #ffffff; }
+
+  /* Product cards area */
+  .spellbound-chakra__products { flex: 1; }
+  .spellbound-chakra__products-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .spellbound-chakra__products-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Product card with badges */
+  .spellbound-chakra__card {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  .spellbound-chakra__card:hover .spellbound-chakra__card-title {
+    color: #fde68a;
+  }
+  .spellbound-chakra__card-media {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: #0d0d0d;
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 1.5rem;
+  }
+  .spellbound-chakra__card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: all 1.5s ease;
+  }
+  .spellbound-chakra__card:hover .spellbound-chakra__card-media img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+  .spellbound-chakra__card-badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .spellbound-chakra__card-badge {
+    font-size: 8px;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    padding: 4px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+    width: fit-content;
+  }
+  .spellbound-chakra__card-badge--amber {
+    color: #fde68a;
+  }
+  .spellbound-chakra__card-info { text-align: center; }
+  .spellbound-chakra__card-title {
+    color: #ffffff;
+    font-family: var(--font-heading--family);
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+    transition: color 0.3s ease;
+  }
+  .spellbound-chakra__card-price {
+    color: rgba(255,255,255,0.3);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .spellbound-chakra__empty {
+    grid-column: 1 / -1;
+    padding: 5rem 0;
+    text-align: center;
+    border: 1px dashed rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.875rem;
+  }
+</style>
+
+{%- assign current_product = product -%}
+{%- capture chakra_clean -%}{%- render 'spellbound-metafield-value', value: current_product.metafields.custom.chakra -%}{%- endcapture -%}
+{%- assign chakra_clean = chakra_clean | strip -%}
+{%- assign chakra_lower = chakra_clean | downcase | replace: ' ', '-' -%}
+
+{% if chakra_clean != blank %}
+<section class="spellbound-chakra">
+  <div class="spellbound-chakra__heading-wrapper">
+    <h2 class="spellbound-chakra__heading">Attuning the <em>{{ chakra_clean }}</em></h2>
+  </div>
+
+  <div class="spellbound-chakra__content">
+    <!-- Chakra spine diagram -->
+    <div class="spellbound-chakra__diagram">
+      <div class="spellbound-chakra__spine">
+        {%- assign chakra_names = 'crown,third-eye,throat,heart,solar-plexus,sacral,root' | split: ',' -%}
+        {% for name in chakra_names %}
+          <div class="spellbound-chakra__dot spellbound-chakra__dot--{{ name }}{% if name == chakra_lower %} spellbound-chakra__dot--active{% endif %}"></div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Related products -->
+    <div class="spellbound-chakra__products">
+      <div class="spellbound-chakra__products-grid">
+        {%- assign count = 0 -%}
+
+        {%- if section.settings.collection != blank -%}
+          {%- for related_product in collections[section.settings.collection].products -%}
+            {%- capture related_chakra -%}{%- render 'spellbound-metafield-value', value: related_product.metafields.custom.chakra -%}{%- endcapture -%}
+            {%- assign related_chakra = related_chakra | strip -%}
+
+            {%- if related_chakra == chakra_clean and related_product.id != current_product.id and count < 3 -%}
+              {%- capture related_element -%}{%- render 'spellbound-metafield-value', value: related_product.metafields.custom.element -%}{%- endcapture -%}
+              {%- capture related_intention -%}{%- render 'spellbound-metafield-value', value: related_product.metafields.custom.intention -%}{%- endcapture -%}
+              {%- assign related_element = related_element | strip -%}
+              {%- assign related_intention = related_intention | strip -%}
+
+              <a href="{{ related_product.url }}" class="spellbound-chakra__card">
+                <div class="spellbound-chakra__card-media">
+                  {% if related_product.featured_image %}
+                    <img
+                      src="{{ related_product.featured_image | image_url: width: 600 }}"
+                      alt="{{ related_product.title | escape }}"
+                      loading="lazy"
+                      width="{{ related_product.featured_image.width }}"
+                      height="{{ related_product.featured_image.height }}"
+                    >
+                  {% endif %}
+                  <div class="spellbound-chakra__card-badges">
+                    {% if related_element != blank %}
+                      <span class="spellbound-chakra__card-badge">{{ related_element }}</span>
+                    {% endif %}
+                    {% if related_intention != blank %}
+                      <span class="spellbound-chakra__card-badge spellbound-chakra__card-badge--amber">{{ related_intention }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="spellbound-chakra__card-info">
+                  <h3 class="spellbound-chakra__card-title">{{ related_product.title }}</h3>
+                  <p class="spellbound-chakra__card-price">{{ related_product.price | money }}</p>
+                </div>
+              </a>
+              {%- assign count = count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- if count == 0 -%}
+          <div class="spellbound-chakra__empty">
+            No additional {{ chakra_clean }} artifacts found
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Spellbound Chakra",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Source collection",
+      "info": "Products with the same chakra metafield will be shown alongside the chakra diagram"
+    }
+  ],
+  "templates": ["product"],
+  "presets": [
+    {
+      "name": "Spellbound Chakra"
+    }
+  ]
+}
+{% endschema %}

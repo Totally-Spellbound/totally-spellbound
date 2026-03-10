@@ -1,0 +1,186 @@
+{% comment %}
+  Spellbound Filter Ribbon - Horizontal scrolling icon-based filter navigation
+{% endcomment %}
+
+<style>
+  .spellbound-filter-ribbon {
+    padding: 0 1.5rem;
+    margin-bottom: 5rem;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .spellbound-filter-ribbon::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .spellbound-filter-ribbon {
+      padding: 0 6rem;
+    }
+  }
+  .spellbound-filter-ribbon__inner {
+    display: flex;
+    gap: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 2.5rem;
+    min-width: max-content;
+  }
+  .spellbound-filter-ribbon__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.4;
+    cursor: pointer;
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #ffffff;
+  }
+  .spellbound-filter-ribbon__item:hover,
+  .spellbound-filter-ribbon__item.active {
+    opacity: 1;
+  }
+  .spellbound-filter-ribbon__item.active {
+    transform: scale(1.1);
+  }
+  .spellbound-filter-ribbon__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  .spellbound-filter-ribbon__item:hover .spellbound-filter-ribbon__icon,
+  .spellbound-filter-ribbon__item.active .spellbound-filter-ribbon__icon {
+    border-color: #f59e0b;
+    background: rgba(253,230,138,0.05);
+  }
+  .spellbound-filter-ribbon__item.active .spellbound-filter-ribbon__icon {
+    box-shadow: 0 0 15px rgba(245,158,11,0.2);
+  }
+  .spellbound-filter-ribbon__icon svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1;
+  }
+  .spellbound-filter-ribbon__label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .spellbound-filter-ribbon__item.active .spellbound-filter-ribbon__label {
+    color: #fde68a;
+    font-weight: 700;
+  }
+</style>
+
+<section class="spellbound-filter-ribbon">
+  <div class="spellbound-filter-ribbon__inner">
+    {% for block in section.blocks %}
+      {%- assign is_active = false -%}
+      {%- if block.settings.filter_value != blank -%}
+        {%- assign filter_param = 'filter.p.m.custom.' | append: section.settings.filter_type -%}
+        {%- assign current_filter = request.params[filter_param] -%}
+        {%- if current_filter == block.settings.filter_value -%}
+          {%- assign is_active = true -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      <a
+        href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}{{ collection.url }}?filter.p.m.custom.{{ section.settings.filter_type }}={{ block.settings.filter_value | url_encode }}{% endif %}"
+        class="spellbound-filter-ribbon__item{% if is_active %} active{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="spellbound-filter-ribbon__icon">
+          {% if block.settings.icon != blank %}
+            {{ block.settings.icon }}
+          {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
+          {% endif %}
+        </div>
+        <span class="spellbound-filter-ribbon__label">{{ block.settings.filter_value }}</span>
+      </a>
+    {% endfor %}
+
+    <!-- All Items button -->
+    <a
+      href="{{ collection.url }}"
+      class="spellbound-filter-ribbon__item{% unless request.params contains 'filter' %} active{% endunless %}"
+    >
+      <div class="spellbound-filter-ribbon__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
+      </div>
+      <span class="spellbound-filter-ribbon__label">All Items</span>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spellbound Filter Ribbon",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "filter_type",
+      "label": "Filter by metafield",
+      "options": [
+        { "value": "element", "label": "Element" },
+        { "value": "zodiac", "label": "Zodiac" },
+        { "value": "chakra", "label": "Chakra" },
+        { "value": "intention", "label": "Intention" }
+      ],
+      "default": "element"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter_item",
+      "name": "Filter Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "filter_value",
+          "label": "Filter value",
+          "default": "Earth"
+        },
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "Icon SVG",
+          "info": "Paste an SVG icon here"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom link (optional)",
+          "info": "Overrides the auto-generated filter link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spellbound Filter Ribbon",
+      "settings": {
+        "filter_type": "element"
+      },
+      "blocks": [
+        { "type": "filter_item", "settings": { "filter_value": "Earth" } },
+        { "type": "filter_item", "settings": { "filter_value": "Air" } },
+        { "type": "filter_item", "settings": { "filter_value": "Fire" } },
+        { "type": "filter_item", "settings": { "filter_value": "Water" } },
+        { "type": "filter_item", "settings": { "filter_value": "Spirit" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

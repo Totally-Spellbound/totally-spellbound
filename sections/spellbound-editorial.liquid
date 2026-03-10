@@ -1,0 +1,143 @@
+{% comment %}
+  Spellbound Editorial - Parallax content block with quote
+{% endcomment %}
+
+<style>
+  .spellbound-editorial {
+    position: relative;
+    padding: 12rem 1.5rem;
+    background: #000000;
+    overflow: hidden;
+  }
+  .spellbound-editorial__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    filter: grayscale(100%);
+    transition: transform 5s ease;
+  }
+  .spellbound-editorial:hover .spellbound-editorial__bg {
+    transform: scale(1.1);
+  }
+  .spellbound-editorial__content {
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .spellbound-editorial__label {
+    color: #f59e0b;
+    font-size: 10px;
+    letter-spacing: 1em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: block;
+  }
+  .spellbound-editorial__heading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(3rem, 6vw, 8rem);
+    color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 3rem;
+    mix-blend-mode: difference;
+    transition: color 2s ease;
+  }
+  .spellbound-editorial:hover .spellbound-editorial__heading {
+    color: #ffffff;
+  }
+  .spellbound-editorial__quote {
+    color: rgba(255, 255, 255, 0.4);
+    max-width: 32rem;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    font-style: italic;
+  }
+  .spellbound-editorial__cta {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: #fde68a;
+    border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+    padding-bottom: 0.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .spellbound-editorial__cta:hover {
+    color: #ffffff;
+  }
+</style>
+
+<section class="spellbound-editorial">
+  {% if section.settings.background_image != blank %}
+    <div
+      class="spellbound-editorial__bg"
+      style="background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}')"
+    ></div>
+  {% endif %}
+  <div class="spellbound-editorial__content">
+    {% if section.settings.label != blank %}
+      <span class="spellbound-editorial__label">{{ section.settings.label }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="spellbound-editorial__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.quote != blank %}
+      <p class="spellbound-editorial__quote">"{{ section.settings.quote }}"</p>
+    {% endif %}
+    {% if section.settings.cta_label != blank %}
+      <a href="{{ section.settings.cta_link }}" class="spellbound-editorial__cta">{{ section.settings.cta_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spellbound Editorial",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "A Reflection of Intent"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THE MIDNIGHT MIRROR"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote text",
+      "default": "Look closer into the void, for the void is looking back. What you find is not an object, but a reflection of your own hidden power."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Gaze Into the Collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spellbound Editorial"
+    }
+  ]
+}
+{% endschema %}
