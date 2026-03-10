@@ -274,6 +274,10 @@
         "explore_link": "shopify://collections/all"
       }
     },
+    "celestial_body": {
+      "type": "spellbound-celestial-body",
+      "settings": {}
+    },
     "chakra_attunement": {
       "type": "spellbound-chakra-attunement",
       "settings": {
@@ -427,6 +431,7 @@
     "main",
     "product_extras",
     "product_lore",
+    "celestial_body",
     "chakra_attunement",
     "product_recommendations"
   ]

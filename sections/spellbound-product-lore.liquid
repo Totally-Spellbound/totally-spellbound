@@ -149,9 +149,32 @@
 </style>
 
 {%- assign current_product = product -%}
-{%- capture planet_clean -%}{%- render 'spellbound-metafield-value', value: current_product.metafields.custom.planet -%}{%- endcapture -%}
+
+{%- comment -%} Handle planet as array (list.single_line_text_field) {%- endcomment -%}
+{%- assign planet_values = current_product.metafields.custom.planet.value -%}
+{%- assign planet_clean = '' -%}
+{%- if planet_values.size > 0 -%}
+  {%- assign planet_names = '' -%}
+  {%- for pv in planet_values -%}
+    {%- assign pv_stripped = pv | strip -%}
+    {%- if pv_stripped != blank -%}
+      {%- if planet_names == '' -%}
+        {%- assign planet_names = pv_stripped -%}
+      {%- else -%}
+        {%- assign planet_names = planet_names | append: ', ' | append: pv_stripped -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign planet_clean = planet_names -%}
+{%- else -%}
+  {%- capture planet_raw -%}{%- render 'spellbound-metafield-value', value: current_product.metafields.custom.planet -%}{%- endcapture -%}
+  {%- assign planet_clean = planet_raw | strip -%}
+  {%- if planet_clean != blank -%}
+    {%- assign planet_values = planet_clean | split: ', ' -%}
+  {%- endif -%}
+{%- endif -%}
+
 {%- capture element_clean -%}{%- render 'spellbound-metafield-value', value: current_product.metafields.custom.element -%}{%- endcapture -%}
-{%- assign planet_clean = planet_clean | strip -%}
 {%- assign element_clean = element_clean | strip -%}
 
 {% if planet_clean != blank or element_clean != blank %}
@@ -192,12 +215,40 @@
       <div class="spellbound-lore__pairs-grid">
         {%- assign pairs_count = 0 -%}
 
-        {%- comment -%} Try product recommendations first {%- endcomment -%}
-        {%- if section.settings.collection != blank -%}
+        {%- comment -%} Find products sharing any planet with current product {%- endcomment -%}
+        {%- if section.settings.collection != blank and planet_values.size > 0 -%}
           {%- for related_product in collections[section.settings.collection].products -%}
-            {%- capture related_planet -%}{%- render 'spellbound-metafield-value', value: related_product.metafields.custom.planet -%}{%- endcapture -%}
-            {%- assign related_planet = related_planet | strip -%}
-            {%- if related_planet == planet_clean and related_product.id != current_product.id and pairs_count < 2 -%}
+            {%- if related_product.id == current_product.id -%}{%- continue -%}{%- endif -%}
+            {%- if pairs_count >= 2 -%}{%- break -%}{%- endif -%}
+
+            {%- assign related_planet_values = related_product.metafields.custom.planet.value -%}
+            {%- assign has_match = false -%}
+
+            {%- if related_planet_values.size > 0 -%}
+              {%- for rp in related_planet_values -%}
+                {%- assign rp_down = rp | strip | downcase -%}
+                {%- for cp in planet_values -%}
+                  {%- assign cp_down = cp | strip | downcase -%}
+                  {%- if rp_down == cp_down -%}
+                    {%- assign has_match = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if has_match -%}{%- break -%}{%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- capture related_planet_raw -%}{%- render 'spellbound-metafield-value', value: related_product.metafields.custom.planet -%}{%- endcapture -%}
+              {%- assign related_planet_raw = related_planet_raw | strip | downcase -%}
+              {%- for cp in planet_values -%}
+                {%- assign cp_down = cp | strip | downcase -%}
+                {%- if related_planet_raw == cp_down -%}
+                  {%- assign has_match = true -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- if has_match -%}
               <a href="{{ related_product.url }}" class="spellbound-lore__pair-card">
                 <div class="spellbound-lore__pair-img">
                   {% if related_product.featured_image %}
