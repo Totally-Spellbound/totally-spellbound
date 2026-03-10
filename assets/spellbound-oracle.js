@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var revealLink = oracle.querySelector('[data-oracle-reveal]');
         if (revealLink) {
-          revealLink.href = baseUrl + '?filter.p.m.custom.element=' + encodeURIComponent(state.element);
+          var handle = state.element.toLowerCase().replace(/\s+/g, '-');
+          revealLink.href = '/collections/' + handle;
         }
         showStep(2);
       });
