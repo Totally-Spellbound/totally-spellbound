@@ -1,13 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
- {
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -67,7 +58,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_icgrde": {
+            "group_header": {
               "type": "group",
               "name": "Header",
               "settings": {
@@ -107,7 +98,7 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "text_xpVMaM": {
+                "title": {
                   "type": "text",
                   "name": "t:names.title",
                   "settings": {
@@ -133,7 +124,7 @@
                   },
                   "blocks": {}
                 },
-                "price_tVjtKg": {
+                "price": {
                   "type": "price",
                   "settings": {
                     "show_sale_price_first": true,
@@ -157,11 +148,11 @@
                 }
               },
               "block_order": [
-                "text_xpVMaM",
-                "price_tVjtKg"
+                "title",
+                "price"
               ]
             },
-            "divider_VJhene": {
+            "divider": {
               "type": "_divider",
               "name": "t:names.divider",
               "settings": {
@@ -173,7 +164,7 @@
               },
               "blocks": {}
             },
-            "variant_picker_R3rGDr": {
+            "variant_picker": {
               "type": "variant-picker",
               "settings": {
                 "variant_style": "buttons",
@@ -186,7 +177,7 @@
               },
               "blocks": {}
             },
-            "buy_buttons_eYQEYi": {
+            "buy_buttons": {
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
@@ -221,7 +212,7 @@
               },
               "block_order": []
             },
-            "text_aEtTtq": {
+            "description": {
               "type": "text",
               "name": "Product description",
               "settings": {
@@ -249,11 +240,11 @@
             }
           },
           "block_order": [
-            "group_icgrde",
-            "divider_VJhene",
-            "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "group_header",
+            "divider",
+            "variant_picker",
+            "buy_buttons",
+            "description"
           ]
         }
       },
@@ -263,19 +254,36 @@
         "equal_columns": false,
         "limit_details_width": false,
         "gap": 48,
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
     },
-    "product_recommendations_qggXJq": {
+    "product_extras": {
+      "type": "spellbound-product-extras",
+      "settings": {}
+    },
+    "product_lore": {
+      "type": "spellbound-product-lore",
+      "settings": {
+        "collection": "all",
+        "explore_link": "shopify://collections/all"
+      }
+    },
+    "chakra_attunement": {
+      "type": "spellbound-chakra-attunement",
+      "settings": {
+        "collection": "all"
+      }
+    },
+    "product_recommendations": {
       "type": "product-recommendations",
       "blocks": {
-        "text_cbcgyb": {
+        "header_text": {
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h3>You may also like </h3>",
+            "text": "<h3>You may also like</h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -315,7 +323,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_gallery_DNizbJ": {
+            "card_gallery": {
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
@@ -331,7 +339,7 @@
               },
               "blocks": {}
             },
-            "product_title_M7MJkb": {
+            "product_title": {
               "type": "product-title",
               "name": "t:names.product_title",
               "settings": {
@@ -356,7 +364,7 @@
               },
               "blocks": {}
             },
-            "price_gLWgA6": {
+            "price": {
               "type": "price",
               "settings": {
                 "show_sale_price_first": true,
@@ -380,14 +388,14 @@
             }
           },
           "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
+            "card_gallery",
+            "product_title",
+            "price"
           ]
         }
       },
       "block_order": [
-        "text_cbcgyb"
+        "header_text"
       ],
       "name": "t:names.product_recommendations",
       "settings": {
@@ -412,6 +420,9 @@
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "product_extras",
+    "product_lore",
+    "chakra_attunement",
+    "product_recommendations"
   ]
 }

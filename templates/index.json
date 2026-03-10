@@ -1,288 +1,163 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
- {
+{
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
-      "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
+    "spellbound_hero": {
+      "type": "spellbound-hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "label": "Artifacts for the Soul",
+        "heading": "<p><em>Ethereal</em> Eminence</p>",
+        "button_label": "Enter The Vault",
+        "button_link": "shopify://collections/all"
       }
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "discovery_elements": {
+      "type": "spellbound-discovery-grid",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "el_earth": {
+          "type": "card",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "card_title": "Earth",
+            "description": "The Material Plane",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/></svg>"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "el_air": {
+          "type": "card",
           "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "card_title": "Air",
+            "description": "The Mental Plane",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/></svg>"
+          }
+        },
+        "el_fire": {
+          "type": "card",
+          "settings": {
+            "card_title": "Fire",
+            "description": "The Will",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/></svg>"
+          }
+        },
+        "el_water": {
+          "type": "card",
+          "settings": {
+            "card_title": "Water",
+            "description": "The Emotions",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z\"/><path d=\"M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97\"/></svg>"
+          }
+        },
+        "el_spirit": {
+          "type": "card",
+          "settings": {
+            "card_title": "Spirit",
+            "description": "The Quintessence",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z\"/><path d=\"M5 3v4\"/><path d=\"M19 17v4\"/><path d=\"M3 5h4\"/><path d=\"M17 19h4\"/></svg>"
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": ["el_earth", "el_air", "el_fire", "el_water", "el_spirit"],
       "settings": {
+        "title": "The Elements",
+        "subtitle": "Foundational Forces",
+        "columns": 5
+      }
+    },
+    "editorial": {
+      "type": "spellbound-editorial",
+      "settings": {
+        "label": "A Reflection of Intent",
+        "heading": "THE MIDNIGHT MIRROR",
+        "quote": "Look closer into the void, for the void is looking back. What you find is not an object, but a reflection of your own hidden power.",
+        "cta_label": "Gaze Into the Collection",
+        "cta_link": "shopify://collections/all"
+      }
+    },
+    "discovery_zodiac": {
+      "type": "spellbound-discovery-grid",
+      "blocks": {
+        "z_aries": { "type": "card", "settings": { "card_title": "Aries", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/></svg>" } },
+        "z_taurus": { "type": "card", "settings": { "card_title": "Taurus", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/></svg>" } },
+        "z_gemini": { "type": "card", "settings": { "card_title": "Gemini", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/></svg>" } },
+        "z_cancer": { "type": "card", "settings": { "card_title": "Cancer", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z\"/><path d=\"M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97\"/></svg>" } },
+        "z_leo": { "type": "card", "settings": { "card_title": "Leo", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2\"/><path d=\"M12 20v2\"/><path d=\"m4.93 4.93 1.41 1.41\"/><path d=\"m17.66 17.66 1.41 1.41\"/><path d=\"M2 12h2\"/><path d=\"M20 12h2\"/><path d=\"m6.34 17.66-1.41 1.41\"/><path d=\"m19.07 4.93-1.41 1.41\"/></svg>" } },
+        "z_virgo": { "type": "card", "settings": { "card_title": "Virgo", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/></svg>" } },
+        "z_libra": { "type": "card", "settings": { "card_title": "Libra", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/></svg>" } },
+        "z_scorpio": { "type": "card", "settings": { "card_title": "Scorpio", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76\"/></svg>" } },
+        "z_sagittarius": { "type": "card", "settings": { "card_title": "Sagittarius", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/></svg>" } },
+        "z_capricorn": { "type": "card", "settings": { "card_title": "Capricorn", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/></svg>" } },
+        "z_aquarius": { "type": "card", "settings": { "card_title": "Aquarius", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/></svg>" } },
+        "z_pisces": { "type": "card", "settings": { "card_title": "Pisces", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z\"/><path d=\"M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97\"/></svg>" } }
+      },
+      "block_order": ["z_aries", "z_taurus", "z_gemini", "z_cancer", "z_leo", "z_virgo", "z_libra", "z_scorpio", "z_sagittarius", "z_capricorn", "z_aquarius", "z_pisces"],
+      "settings": {
+        "title": "The Zodiac",
+        "subtitle": "Celestial Influence",
+        "columns": 6
+      }
+    },
+    "oracle": {
+      "type": "spellbound-oracle",
+      "blocks": {
+        "intent_growth": { "type": "intention", "settings": { "value": "Spiritual Growth" } },
+        "intent_protection": { "type": "intention", "settings": { "value": "Protection" } },
+        "intent_dreaming": { "type": "intention", "settings": { "value": "Lucid Dreaming" } },
+        "intent_banishment": { "type": "intention", "settings": { "value": "Banishment" } },
+        "elem_earth": { "type": "element", "settings": { "value": "Earth" } },
+        "elem_air": { "type": "element", "settings": { "value": "Air" } },
+        "elem_fire": { "type": "element", "settings": { "value": "Fire" } },
+        "elem_water": { "type": "element", "settings": { "value": "Water" } },
+        "elem_spirit": { "type": "element", "settings": { "value": "Spirit" } }
+      },
+      "block_order": ["intent_growth", "intent_protection", "intent_dreaming", "intent_banishment", "elem_earth", "elem_air", "elem_fire", "elem_water", "elem_spirit"],
+      "settings": {
+        "collection_base_url": "shopify://collections/all"
+      }
+    },
+    "discovery_chakras": {
+      "type": "spellbound-discovery-grid",
+      "blocks": {
+        "ch_root": { "type": "card", "settings": { "card_title": "Root", "description": "Muladhara", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>" } },
+        "ch_sacral": { "type": "card", "settings": { "card_title": "Sacral", "description": "Svadhisthana", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><polyline points=\"22 12 18 12 15 21 9 3 6 12 2 12\"/></svg>" } },
+        "ch_solar": { "type": "card", "settings": { "card_title": "Solar Plexus", "description": "Manipura", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2\"/><path d=\"M12 20v2\"/><path d=\"m4.93 4.93 1.41 1.41\"/><path d=\"m17.66 17.66 1.41 1.41\"/><path d=\"M2 12h2\"/><path d=\"M20 12h2\"/><path d=\"m6.34 17.66-1.41 1.41\"/><path d=\"m19.07 4.93-1.41 1.41\"/></svg>" } },
+        "ch_heart": { "type": "card", "settings": { "card_title": "Heart", "description": "Anahata", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/><path d=\"m9 12 2 2 4-4\"/></svg>" } },
+        "ch_throat": { "type": "card", "settings": { "card_title": "Throat", "description": "Vishuddha", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2\"/><path d=\"M9.6 4.6A2 2 0 1 1 11 8H2\"/><path d=\"M12.6 19.4A2 2 0 1 0 14 16H2\"/></svg>" } },
+        "ch_third_eye": { "type": "card", "settings": { "card_title": "Third Eye", "description": "Ajna", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>" } },
+        "ch_crown": { "type": "card", "settings": { "card_title": "Crown", "description": "Sahasrara", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.5\"><path d=\"M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.74-8Z\"/></svg>" } }
+      },
+      "block_order": ["ch_root", "ch_sacral", "ch_solar", "ch_heart", "ch_throat", "ch_third_eye", "ch_crown"],
+      "settings": {
+        "title": "The Chakras",
+        "subtitle": "Energy Alignment",
+        "columns": 7
+      }
+    },
+    "countdown": {
+      "type": "spellbound-ritual-countdown",
+      "settings": {
+        "label": "Current Season",
+        "heading": "Equinox Ritual",
+        "description": "The veil is thinning. During the Equinox, all artifacts involving balance and transition gain 15% resonance.",
+        "target_date": "2026-06-21",
+        "cta_label": "Shop Ritual Gear",
+        "cta_link": "shopify://collections/all"
+      }
+    },
+    "featured_products": {
+      "type": "spellbound-featured-products",
+      "settings": {
+        "heading": "New Manifestations",
         "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "max_products": 4,
+        "view_all_link": "shopify://collections/all"
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "spellbound_hero",
+    "discovery_elements",
+    "editorial",
+    "discovery_zodiac",
+    "oracle",
+    "discovery_chakras",
+    "countdown",
+    "featured_products"
   ]
 }
