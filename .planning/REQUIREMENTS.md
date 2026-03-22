@@ -7,8 +7,8 @@
 
 ### Foundation
 
-- [ ] **FOUND-01**: Clean skeleton structure for all core pages (home, product, collection, cart, search)
-- [ ] **FOUND-02**: Shopify theme editor compatibility — sections and blocks configurable via admin
+- [x] **FOUND-01**: Clean skeleton structure for all core pages (home, product, collection, cart, search)
+- [x] **FOUND-02**: Shopify theme editor compatibility — sections and blocks configurable via admin
 - [ ] **FOUND-03**: Mobile-responsive layout — most traffic will come from social media on phones
 - [ ] **FOUND-04**: Performance: pages load fast on mobile (< 3s LCP)
 
@@ -108,8 +108,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Pending |
 | FOUND-04 | Phase 1 | Pending |
 | DSGN-01 | Phase 2 | Pending |
