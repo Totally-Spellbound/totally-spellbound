@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-03-22T21:38:15.551Z",
+  "phase": "2",
+  "phase_name": "Design System",
+  "phase_dir": ".planning/phases/02-design-system",
+  "plan": null,
+  "task": null,
+  "total_tasks": null,
+  "status": "paused",
+  "completed_tasks": [],
+  "remaining_tasks": [],
+  "blockers": [],
+  "human_actions_pending": [
+    {
+      "action": "Open monopo.vn and Wope in Chrome for reverse-engineering session",
+      "context": "Andrew will guide which design elements to extract. Chrome DevTools MCP required for inspection.",
+      "blocking": true
+    }
+  ],
+  "decisions": [
+    {"decision": "Clean slate homepage — wiped 8 existing sections", "rationale": "Avoid muddiness, start fresh, old data preserved in git history", "phase": "1"},
+    {"decision": "Design process is reverse-engineering from reference sites", "rationale": "Andrew works visually — needs to see and react to live sites, not answer abstract questions", "phase": "2"},
+    {"decision": "Monopo (monopo.vn) is PRIMARY design reference", "rationale": "Andrew and Alison both liked the fluid, organic, dark aesthetic", "phase": "2"},
+    {"decision": "Wope is SECONDARY reference", "rationale": "Purple palette, bento grid, card styles — liked but Monopo is the main target", "phase": "2"},
+    {"decision": "No abstract design questions", "rationale": "Andrew explicitly rejected being asked hex values/font names without visual context. Inspect live sites together.", "phase": "2"},
+    {"decision": "Iterative design process, not one-shot", "rationale": "Andrew described this as 'a lengthy process' — expect multiple rounds", "phase": "2"}
+  ],
+  "uncommitted_files": ["package.json"],
+  "next_action": "Open monopo.vn in Chrome, use Chrome DevTools MCP to inspect and reverse-engineer design values (colors, fonts, spacing, animations) with Andrew guiding what to extract. Then apply to Shopify theme.",
+  "context_notes": "Phase 1 (Foundation Skeleton) is COMPLETE — all 4 requirements verified, 10/10 must-haves passed. Phase 2 (Design System) context captured but NO plans created yet. The design system will be built iteratively by reverse-engineering reference websites. Andrew is a designer/developer who controls visual direction. His mum Alison owns the crystal shop (Totally Spellbound, Sutton-in-Ashfield). The project has full research (local competitors, UK landscape, design direction) and a 7-phase roadmap through to SLC. Shopify CLI needs to be installed for dev server (brew install shopify-cli). The store is totally-spellbound-2.myshopify.com."
+}
