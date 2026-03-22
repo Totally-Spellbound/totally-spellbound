@@ -1,0 +1,16 @@
+{
+  "project_name": "Totally Spellbound",
+  "milestone": "v1",
+  "milestone_name": "SLC — Simple, Lovable, Complete",
+  "total_phases": 7,
+  "current_phase": null,
+  "commit_docs": true,
+  "commit_code": true,
+  "auto_verify": true,
+  "researcher_model": "sonnet",
+  "planner_model": "sonnet",
+  "executor_model": "sonnet",
+  "verifier_model": "sonnet",
+  "created": "2026-03-22",
+  "updated": "2026-03-22"
+}
