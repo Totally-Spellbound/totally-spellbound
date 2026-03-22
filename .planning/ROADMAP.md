@@ -24,6 +24,12 @@
 
 **Requirements:** FOUND-01, FOUND-02, FOUND-03, FOUND-04
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Homepage skeleton section + tech debt cleanup
+- [ ] 01-02-PLAN.md — JS performance optimization + responsive CSS + verification
+
 **What gets built:**
 - Clean layout template (theme.liquid) with proper head/body structure
 - Skeleton templates for: index, product, collection, cart, search, page, 404
@@ -209,4 +215,4 @@ After SLC is live and generating sales:
 
 ---
 *Roadmap created: 2026-03-22*
-*Last updated: 2026-03-22 after requirements definition*
+*Last updated: 2026-03-22 after phase 1 planning*
