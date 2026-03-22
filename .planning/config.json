@@ -12,5 +12,8 @@
   "executor_model": "sonnet",
   "verifier_model": "sonnet",
   "created": "2026-03-22",
-  "updated": "2026-03-22"
+  "updated": "2026-03-22",
+  "workflow": {
+    "_auto_chain_active": false
+  }
 }

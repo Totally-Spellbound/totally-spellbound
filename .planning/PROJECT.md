@@ -80,6 +80,7 @@ A thoughtful, independent e-commerce experience that gently guides customers to 
 | "Add to Cauldron" instead of "Add to Cart" | Aaron's idea — Alison loves it. Small touches that show thoughtfulness | ✓ Good |
 | AI oracle deferred to v2 | Powerful feature but complex — SLC first, oracle second | — Pending |
 | Star sign collections as curation strategy | Makes products feel personally curated — Andrew and Alison both excited about this | — Pending |
+| Clean slate homepage — wipe existing sections | Existing 8 homepage sections (hero, elements, zodiac, oracle, chakras, countdown, featured products) are removed from template wiring. Old section files kept in repo, data preserved in git history. Avoids muddiness — add bits back as needed during Phase 3 | — Pending |
 
 ---
 *Last updated: 2026-03-22 after transcript synthesis and codebase mapping*
