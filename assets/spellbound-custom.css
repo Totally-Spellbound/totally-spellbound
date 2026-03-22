@@ -176,3 +176,52 @@ body {
   color: #ffffff !important;
   border-color: rgba(255,255,255,0.2) !important;
 }
+
+/* ========================= */
+/* Skeleton Layout (Phase 1)  */
+/* ========================= */
+
+/* Homepage skeleton section */
+.spellbound-section--homepage {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.spellbound-section--homepage h1 {
+  font-family: var(--font-heading--family);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--color-foreground);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+.spellbound-section--homepage .spellbound-label {
+  margin-top: 0.5rem;
+}
+
+/* Skeleton section base — reusable for all future spellbound sections */
+.spellbound-section {
+  padding: 2rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .spellbound-section {
+    padding: 3rem 0;
+  }
+
+  .spellbound-section--homepage {
+    padding: 6rem 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .spellbound-section {
+    padding: 4rem 0;
+  }
+
+  .spellbound-section--homepage {
+    padding: 8rem 0;
+  }
+}
