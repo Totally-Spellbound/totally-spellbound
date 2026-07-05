@@ -8,8 +8,8 @@
 
 | Phase | Name | Goal | Requirements |
 |-------|------|------|-------------|
-| 1 | 1/2 | In Progress|  |
-| 2 | Design System | Dark palette, typography, components — the visual identity | DSGN-01 → DSGN-05 |
+| 1 | Foundation Skeleton | Clean skeleton structure, correct Shopify wiring, mobile-responsive — **Complete** | FOUND-01 → FOUND-04 |
+| 2 | Design System | Dark palette, typography, components — the visual identity (canonical = DESIGN.md amethyst+gold) | DSGN-01 → DSGN-05 |
 | 3 | Homepage Experience | The first impression — hero, animations, star sign entry, indie messaging | HOME-01 → HOME-07 |
 | 4 | Smart Search | Prominent, instant, helpful search with suggestions | SRCH-01 → SRCH-04 |
 | 5 | Products & Collections | Product pages, collection pages, star sign curation | PROD-01 → PROD-05, COLL-01 → COLL-04 |
