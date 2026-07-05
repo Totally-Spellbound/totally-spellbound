@@ -1,13 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
- {
+{
   "sections": {
     "cart-section": {
       "type": "main-cart",
@@ -16,7 +7,7 @@
           "type": "_cart-title",
           "static": true,
           "settings": {
-            "title": "Cart",
+            "title": "Your Cauldron",
             "show_count": true,
             "type_preset": "h4",
             "alignment": "left",
@@ -47,7 +38,7 @@
           "static": true,
           "settings": {
             "extend_summary": true,
-            "inherit_color_scheme": false,
+            "inherit_color_scheme": true,
             "color_scheme": "scheme-2",
             "border": "none",
             "border_width": 1,
@@ -105,7 +96,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>You may also like</h3>",
+                "text": "<h3>The ritual continues</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",

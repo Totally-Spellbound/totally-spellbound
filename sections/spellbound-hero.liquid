@@ -1,102 +1,334 @@
 {% comment %}
-  Spellbound Hero - Full-screen cinematic hero with dark overlay
+  Spellbound Hero — cinematic full-bleed hero.
+  Candlelight tokens only (no hardcoded accent hex). Ken Burns zoom,
+  dual gradient scrim, reveal-on-scroll content, scroll cue.
 {% endcomment %}
 
 <style>
+  .spellbound-section.spellbound-section--hero {
+    padding: 0;
+  }
+
   .spellbound-hero {
     position: relative;
-    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    min-height: 92vh;
+    min-height: 92svh;
     overflow: hidden;
-    background: #050505;
+    background: var(--spellbound-bg);
   }
-  .spellbound-hero__media {
+
+  .spellbound-hero__media-wrap {
     position: absolute;
     inset: 0;
+    background: var(--spellbound-surface);
+    overflow: hidden;
+  }
+
+  .spellbound-hero__media {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.1);
+    animation: spellbound-hero-kenburns 14s ease-in-out infinite alternate;
+    will-change: transform;
   }
-  .spellbound-hero__overlay {
+
+  @keyframes spellbound-hero-kenburns {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+
+  .spellbound-hero__scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), #050505);
     z-index: 1;
+    background:
+      linear-gradient(
+        to top,
+        var(--spellbound-bg) 0%,
+        rgba(5, 5, 5, 0.72) 22%,
+        rgba(5, 5, 5, 0.28) 52%,
+        rgba(5, 5, 5, 0.12) 74%,
+        rgba(5, 5, 5, 0.3) 100%
+      ),
+      radial-gradient(
+        130% 100% at 50% 32%,
+        rgba(0, 0, 0, 0) 42%,
+        rgba(0, 0, 0, 0.42) 100%
+      ),
+      radial-gradient(
+        55% 45% at 82% 8%,
+        var(--spellbound-violet-glow) 0%,
+        rgba(0, 0, 0, 0) 70%
+      );
+    pointer-events: none;
   }
+
   .spellbound-hero__content {
     position: relative;
     z-index: 2;
+    width: 100%;
+    padding: 6rem clamp(1.5rem, 5vw, 5rem) clamp(3rem, 9svh, 6rem);
     text-align: center;
-    padding: 0 1.5rem;
   }
+
   .spellbound-hero__label {
-    color: rgba(253, 230, 138, 0.6);
-    font-size: 10px;
-    letter-spacing: 0.6em;
+    margin: 0 0 1.25rem;
+    font-family: var(--font-body--family, Inter, sans-serif);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    color: var(--spellbound-gold);
   }
+
   .spellbound-hero__heading {
+    margin: 0 auto 1.25rem;
+    max-width: 16ch;
     font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: clamp(3rem, 8vw, 8rem);
-    line-height: 0.8;
-    color: #ffffff;
-    margin-bottom: 3rem;
+    font-weight: var(--font-heading--weight, 300);
+    font-size: clamp(2.75rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--spellbound-text);
+    text-wrap: balance;
   }
+
   .spellbound-hero__heading em {
     font-family: var(--font-accent--family);
+    font-weight: var(--font-accent--weight, 400);
     font-style: italic;
-    font-weight: var(--font-accent--weight);
   }
+
+  .spellbound-hero__subheading {
+    margin: 0 auto 2.25rem;
+    max-width: 34rem;
+    font-family: var(--font-body--family, Inter, sans-serif);
+    font-size: clamp(1rem, 1.4vw, 1.125rem);
+    line-height: 1.6;
+    color: var(--spellbound-text-soft);
+  }
+
+  .spellbound-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
   .spellbound-hero__cta {
-    display: inline-block;
-    padding: 1.25rem 3rem;
-    background: #ffffff;
-    color: #000000;
-    font-size: 10px;
-    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.1rem 2.6rem;
+    font-family: var(--font-body--family, Inter, sans-serif);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    letter-spacing: 0.4em;
     text-decoration: none;
-    transition: background 0.5s ease;
+    transition:
+      background 0.45s ease,
+      color 0.45s ease,
+      border-color 0.45s ease,
+      box-shadow 0.45s ease;
   }
-  .spellbound-hero__cta:hover {
-    background: #fde68a;
+
+  .spellbound-hero__cta:focus-visible {
+    outline: 2px solid var(--spellbound-gold);
+    outline-offset: 3px;
+  }
+
+  .spellbound-hero__cta--primary {
+    background: var(--spellbound-text);
+    color: var(--spellbound-bg);
+    border: 1px solid var(--spellbound-text);
+  }
+
+  .spellbound-hero__cta--primary:hover {
+    background: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+    color: var(--spellbound-bg);
+    box-shadow:
+      0 0 34px var(--spellbound-gold-glow),
+      0 0 14px var(--spellbound-gold-glow);
+  }
+
+  .spellbound-hero__cta--ghost {
+    background: transparent;
+    color: var(--spellbound-text);
+    border: 1px solid var(--spellbound-border-strong);
+  }
+
+  .spellbound-hero__cta--ghost:hover {
+    border-color: var(--spellbound-gold);
+    color: var(--spellbound-gold);
+  }
+
+  .spellbound-hero__scroll {
+    position: absolute;
+    z-index: 2;
+    right: clamp(1.5rem, 4vw, 3.5rem);
+    bottom: clamp(2.5rem, 8svh, 5rem);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    pointer-events: none;
+  }
+
+  .spellbound-hero__scroll-label {
+    font-family: var(--font-body--family, Inter, sans-serif);
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--spellbound-text-faint);
+    writing-mode: vertical-rl;
+  }
+
+  .spellbound-hero__scroll-line {
+    position: relative;
+    width: 1px;
+    height: 56px;
+    background: var(--spellbound-border);
+    overflow: hidden;
+  }
+
+  .spellbound-hero__scroll-line::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 18px;
+    background: var(--spellbound-gold);
+    animation: spellbound-hero-scroll-cue 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  @keyframes spellbound-hero-scroll-cue {
+    0% { transform: translateY(-20px); }
+    70% { transform: translateY(58px); }
+    100% { transform: translateY(58px); }
+  }
+
+  @media screen and (min-width: 750px) {
+    .spellbound-hero__content {
+      text-align: left;
+    }
+
+    .spellbound-hero__heading,
+    .spellbound-hero__subheading {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .spellbound-hero__actions {
+      justify-content: flex-start;
+    }
+
+    .spellbound-hero__scroll {
+      display: flex;
+    }
+  }
+
+  @media screen and (max-height: 640px) {
+    .spellbound-hero__scroll {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-hero__media {
+      animation: none;
+    }
+
+    .spellbound-hero__scroll {
+      display: none;
+    }
   }
 </style>
 
+{%- liquid
+  assign hero_alt = section.settings.heading | strip_html | strip
+  if hero_alt == blank
+    assign hero_alt = shop.name
+  endif
+-%}
+
 <section class="spellbound-hero">
-  {% if section.settings.image != blank %}
-    {%- assign image = section.settings.image -%}
-    <img
-      src="{{ image | image_url: width: 2000 }}"
-      srcset="{{ image | image_url: width: 1000 }} 1000w, {{ image | image_url: width: 1500 }} 1500w, {{ image | image_url: width: 2000 }} 2000w"
-      sizes="100vw"
-      alt="{{ section.settings.heading | escape }}"
-      class="spellbound-hero__media"
-      loading="eager"
-      fetchpriority="high"
-      width="{{ image.width }}"
-      height="{{ image.height }}"
-    >
-  {% endif %}
-  <div class="spellbound-hero__overlay"></div>
-  <div class="spellbound-hero__content spellbound-fade-in">
-    {% if section.settings.label != blank %}
+  <div class="spellbound-hero__media-wrap" aria-hidden="false">
+    {%- if section.settings.image != blank -%}
+      {%- assign image = section.settings.image -%}
+      <img
+        src="{{ image | image_url: width: 2000 }}"
+        srcset="
+          {{ image | image_url: width: 800 }} 800w,
+          {{ image | image_url: width: 1200 }} 1200w,
+          {{ image | image_url: width: 1600 }} 1600w,
+          {{ image | image_url: width: 2000 }} 2000w,
+          {{ image | image_url: width: 2600 }} 2600w
+        "
+        sizes="100vw"
+        alt="{{ hero_alt | escape }}"
+        class="spellbound-hero__media"
+        loading="eager"
+        fetchpriority="high"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+      >
+    {%- elsif section.settings.image_asset != blank -%}
+      <img
+        src="{{ section.settings.image_asset | asset_url }}"
+        alt="{{ hero_alt | escape }}"
+        class="spellbound-hero__media"
+        loading="eager"
+        fetchpriority="high"
+        width="2400"
+        height="1600"
+      >
+    {%- endif -%}
+  </div>
+  <div class="spellbound-hero__scrim"></div>
+
+  <div class="spellbound-hero__content" data-spellbound-reveal-group>
+    {%- if section.settings.label != blank -%}
       <p class="spellbound-hero__label">{{ section.settings.label }}</p>
-    {% endif %}
-    {% if section.settings.heading != blank %}
-      <h1 class="spellbound-hero__heading">{{ section.settings.heading }}</h1>
-    {% endif %}
-    {% if section.settings.button_label != blank %}
-      <a href="{{ section.settings.button_link }}" class="spellbound-hero__cta">
-        {{ section.settings.button_label }}
-      </a>
-    {% endif %}
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h1 class="spellbound-hero__heading">
+        {{- section.settings.heading | replace: '<p>', '<span>' | replace: '</p>', '</span>' -}}
+      </h1>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="spellbound-hero__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank or section.settings.button2_label != blank -%}
+      <div class="spellbound-hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a
+            href="{{ section.settings.button_link | default: '/collections/all' }}"
+            class="spellbound-hero__cta spellbound-hero__cta--primary"
+          >
+            {{- section.settings.button_label -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button2_label != blank -%}
+          <a
+            href="{{ section.settings.button2_link | default: '#oracle' }}"
+            class="spellbound-hero__cta spellbound-hero__cta--ghost"
+          >
+            {{- section.settings.button2_label -}}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="spellbound-hero__scroll" aria-hidden="true">
+    <span class="spellbound-hero__scroll-label">Scroll</span>
+    <span class="spellbound-hero__scroll-line"></span>
   </div>
 </section>
 
@@ -104,7 +336,7 @@
 {
   "name": "Spellbound Hero",
   "tag": "section",
-  "class": "spellbound-section",
+  "class": "spellbound-section spellbound-section--hero",
   "settings": [
     {
       "type": "image_picker",
@@ -113,26 +345,52 @@
     },
     {
       "type": "text",
+      "id": "image_asset",
+      "label": "Fallback asset filename",
+      "default": "spellbound-img-hero.jpg",
+      "info": "Theme asset used when no image is picked"
+    },
+    {
+      "type": "text",
       "id": "label",
       "label": "Label text",
-      "default": "Artifacts for the Soul"
+      "default": "The Doors Are Open"
     },
     {
       "type": "richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "<p><em>Ethereal</em> Eminence</p>"
+      "default": "<p>Every crystal holds a <em>story</em>.</p>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Hand-picked crystals, tarot & curiosities from a real little shop in Nottinghamshire."
     },
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button label",
-      "default": "Enter The Vault"
+      "label": "Primary button label",
+      "default": "Enter the Vault"
     },
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button link"
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button2_label",
+      "label": "Secondary button label",
+      "default": "Consult the Oracle"
+    },
+    {
+      "type": "text",
+      "id": "button2_link",
+      "label": "Secondary button link",
+      "default": "#oracle",
+      "info": "Accepts anchors like #oracle or a relative URL"
     }
   ],
   "presets": [

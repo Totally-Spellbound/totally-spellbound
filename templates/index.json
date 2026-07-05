@@ -1,12 +1,384 @@
 {
   "sections": {
-    "main": {
-      "type": "spellbound-homepage",
+    "hero": {
+      "type": "spellbound-hero",
       "settings": {
-        "heading": "Totally Spellbound",
-        "subheading": "Crystals, curiosities & things that make you feel something"
+        "image_asset": "spellbound-img-hero.jpg",
+        "label": "The Doors Are Open",
+        "heading": "<p>Every crystal holds a <em>story</em>.</p>",
+        "subheading": "Hand-picked crystals, tarot & curiosities from a real little shop in Nottinghamshire.",
+        "button_label": "Enter the Vault",
+        "button_link": "shopify://collections/all",
+        "button2_label": "Consult the Oracle",
+        "button2_link": "#oracle"
+      }
+    },
+    "category_tiles": {
+      "type": "spellbound-category-tiles",
+      "blocks": {
+        "tile_crystals": {
+          "type": "tile",
+          "settings": {
+            "card_title": "Crystals & Stones",
+            "description": "Points, spheres, clusters & one-of-a-kind pieces",
+            "link": "/collections/crystals-stones",
+            "image_asset": "spellbound-img-cat-crystals.jpg"
+          }
+        },
+        "tile_tarot": {
+          "type": "tile",
+          "settings": {
+            "card_title": "Tarot & Oracle",
+            "description": "Decks and card holders to guide your path",
+            "link": "/collections/tarot-oracle",
+            "image_asset": "spellbound-img-cat-tarot.jpg"
+          }
+        },
+        "tile_incense": {
+          "type": "tile",
+          "settings": {
+            "card_title": "Incense & Burners",
+            "description": "Cones, holders and backflow burners",
+            "link": "/collections/incense-burners",
+            "image_asset": "spellbound-img-cat-incense.jpg"
+          }
+        },
+        "tile_books": {
+          "type": "tile",
+          "settings": {
+            "card_title": "Books & Guides",
+            "description": "Preloved wisdom on crystals, reiki & folklore",
+            "link": "/collections/books-guides",
+            "image_asset": "spellbound-img-cat-books.jpg"
+          }
+        },
+        "tile_altar": {
+          "type": "tile",
+          "settings": {
+            "card_title": "Altar & Home",
+            "description": "Coasters, dishes, trinket boxes & decor",
+            "link": "/collections/altar-home",
+            "image_asset": "spellbound-img-cat-altar.jpg"
+          }
+        },
+        "tile_handmade": {
+          "type": "tile",
+          "settings": {
+            "card_title": "Handmade by Us",
+            "description": "Laser-engraved & 3D-printed in our shop",
+            "link": "/collections/handmade",
+            "image_asset": "spellbound-img-cat-handmade.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "tile_crystals",
+        "tile_tarot",
+        "tile_incense",
+        "tile_books",
+        "tile_altar",
+        "tile_handmade"
+      ],
+      "settings": {
+        "title": "Browse the Collections",
+        "subtitle": "Curiosities, sorted"
+      }
+    },
+    "featured": {
+      "type": "spellbound-featured-products",
+      "settings": {
+        "heading": "New Manifestations",
+        "collection": "all",
+        "max_products": 8,
+        "view_all_link": "shopify://collections/all"
+      }
+    },
+    "intentions": {
+      "type": "spellbound-discovery-grid",
+      "blocks": {
+        "int_protection": {
+          "type": "card",
+          "settings": {
+            "card_title": "Protection",
+            "description": "Ward what matters",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 4 26 8.2v6.8c0 6.8-4.3 11.4-10 13-5.7-1.6-10-6.2-10-13V8.2Z\"/><path d=\"M16 11.5l1.2 2.8 2.8 1.2-2.8 1.2-1.2 2.8-1.2-2.8-2.8-1.2 2.8-1.2Z\"/></svg>",
+            "link": "/collections/intention-protection"
+          }
+        },
+        "int_abundance": {
+          "type": "card",
+          "settings": {
+            "card_title": "Abundance",
+            "description": "Invite prosperity in",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 28V6\"/><path d=\"M16 13c-3.6 0-6-2.3-6-6 3.6 0 6 2.3 6 6Z\"/><path d=\"M16 13c3.6 0 6-2.3 6-6-3.6 0-6 2.3-6 6Z\"/><path d=\"M16 20c-3.6 0-6-2.3-6-6 3.6 0 6 2.3 6 6Z\"/><path d=\"M16 20c3.6 0 6-2.3 6-6-3.6 0-6 2.3-6 6Z\"/><path d=\"M16 6c-1.4-1.2-1.4-3.1 0-4.3 1.4 1.2 1.4 3.1 0 4.3Z\"/></svg>",
+            "link": "/collections/intention-abundance"
+          }
+        },
+        "int_love": {
+          "type": "card",
+          "settings": {
+            "card_title": "Love",
+            "description": "Open the heart",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 26.5C9.2 21.2 5 17 5 12.3 5 8.8 7.7 6.3 11 6.3c2.2 0 4.1 1.1 5 2.9.9-1.8 2.8-2.9 5-2.9 3.3 0 6 2.5 6 6 0 4.7-4.2 8.9-11 14.2Z\"/></svg>",
+            "link": "/collections/intention-love"
+          }
+        },
+        "int_calm": {
+          "type": "card",
+          "settings": {
+            "card_title": "Calm",
+            "description": "Quiet the mind",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 4a8 8 0 0 0 12 12 12 12 0 1 1-12-12Z\"/><path d=\"M26 4.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6Z\"/></svg>",
+            "link": "/collections/intention-calm"
+          }
+        },
+        "int_healing": {
+          "type": "card",
+          "settings": {
+            "card_title": "Healing",
+            "description": "Gentle restoration",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M25.5 6.5c0 12-7 19-17 19-.9 0-1.6-.1-2-.2 0-11.8 7-18.8 19-18.8Z\"/><path d=\"M6.5 25.3C10.5 19.5 16.5 12.5 24 8\"/></svg>",
+            "link": "/collections/intention-healing"
+          }
+        },
+        "int_manifestation": {
+          "type": "card",
+          "settings": {
+            "card_title": "Manifestation",
+            "description": "Will it into being",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 4.5c1 6.6 4.4 10 10.9 11-6.5 1-9.9 4.4-10.9 11-1-6.6-4.4-10-10.9-11 6.5-1 9.9-4.4 10.9-11Z\"/><path d=\"M25 22.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6Z\"/></svg>",
+            "link": "/collections/intention-manifestation"
+          }
+        }
+      },
+      "block_order": [
+        "int_protection",
+        "int_abundance",
+        "int_love",
+        "int_calm",
+        "int_healing",
+        "int_manifestation"
+      ],
+      "settings": {
+        "title": "Shop by Intention",
+        "subtitle": "What do you seek?",
+        "columns": 6,
+        "atmosphere_asset": "spellbound-img-hero.jpg",
+        "centre_header": true
+      }
+    },
+    "editorial": {
+      "type": "spellbound-editorial",
+      "settings": {
+        "label": "Proudly Independent",
+        "heading": "A real little shop in Sutton-in-Ashfield",
+        "body": "<p>Totally Spellbound isn’t a faceless warehouse — it’s Alison’s shop on Outram Street, where every crystal, deck and curiosity is chosen by hand. When you order online, it’s packed with the same care as if you’d walked through the door.</p>",
+        "quote": "Helpful like a conversation in the shop — never pushy.",
+        "cta_label": "Plan Your Visit",
+        "cta_link": "/pages/visit-us",
+        "image_asset": "spellbound-img-editorial.jpg",
+        "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
+        "hours_text": "Mon–Sat 10am–4pm · Closed Sundays"
+      }
+    },
+    "oracle": {
+      "type": "spellbound-oracle",
+      "blocks": {
+        "intent_protection": {
+          "type": "intention",
+          "settings": { "value": "Protection" }
+        },
+        "intent_abundance": {
+          "type": "intention",
+          "settings": { "value": "Abundance" }
+        },
+        "intent_love": {
+          "type": "intention",
+          "settings": { "value": "Love" }
+        },
+        "intent_calm": {
+          "type": "intention",
+          "settings": { "value": "Calm" }
+        },
+        "elem_earth": {
+          "type": "element",
+          "settings": { "value": "Earth" }
+        },
+        "elem_air": {
+          "type": "element",
+          "settings": { "value": "Air" }
+        },
+        "elem_fire": {
+          "type": "element",
+          "settings": { "value": "Fire" }
+        },
+        "elem_water": {
+          "type": "element",
+          "settings": { "value": "Water" }
+        },
+        "elem_spirit": {
+          "type": "element",
+          "settings": { "value": "Spirit" }
+        }
+      },
+      "block_order": [
+        "intent_protection",
+        "intent_abundance",
+        "intent_love",
+        "intent_calm",
+        "elem_earth",
+        "elem_air",
+        "elem_fire",
+        "elem_water",
+        "elem_spirit"
+      ],
+      "settings": {
+        "collection_base_url": "shopify://collections/all",
+        "image_asset": "spellbound-img-oracle.jpg"
+      }
+    },
+    "countdown": {
+      "type": "spellbound-ritual-countdown",
+      "settings": {
+        "label": "The Wheel Turns",
+        "heading": "Lammas — The First Harvest",
+        "description": "The first harvest festival of the year falls on the 1st of August. Gather abundance while the wheel turns.",
+        "target_date": "2026-08-01",
+        "cta_label": "Shop the Harvest Ritual",
+        "cta_link": "/collections/intention-abundance",
+        "image_asset": "spellbound-img-lammas.jpg"
+      }
+    },
+    "zodiac": {
+      "type": "spellbound-discovery-grid",
+      "blocks": {
+        "z_aries": {
+          "type": "card",
+          "settings": {
+            "card_title": "Aries",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 27V13.5\"/><path d=\"M16 14c0-6-3.5-10-6.7-10C6.7 4 5.5 6.6 7 9c1 1.6 2.6 2.4 4.3 2.4\"/><path d=\"M16 14c0-6 3.5-10 6.7-10 2.6 0 3.8 2.6 2.3 5-1 1.6-2.6 2.4-4.3 2.4\"/></svg>",
+            "link": "/collections/aries"
+          }
+        },
+        "z_taurus": {
+          "type": "card",
+          "settings": {
+            "card_title": "Taurus",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"16\" cy=\"19.5\" r=\"7.5\"/><path d=\"M8.5 4.5a7.5 7.5 0 0 0 15 0\"/></svg>",
+            "link": "/collections/taurus"
+          }
+        },
+        "z_gemini": {
+          "type": "card",
+          "settings": {
+            "card_title": "Gemini",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 5.5c5 3.2 13 3.2 18 0\"/><path d=\"M7 26.5c5-3.2 13-3.2 18 0\"/><path d=\"M12.5 7.5v17\"/><path d=\"M19.5 7.5v17\"/></svg>",
+            "link": "/collections/gemini"
+          }
+        },
+        "z_cancer": {
+          "type": "card",
+          "settings": {
+            "card_title": "Cancer",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"10.5\" cy=\"12\" r=\"3.75\"/><circle cx=\"21.5\" cy=\"20\" r=\"3.75\"/><path d=\"M14.25 12c4.5 0 8.5-1.2 11.25-4.5\"/><path d=\"M17.75 20c-4.5 0-8.5 1.2-11.25 4.5\"/></svg>",
+            "link": "/collections/cancer"
+          }
+        },
+        "z_leo": {
+          "type": "card",
+          "settings": {
+            "card_title": "Leo",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"9\" cy=\"20.5\" r=\"3.75\"/><path d=\"M12.75 20.5c0-7.5 1.5-14 5.75-14 3.7 0 5 3.6 3.4 7.6-1.3 3.2-1.9 6-.2 8.8 1.3 2.1 3.7 2.3 5.3.9\"/></svg>",
+            "link": "/collections/leo"
+          }
+        },
+        "z_virgo": {
+          "type": "card",
+          "settings": {
+            "card_title": "Virgo",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5.5 24V10.75c0-2.5 3.75-2.5 3.75 0V24\"/><path d=\"M9.25 10.75c0-2.5 3.75-2.5 3.75 0V24\"/><path d=\"M13 10.75c0-2.5 3.75-2.5 3.75 0V18\"/><path d=\"M16.75 18c0-3.2 5.5-3.6 5.5.4 0 3.8-2.9 6.6-6.75 8\"/><path d=\"M22.25 15.5c1.5 4.5.9 8.5-1.5 11.5\"/></svg>",
+            "link": "/collections/virgo"
+          }
+        },
+        "z_libra": {
+          "type": "card",
+          "settings": {
+            "card_title": "Libra",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 20.5h6\"/><path d=\"M21 20.5h6\"/><path d=\"M11 20.5a5 5 0 0 1 10 0\"/><path d=\"M5 26h22\"/></svg>",
+            "link": "/collections/libra"
+          }
+        },
+        "z_scorpio": {
+          "type": "card",
+          "settings": {
+            "card_title": "Scorpio",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5.5 24V10.75c0-2.5 3.75-2.5 3.75 0V24\"/><path d=\"M9.25 10.75c0-2.5 3.75-2.5 3.75 0V24\"/><path d=\"M13 10.75c0-2.5 3.75-2.5 3.75 0V19.5c0 4 2.5 5.8 6.25 4.6\"/><path d=\"m23.9 20.4-.9 3.7-3.7-.9\"/></svg>",
+            "link": "/collections/scorpio"
+          }
+        },
+        "z_sagittarius": {
+          "type": "card",
+          "settings": {
+            "card_title": "Sagittarius",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 25 25 7\"/><path d=\"M16.5 7H25v8.5\"/><path d=\"m10.5 15.5 6 6\"/></svg>",
+            "link": "/collections/sagittarius"
+          }
+        },
+        "z_capricorn": {
+          "type": "card",
+          "settings": {
+            "card_title": "Capricorn",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 11c1.5-3.5 5-2.7 5 .8V22\"/><path d=\"M10 14.5c0-5 5.5-6.3 7-1.8L19.5 20\"/><path d=\"M19.5 20c1.3 4.3 6.3 4.2 6-.2-.3-3-4.2-3.2-5.3-.3-.8 2.2.4 4.6 2.8 5.3\"/></svg>",
+            "link": "/collections/capricorn"
+          }
+        },
+        "z_aquarius": {
+          "type": "card",
+          "settings": {
+            "card_title": "Aquarius",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m5 14 4.5-4 4.5 4 4.5-4 4.5 4 4-3.5\"/><path d=\"m5 22 4.5-4 4.5 4 4.5-4 4.5 4 4-3.5\"/></svg>",
+            "link": "/collections/aquarius"
+          }
+        },
+        "z_pisces": {
+          "type": "card",
+          "settings": {
+            "card_title": "Pisces",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10.5 5.5c3.6 4 3.6 17 0 21\"/><path d=\"M21.5 5.5c-3.6 4-3.6 17 0 21\"/><path d=\"M8 16h16\"/></svg>",
+            "link": "/collections/pisces"
+          }
+        }
+      },
+      "block_order": [
+        "z_aries",
+        "z_taurus",
+        "z_gemini",
+        "z_cancer",
+        "z_leo",
+        "z_virgo",
+        "z_libra",
+        "z_scorpio",
+        "z_sagittarius",
+        "z_capricorn",
+        "z_aquarius",
+        "z_pisces"
+      ],
+      "settings": {
+        "title": "Written in the Stars",
+        "subtitle": "Shop by zodiac",
+        "columns": 6,
+        "atmosphere_asset": "spellbound-img-zodiac.jpg"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "hero",
+    "category_tiles",
+    "featured",
+    "intentions",
+    "editorial",
+    "oracle",
+    "countdown",
+    "zodiac"
+  ]
 }

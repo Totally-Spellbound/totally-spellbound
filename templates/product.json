@@ -110,8 +110,8 @@
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
+                    "type_preset": "h2",
+                    "font": "var(--font-heading--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -284,6 +284,26 @@
         "collection": "all"
       }
     },
+    "kindred_intention": {
+      "type": "spellbound-kindred",
+      "settings": {
+        "label": "Shared Intention",
+        "heading": "Charms with the same purpose",
+        "match_field": "intention",
+        "collection": "all",
+        "max_products": 4
+      }
+    },
+    "kindred_handmade": {
+      "type": "spellbound-kindred",
+      "settings": {
+        "label": "From Our Workbench",
+        "heading": "More made by our own hands",
+        "match_field": "handmade",
+        "collection": "handmade",
+        "max_products": 4
+      }
+    },
     "product_recommendations": {
       "type": "product-recommendations",
       "blocks": {
@@ -291,12 +311,12 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h3>You may also like</h3>",
+            "text": "<h2>You may also like</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-primary--family)",
+            "type_preset": "h2",
+            "font": "var(--font-heading--family)",
             "font_size": "",
             "line_height": "normal",
             "letter_spacing": "normal",
@@ -355,7 +375,7 @@
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
-                "font": "var(--font-body--family)",
+                "font": "var(--font-heading--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
@@ -433,6 +453,8 @@
     "product_lore",
     "celestial_body",
     "chakra_attunement",
+    "kindred_intention",
+    "kindred_handmade",
     "product_recommendations"
   ]
 }

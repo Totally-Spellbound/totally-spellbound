@@ -1,0 +1,397 @@
+/* ============================================================
+   Totally Spellbound — "Your Cauldron" cart drawer
+   Candlelight design system (see .planning/phases/03-launch/DIRECTION.md)
+   Every rule is scoped under .cart-drawer__dialog so nothing
+   leaks to the cart page or other dialogs.
+   ============================================================ */
+
+/* ---------- 1. Drawer surface + gold spine ---------- */
+
+.cart-drawer__dialog {
+  --spellbound-cauldron-header-h: 90px;
+
+  background-color: var(--spellbound-surface);
+  border-left: 1px solid var(--spellbound-gold-deep);
+  box-shadow: -32px 0 80px rgba(0, 0, 0, 0.6);
+}
+
+/* 3px candle-flame gradient running down the left edge */
+.cart-drawer__dialog::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--spellbound-gold-deep) 30%,
+    var(--spellbound-gold-deep) 70%,
+    transparent 100%
+  );
+}
+
+.cart-drawer__dialog::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.cart-drawer__dialog .cart-drawer__inner {
+  background-color: var(--spellbound-surface);
+}
+
+/* ---------- 2. Candlelit header band + heading ---------- */
+
+.cart-drawer__dialog .cart-drawer__header {
+  position: relative;
+  min-height: var(--spellbound-cauldron-header-h);
+  align-items: center;
+  background-color: var(--spellbound-surface);
+  border-bottom: 1px solid var(--spellbound-border);
+}
+
+/* Masked, darkened strip of the hero image behind the title.
+   The overlay fades to the surface colour so it reads as a
+   quiet branded glow, not a busy photo. */
+.cart-drawer__dialog .cart-drawer__header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(5, 5, 5, 0.45) 0%,
+      rgba(10, 8, 6, 0.62) 45%,
+      var(--spellbound-surface) 100%
+    ),
+    url('spellbound-img-hero.jpg');
+  background-size: cover, cover;
+  background-position: center 35%, center 35%;
+  background-repeat: no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.55) 100%);
+  mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* Header is 90px now (Horizon hardcodes --header-height: 60px inline),
+   so re-derive the scroll area height ourselves. */
+.cart-drawer__dialog .cart-drawer__content {
+  height: calc(100% - var(--spellbound-cauldron-header-h));
+  background-color: var(--spellbound-surface);
+}
+
+/* "Your Cauldron" — Cormorant with a gold underline flourish */
+.cart-drawer__dialog .cart-drawer__heading {
+  position: relative;
+  font-family: var(--font-heading--family, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 1.875rem);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--spellbound-text);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+  padding-bottom: 0.625rem;
+}
+
+.cart-drawer__dialog .cart-drawer__heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3.5rem;
+  height: 1px;
+  background: linear-gradient(to right, var(--spellbound-gold), transparent);
+}
+
+/* Item-count bubble beside the title */
+.cart-drawer__dialog .cart-drawer__heading .cart-bubble__background {
+  background-color: var(--spellbound-gold);
+}
+
+.cart-drawer__dialog .cart-drawer__heading .cart-bubble__text {
+  color: var(--spellbound-bg);
+  font-family: var(--font-body--family, sans-serif);
+  font-weight: 600;
+}
+
+/* Close button sits on the image band — keep it crisp */
+.cart-drawer__dialog .cart-drawer__close-button {
+  color: var(--spellbound-text);
+  transition: color 0.25s ease;
+}
+
+.cart-drawer__dialog .cart-drawer__close-button:hover {
+  color: var(--spellbound-gold-bright);
+}
+
+.cart-drawer__dialog .cart-drawer__close-button:focus-visible {
+  outline: 2px solid var(--spellbound-gold-deep);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. Line items ---------- */
+
+.cart-drawer__dialog .cart-drawer__items {
+  padding-block-start: 1.25rem;
+}
+
+.cart-drawer__dialog .cart-drawer__items .cart-items__table-row {
+  border-bottom-color: var(--spellbound-border);
+  padding-bottom: 1.375rem;
+  margin-bottom: 1.375rem;
+}
+
+.cart-drawer__dialog .cart-drawer__items .cart-items__table-row:last-child {
+  border-bottom: none;
+}
+
+/* Framed thumbnail: hairline border + offset gold echo line */
+.cart-drawer__dialog .cart-items__media-container {
+  border: 1px solid var(--spellbound-border);
+  outline: 1px solid var(--spellbound-gold-glow);
+  outline-offset: 3px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Cormorant item titles */
+.cart-drawer__dialog .cart-items__title {
+  font-family: var(--font-heading--family, Georgia, serif);
+  font-weight: 400;
+  font-size: 1.1875rem;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  color: var(--spellbound-text);
+  transition: color 0.25s ease;
+}
+
+.cart-drawer__dialog .cart-items__title:hover {
+  color: var(--spellbound-gold-bright);
+}
+
+/* Variant / property / vendor copy stays readable */
+.cart-drawer__dialog .cart-items__details {
+  color: var(--spellbound-text-soft);
+}
+
+.cart-drawer__dialog .cart-items__variants-wrapper,
+.cart-drawer__dialog .cart-items__unit-price-wrapper {
+  color: var(--spellbound-text-soft);
+}
+
+/* Soft line prices */
+.cart-drawer__dialog .cart-items__price {
+  color: var(--spellbound-text-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-drawer__dialog .compare-at-price {
+  color: var(--spellbound-text-faint);
+}
+
+/* Quantity stepper: quiet pill, gold when focused */
+.cart-drawer__dialog .cart-items__quantity .quantity-selector {
+  background-color: var(--spellbound-surface-2);
+  border: 1px solid var(--spellbound-border);
+  border-radius: 100px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cart-drawer__dialog .cart-items__quantity .quantity-selector:focus-within {
+  border-color: var(--spellbound-gold-deep);
+  box-shadow: 0 0 0 3px var(--spellbound-gold-glow);
+}
+
+.cart-drawer__dialog .cart-items__quantity .quantity-selector input {
+  background: transparent;
+  color: var(--spellbound-text);
+}
+
+.cart-drawer__dialog .cart-items__quantity .quantity-minus,
+.cart-drawer__dialog .cart-items__quantity .quantity-plus {
+  color: var(--spellbound-text-soft);
+  transition: color 0.25s ease;
+}
+
+.cart-drawer__dialog .cart-items__quantity .quantity-minus:hover,
+.cart-drawer__dialog .cart-items__quantity .quantity-plus:hover {
+  color: var(--spellbound-gold-bright);
+}
+
+.cart-drawer__dialog .cart-items__remove {
+  color: var(--spellbound-text-faint);
+  transition: color 0.25s ease;
+}
+
+.cart-drawer__dialog .cart-items__remove:hover {
+  color: var(--spellbound-gold-bright);
+}
+
+.cart-drawer__dialog .cart-items__remove:focus-visible,
+.cart-drawer__dialog .quantity-selector button:focus-visible {
+  outline: 2px solid var(--spellbound-gold-deep);
+  outline-offset: 2px;
+}
+
+/* ---------- 4. Summary + checkout ---------- */
+
+.cart-drawer__dialog .cart-drawer__summary {
+  background-color: var(--spellbound-surface);
+}
+
+.cart-drawer__dialog .cart-drawer__summary .cart-totals,
+.cart-drawer__dialog .cart-drawer__summary .cart__summary-totals,
+.cart-drawer__dialog .cart-drawer__summary .cart-actions,
+.cart-drawer__dialog .cart-drawer__summary .cart-actions__divider {
+  border-color: var(--spellbound-border);
+}
+
+/* Micro-label: "Estimated total" */
+.cart-drawer__dialog .cart-totals__total-label {
+  font-family: var(--font-body--family, sans-serif);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--spellbound-gold);
+}
+
+/* Cormorant amount */
+.cart-drawer__dialog .cart-totals__total-value {
+  font-family: var(--font-heading--family, Georgia, serif);
+  font-weight: 400;
+  font-size: 1.75rem;
+  letter-spacing: 0.05em;
+  color: var(--spellbound-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-drawer__dialog .cart-totals__original-label,
+.cart-drawer__dialog .cart-totals__original-value {
+  color: var(--spellbound-text-soft);
+}
+
+.cart-drawer__dialog .cart-totals__tax-note {
+  color: var(--spellbound-text-faint);
+}
+
+/* Note / discount accordion labels */
+.cart-drawer__dialog .cart-note__label,
+.cart-drawer__dialog .cart-discount__label {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--spellbound-text-soft);
+  transition: color 0.25s ease;
+}
+
+.cart-drawer__dialog .cart-note__summary:hover .cart-note__label,
+.cart-drawer__dialog .cart-discount__summary:hover .cart-discount__label {
+  color: var(--spellbound-gold-bright);
+}
+
+.cart-drawer__dialog .cart-note__instructions,
+.cart-drawer__dialog .cart-discount__input {
+  background-color: var(--spellbound-surface-2);
+  border: 1px solid var(--spellbound-border);
+  color: var(--spellbound-text);
+}
+
+.cart-drawer__dialog .cart-note__instructions:focus-visible,
+.cart-drawer__dialog .cart-discount__input:focus-visible {
+  outline: none;
+  border-color: var(--spellbound-gold-deep);
+  box-shadow: 0 0 0 3px var(--spellbound-gold-glow);
+}
+
+.cart-drawer__dialog .cart-discount__pill {
+  background-color: var(--spellbound-gold-glow);
+  color: var(--spellbound-gold-bright);
+  border: 1px solid var(--spellbound-gold-deep);
+}
+
+/* Cream pill checkout button (matches "Add to Cauldron") */
+.cart-drawer__dialog .cart__checkout-button,
+.cart-drawer__dialog .cart-items__empty-button {
+  background-color: var(--spellbound-text);
+  color: var(--spellbound-bg);
+  border: none;
+  border-radius: 100px;
+  text-transform: uppercase;
+  font-family: var(--font-body--family, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.cart-drawer__dialog .cart__checkout-button:hover:not(:disabled),
+.cart-drawer__dialog .cart-items__empty-button:hover {
+  background-color: var(--spellbound-gold-bright);
+  color: var(--spellbound-bg);
+  box-shadow: 0 0 32px var(--spellbound-gold-glow);
+}
+
+.cart-drawer__dialog .cart__checkout-button:focus-visible,
+.cart-drawer__dialog .cart-items__empty-button:focus-visible {
+  outline: 2px solid var(--spellbound-gold-deep);
+  outline-offset: 3px;
+}
+
+.cart-drawer__dialog .cart__checkout-button:disabled {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+/* ---------- 5. Empty state ---------- */
+
+.cart-drawer__dialog.cart-drawer--empty .cart-drawer__content {
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.cart-drawer__dialog .cart-drawer__heading--empty {
+  justify-content: center;
+  text-align: center;
+  color: var(--spellbound-text);
+}
+
+/* Centre the flourish under the empty heading */
+.cart-drawer__dialog .cart-drawer__heading--empty::after {
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--spellbound-gold),
+    transparent
+  );
+}
+
+.cart-drawer__dialog.cart-drawer--empty .cart-items__wrapper,
+.cart-drawer__dialog.cart-drawer--empty .cart-items__wrapper p {
+  color: var(--spellbound-text-soft);
+}
+
+.cart-drawer__dialog.cart-drawer--empty .cart-items__wrapper a:not(.button) {
+  color: var(--spellbound-gold);
+}
+
+.cart-drawer__dialog.cart-drawer--empty .cart-items__wrapper a:not(.button):hover {
+  color: var(--spellbound-gold-bright);
+}
+
+/* ---------- 6. Motion safety ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-drawer__dialog *,
+  .cart-drawer__dialog *::before,
+  .cart-drawer__dialog *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

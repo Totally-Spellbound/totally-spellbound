@@ -1,12 +1,13 @@
 {% comment %}
-  Spellbound Featured Products - "New Manifestations" product grid with custom cards
+  Spellbound Featured Products - "New Manifestations" homepage product grid.
+  Candlelight tokens only (no hardcoded accent hex). Badges via spellbound-badges snippet.
 {% endcomment %}
 
 <style>
   .spellbound-featured {
-    padding: 8rem 1.5rem;
-    background: #000000;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+    background: var(--spellbound-bg);
+    border-top: 1px solid var(--spellbound-border);
   }
   .spellbound-featured__inner {
     max-width: 100rem;
@@ -14,139 +15,186 @@
   }
   .spellbound-featured__header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  @media (min-width: 750px) {
+    .spellbound-featured__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
   }
   .spellbound-featured__title {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
-    font-size: clamp(2.5rem, 4vw, 6rem);
-    color: #ffffff;
-    line-height: 1;
+    font-size: clamp(2.25rem, 4vw, 3.75rem);
+    color: var(--spellbound-text);
+    line-height: 1.05;
+    margin: 0;
   }
   .spellbound-featured__view-all {
-    font-size: 9px;
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-body--family);
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 0.25rem;
+    color: var(--spellbound-gold);
     text-decoration: none;
+    padding-bottom: 0.45rem;
     transition: color 0.3s ease;
   }
+  .spellbound-featured__view-all::before,
+  .spellbound-featured__view-all::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+  }
+  .spellbound-featured__view-all::before {
+    background: var(--spellbound-gold-deep);
+  }
+  .spellbound-featured__view-all::after {
+    background: var(--spellbound-gold-bright);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
   .spellbound-featured__view-all:hover {
-    color: #ffffff;
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-featured__view-all:hover::after,
+  .spellbound-featured__view-all:focus-visible::after {
+    transform: scaleX(1);
   }
   .spellbound-featured__grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 1rem;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 990px) {
     .spellbound-featured__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 1024px) {
-    .spellbound-featured__grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem 2rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 3rem 2rem;
     }
   }
 
-  /* Product Card Styles */
+  /* Product card */
   .spellbound-product-card {
-    cursor: pointer;
-    text-decoration: none;
     display: block;
+    text-decoration: none;
   }
   .spellbound-product-card__media {
     position: relative;
     aspect-ratio: 4 / 5;
     overflow: hidden;
-    background: #0d0d0d;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    background: var(--spellbound-surface);
+    border: 1px solid var(--spellbound-border);
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .spellbound-product-card__media::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--spellbound-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+  }
+  .spellbound-product-card:hover .spellbound-product-card__media::after,
+  .spellbound-product-card:focus-visible .spellbound-product-card__media::after {
+    transform: scaleX(1);
   }
   .spellbound-product-card__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%);
-    transition: all 1.5s ease;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
   }
   .spellbound-product-card:hover .spellbound-product-card__image {
-    filter: grayscale(0%);
-    transform: scale(1.05);
+    transform: scale(1.03);
+    filter: brightness(1.05);
   }
   .spellbound-product-card__badges {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 0.75rem;
+    left: 0.75rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.375rem;
     z-index: 1;
   }
-  .spellbound-product-card__badge {
-    font-size: 8px;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
-    padding: 4px 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.8);
-  }
-  .spellbound-product-card__badge--amber {
-    color: #fde68a;
-  }
   .spellbound-product-card__info {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
   }
   .spellbound-product-card__title {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
     font-size: 1.25rem;
-    color: #ffffff;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.25rem;
+    line-height: 1.25;
+    color: var(--spellbound-text);
+    margin: 0;
     transition: color 0.3s ease;
   }
   .spellbound-product-card:hover .spellbound-product-card__title {
-    color: #fde68a;
+    color: var(--spellbound-gold-bright);
   }
   .spellbound-product-card__price {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    font-family: var(--font-body--family);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    color: var(--spellbound-text-soft);
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-product-card__image,
+    .spellbound-product-card__media::after,
+    .spellbound-featured__view-all::after {
+      transition: none;
+    }
+    .spellbound-product-card:hover .spellbound-product-card__image {
+      transform: none;
+      filter: none;
+    }
   }
 </style>
 
 <section class="spellbound-featured">
   <div class="spellbound-featured__inner">
-    <div class="spellbound-featured__header">
-      <h2 class="spellbound-featured__title">{{ section.settings.heading }}</h2>
+    <div class="spellbound-featured__header" data-spellbound-reveal>
+      <h2 class="spellbound-featured__title">{{ section.settings.heading | escape }}</h2>
       {% if section.settings.view_all_link != blank %}
-        <a href="{{ section.settings.view_all_link }}" class="spellbound-featured__view-all">View All</a>
+        <a href="{{ section.settings.view_all_link }}" class="spellbound-featured__view-all">View all</a>
       {% endif %}
     </div>
 
-    {%- assign collection = section.settings.collection -%}
-    {% if collection != blank %}
-      <div class="spellbound-featured__grid">
-        {% for product in collections[collection].products limit: section.settings.max_products %}
+    {%- assign featured_collection = section.settings.collection -%}
+    {% if featured_collection != blank and featured_collection.products.size > 0 %}
+      <div class="spellbound-featured__grid" data-spellbound-reveal-group>
+        {% for product in featured_collection.products limit: section.settings.max_products %}
           <a href="{{ product.url }}" class="spellbound-product-card">
             <div class="spellbound-product-card__media">
               {% if product.featured_image %}
                 <img
                   src="{{ product.featured_image | image_url: width: 600 }}"
-                  srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w"
-                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-                  alt="{{ product.title | escape }}"
+                  srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w"
+                  sizes="(min-width: 990px) 25vw, 50vw"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
                   class="spellbound-product-card__image"
                   loading="lazy"
                   width="{{ product.featured_image.width }}"
@@ -154,29 +202,24 @@
                 >
               {% endif %}
               <div class="spellbound-product-card__badges">
-                {% if product.metafields.custom.element != blank %}
-                  <span class="spellbound-product-card__badge">{{ product.metafields.custom.element }}</span>
-                {% endif %}
-                {% if product.metafields.custom.intention != blank %}
-                  <span class="spellbound-product-card__badge spellbound-product-card__badge--amber">{{ product.metafields.custom.intention }}</span>
-                {% endif %}
+                {% render 'spellbound-badges', product: product %}
               </div>
             </div>
             <div class="spellbound-product-card__info">
-              <h3 class="spellbound-product-card__title">{{ product.title }}</h3>
+              <h3 class="spellbound-product-card__title">{{ product.title | escape }}</h3>
               <p class="spellbound-product-card__price">{{ product.price | money }}</p>
             </div>
           </a>
         {% endfor %}
       </div>
     {% else %}
-      <div class="spellbound-featured__grid">
+      <div class="spellbound-featured__grid" data-spellbound-reveal-group>
         {% for i in (1..4) %}
           <div class="spellbound-product-card">
-            <div class="spellbound-product-card__media" style="background: #1a1a1a;"></div>
+            <div class="spellbound-product-card__media"></div>
             <div class="spellbound-product-card__info">
-              <h3 class="spellbound-product-card__title">Sample Product {{ i }}</h3>
-              <p class="spellbound-product-card__price">$0.00</p>
+              <h3 class="spellbound-product-card__title">New treasures brewing&hellip;</h3>
+              <p class="spellbound-product-card__price">Choose a collection to reveal them</p>
             </div>
           </div>
         {% endfor %}
@@ -209,7 +252,7 @@
       "min": 2,
       "max": 12,
       "step": 1,
-      "default": 4
+      "default": 8
     },
     {
       "type": "url",

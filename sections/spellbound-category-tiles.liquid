@@ -1,0 +1,315 @@
+{% comment %}
+  Spellbound Category Tiles - "Browse the Collections" homepage showcase.
+  Editorial header + 3-column (desktop) / 2-column (mobile) grid of image tiles.
+  Consumes Candlelight tokens from assets/spellbound-custom.css only.
+{% endcomment %}
+
+<style>
+  .spellbound-cattiles {
+    padding: 5rem 1.5rem;
+    background: var(--spellbound-bg);
+  }
+  @media (min-width: 990px) {
+    .spellbound-cattiles {
+      padding: 7rem 6rem;
+    }
+  }
+  .spellbound-cattiles__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .spellbound-cattiles__header {
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 990px) {
+    .spellbound-cattiles__header {
+      margin-bottom: 4rem;
+    }
+  }
+  .spellbound-cattiles__subtitle {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin-bottom: 1rem;
+  }
+  .spellbound-cattiles__title {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    line-height: 1.1;
+    color: var(--spellbound-text);
+    margin: 0;
+  }
+  .spellbound-cattiles__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (min-width: 990px) {
+    .spellbound-cattiles__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+  }
+  .spellbound-cattiles__tile {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--spellbound-surface);
+    border: 1px solid var(--spellbound-border);
+    text-decoration: none;
+  }
+  .spellbound-cattiles__tile:hover {
+    border-color: var(--spellbound-border-strong);
+  }
+  .spellbound-cattiles__tile:focus-visible {
+    outline: 2px solid var(--spellbound-gold);
+    outline-offset: 2px;
+  }
+  .spellbound-cattiles__media {
+    position: absolute;
+    inset: 0;
+    background: var(--spellbound-surface);
+    overflow: hidden;
+  }
+  .spellbound-cattiles__initial {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(4.5rem, 10vw, 8rem);
+    line-height: 1;
+    color: rgba(245, 242, 234, 0.08);
+    user-select: none;
+    pointer-events: none;
+  }
+  .spellbound-cattiles__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spellbound-cattiles__tile:hover .spellbound-cattiles__image {
+    transform: scale(1.03);
+  }
+  .spellbound-cattiles__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 5, 0.92) 0%,
+      rgba(5, 5, 5, 0.55) 32%,
+      rgba(5, 5, 5, 0) 65%
+    );
+    pointer-events: none;
+  }
+  .spellbound-cattiles__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem 1rem 1.15rem;
+    z-index: 1;
+  }
+  @media (min-width: 990px) {
+    .spellbound-cattiles__content {
+      padding: 1.5rem 1.5rem 1.65rem;
+    }
+  }
+  .spellbound-cattiles__tile-title {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.1rem;
+    line-height: 1.2;
+    color: var(--spellbound-text);
+    margin: 0 0 0.25rem;
+  }
+  @media (min-width: 990px) {
+    .spellbound-cattiles__tile-title {
+      font-size: 1.4rem;
+    }
+  }
+  .spellbound-cattiles__tile-desc {
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--spellbound-text-soft);
+    margin: 0;
+  }
+  @media (min-width: 990px) {
+    .spellbound-cattiles__tile-desc {
+      font-size: 0.85rem;
+    }
+  }
+  .spellbound-cattiles__accent {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--spellbound-gold-deep);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+  }
+  .spellbound-cattiles__tile:hover .spellbound-cattiles__accent {
+    transform: scaleX(1);
+    background: var(--spellbound-gold);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-cattiles__image,
+    .spellbound-cattiles__accent {
+      transition: none;
+    }
+    .spellbound-cattiles__tile:hover .spellbound-cattiles__image {
+      transform: none;
+    }
+  }
+</style>
+
+<section class="spellbound-cattiles">
+  <div class="spellbound-cattiles__inner">
+    <header class="spellbound-cattiles__header" data-spellbound-reveal>
+      {% if section.settings.subtitle != blank %}
+        <span class="spellbound-cattiles__subtitle">{{ section.settings.subtitle }}</span>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="spellbound-cattiles__title">{{ section.settings.title }}</h2>
+      {% endif %}
+    </header>
+
+    <div class="spellbound-cattiles__grid" data-spellbound-reveal-group>
+      {% for block in section.blocks %}
+        {% liquid
+          assign tile_title = block.settings.card_title | default: ''
+          assign tile_initial = tile_title | strip | slice: 0, 1 | upcase
+          assign tile_asset = block.settings.image_asset | strip
+        %}
+        <a
+          class="spellbound-cattiles__tile"
+          {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+          {{ block.shopify_attributes }}
+        >
+          <div class="spellbound-cattiles__media">
+            {% if tile_initial != blank %}
+              <span class="spellbound-cattiles__initial" aria-hidden="true">{{ tile_initial }}</span>
+            {% endif %}
+            {% if block.settings.image != blank %}
+              <img
+                class="spellbound-cattiles__image"
+                src="{{ block.settings.image | image_url: width: 900 }}"
+                srcset="{{ block.settings.image | image_url: width: 450 }} 450w, {{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1200 }} 1200w"
+                sizes="(min-width: 990px) 33vw, 50vw"
+                alt="{{ block.settings.image.alt | default: tile_title | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            {% elsif tile_asset != blank %}
+              <img
+                class="spellbound-cattiles__image"
+                src="{{ tile_asset | asset_url }}"
+                alt="{{ tile_title | escape }}"
+                width="900"
+                height="1125"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              >
+            {% endif %}
+            <div class="spellbound-cattiles__scrim"></div>
+          </div>
+          <div class="spellbound-cattiles__content">
+            {% if tile_title != blank %}
+              <h3 class="spellbound-cattiles__tile-title">{{ tile_title }}</h3>
+            {% endif %}
+            {% if block.settings.description != blank %}
+              <span class="spellbound-cattiles__tile-desc">{{ block.settings.description }}</span>
+            {% endif %}
+          </div>
+          <span class="spellbound-cattiles__accent" aria-hidden="true"></span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spellbound Categories",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Browse the Collections"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Curiosities, sorted"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Fallback asset filename",
+          "info": "Theme asset (e.g. spellbound-img-crystals.jpg) used when no image is picked"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spellbound Categories",
+      "blocks": [
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" }
+      ]
+    }
+  ]
+}
+{% endschema %}

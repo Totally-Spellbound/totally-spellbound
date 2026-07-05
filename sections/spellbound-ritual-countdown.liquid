@@ -6,123 +6,161 @@
 
 <style>
   .spellbound-countdown {
-    padding: 8rem 1.5rem;
-    background: rgba(255,255,255,0.05);
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    padding: clamp(5rem, 10vw, 8.5rem) 1.5rem;
+    background: var(--spellbound-bg);
+    border-top: 1px solid var(--spellbound-border);
+    border-bottom: 1px solid var(--spellbound-border);
     overflow: hidden;
   }
   .spellbound-countdown__inner {
-    max-width: 80rem;
+    max-width: 72rem;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: 5rem;
+    gap: 4rem;
   }
   @media (min-width: 1024px) {
     .spellbound-countdown__inner {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
       padding: 0 1.5rem;
     }
   }
   .spellbound-countdown__label {
-    font-size: 10px;
-    letter-spacing: 0.6em;
-    color: #f59e0b;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: var(--spellbound-gold);
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    margin: 0 0 1.5rem;
   }
   .spellbound-countdown__heading {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
-    font-size: clamp(3rem, 5vw, 6rem);
-    color: #ffffff;
-    margin-bottom: 1.5rem;
-    line-height: 1;
+    font-size: clamp(2.75rem, 4.5vw, 4.5rem);
+    color: var(--spellbound-text);
+    margin: 0 0 1.5rem;
+    line-height: 1.05;
   }
   .spellbound-countdown__description {
-    color: rgba(255,255,255,0.4);
+    color: var(--spellbound-text-soft);
     line-height: 1.8;
-    max-width: 24rem;
-    margin-bottom: 3rem;
+    max-width: 30rem;
+    margin: 0 0 3rem;
   }
   .spellbound-countdown__timer {
     display: flex;
-    gap: 2rem;
+    align-items: flex-start;
+    gap: clamp(1rem, 2.5vw, 1.75rem);
   }
   .spellbound-countdown__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
   }
   .spellbound-countdown__value {
     font-family: var(--font-heading--family);
-    font-size: 1.875rem;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(3rem, 5vw, 4.25rem);
+    line-height: 1;
+    color: var(--spellbound-text);
+    font-variant-numeric: tabular-nums;
+  }
+  .spellbound-countdown__sep {
+    font-family: var(--font-heading--family);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1;
+    color: var(--spellbound-gold);
+    padding-top: 0.35em;
   }
   .spellbound-countdown__unit-label {
-    font-size: 8px;
-    letter-spacing: 0.15em;
-    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--spellbound-text-faint);
     text-transform: uppercase;
+    margin-top: 0.9rem;
   }
-  .spellbound-countdown__visual {
-    position: relative;
-    aspect-ratio: 1;
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .spellbound-countdown__glow {
-    position: absolute;
-    inset: 0;
-    background: #fde68a;
-    opacity: 0.05;
-    filter: blur(48px);
-    border-radius: 50%;
-    animation: pulse 4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.03; }
-    50% { opacity: 0.08; }
-  }
-  .spellbound-countdown__icon {
-    color: rgba(255,255,255,0.1);
-  }
-  .spellbound-countdown__icon svg {
-    width: 200px;
-    height: 200px;
-    stroke-width: 0.5;
-  }
-  .spellbound-countdown__visual-cta {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .spellbound-countdown__expired {
+    font-family: var(--font-accent--family);
+    font-style: italic;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.4;
+    color: var(--spellbound-text);
+    max-width: 28rem;
+    margin: 0;
   }
   .spellbound-countdown__cta {
     display: inline-block;
-    padding: 1rem 2.5rem;
-    background: #ffffff;
-    color: #000000;
-    font-size: 10px;
+    margin-top: 3rem;
+    padding: 1.15rem 2.75rem;
+    border-radius: 999px;
+    background: var(--spellbound-text);
+    color: var(--spellbound-bg);
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.3em;
     text-decoration: none;
     transition: background 0.3s ease;
   }
   .spellbound-countdown__cta:hover {
-    background: #fde68a;
+    background: var(--spellbound-gold-bright);
+    color: var(--spellbound-bg);
+  }
+  .spellbound-countdown__cta:focus-visible {
+    outline: 2px solid var(--spellbound-gold);
+    outline-offset: 3px;
+  }
+  .spellbound-countdown__visual {
+    position: relative;
+    width: 100%;
+    max-width: 26rem;
+    margin: 0 auto;
+  }
+  .spellbound-countdown__glow {
+    position: absolute;
+    inset: -12%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--spellbound-gold-glow), transparent 70%);
+    filter: blur(28px);
+    pointer-events: none;
+    animation: spellboundCountdownPulse 6s ease-in-out infinite;
+  }
+  @keyframes spellboundCountdownPulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.97); }
+    50% { opacity: 1; transform: scale(1.03); }
+  }
+  .spellbound-countdown__frame {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid var(--spellbound-border);
+    background: var(--spellbound-surface);
+  }
+  .spellbound-countdown__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-countdown__glow {
+      animation: none;
+    }
+    .spellbound-countdown__cta {
+      transition: none;
+    }
   }
 </style>
 
-<section class="spellbound-countdown">
+<section class="spellbound-countdown" data-spellbound-countdown>
   <div class="spellbound-countdown__inner">
-    <div>
+    <div data-spellbound-reveal-group>
       {% if section.settings.label != blank %}
         <p class="spellbound-countdown__label">{{ section.settings.label }}</p>
       {% endif %}
@@ -132,34 +170,56 @@
       {% if section.settings.description != blank %}
         <p class="spellbound-countdown__description">{{ section.settings.description }}</p>
       {% endif %}
-      <div class="spellbound-countdown__timer" data-countdown-target="{{ section.settings.target_date }}">
+      <div
+        class="spellbound-countdown__timer"
+        data-countdown-timer
+        data-countdown-target="{{ section.settings.target_date | escape }}"
+        role="timer"
+        aria-label="Time remaining until {{ section.settings.heading | default: 'the ritual' | escape }}"
+      >
         <div class="spellbound-countdown__unit">
-          <div class="spellbound-countdown__value" data-countdown-days>00</div>
-          <div class="spellbound-countdown__unit-label">Days</div>
+          <span class="spellbound-countdown__value" data-countdown-days>00</span>
+          <span class="spellbound-countdown__unit-label">Days</span>
         </div>
+        <span class="spellbound-countdown__sep" aria-hidden="true">&middot;</span>
         <div class="spellbound-countdown__unit">
-          <div class="spellbound-countdown__value" data-countdown-hours>00</div>
-          <div class="spellbound-countdown__unit-label">Hours</div>
+          <span class="spellbound-countdown__value" data-countdown-hours>00</span>
+          <span class="spellbound-countdown__unit-label">Hours</span>
         </div>
+        <span class="spellbound-countdown__sep" aria-hidden="true">&middot;</span>
         <div class="spellbound-countdown__unit">
-          <div class="spellbound-countdown__value" data-countdown-mins>00</div>
-          <div class="spellbound-countdown__unit-label">Mins</div>
+          <span class="spellbound-countdown__value" data-countdown-mins>00</span>
+          <span class="spellbound-countdown__unit-label">Mins</span>
         </div>
       </div>
+      <p class="spellbound-countdown__expired" data-countdown-expired hidden>
+        {{- section.settings.expired_text | escape -}}
+      </p>
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="spellbound-countdown__cta">
+          {{- section.settings.cta_label -}}
+        </a>
+      {% endif %}
     </div>
-    <div class="spellbound-countdown__visual">
-      <div class="spellbound-countdown__glow"></div>
-      <div class="spellbound-countdown__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="m15 9-6 6"/>
-          <path d="M9 9h.01"/>
-          <path d="M15 15h.01"/>
-        </svg>
-      </div>
-      <div class="spellbound-countdown__visual-cta">
-        {% if section.settings.cta_label != blank %}
-          <a href="{{ section.settings.cta_link }}" class="spellbound-countdown__cta">{{ section.settings.cta_label }}</a>
+    <div class="spellbound-countdown__visual" data-spellbound-reveal>
+      <div class="spellbound-countdown__glow" aria-hidden="true"></div>
+      <div class="spellbound-countdown__frame">
+        {% if section.settings.image %}
+          <img
+            src="{{ section.settings.image | image_url: width: 900, height: 900, crop: 'center' }}"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            width="900"
+            height="900"
+            loading="lazy"
+          >
+        {% elsif section.settings.image_asset != blank %}
+          <img
+            src="{{ section.settings.image_asset | asset_url }}"
+            alt="{{ section.settings.heading | default: 'Seasonal ritual still life' | escape }}"
+            width="900"
+            height="900"
+            loading="lazy"
+          >
         {% endif %}
       </div>
     </div>
@@ -176,37 +236,55 @@
       "type": "text",
       "id": "label",
       "label": "Label",
-      "default": "Current Season"
+      "default": "The Wheel of the Year"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Equinox Ritual"
+      "default": "Lammas — the First Harvest"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "The veil is thinning. During the Equinox, all artifacts involving balance and transition gain 15% resonance."
+      "default": "Gather abundance while the wheel turns. The first harvest arrives on the 1st of August — mark it with crystals and tools chosen for prosperity."
     },
     {
       "type": "text",
       "id": "target_date",
       "label": "Target date",
       "info": "Format: YYYY-MM-DD",
-      "default": "2026-06-21"
+      "default": "2026-08-01"
+    },
+    {
+      "type": "text",
+      "id": "expired_text",
+      "label": "Message once the date passes",
+      "default": "The harvest is upon us — blessed Lammas."
     },
     {
       "type": "text",
       "id": "cta_label",
       "label": "CTA label",
-      "default": "Shop Ritual Gear"
+      "default": "Shop the Harvest Ritual"
     },
     {
       "type": "url",
       "id": "cta_link",
       "label": "CTA link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Ritual image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Ritual asset filename",
+      "info": "Theme asset used when no image is picked.",
+      "default": "spellbound-img-lammas.jpg"
     }
   ],
   "presets": [

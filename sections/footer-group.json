@@ -153,11 +153,11 @@
         "social_icons": {
           "type": "social-links",
           "settings": {
-            "facebook_url": "https://www.facebook.com",
-            "instagram_url": "https://www.instagram.com",
-            "tiktok_url": "https://www.tiktok.com",
-            "twitter_url": "https://www.twitter.com",
-            "youtube_url": "https://www.youtube.com"
+            "facebook_url": "https://www.facebook.com/totallyspellbound",
+            "instagram_url": "",
+            "tiktok_url": "",
+            "twitter_url": "",
+            "youtube_url": ""
           }
         }
       },

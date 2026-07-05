@@ -1,34 +1,17 @@
 {
   "sections": {
+    "hero": {
+      "type": "spellbound-page-hero",
+      "settings": {
+        "image_asset": "spellbound-img-oracle.jpg",
+        "label": "Send Word",
+        "title": "Contact",
+        "intro": "Questions, requests, or wondering if something's in stock? Write to us — we'll answer like we would in the shop."
+      }
+    },
     "main": {
       "type": "main-page",
       "blocks": {
-        "title": {
-          "type": "text",
-          "name": "t:names.title",
-          "settings": {
-            "text": "<h1>{{ closest.page.title }}</h1>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "h2",
-            "font": "var(--font-primary--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "content": {
           "type": "text",
           "name": "t:names.content",
@@ -56,7 +39,7 @@
           "blocks": {}
         }
       },
-      "block_order": ["title", "content"],
+      "block_order": ["content"],
       "settings": {
         "content_direction": "column",
         "gap": 32,
@@ -87,7 +70,7 @@
               "type": "contact-form-submit-button",
               "static": true,
               "settings": {
-                "label": "Submit",
+                "label": "Send Message",
                 "style_class": "button",
                 "width": "fit-content",
                 "custom_width": 100,
@@ -127,9 +110,37 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 32,
-        "padding-block-end": 84
+        "padding-block-end": 48
+      }
+    },
+    "cards": {
+      "type": "spellbound-visit-cards",
+      "blocks": {
+        "reach": {
+          "type": "card",
+          "settings": {
+            "icon": "mail",
+            "title": "Get In Touch",
+            "body": "gothicwitches@gmail.com / 07380 149004"
+          }
+        },
+        "find": {
+          "type": "card",
+          "settings": {
+            "icon": "map-pin",
+            "title": "Find the Shop",
+            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS. Monday - Saturday, 10am - 4pm.",
+            "link_label": "Plan your visit",
+            "link": "/pages/visit-us"
+          }
+        }
+      },
+      "block_order": ["reach", "find"],
+      "settings": {
+        "heading": "Prefer the direct route?",
+        "subheading": "Call, email, or come and see us in person."
       }
     }
   },
-  "order": ["main", "form"]
+  "order": ["hero", "main", "form", "cards"]
 }

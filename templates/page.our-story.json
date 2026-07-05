@@ -1,0 +1,83 @@
+{
+  "sections": {
+    "hero": {
+      "type": "spellbound-page-hero",
+      "settings": {
+        "image_asset": "spellbound-img-editorial.jpg",
+        "label": "Proudly Independent",
+        "title": "Our Story",
+        "intro": "A real little shop in Sutton-in-Ashfield — no corporate warehouse, no endless aisles. Every crystal, deck and curiosity on our shelves is chosen by hand."
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "content": {
+          "type": "text",
+          "name": "Content",
+          "settings": {
+            "text": "{{ closest.page.content }}",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["content"],
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 48,
+        "padding-block-end": 16
+      }
+    },
+    "cards": {
+      "type": "spellbound-visit-cards",
+      "blocks": {
+        "visit": {
+          "type": "card",
+          "settings": {
+            "icon": "map-pin",
+            "title": "Visit the shop",
+            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS. Open Monday - Saturday, 10am - 4pm — pop in for a browse, a chat, or a bit of guidance.",
+            "link_label": "Plan your visit",
+            "link": "/pages/visit-us"
+          }
+        },
+        "browse": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Browse the vault",
+            "body": "Hand-picked crystals, tarot and curiosities — many one-of-a-kind. The exact piece you see is the exact piece that arrives.",
+            "link_label": "Enter the Vault",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": ["visit", "browse"],
+      "settings": {
+        "heading": "Come and say hello",
+        "subheading": "The kettle's usually on."
+      }
+    }
+  },
+  "order": ["hero", "main", "cards"]
+}

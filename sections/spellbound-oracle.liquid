@@ -1,5 +1,5 @@
 {% comment %}
-  Spellbound Oracle - Interactive multi-step intention finder
+  Spellbound Oracle - "Consult the Oracle" three-step intention reading
 {% endcomment %}
 
 <script src="{{ 'spellbound-oracle.js' | asset_url }}" defer></script>
@@ -7,11 +7,34 @@
 <style>
   .spellbound-oracle {
     position: relative;
-    padding: 12rem 1.5rem;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.05), transparent);
+    padding: clamp(6rem, 12vw, 11rem) 1.5rem;
     overflow: hidden;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: var(--spellbound-bg);
+    border-top: 1px solid var(--spellbound-border);
+    border-bottom: 1px solid var(--spellbound-border);
+  }
+  .spellbound-oracle__backdrop {
+    position: absolute;
+    inset: 0;
+    background: var(--spellbound-surface);
+  }
+  .spellbound-oracle__backdrop-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+  }
+  .spellbound-oracle__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(5, 5, 5, 0.92),
+      rgba(5, 5, 5, 0.55) 45%,
+      rgba(5, 5, 5, 0.92)
+    );
   }
   .spellbound-oracle__content {
     max-width: 56rem;
@@ -21,142 +44,201 @@
     z-index: 1;
   }
   .spellbound-oracle__label {
-    color: #f59e0b;
-    font-size: 10px;
-    letter-spacing: 0.6em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
     display: block;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin-bottom: 1.25rem;
+  }
+  .spellbound-oracle__intro {
+    color: var(--spellbound-text-soft);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 auto 4rem;
+    max-width: 32rem;
+  }
+  .spellbound-oracle__step-label {
+    display: block;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin-bottom: 1.5rem;
   }
   .spellbound-oracle__heading {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
-    font-size: clamp(2.5rem, 4vw, 6rem);
-    color: #ffffff;
-    margin-bottom: 3rem;
-    line-height: 1;
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    color: var(--spellbound-text);
+    margin: 0 0 3rem;
+    line-height: 1.05;
   }
   .spellbound-oracle__heading em {
     font-family: var(--font-accent--family);
     font-style: italic;
+    color: var(--spellbound-gold-bright);
   }
-  .spellbound-oracle__grid {
-    display: grid;
-    gap: 1rem;
-  }
-  .spellbound-oracle__grid--4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .spellbound-oracle__grid--5 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (min-width: 768px) {
-    .spellbound-oracle__grid--4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    .spellbound-oracle__grid--5 {
-      grid-template-columns: repeat(5, 1fr);
-    }
+  .spellbound-oracle__options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem 1rem;
+    max-width: 44rem;
+    margin: 0 auto;
   }
   .spellbound-oracle__option {
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 2rem 1rem;
-    font-size: 10px;
-    letter-spacing: 0.15em;
+    border: 1px solid var(--spellbound-border-strong);
+    border-radius: 999px;
+    padding: 1.05rem 2.25rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--spellbound-text);
     background: transparent;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
   .spellbound-oracle__option:hover {
-    background: #ffffff;
-    color: #000000;
+    background: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+    color: var(--spellbound-bg);
+  }
+  .spellbound-oracle__option:focus-visible,
+  .spellbound-oracle__back:focus-visible,
+  .spellbound-oracle__reset:focus-visible,
+  .spellbound-oracle__cta:focus-visible {
+    outline: 2px solid var(--spellbound-gold);
+    outline-offset: 3px;
   }
   .spellbound-oracle__step {
     display: none;
-    animation: spellboundFadeIn 0.7s ease forwards;
   }
   .spellbound-oracle__step.active {
     display: block;
+    animation: spellboundFadeIn 0.7s ease forwards;
   }
-  .spellbound-oracle__back {
+  .spellbound-oracle__back,
+  .spellbound-oracle__reset {
     margin-top: 3rem;
-    color: rgba(255,255,255,0.4);
-    font-size: 9px;
+    color: var(--spellbound-text-soft);
+    font-size: 11px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     background: none;
     border: none;
     cursor: pointer;
     transition: color 0.3s ease;
   }
-  .spellbound-oracle__back:hover {
-    color: #ffffff;
+  .spellbound-oracle__back:hover,
+  .spellbound-oracle__reset:hover {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-oracle__reset {
+    display: block;
+    margin: 2rem auto 0;
   }
   .spellbound-oracle__result-icon {
-    color: #fde68a;
-    margin-bottom: 2rem;
+    color: var(--spellbound-gold);
+    margin-bottom: 1.5rem;
   }
   .spellbound-oracle__result-icon svg {
     width: 32px;
     height: 32px;
   }
   .spellbound-oracle__result-info {
-    color: rgba(255,255,255,0.4);
-    font-size: 0.875rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 3rem;
+    font-family: var(--font-accent--family);
+    font-style: italic;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    color: var(--spellbound-text-soft);
+    line-height: 1.5;
+    margin: 0 auto 3rem;
+    max-width: 36rem;
+  }
+  .spellbound-oracle__result-info span {
+    color: var(--spellbound-gold-bright);
   }
   .spellbound-oracle__cta {
     display: inline-block;
-    padding: 1.25rem 3rem;
-    background: #ffffff;
-    color: #000000;
-    font-size: 10px;
+    padding: 1.15rem 2.75rem;
+    border-radius: 999px;
+    background: var(--spellbound-text);
+    color: var(--spellbound-bg);
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.3em;
     text-decoration: none;
     transition: background 0.3s ease;
   }
   .spellbound-oracle__cta:hover {
-    background: #fde68a;
+    background: var(--spellbound-gold-bright);
+    color: var(--spellbound-bg);
   }
-  .spellbound-oracle__reset {
-    display: block;
-    margin: 2rem auto 0;
-    color: rgba(255,255,255,0.4);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  .spellbound-oracle__reset:hover {
-    color: #ffffff;
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-oracle__step.active {
+      animation: none;
+    }
+    .spellbound-oracle__option,
+    .spellbound-oracle__cta,
+    .spellbound-oracle__back,
+    .spellbound-oracle__reset {
+      transition: none;
+    }
   }
 </style>
 
-<section class="spellbound-oracle" id="spellbound-oracle-{{ section.id }}" data-base-url="{{ section.settings.collection_base_url }}">
-  <div class="spellbound-oracle__content">
-    <span class="spellbound-oracle__label">The Oracle</span>
+<section
+  class="spellbound-oracle"
+  id="oracle"
+  data-spellbound-oracle
+  data-base-url="{{ section.settings.collection_base_url | default: '/collections/all' }}"
+>
+  <div class="spellbound-oracle__backdrop" aria-hidden="true">
+    {% if section.settings.image %}
+      <img
+        class="spellbound-oracle__backdrop-img"
+        src="{{ section.settings.image | image_url: width: 1800 }}"
+        alt=""
+        width="{{ section.settings.image.width | default: 1800 }}"
+        height="{{ section.settings.image.height | default: 1200 }}"
+        loading="lazy"
+      >
+    {% elsif section.settings.image_asset != blank %}
+      <img
+        class="spellbound-oracle__backdrop-img"
+        src="{{ section.settings.image_asset | asset_url }}"
+        alt=""
+        width="1800"
+        height="1200"
+        loading="lazy"
+      >
+    {% endif %}
+    <div class="spellbound-oracle__scrim"></div>
+  </div>
+
+  <div class="spellbound-oracle__content" data-spellbound-reveal>
+    <span class="spellbound-oracle__label">Consult the Oracle</span>
+    <p class="spellbound-oracle__intro">Let intuition choose for you. Answer two small questions and the Oracle will draw the crystals meant for your path.</p>
 
     <!-- Step 0: Choose Intention -->
-    <div class="spellbound-oracle__step active" data-step="0">
-      <h2 class="spellbound-oracle__heading">Identify your <em>Intention</em></h2>
-      <div class="spellbound-oracle__grid spellbound-oracle__grid--4">
+    <div class="spellbound-oracle__step active" data-oracle-step="0">
+      <span class="spellbound-oracle__step-label">First &mdash; your intention</span>
+      <h2 class="spellbound-oracle__heading">What do you <em>seek</em>?</h2>
+      <div class="spellbound-oracle__options">
         {% for block in section.blocks %}
           {% if block.type == 'intention' %}
             <button
+              type="button"
               class="spellbound-oracle__option"
-              data-oracle-intent="{{ block.settings.value }}"
+              data-oracle-intent="{{ block.settings.value | escape }}"
               {{ block.shopify_attributes }}
             >
-              {{ block.settings.value }}
+              {{ block.settings.value | escape }}
             </button>
           {% endif %}
         {% endfor %}
@@ -164,35 +246,43 @@
     </div>
 
     <!-- Step 1: Choose Element -->
-    <div class="spellbound-oracle__step" data-step="1">
-      <h2 class="spellbound-oracle__heading">Seek your <em>Element</em></h2>
-      <div class="spellbound-oracle__grid spellbound-oracle__grid--5">
+    <div class="spellbound-oracle__step" data-oracle-step="1">
+      <span class="spellbound-oracle__step-label">Second &mdash; your element</span>
+      <h2 class="spellbound-oracle__heading">Which element <em>calls</em> to you?</h2>
+      <div class="spellbound-oracle__options">
         {% for block in section.blocks %}
           {% if block.type == 'element' %}
             <button
+              type="button"
               class="spellbound-oracle__option"
-              data-oracle-element="{{ block.settings.value }}"
+              data-oracle-element="{{ block.settings.value | escape }}"
               {{ block.shopify_attributes }}
             >
-              {{ block.settings.value }}
+              {{ block.settings.value | escape }}
             </button>
           {% endif %}
         {% endfor %}
       </div>
-      <button class="spellbound-oracle__back" data-oracle-back>Go Back</button>
+      <button type="button" class="spellbound-oracle__back" data-oracle-back="0">Go back</button>
     </div>
 
-    <!-- Step 2: Result -->
-    <div class="spellbound-oracle__step" data-step="2">
-      <div class="spellbound-oracle__result-icon">
+    <!-- Step 2: The reading -->
+    <div class="spellbound-oracle__step" data-oracle-step="2">
+      <div class="spellbound-oracle__result-icon" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
       </div>
-      <h2 class="spellbound-oracle__heading">Manifesting Destiny</h2>
+      <span class="spellbound-oracle__step-label">Your reading</span>
+      <h2 class="spellbound-oracle__heading">The cards have <em>spoken</em></h2>
       <p class="spellbound-oracle__result-info">
-        Aligning <span data-oracle-intent-display></span> with <span data-oracle-element-display></span>
+        The cards align <span data-oracle-intent-display></span> with <span data-oracle-element-display></span>
       </p>
-      <a href="#" class="spellbound-oracle__cta" data-oracle-reveal>Reveal Selection</a>
-      <button class="spellbound-oracle__reset" data-oracle-reset>Reset Reading</button>
+      <a
+        href="{{ section.settings.collection_base_url | default: '/collections/all' }}"
+        class="spellbound-oracle__cta"
+        data-oracle-reveal
+      >Reveal your crystals</a>
+      <button type="button" class="spellbound-oracle__back" data-oracle-back="1">Change your element</button>
+      <button type="button" class="spellbound-oracle__reset" data-oracle-reset>Ask the Oracle again</button>
     </div>
   </div>
 </section>
@@ -207,7 +297,19 @@
       "type": "url",
       "id": "collection_base_url",
       "label": "Base collection URL",
-      "info": "Link to your main collection page. Element filter will be appended."
+      "info": "Link to your main collection page. Intention and element filters will be appended."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Backdrop image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Backdrop asset filename",
+      "info": "Theme asset used when no image is picked.",
+      "default": "spellbound-img-oracle.jpg"
     }
   ],
   "blocks": [
@@ -240,10 +342,12 @@
     {
       "name": "Spellbound Oracle",
       "blocks": [
-        { "type": "intention", "settings": { "value": "Spiritual Growth" } },
         { "type": "intention", "settings": { "value": "Protection" } },
-        { "type": "intention", "settings": { "value": "Lucid Dreaming" } },
-        { "type": "intention", "settings": { "value": "Banishment" } },
+        { "type": "intention", "settings": { "value": "Abundance" } },
+        { "type": "intention", "settings": { "value": "Love" } },
+        { "type": "intention", "settings": { "value": "Calm" } },
+        { "type": "intention", "settings": { "value": "Healing" } },
+        { "type": "intention", "settings": { "value": "Manifestation" } },
         { "type": "element", "settings": { "value": "Earth" } },
         { "type": "element", "settings": { "value": "Air" } },
         { "type": "element", "settings": { "value": "Fire" } },

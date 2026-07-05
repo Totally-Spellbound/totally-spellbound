@@ -51,16 +51,39 @@
     class="header-logo__image-container header-logo__image-container--original"
     data-testid="header-logo"
   >
-    {% render 'image',
-      image: settings.logo,
-      class: 'header-logo__image',
-      height: settings.logo_height,
-      text_fallback: shop.name,
-      style: logo_style
-    %}
+    {% if settings.logo != blank %}
+      {% render 'image',
+        image: settings.logo,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        text_fallback: shop.name,
+        style: logo_style
+      %}
+    {% else %}
+      {% comment %} Spellbound banner logo (theme asset, 800x422) used until a logo is picked in theme settings.
+        Sized here directly: the ornate banner needs more height than the logo_height setting allows (max 100). {% endcomment %}
+      {% liquid
+        assign asset_logo_height = 190
+        assign asset_logo_height_mobile = 120
+        assign asset_logo_width = asset_logo_height | times: 1.896 | ceil
+        assign asset_logo_width_mobile = asset_logo_height_mobile | times: 1.896 | ceil
+      %}
+      <img
+        src="{{ 'spellbound-logo-banner.png' | asset_url }}"
+        alt="{{ shop.name }}"
+        class="header-logo__image"
+        width="800"
+        height="422"
+        style="--header-logo-image-width: {{ asset_logo_width }}px; --header-logo-image-width-mobile: {{ asset_logo_width_mobile }}px; --header-logo-image-height: {{ asset_logo_height }}px; --header-logo-image-height-mobile: {{ asset_logo_height_mobile }}px;"
+      >
+    {% endif %}
   </span>
 
-  {% if use_inverse_logo %}
+  {% comment %} No inverse container when falling back to the Spellbound banner asset:
+    the same artwork serves both header states (site is dark throughout), and a single
+    persistent <img> lets the shrink-on-scroll height transition animate — the
+    inverse/original display swap on the transparent-header homepage cannot. {% endcomment %}
+  {% if use_inverse_logo and inverse_logo != blank %}
     <span
       class="header-logo__image-container header-logo__image-container--inverse"
       data-testid="header-logo-inverse"

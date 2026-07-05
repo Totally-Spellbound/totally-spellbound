@@ -1,0 +1,267 @@
+{% comment %}
+  Spellbound Info Cards - grid of practical info cards (address, hours,
+  contact, click & collect, links). Gold icon in a thin ring, Cormorant
+  card titles, soft body copy. Candlelight tokens only.
+{% endcomment %}
+
+<style>
+  .spellbound-info-cards {
+    padding: clamp(3.5rem, 8vw, 6rem) 1.5rem;
+    background: var(--spellbound-bg);
+  }
+  .spellbound-info-cards__header {
+    max-width: 44rem;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+  .spellbound-info-cards__heading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    line-height: 1.1;
+    color: var(--spellbound-text);
+    margin: 0;
+  }
+  .spellbound-info-cards__subheading {
+    font-family: var(--font-body--family);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--spellbound-text-soft);
+    margin: 0.875rem 0 0;
+  }
+  .spellbound-info-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1.25rem;
+    margin: 0 auto;
+  }
+  .spellbound-info-card {
+    background: var(--spellbound-surface);
+    border: 1px solid var(--spellbound-border);
+    border-radius: 10px;
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .spellbound-info-card:hover {
+    border-color: var(--spellbound-border-strong);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.7);
+  }
+  .spellbound-info-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--spellbound-gold-deep);
+    color: var(--spellbound-gold);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .spellbound-info-card__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .spellbound-info-card__title {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.4rem;
+    line-height: 1.2;
+    color: var(--spellbound-text);
+    margin: 0;
+  }
+  .spellbound-info-card__body {
+    font-family: var(--font-body--family);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--spellbound-text-soft);
+    margin: 0;
+  }
+  .spellbound-info-card__link {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-block;
+    padding: 0.375rem 0;
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--spellbound-gold-deep);
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .spellbound-info-card__link:hover,
+  .spellbound-info-card__link:focus-visible {
+    color: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-info-card,
+    .spellbound-info-card__link {
+      transition: none;
+    }
+    .spellbound-info-card:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<section class="spellbound-info-cards">
+  {% if section.settings.heading != blank or section.settings.subheading != blank %}
+    <header class="spellbound-info-cards__header" data-spellbound-reveal>
+      {% if section.settings.heading != blank %}
+        <h2 class="spellbound-info-cards__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="spellbound-info-cards__subheading">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+    </header>
+  {% endif %}
+
+  {%- assign grid_max = section.blocks.size | times: 24 -%}
+  <div
+    class="spellbound-info-cards__grid"
+    style="max-width: min(72rem, {{ grid_max }}rem);"
+    data-spellbound-reveal-group
+  >
+    {% for block in section.blocks %}
+      <article class="spellbound-info-card" {{ block.shopify_attributes }}>
+        <span class="spellbound-info-card__icon" aria-hidden="true">
+          {% case block.settings.icon %}
+            {% when 'map-pin' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 21s-7-5.6-7-11a7 7 0 1 1 14 0c0 5.4-7 11-7 11z"/>
+                <circle cx="12" cy="10" r="2.5"/>
+              </svg>
+            {% when 'clock' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 2"/>
+              </svg>
+            {% when 'mail' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="M3 7.5l9 6 9-6"/>
+              </svg>
+            {% when 'phone' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M5 4h4l2 4.5-2.5 1.7a11.5 11.5 0 0 0 5.3 5.3L15.5 13l4.5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>
+              </svg>
+            {% when 'bag' %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M6 8h12l1.1 12.1a1.7 1.7 0 0 1-1.7 1.9H6.6a1.7 1.7 0 0 1-1.7-1.9z"/>
+                <path d="M9 11V7a3 3 0 0 1 6 0v4"/>
+              </svg>
+            {% else %}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z"/>
+              </svg>
+          {% endcase %}
+        </span>
+        {% if block.settings.title != blank %}
+          <h3 class="spellbound-info-card__title">{{ block.settings.title | escape }}</h3>
+        {% endif %}
+        {% if block.settings.body != blank %}
+          <p class="spellbound-info-card__body">{{ block.settings.body | escape | newline_to_br }}</p>
+        {% endif %}
+        {% if block.settings.link_label != blank %}
+          <a href="{{ block.settings.link | default: '#' }}" class="spellbound-info-card__link">
+            {{ block.settings.link_label | escape }}
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spellbound Info Cards",
+  "tag": "section",
+  "class": "spellbound-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Info card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "map-pin", "label": "Map pin" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "mail", "label": "Mail" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "bag", "label": "Bag" },
+            { "value": "sparkle", "label": "Sparkle" }
+          ],
+          "default": "sparkle"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card title"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spellbound Info Cards",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "icon": "map-pin",
+            "title": "Visit the shop",
+            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "clock",
+            "title": "Opening Hours",
+            "body": "Monday - Saturday, 10am - 4pm. Closed Sundays."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

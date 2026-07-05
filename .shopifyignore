@@ -1,0 +1,3 @@
+# Editor atomic-write temp files — never upload (they race the CLI watcher)
+*.tmp
+*.tmp.*

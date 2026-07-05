@@ -1,8 +1,26 @@
-/* Totally Spellbound - Custom Dark Theme Overrides */
+/* Totally Spellbound — Candlelight design tokens + shared utilities
+   Canonical direction: .planning/phases/03-launch/DIRECTION.md
+   All spellbound sections consume these variables — no hardcoded accent hex. */
+
+:root {
+  --spellbound-bg: #050505;
+  --spellbound-surface: #121014;
+  --spellbound-surface-2: #1b181e;
+  --spellbound-border: rgba(255, 255, 255, 0.14);
+  --spellbound-border-strong: rgba(255, 255, 255, 0.28);
+  --spellbound-text: #f5f2ea;
+  --spellbound-text-soft: rgba(245, 242, 234, 0.78);
+  --spellbound-text-faint: rgba(245, 242, 234, 0.55);
+  --spellbound-gold: #e5a94d;
+  --spellbound-gold-bright: #f7cf8a;
+  --spellbound-gold-deep: rgba(229, 169, 77, 0.45);
+  --spellbound-gold-glow: rgba(229, 169, 77, 0.18);
+  --spellbound-violet-glow: rgba(139, 109, 255, 0.16);
+}
 
 /* Selection */
 ::selection {
-  background-color: #fde68a;
+  background-color: var(--spellbound-gold-bright);
   color: #000000;
 }
 
@@ -11,38 +29,45 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--spellbound-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #ffffff1a;
+  background: #ffffff2e;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffffff33;
+  background: #ffffff52;
 }
 
 /* Body background enforcement */
 body {
-  background-color: #050505;
+  background-color: var(--spellbound-bg);
 }
 
-/* Utility: Grayscale to color on hover */
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--spellbound-gold);
+  outline-offset: 2px;
+}
+
+/* Utility: image hover (grayscale-by-default DROPPED for contrast — colour always visible) */
 .spellbound-grayscale {
-  filter: grayscale(100%);
-  transition: filter 1.5s ease, transform 1.5s ease;
+  filter: none;
+  transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .spellbound-grayscale:hover,
 .group:hover .spellbound-grayscale {
-  filter: grayscale(0%);
-  transform: scale(1.05);
+  filter: brightness(1.08);
+  transform: scale(1.03);
 }
 
-/* Utility: Amber label */
+/* Utility: gold micro-label */
 .spellbound-label {
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.4em;
-  color: #f59e0b;
+  letter-spacing: 0.32em;
+  color: var(--spellbound-gold);
 }
 
 /* Utility: Wide tracking */
@@ -50,7 +75,7 @@ body {
   letter-spacing: 0.3em;
 }
 
-/* Utility: Fade in animation */
+/* Legacy fade-in (kept for existing sections) */
 @keyframes spellboundFadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -64,35 +89,84 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Reveal-on-scroll system (paired with assets/spellbound-motion.js)
+   Usage: add data-spellbound-reveal to any element; add data-spellbound-reveal-group
+   to a parent to stagger its direct children. */
+[data-spellbound-reveal],
+[data-spellbound-reveal-group] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-spellbound-reveal].is-visible,
+[data-spellbound-reveal-group].is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-spellbound-reveal-group].is-visible > *:nth-child(2) { transition-delay: 80ms; }
+[data-spellbound-reveal-group].is-visible > *:nth-child(3) { transition-delay: 160ms; }
+[data-spellbound-reveal-group].is-visible > *:nth-child(4) { transition-delay: 240ms; }
+[data-spellbound-reveal-group].is-visible > *:nth-child(5) { transition-delay: 320ms; }
+[data-spellbound-reveal-group].is-visible > *:nth-child(6) { transition-delay: 400ms; }
+[data-spellbound-reveal-group].is-visible > *:nth-child(n + 7) { transition-delay: 480ms; }
+
+/* No-JS + reduced motion safety: never hide content permanently */
+.no-js [data-spellbound-reveal],
+.no-js [data-spellbound-reveal-group] > * {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-spellbound-reveal],
+  [data-spellbound-reveal-group] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .spellbound-fade-in {
+    animation: none;
+  }
+}
+
 /* Gradient overlay for images */
 .spellbound-overlay-gradient {
-  background: linear-gradient(to top, #050505, transparent);
+  background: linear-gradient(to top, var(--spellbound-bg), transparent);
 }
 
-/* Card badge styling */
+/* Card badge styling (shared with snippets/spellbound-badges.liquid) */
 .spellbound-badge {
-  font-size: 8px;
-  background: rgba(0, 0, 0, 0.8);
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body--family);
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(5, 5, 5, 0.82);
   backdrop-filter: blur(8px);
-  padding: 4px 8px;
+  padding: 4px 9px;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.14em;
+  border: 1px solid var(--spellbound-border);
+  border-radius: 100px;
+  color: var(--spellbound-text-soft);
 }
-
+.spellbound-badge--gold,
 .spellbound-badge--amber {
-  color: #fde68a;
+  color: var(--spellbound-gold-bright);
+  border-color: var(--spellbound-gold-deep);
+}
+.product-badges .spellbound-badge {
+  margin-block-start: 2px;
 }
 
-/* Amber accent border animation */
+/* Gold accent border animation */
 .spellbound-accent-line {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 1px;
-  background: rgba(245, 158, 11, 0.5);
+  background: var(--spellbound-gold-deep);
   transform: scaleX(0);
   transition: transform 0.7s ease;
 }
@@ -107,6 +181,351 @@ body {
 }
 .spellbound-no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* ========================= */
+/* Horizon component overrides */
+/* ========================= */
+
+/* Quick-add button: cream pill so the cart icon (painted with the scheme's
+   dark button-text variable) is always visible over product photos */
+.quick-add .quick-add__button,
+quick-add-component .quick-add__button {
+  border: 1px solid var(--spellbound-text);
+  background-color: var(--spellbound-text);
+  color: #050505;
+  --color-primary-button-text: #050505;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+.quick-add .quick-add__button:hover,
+quick-add-component .quick-add__button:hover {
+  background-color: var(--spellbound-gold-bright);
+  border-color: var(--spellbound-gold-bright);
+  color: #050505;
+}
+
+/* ============ Header banner logo ============
+   Grand at the top of the page; shrinks to a compact size once the sticky
+   header engages (Horizon flips data-sticky-state inactive -> active on
+   scroll) so the header stops eating vertical space. */
+.header-logo__image {
+  transition: height 0.35s var(--ease-out-cubic, ease), width 0.35s var(--ease-out-cubic, ease);
+}
+#header-component[data-sticky-state='active'] .header-logo__image {
+  height: 84px;
+  width: 160px;
+}
+@media screen and (max-width: 749px) {
+  #header-component[data-sticky-state='active'] .header-logo__image {
+    height: 60px;
+    width: 114px;
+  }
+}
+/* The overflow-list menu component measures the header row at page load
+   (when the logo is full-size) and pins that height as an inline style on
+   its shadow <ul>, locking the menu column — and with it the whole header
+   row — at the load-time height. Neutralise it so the row can follow the
+   shrinking logo; overflow detection still works (it compares wrap
+   positions, not the pinned height). */
+#header-component overflow-list::part(list) {
+  height: 100% !important;
+}
+
+/* ============ Pure-CSS mega menu (desktop) ============
+   Horizon opens the mega menu with JS pointer events (aria-expanded plus
+   measured --submenu-height / --full-open-header-height vars driving a
+   clip-path + translate + underlay animation), which drops events and feels
+   flaky. On fine-pointer desktops we drive it entirely with CSS instead:
+   - state comes from :hover / :focus-within on the list item only; the JS
+     aria-expanded attribute is overridden in both directions
+   - geometry is simplified: panel pinned just below the header, no
+     clip-path/translate (those need the JS-measured vars)
+   - the panel paints its own backdrop + shadow (the JS-animated underlay
+     can't be relied on)
+   - an invisible ::after on the hovered link bridges the ~10px gap between
+     the nav row and the panel so the hover chain never breaks. It lives on
+     the LINK, never `position: relative` on the list item — that would make
+     the li the panel's containing block and collapse it to the li's width. */
+.menu-list__link {
+  position: relative;
+}
+@media (hover: hover) and (pointer: fine) {
+  header-component .menu-list__list-item:not([slot='overflow']) > .menu-list__submenu {
+    top: calc(100% - 1px + var(--border-bottom-width, 0px)) !important;
+    clip-path: none !important;
+    visibility: hidden !important;
+    opacity: 0;
+    background-color: var(--color-submenu, var(--spellbound-bg)) !important;
+    border-bottom: 1px solid var(--spellbound-border-strong);
+    box-shadow: 0 28px 48px rgba(0, 0, 0, 0.55);
+    transition: opacity 0.16s ease, visibility 0s linear 0.28s;
+  }
+  header-component .menu-list__list-item:not([slot='overflow']) > .menu-list__submenu .menu-list__submenu-inner {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  header-component .menu-list__list-item:not([slot='overflow']):is(:hover, :focus-within) > .menu-list__submenu {
+    visibility: visible !important;
+    opacity: 1;
+    transition: opacity 0.16s ease 0.05s, visibility 0s linear 0.05s;
+  }
+  header-component .menu-list__list-item:not([slot='overflow']):is(:hover, :focus-within) > .menu-list__link::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -2rem;
+    right: -2rem;
+    height: 16px;
+  }
+}
+
+/* Product card text hierarchy: Cormorant title, quiet gold price */
+product-card a p,
+.product-card__link p {
+  font-family: var(--font-heading--family);
+  font-size: 1.0625rem;
+  line-height: 1.35;
+}
+product-card .price,
+product-card [class*='price'] {
+  font-family: var(--font-body--family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--spellbound-gold);
+}
+
+/* Facet pill turns gold when it holds active selections */
+.facets__item details:has(input:checked) .facets__summary,
+.facets__item:has(.facets__bubble) .facets__summary {
+  border-color: var(--spellbound-gold-deep);
+  color: var(--spellbound-gold-bright);
+}
+
+/* "More" overflow panel: contained dark card with row-style facet groups */
+.facets__overflow-list {
+  background: var(--spellbound-surface-2);
+  border: 1px solid var(--spellbound-border);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+  padding: 10px;
+  min-width: 280px;
+}
+.facets__overflow-list .facets__item {
+  margin: 2px 0;
+}
+.facets__overflow-list .facets__summary {
+  width: 100%;
+  justify-content: space-between;
+  border-color: transparent;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.facets__overflow-list .facets__summary:hover {
+  border-color: var(--spellbound-border);
+}
+.facets__overflow-list details[open] > .facets__summary {
+  background: transparent;
+  border-color: var(--spellbound-gold-deep);
+}
+.facets__overflow-list .facets__panel {
+  position: static;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 6px 12px 12px;
+}
+
+/* PDP hero atmosphere: candlelit backdrop behind the buy area, strong at the
+   top and dissolving into the page background */
+.shopify-section:has(> .product-information) {
+  position: relative;
+  isolation: isolate;
+}
+.shopify-section:has(> .product-information)::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: min(72vh, 640px);
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('spellbound-img-hero.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.12;
+  filter: brightness(0.6) saturate(0.9);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 100%);
+}
+
+/* Product grid card titles: full-strength text (never gold links) */
+.product-grid .product-title,
+.product-card .product-title,
+.product-card__title,
+product-card a,
+product-card a p {
+  color: var(--spellbound-text);
+}
+product-card a:hover p {
+  color: var(--spellbound-gold-bright);
+}
+product-card .price,
+product-card [class*='price'] {
+  color: var(--spellbound-text-soft);
+}
+
+/* ============================================== */
+/* Collection filters — unify Horizon facets with  */
+/* the spellbound pill language (desktop + mobile) */
+/* ============================================== */
+
+/* Tighten the header → ribbon → facets stack so it reads as one system */
+.spellbound-section:has(> .spellbound-collection-header),
+.shopify-section:has(> .spellbound-collection-header) {
+  padding-block: 0 !important;
+}
+.spellbound-section:has(> .spellbound-filter-ribbon),
+.shopify-section:has(> .spellbound-filter-ribbon) {
+  padding-block: 0.25rem 0.75rem !important;
+}
+
+/* Facet + sort triggers as pills */
+.facets__summary,
+.facets-toggle__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--spellbound-border);
+  border-radius: 100px;
+  padding: 8px 16px;
+  background: transparent;
+  font-family: var(--font-body--family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--spellbound-text-soft);
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  cursor: pointer;
+}
+.facets__summary:hover,
+.facets-toggle__button:hover {
+  border-color: var(--spellbound-border-strong);
+  color: var(--spellbound-text);
+}
+details[open] > .facets__summary,
+.facets__item details[open] .facets__summary {
+  border-color: var(--spellbound-gold);
+  background: var(--spellbound-gold-glow);
+  color: var(--spellbound-gold-bright);
+}
+.facets__label {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+.facets__status,
+.facets__bubble {
+  color: var(--spellbound-gold-bright);
+  font-weight: 600;
+}
+
+/* Dropdown panels as dark surface cards */
+.facets__panel {
+  background: var(--spellbound-surface-2);
+  border: 1px solid var(--spellbound-border);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+  color: var(--spellbound-text);
+}
+.facets__panel-content {
+  color: var(--spellbound-text-soft);
+}
+.facets__panel label,
+.facets__inputs-list {
+  color: var(--spellbound-text-soft);
+}
+.facets__panel label:hover {
+  color: var(--spellbound-text);
+}
+.facets__panel input[type='checkbox'],
+.facets__panel input[type='radio'] {
+  accent-color: var(--spellbound-gold);
+}
+
+/* Sort popover (uses popover colour scheme by default — force dark) */
+.sorting-filter__options {
+  background: var(--spellbound-surface-2) !important;
+  border: 1px solid var(--spellbound-border);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+  color: var(--spellbound-text-soft);
+}
+.sorting-filter__option:hover,
+.sorting-filter__option:focus-within {
+  color: var(--spellbound-gold-bright);
+}
+
+/* Active-filter chips + clear links in gold */
+.facets-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--spellbound-gold-deep);
+  border-radius: 100px;
+  background: var(--spellbound-gold-glow);
+  color: var(--spellbound-gold-bright);
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.25s ease;
+}
+.facets-remove:hover {
+  border-color: var(--spellbound-gold);
+}
+.facets__clear,
+.facets__clear-all-link {
+  color: var(--spellbound-gold);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.facets__clear:hover,
+.facets__clear-all-link:hover {
+  color: var(--spellbound-gold-bright);
+}
+
+/* Grid density picker: quiet by default, gold when active */
+.column-picker {
+  color: var(--spellbound-text-faint);
+}
+.column-options__option:has(.column-options__option-input:checked) {
+  color: var(--spellbound-gold);
+}
+.column-options__option:hover {
+  color: var(--spellbound-text);
+}
+
+/* Mobile facets drawer */
+.facets__drawer-actions {
+  border-top: 1px solid var(--spellbound-border);
+  background: var(--spellbound-surface);
+}
+.facets__see-results {
+  background: var(--spellbound-text);
+  color: #050505;
+  border-radius: 100px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.facets__see-results:hover {
+  background: var(--spellbound-gold-bright);
+  color: #050505;
 }
 
 /* ========================= */
@@ -126,7 +545,7 @@ body {
 .product-information .add-to-cart-button,
 .product-information button.add-to-cart-button {
   position: relative;
-  background: #ffffff;
+  background: var(--spellbound-text);
   color: #000000;
   font-weight: 700;
   letter-spacing: 0.4em;
@@ -135,30 +554,30 @@ body {
   padding: 1.5rem 2rem;
   border: none;
   overflow: hidden;
-  transition: color 0.3s ease, background 0.3s ease;
+  transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 .product-information .add-to-cart-button:hover,
 .product-information button.add-to-cart-button:hover {
-  background: #fde68a;
+  background: var(--spellbound-gold-bright);
   color: #000000;
+  box-shadow: 0 0 32px var(--spellbound-gold-glow);
 }
 
-/* Product description italic styling */
+/* Product description: readable, no low-contrast italic */
 .product-information .rte p {
-  font-style: italic;
-  color: rgba(255,255,255,0.4);
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-style: normal;
+  color: var(--spellbound-text-soft);
+  font-size: 0.9375rem;
+  line-height: 1.7;
 }
 
-/* Square Wishlist app button styling */
+/* Square Wishlist app button styling (scoped to the app's own classes only) */
 .wishlist-button-container button,
-.sqw-wishlist-btn,
-[class*="wishlist"] button {
+.sqw-wishlist-btn {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.1) !important;
+  border: 1px solid var(--spellbound-border) !important;
   background: transparent !important;
-  color: rgba(255,255,255,0.4) !important;
+  color: var(--spellbound-text-soft) !important;
   padding: 1.25rem !important;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -171,17 +590,15 @@ body {
   transition: all 0.3s ease;
 }
 .wishlist-button-container button:hover,
-.sqw-wishlist-btn:hover,
-[class*="wishlist"] button:hover {
-  color: #ffffff !important;
-  border-color: rgba(255,255,255,0.2) !important;
+.sqw-wishlist-btn:hover {
+  color: var(--spellbound-text) !important;
+  border-color: var(--spellbound-gold-deep) !important;
 }
 
 /* ========================= */
-/* Skeleton Layout (Phase 1)  */
+/* Section base layout        */
 /* ========================= */
 
-/* Homepage skeleton section */
 .spellbound-section--homepage {
   padding: 4rem 0;
   text-align: center;
@@ -201,7 +618,7 @@ body {
   margin-top: 0.5rem;
 }
 
-/* Skeleton section base — reusable for all future spellbound sections */
+/* Section base — reusable for all spellbound sections */
 .spellbound-section {
   padding: 2rem 0;
 }

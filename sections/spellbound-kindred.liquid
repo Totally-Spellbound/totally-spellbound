@@ -1,0 +1,308 @@
+{% comment %}
+  Spellbound Kindred - reusable related-products strip driven by a shared
+  correspondence metafield (intention / zodiac / element / theme / handmade).
+  Matches ANY shared value, case-insensitive, list-aware on both sides via
+  snippets/spellbound-metafield-value. Renders nothing when there are no
+  matches (optional bonus section - no empty state).
+  Candlelight tokens only (no hardcoded accent hex).
+{% endcomment %}
+
+{%- liquid
+  assign match_field = section.settings.match_field | default: 'intention'
+  assign max_products = section.settings.max_products | default: 4
+  assign pool = section.settings.collection
+  if pool == blank or pool.products.size == 0
+    assign pool = collections['all']
+  endif
+  assign matched_count = 0
+  assign eligible = false
+-%}
+
+{%- if match_field == 'handmade' -%}
+  {%- assign current_handmade = product.metafields.custom.handmade.value | append: '' | downcase | strip -%}
+  {%- if current_handmade == 'true' -%}
+    {%- assign eligible = true -%}
+  {%- endif -%}
+{%- else -%}
+  {%- capture current_raw -%}{%- render 'spellbound-metafield-value', value: product.metafields.custom[match_field] -%}{%- endcapture -%}
+  {%- assign current_raw = current_raw | strip -%}
+  {%- if current_raw != blank -%}
+    {%- assign eligible = true -%}
+    {%- assign current_values = current_raw | downcase | split: ',' -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if eligible and pool != blank -%}
+  {%- capture kindred_cards -%}
+    {%- for p in pool.products limit: 50 -%}
+      {%- if matched_count >= max_products -%}
+        {%- break -%}
+      {%- endif -%}
+      {%- if p.id == product.id -%}
+        {%- continue -%}
+      {%- endif -%}
+
+      {%- assign is_match = false -%}
+      {%- if match_field == 'handmade' -%}
+        {%- assign p_handmade = p.metafields.custom.handmade.value | append: '' | downcase | strip -%}
+        {%- if p_handmade == 'true' -%}
+          {%- assign is_match = true -%}
+        {%- endif -%}
+      {%- else -%}
+        {%- capture p_raw -%}{%- render 'spellbound-metafield-value', value: p.metafields.custom[match_field] -%}{%- endcapture -%}
+        {%- assign p_raw = p_raw | strip -%}
+        {%- if p_raw != blank -%}
+          {%- assign p_values = p_raw | downcase | split: ',' -%}
+          {%- for pv in p_values -%}
+            {%- assign pv_clean = pv | strip -%}
+            {%- if pv_clean == blank -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- for cv in current_values -%}
+              {%- assign cv_clean = cv | strip -%}
+              {%- if cv_clean != blank and cv_clean == pv_clean -%}
+                {%- assign is_match = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if is_match -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if is_match -%}
+        {%- assign matched_count = matched_count | plus: 1 -%}
+        <a href="{{ p.url }}" class="spellbound-kindred__card">
+          <div class="spellbound-kindred__media">
+            {%- if p.featured_image -%}
+              <img
+                src="{{ p.featured_image | image_url: width: 600 }}"
+                srcset="{{ p.featured_image | image_url: width: 300 }} 300w, {{ p.featured_image | image_url: width: 400 }} 400w, {{ p.featured_image | image_url: width: 600 }} 600w, {{ p.featured_image | image_url: width: 800 }} 800w"
+                sizes="(min-width: 990px) 25vw, 50vw"
+                alt="{{ p.featured_image.alt | default: p.title | escape }}"
+                class="spellbound-kindred__image"
+                loading="lazy"
+                width="{{ p.featured_image.width }}"
+                height="{{ p.featured_image.height }}"
+              >
+            {%- endif -%}
+            <div class="spellbound-kindred__badges">
+              {% render 'spellbound-badges', product: p %}
+            </div>
+          </div>
+          <div class="spellbound-kindred__info">
+            <h3 class="spellbound-kindred__product-title">{{ p.title | escape }}</h3>
+            <p class="spellbound-kindred__price">{{ p.price | money }}</p>
+          </div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- if matched_count > 0 -%}
+  <style>
+    .spellbound-kindred {
+      padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+      background: var(--spellbound-bg);
+      border-top: 1px solid var(--spellbound-border);
+    }
+    .spellbound-kindred__inner {
+      max-width: 100rem;
+      margin: 0 auto;
+    }
+    .spellbound-kindred__header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    }
+    .spellbound-kindred__label {
+      font-family: var(--font-body--family);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--spellbound-gold);
+      margin: 0;
+    }
+    .spellbound-kindred__title {
+      font-family: var(--font-heading--family);
+      font-weight: var(--font-heading--weight);
+      font-size: clamp(2.25rem, 4vw, 3.75rem);
+      color: var(--spellbound-text);
+      line-height: 1.05;
+      margin: 0;
+    }
+    .spellbound-kindred__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.5rem 1rem;
+    }
+    @media (min-width: 990px) {
+      .spellbound-kindred__grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3rem 2rem;
+      }
+    }
+    .spellbound-kindred__card {
+      display: block;
+      text-decoration: none;
+    }
+    .spellbound-kindred__media {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: var(--spellbound-surface);
+      border: 1px solid var(--spellbound-border);
+      border-radius: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .spellbound-kindred__media::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--spellbound-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2;
+    }
+    .spellbound-kindred__card:hover .spellbound-kindred__media::after,
+    .spellbound-kindred__card:focus-visible .spellbound-kindred__media::after {
+      transform: scaleX(1);
+    }
+    .spellbound-kindred__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+    }
+    .spellbound-kindred__card:hover .spellbound-kindred__image {
+      transform: scale(1.03);
+      filter: brightness(1.05);
+    }
+    .spellbound-kindred__badges {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.375rem;
+      z-index: 1;
+    }
+    .spellbound-kindred__info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .spellbound-kindred__product-title {
+      font-family: var(--font-heading--family);
+      font-weight: var(--font-heading--weight);
+      font-size: 1.25rem;
+      line-height: 1.25;
+      color: var(--spellbound-text);
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+    .spellbound-kindred__card:hover .spellbound-kindred__product-title {
+      color: var(--spellbound-gold-bright);
+    }
+    .spellbound-kindred__price {
+      font-family: var(--font-body--family);
+      font-size: 0.8125rem;
+      letter-spacing: 0.04em;
+      color: var(--spellbound-text-soft);
+      margin: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .spellbound-kindred__image,
+      .spellbound-kindred__media::after,
+      .spellbound-kindred__product-title {
+        transition: none;
+      }
+      .spellbound-kindred__card:hover .spellbound-kindred__image {
+        transform: none;
+        filter: none;
+      }
+    }
+  </style>
+
+  <section class="spellbound-kindred">
+    <div class="spellbound-kindred__inner">
+      <div class="spellbound-kindred__header" data-spellbound-reveal>
+        {%- if section.settings.label != blank -%}
+          <p class="spellbound-kindred__label">{{ section.settings.label | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="spellbound-kindred__title">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+      </div>
+      <div class="spellbound-kindred__grid" data-spellbound-reveal-group>
+        {{ kindred_cards }}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Spellbound Kindred",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Kindred"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Cut from the same cloth"
+    },
+    {
+      "type": "select",
+      "id": "match_field",
+      "label": "Match by",
+      "options": [
+        { "value": "intention", "label": "Intention" },
+        { "value": "zodiac", "label": "Zodiac" },
+        { "value": "element", "label": "Ruling element" },
+        { "value": "theme", "label": "Theme" },
+        { "value": "handmade", "label": "Handmade" }
+      ],
+      "default": "intention"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Source pool for matches; falls back to all products."
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spellbound Kindred"
+    }
+  ]
+}
+{% endschema %}

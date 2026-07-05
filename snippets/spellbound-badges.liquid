@@ -1,0 +1,25 @@
+{% comment %}
+  Renders Totally Spellbound metafield badges for a product card.
+  Shows the ruling element (neutral badge) and first intention (gold badge).
+  Values normalised via spellbound-metafield-value (handles list metafields).
+
+  Accepts:
+  - product: {Object} product to render badges for
+
+  Usage:
+  {% render 'spellbound-badges', product: product %}
+{% endcomment %}
+
+{%- if product != blank -%}
+  {%- capture element_value -%}{%- render 'spellbound-metafield-value', value: product.metafields.custom.element -%}{%- endcapture -%}
+  {%- capture intention_value -%}{%- render 'spellbound-metafield-value', value: product.metafields.custom.intention -%}{%- endcapture -%}
+  {%- assign element_first = element_value | split: ',' | first | strip -%}
+  {%- assign intention_first = intention_value | split: ',' | first | strip -%}
+
+  {%- if element_first != blank -%}
+    <span class="spellbound-badge">{{ element_first | escape }}</span>
+  {%- endif -%}
+  {%- if intention_first != blank -%}
+    <span class="spellbound-badge spellbound-badge--gold">{{ intention_first | escape }}</span>
+  {%- endif -%}
+{%- endif -%}

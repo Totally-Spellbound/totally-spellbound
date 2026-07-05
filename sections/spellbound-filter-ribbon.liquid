@@ -1,126 +1,114 @@
 {% comment %}
-  Spellbound Filter Ribbon - Horizontal scrolling icon-based filter navigation
+  Spellbound Filter Ribbon - Compact pill-row metafield filter navigation
 {% endcomment %}
 
 <style>
   .spellbound-filter-ribbon {
     padding: 0 1.5rem;
-    margin-bottom: 5rem;
-    overflow-x: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    margin-bottom: 0.5rem;
+    max-width: var(--narrow-page-width, 90rem);
+    margin-inline: auto;
   }
-  .spellbound-filter-ribbon::-webkit-scrollbar {
-    display: none;
-  }
-  @media (min-width: 1024px) {
+  @media (min-width: 1480px) {
     .spellbound-filter-ribbon {
-      padding: 0 6rem;
+      padding: 0;
     }
+  }
+  .spellbound-filter-ribbon__scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .spellbound-filter-ribbon__inner {
     display: flex;
-    gap: 2.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding-bottom: 2.5rem;
+    align-items: center;
+    gap: 0.625rem;
     min-width: max-content;
+    padding-bottom: 0.25rem;
   }
-  .spellbound-filter-ribbon__item {
-    display: flex;
-    flex-direction: column;
+  .spellbound-filter-ribbon__pill {
+    display: inline-flex;
     align-items: center;
-    gap: 1rem;
-    transition: all 0.3s ease;
-    opacity: 0.4;
-    cursor: pointer;
-    text-decoration: none;
-    background: none;
-    border: none;
-    padding: 0;
-    color: #ffffff;
-  }
-  .spellbound-filter-ribbon__item:hover,
-  .spellbound-filter-ribbon__item.active {
-    opacity: 1;
-  }
-  .spellbound-filter-ribbon__item.active {
-    transform: scale(1.1);
-  }
-  .spellbound-filter-ribbon__icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-  .spellbound-filter-ribbon__item:hover .spellbound-filter-ribbon__icon,
-  .spellbound-filter-ribbon__item.active .spellbound-filter-ribbon__icon {
-    border-color: #f59e0b;
-    background: rgba(253,230,138,0.05);
-  }
-  .spellbound-filter-ribbon__item.active .spellbound-filter-ribbon__icon {
-    box-shadow: 0 0 15px rgba(245,158,11,0.2);
-  }
-  .spellbound-filter-ribbon__icon svg {
-    width: 20px;
-    height: 20px;
-    stroke-width: 1;
-  }
-  .spellbound-filter-ribbon__label {
-    font-size: 9px;
-    letter-spacing: 0.3em;
+    gap: 0.5rem;
+    padding: 8px 16px;
+    border: 1px solid var(--spellbound-border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--spellbound-text-soft);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
   }
-  .spellbound-filter-ribbon__item.active .spellbound-filter-ribbon__label {
-    color: #fde68a;
-    font-weight: 700;
+  .spellbound-filter-ribbon__pill:hover {
+    border-color: var(--spellbound-border-strong);
+    color: var(--spellbound-text);
+  }
+  .spellbound-filter-ribbon__pill.is-active {
+    border-color: var(--spellbound-gold);
+    background: var(--spellbound-gold-glow);
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-filter-ribbon__pill svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
   }
 </style>
 
-<section class="spellbound-filter-ribbon">
-  <div class="spellbound-filter-ribbon__inner">
-    {% for block in section.blocks %}
-      {%- assign is_active = false -%}
-      {%- if block.settings.filter_value != blank -%}
-        {%- assign filter_param = 'filter.p.m.custom.' | append: section.settings.filter_type -%}
-        {%- assign current_filter = request.params[filter_param] -%}
-        {%- if current_filter == block.settings.filter_value -%}
-          {%- assign is_active = true -%}
-        {%- endif -%}
-      {%- endif -%}
+{%- assign filter_param = 'filter.p.m.custom.' | append: section.settings.filter_type -%}
+{%- assign current_filter = '' -%}
+{%- assign has_metafield_filter = false -%}
+{%- for f in collection.filters -%}
+  {%- if f.param_name contains 'filter.p.m.custom.' and f.active_values.size > 0 -%}
+    {%- assign has_metafield_filter = true -%}
+    {%- if f.param_name == filter_param -%}
+      {%- assign current_filter = f.active_values.first.value | downcase -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign base_url = collection.url | default: '/collections/all' -%}
 
+<nav class="spellbound-filter-ribbon" aria-label="Quick filters">
+  <div class="spellbound-filter-ribbon__scroll spellbound-no-scrollbar">
+    <div class="spellbound-filter-ribbon__inner" data-spellbound-reveal-group>
       <a
-        href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}{{ collection.url }}?filter.p.m.custom.{{ section.settings.filter_type }}={{ block.settings.filter_value | url_encode }}{% endif %}"
-        class="spellbound-filter-ribbon__item{% if is_active %} active{% endif %}"
-        {{ block.shopify_attributes }}
+        href="{{ base_url }}"
+        class="spellbound-filter-ribbon__pill{% unless has_metafield_filter %} is-active{% endunless %}"
+        {% unless has_metafield_filter %}aria-current="true"{% endunless %}
       >
-        <div class="spellbound-filter-ribbon__icon">
-          {% if block.settings.icon != blank %}
-            {{ block.settings.icon }}
-          {% else %}
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
-          {% endif %}
-        </div>
-        <span class="spellbound-filter-ribbon__label">{{ block.settings.filter_value }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
+        <span>All Items</span>
       </a>
-    {% endfor %}
 
-    <!-- All Items button -->
-    <a
-      href="{{ collection.url }}"
-      class="spellbound-filter-ribbon__item{% unless request.params contains 'filter' %} active{% endunless %}"
-    >
-      <div class="spellbound-filter-ribbon__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
-      </div>
-      <span class="spellbound-filter-ribbon__label">All Items</span>
-    </a>
+      {%- for block in section.blocks -%}
+        {%- assign is_active = false -%}
+        {%- if block.settings.filter_value != blank and current_filter != blank -%}
+          {%- assign block_value = block.settings.filter_value | downcase -%}
+          {%- if current_filter == block_value -%}
+            {%- assign is_active = true -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <a
+          href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}{{ base_url }}?filter.p.m.custom.{{ section.settings.filter_type }}={{ block.settings.filter_value | url_encode }}{% endif %}"
+          class="spellbound-filter-ribbon__pill{% if is_active %} is-active{% endif %}"
+          {% if is_active %}aria-current="true"{% endif %}
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.icon != blank -%}
+            {{ block.settings.icon }}
+          {%- else -%}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
+          {%- endif -%}
+          <span>{{ block.settings.filter_value }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
   </div>
-</section>
+</nav>
 
 {% schema %}
 {

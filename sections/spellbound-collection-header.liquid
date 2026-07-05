@@ -1,116 +1,185 @@
 {% comment %}
-  Spellbound Collection Header - Cinematic collection title with background
+  Spellbound Collection Header - Compact cinematic collection title
 {% endcomment %}
 
 <style>
   .spellbound-collection-header {
     position: relative;
-    padding: 6rem 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    margin-bottom: 4rem;
+    padding: 2.5rem 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--spellbound-gold-deep);
     overflow: hidden;
   }
   @media (min-width: 1024px) {
     .spellbound-collection-header {
-      padding: 6rem;
+      padding: 4rem 6rem;
+      max-height: 40vh;
     }
   }
   .spellbound-collection-header__bg {
     position: absolute;
     inset: 0;
-    opacity: 0.1;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    filter: grayscale(100%);
+    background: var(--spellbound-surface);
+    z-index: 0;
+  }
+  .spellbound-collection-header__bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.45;
+  }
+  .spellbound-collection-header__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      var(--spellbound-bg) 0%,
+      rgba(5, 5, 5, 0.6) 55%,
+      rgba(5, 5, 5, 0.35) 100%
+    );
   }
   .spellbound-collection-header__inner {
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-  @media (min-width: 768px) {
-    .spellbound-collection-header__inner {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-  }
-  .spellbound-collection-header__text {
-    max-width: 36rem;
   }
   .spellbound-collection-header__label {
-    color: #f59e0b;
-    font-size: 10px;
-    letter-spacing: 0.6em;
-    text-transform: uppercase;
     display: block;
-    margin-bottom: 1.5rem;
+    color: var(--spellbound-gold);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .spellbound-collection-header__row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .spellbound-collection-header__row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 2rem;
+    }
   }
   .spellbound-collection-header__title {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
-    font-size: clamp(3.5rem, 7vw, 7rem);
-    color: #ffffff;
-    letter-spacing: -0.03em;
-    line-height: 0.9;
-    margin-bottom: 1.5rem;
-  }
-  .spellbound-collection-header__quote {
-    color: rgba(255,255,255,0.4);
-    font-style: italic;
-    font-size: 0.875rem;
-  }
-  .spellbound-collection-header__meta {
-    text-align: right;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--spellbound-text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
   }
   .spellbound-collection-header__count {
-    font-size: 10px;
-    color: rgba(255,255,255,0.3);
+    flex-shrink: 0;
+    color: var(--spellbound-text-faint);
+    font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.2em;
+    white-space: nowrap;
   }
-  .spellbound-collection-header__divider {
-    width: 100%;
-    height: 1px;
-    background: rgba(255,255,255,0.1);
+  @media (min-width: 768px) {
+    .spellbound-collection-header__count {
+      text-align: right;
+    }
+  }
+  .spellbound-collection-header__quote {
+    color: var(--spellbound-text-soft);
+    font-family: var(--font-accent--family, var(--font-heading--family));
+    font-style: italic;
+    font-size: 1rem;
+    max-width: 40rem;
+    margin: 1rem 0 0;
   }
 </style>
 
+{%- assign header_image = section.settings.background_image -%}
+{%- if header_image == blank and collection != blank and collection.image != blank -%}
+  {%- assign header_image = collection.image -%}
+{%- endif -%}
+{%- assign header_asset = section.settings.background_image_asset -%}
+
+{%- comment -%} Automatic atmospheric backdrop per collection handle {%- endcomment -%}
+{%- if header_image == blank and header_asset == blank -%}
+  {%- assign handle = collection.handle | default: '' -%}
+  {%- assign zodiac_handles = 'aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces' | split: ',' -%}
+  {%- case handle -%}
+    {%- when 'crystals-stones' -%}
+      {%- assign header_asset = 'spellbound-img-cat-crystals.jpg' -%}
+    {%- when 'tarot-oracle' -%}
+      {%- assign header_asset = 'spellbound-img-cat-tarot.jpg' -%}
+    {%- when 'incense-burners' -%}
+      {%- assign header_asset = 'spellbound-img-cat-incense.jpg' -%}
+    {%- when 'books-guides' -%}
+      {%- assign header_asset = 'spellbound-img-cat-books.jpg' -%}
+    {%- when 'altar-home' -%}
+      {%- assign header_asset = 'spellbound-img-cat-altar.jpg' -%}
+    {%- when 'handmade' -%}
+      {%- assign header_asset = 'spellbound-img-cat-handmade.jpg' -%}
+    {%- else -%}
+      {%- if zodiac_handles contains handle -%}
+        {%- assign header_asset = 'spellbound-img-zodiac.jpg' -%}
+      {%- elsif handle contains 'planet-' -%}
+        {%- assign header_asset = 'spellbound-img-oracle.jpg' -%}
+      {%- elsif handle contains '-chakra' or handle contains 'crystal-' -%}
+        {%- assign header_asset = 'spellbound-img-cat-crystals.jpg' -%}
+      {%- else -%}
+        {%- assign header_asset = 'spellbound-img-hero.jpg' -%}
+      {%- endif -%}
+  {%- endcase -%}
+{%- endif -%}
+
 <section class="spellbound-collection-header">
-  {% if section.settings.background_image != blank %}
-    <div
-      class="spellbound-collection-header__bg"
-      style="background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}')"
-    ></div>
-  {% endif %}
-  <div class="spellbound-collection-header__inner">
-    <div class="spellbound-collection-header__text">
-      {% if section.settings.label != blank %}
-        <span class="spellbound-collection-header__label">{{ section.settings.label }}</span>
-      {% endif %}
+  {%- if header_image != blank or header_asset != blank -%}
+    <div class="spellbound-collection-header__bg" aria-hidden="true">
+      {%- if header_image != blank -%}
+        {{
+          header_image
+          | image_url: width: 1800
+          | image_tag: loading: 'lazy', alt: '', widths: '750, 1100, 1500, 1800'
+        }}
+      {%- else -%}
+        <img
+          src="{{ header_asset | asset_url }}"
+          alt=""
+          loading="lazy"
+          width="1800"
+          height="900"
+        >
+      {%- endif -%}
+      <div class="spellbound-collection-header__scrim"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="spellbound-collection-header__inner" data-spellbound-reveal-group>
+    {%- if section.settings.label != blank -%}
+      <span class="spellbound-collection-header__label">{{ section.settings.label }}</span>
+    {%- endif -%}
+
+    <div class="spellbound-collection-header__row">
       <h1 class="spellbound-collection-header__title">
-        {% if collection != blank %}
+        {%- if collection != blank -%}
           {{ collection.title }}
-        {% else %}
+        {%- else -%}
           {{ section.settings.fallback_title }}
-        {% endif %}
+        {%- endif -%}
       </h1>
-      {% if section.settings.quote != blank %}
-        <p class="spellbound-collection-header__quote">"{{ section.settings.quote }}"</p>
-      {% endif %}
+      {%- if collection != blank -%}
+        <span class="spellbound-collection-header__count">
+          {{ collection.products_count }} manifestation{% if collection.products_count != 1 %}s{% endif %}
+        </span>
+      {%- endif -%}
     </div>
-    <div class="spellbound-collection-header__meta">
-      {% if collection != blank %}
-        <div class="spellbound-collection-header__count">
-          {{ collection.products_count }} Manifestations Found
-        </div>
-      {% endif %}
-      <div class="spellbound-collection-header__divider"></div>
-    </div>
+
+    {%- if section.settings.quote != blank -%}
+      <p class="spellbound-collection-header__quote">&ldquo;{{ section.settings.quote }}&rdquo;</p>
+    {%- endif -%}
   </div>
 </section>
 
@@ -127,22 +196,27 @@
     },
     {
       "type": "text",
+      "id": "background_image_asset",
+      "label": "Background asset filename",
+      "info": "Fallback theme asset (e.g. spellbound-img-vault.jpg) used when no background image is picked"
+    },
+    {
+      "type": "text",
       "id": "label",
       "label": "Label",
-      "default": "Browsing The Archives"
+      "default": "The Vault"
     },
     {
       "type": "text",
       "id": "fallback_title",
       "label": "Fallback title",
-      "default": "The Vault",
+      "default": "All Artifacts",
       "info": "Shown when no collection is available"
     },
     {
       "type": "textarea",
       "id": "quote",
-      "label": "Quote",
-      "default": "Each item in this collection has been vetted for spiritual integrity and aesthetic weight."
+      "label": "Quote"
     }
   ],
   "presets": [

@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "hero": {
+      "type": "spellbound-page-hero",
+      "settings": {
+        "image_asset": "spellbound-img-cat-altar.jpg",
+        "label": "Find Us",
+        "title": "Visit Us",
+        "intro": "You'll find us on Outram Street in the heart of Sutton-in-Ashfield — pop in for a browse, a chat, or a bit of guidance."
+      }
+    },
+    "cards": {
+      "type": "spellbound-visit-cards",
+      "blocks": {
+        "address": {
+          "type": "card",
+          "settings": {
+            "icon": "map-pin",
+            "title": "Address",
+            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS"
+          }
+        },
+        "hours": {
+          "type": "card",
+          "settings": {
+            "icon": "clock",
+            "title": "Opening Hours",
+            "body": "Monday - Saturday, 10am - 4pm. Closed Sundays."
+          }
+        },
+        "contact": {
+          "type": "card",
+          "settings": {
+            "icon": "mail",
+            "title": "Get In Touch",
+            "body": "gothicwitches@gmail.com / 07380 149004",
+            "link_label": "Send a message",
+            "link": "/pages/contact"
+          }
+        },
+        "collect": {
+          "type": "card",
+          "settings": {
+            "icon": "bag",
+            "title": "Click & Collect",
+            "body": "Free collection - we'll email when your order is ready, usually the same day."
+          }
+        }
+      },
+      "block_order": ["address", "hours", "contact", "collect"],
+      "settings": {
+        "heading": "The practical bits",
+        "subheading": "Everything you need to find your way to the shop."
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "content": {
+          "type": "text",
+          "name": "Content",
+          "settings": {
+            "text": "{{ closest.page.content }}",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["content"],
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 16,
+        "padding-block-end": 80
+      }
+    }
+  },
+  "order": ["hero", "cards", "main"]
+}

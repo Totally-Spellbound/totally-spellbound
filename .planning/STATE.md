@@ -18,19 +18,26 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-22)
 
 **Core value:** A thoughtful, independent e-commerce experience that gently guides customers to the right products.
-**Current focus:** Phase 02 — Design System (canonical design = DESIGN.md amethyst+gold, confirmed 2026-07-05; implementation not started)
+**Current focus:** LAUNCH (2026-07-05 full-site rebuild — see Reality Check below)
 
-## Reality Check (reconciled 2026-07-05)
+## Reality Check (superseded 2026-07-05, launch rebuild)
 
-Only the **homepage** was reset to a skeleton in Phase 1 — the rest of the earlier
-build survived. Actual code state:
+**The amethyst DESIGN.md direction was DROPPED on 2026-07-05** (Aaron's instruction: client
+preferred the original traditional-ecommerce + candlelit-gold identity). The canonical design
+brief is now **`.planning/phases/03-launch/DIRECTION.md`** ("Candlelight" tokens: gold #e5a94d /
+#f7cf8a on #050505; Cormorant + Inter kept). Do NOT implement DESIGN.md's amethyst palette.
 
-- **Homepage** (`templates/index.json`): skeleton, 1 section (`spellbound-homepage`).
-- **Product** (`templates/product.json`, 437 lines): fully built — old amber palette.
-- **Collection** (`templates/collection.json`): fully built — old amber palette.
-- **Cart / search**: stock Horizon, not customised.
-- **Design system**: documented in `phases/02-design-system/DESIGN.md`, **0% implemented**.
-- **Amber hardcoding**: ~33 refs across 12 `spellbound-*.liquid` sections + `spellbound-custom.css`, to be repointed to the new amethyst/gold tokens.
+Full-site rebuild completed the same day:
+
+- **Homepage**: fully rebuilt — cinematic hero, category tiles, featured products, intentions,
+  Proudly Independent story, oracle quiz, Lammas countdown (2026-08-01), zodiac grid.
+- **Product page**: all custom sections rebuilt (self-contained CSS planets, interactive chakra
+  column, badged cross-sells). **Collection**: compact header + working filter ribbon + badges.
+- **Cart** ("Your Cauldron"), **search** (facets on), **404**, list-collections: rebranded.
+- Old amber hex fully purged; all sections consume CSS vars from `assets/spellbound-custom.css`.
+- Admin: 5 new type collections (crystals-stones, tarot-oracle, incense-burners, books-guides,
+  altar-home), nested Shop nav, Our Story / Visit Us / Delivery & Returns pages, policies set.
+- Generated imagery: `assets/spellbound-img-*.jpg` (12 cinematic images).
 
 ## Current Milestone
 

@@ -1,7 +1,9 @@
 {% comment %}
   Spellbound Celestial Body - Visual planet display for product pages
-  Renders the matching celestial body with textured sphere, moons,
-  orbit lines, and description based on custom.planet metafield.
+  Renders the matching celestial body with a fully self-contained CSS/SVG
+  sphere (layered gradients + inline feTurbulence noise), moons, orbit
+  arcs, and description based on the custom.planet metafield.
+  Zero external assets.
 {% endcomment %}
 
 {%- assign current_product = product -%}
@@ -71,6 +73,34 @@
     {%- assign planet_desc = 'Pluto, once considered the ninth and most distant planet from the sun, is now the largest known dwarf planet in the solar system.' -%}
 {%- endcase -%}
 
+{%- comment -%}
+  Per-planet SVG turbulence parameters for the surface noise overlay.
+  Rocky worlds: high frequency, 4 octaves (mottled, cratered).
+  Gas giants: horizontally stretched frequency (streaked cloud bands).
+{%- endcomment -%}
+{%- case planet_name -%}
+  {%- when 'mercury' -%}
+    {%- assign noise_freq = '0.035' -%}{%- assign noise_oct = '4' -%}{%- assign noise_seed = '11' -%}{%- assign noise_opacity = '0.5' -%}
+  {%- when 'venus' -%}
+    {%- assign noise_freq = '0.008 0.02' -%}{%- assign noise_oct = '3' -%}{%- assign noise_seed = '4' -%}{%- assign noise_opacity = '0.38' -%}
+  {%- when 'earth' -%}
+    {%- assign noise_freq = '0.02' -%}{%- assign noise_oct = '4' -%}{%- assign noise_seed = '8' -%}{%- assign noise_opacity = '0.34' -%}
+  {%- when 'mars' -%}
+    {%- assign noise_freq = '0.03' -%}{%- assign noise_oct = '4' -%}{%- assign noise_seed = '5' -%}{%- assign noise_opacity = '0.46' -%}
+  {%- when 'jupiter' -%}
+    {%- assign noise_freq = '0.004 0.045' -%}{%- assign noise_oct = '3' -%}{%- assign noise_seed = '9' -%}{%- assign noise_opacity = '0.45' -%}
+  {%- when 'saturn' -%}
+    {%- assign noise_freq = '0.003 0.035' -%}{%- assign noise_oct = '3' -%}{%- assign noise_seed = '3' -%}{%- assign noise_opacity = '0.32' -%}
+  {%- when 'uranus' -%}
+    {%- assign noise_freq = '0.008' -%}{%- assign noise_oct = '3' -%}{%- assign noise_seed = '6' -%}{%- assign noise_opacity = '0.22' -%}
+  {%- when 'neptune' -%}
+    {%- assign noise_freq = '0.006 0.02' -%}{%- assign noise_oct = '3' -%}{%- assign noise_seed = '12' -%}{%- assign noise_opacity = '0.32' -%}
+  {%- when 'pluto' -%}
+    {%- assign noise_freq = '0.028' -%}{%- assign noise_oct = '4' -%}{%- assign noise_seed = '14' -%}{%- assign noise_opacity = '0.46' -%}
+{%- endcase -%}
+
+{%- assign panel_id = 'SpellboundCelestialPanel-' | append: section.id -%}
+
 <style>
   .spellbound-celestial {
     position: relative;
@@ -78,59 +108,213 @@
     height: 600px;
     overflow: hidden;
     background: #000;
-    font-family: "Montserrat", var(--font-body--family), sans-serif;
+    font-family: var(--font-body--family, sans-serif);
   }
   @media (min-width: 750px) {
     .spellbound-celestial { height: 700px; }
   }
 
-  /* Planet sphere */
+  /* ---------- Star field (sparse, self-contained box-shadow layers) ---------- */
+  .spellbound-celestial__stars {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1600px;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .spellbound-celestial__stars::before,
+  .spellbound-celestial__stars::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+  }
+  .spellbound-celestial__stars::before {
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+      80px 120px var(--spellbound-text-faint), 210px 60px var(--spellbound-text-faint),
+      340px 190px var(--spellbound-text-faint), 460px 90px var(--spellbound-text-faint),
+      590px 40px var(--spellbound-text-faint), 700px 170px var(--spellbound-text-faint),
+      820px 110px var(--spellbound-text-faint), 940px 60px var(--spellbound-text-faint),
+      1050px 200px var(--spellbound-text-faint), 1180px 90px var(--spellbound-text-faint),
+      1290px 150px var(--spellbound-text-faint), 1420px 70px var(--spellbound-text-faint),
+      1510px 180px var(--spellbound-text-faint), 160px 260px var(--spellbound-text-faint),
+      420px 300px var(--spellbound-text-faint), 760px 280px var(--spellbound-text-faint),
+      1010px 320px var(--spellbound-text-faint), 1330px 260px var(--spellbound-text-faint),
+      260px 30px var(--spellbound-text-faint), 880px 20px var(--spellbound-text-faint),
+      1470px 30px var(--spellbound-text-faint);
+  }
+  .spellbound-celestial__stars::after {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+      300px 140px rgba(245, 242, 234, 0.75), 640px 230px rgba(245, 242, 234, 0.6),
+      980px 130px rgba(245, 242, 234, 0.75), 1240px 40px rgba(245, 242, 234, 0.6),
+      1440px 210px rgba(245, 242, 234, 0.7), 150px 40px rgba(245, 242, 234, 0.6),
+      520px 210px rgba(245, 242, 234, 0.7), 1120px 260px rgba(245, 242, 234, 0.55),
+      400px 30px rgba(245, 242, 234, 0.65), 860px 330px rgba(245, 242, 234, 0.5);
+    animation: spellbound-celestial-twinkle 8s ease-in-out infinite alternate;
+  }
+  @keyframes spellbound-celestial-twinkle {
+    from { opacity: 0.45; }
+    to { opacity: 1; }
+  }
+
+  /* ---------- Planet sphere: layered gradients + noise + terminator ---------- */
   .spellbound-celestial__sphere {
     position: absolute;
     left: 50%;
-    bottom: -550px;
-    width: 900px;
-    height: 900px;
+    bottom: -620px;
+    width: 920px;
+    height: 920px;
     border-radius: 50%;
-    transform: translateX(-50%) scaleX(0.89);
-    background-size: 860px 700px;
-    animation: spellbound-planet-rotate 80s linear infinite;
+    transform: translateX(-50%);
+    overflow: hidden;
     z-index: 1;
+    /* Strong top-left light source: bright core -> mid tone -> dark limb */
+    background: radial-gradient(circle at 32% 12%, var(--planet-hi) 0%, var(--planet-mid) 34%, var(--planet-lo) 72%, #000 96%);
+    /* Atmosphere glow in the planet hue + inner rim light */
+    box-shadow:
+      0 -18px 140px 24px var(--planet-glow),
+      0 0 60px 10px var(--planet-glow-soft),
+      inset 0 18px 70px rgba(255, 255, 255, 0.08);
   }
   @media (min-width: 750px) {
     .spellbound-celestial__sphere {
-      width: 1200px;
-      height: 1200px;
-      bottom: -780px;
-      background-size: 1140px 910px;
+      width: 1280px;
+      height: 1280px;
+      bottom: -880px;
     }
   }
-  @keyframes spellbound-planet-rotate {
-    from { background-position-y: 0px; }
-    to { background-position-y: -1000px; }
+
+  /* Gas-giant cloud bands (masked to the sphere via overflow hidden).
+     Oversized vertically and drifted with a transform (GPU-friendly) —
+     it loops seamlessly by travelling exactly one gradient period
+     (--band-shift, set per planet). */
+  .spellbound-celestial__bands {
+    display: none;
+    position: absolute;
+    inset: -380px 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    will-change: transform;
+    animation: spellbound-celestial-band-drift 110s linear infinite;
   }
 
-  /* Atmosphere overlay - creates the shadow/glow over the sphere */
-  .spellbound-celestial__atmosphere {
+  /* Turbulence noise overlay (inline SVG data URI, planet-tuned).
+     Rocky/icy worlds: the whole texture slowly ROTATES across the sphere
+     (rigid-body rotation = perfectly seamless, clearly visible motion).
+     Streaked worlds override this with a horizontal cloud-stream drift. */
+  .spellbound-celestial__noise {
+    position: absolute;
+    inset: -8%;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    background-repeat: repeat;
+    background-size: 420px 420px;
+    will-change: transform;
+    animation: spellbound-celestial-spin 120s linear infinite;
+  }
+
+  /* Streaked atmospheres (anisotropic noise): rotating would tilt the
+     cloud bands, so these stream horizontally instead. The layer bleeds
+     one full 420px tile each side and travels exactly one tile per loop,
+     so the repeat is seamless. */
+  .spellbound-celestial--venus .spellbound-celestial__noise,
+  .spellbound-celestial--jupiter .spellbound-celestial__noise,
+  .spellbound-celestial--saturn .spellbound-celestial__noise,
+  .spellbound-celestial--neptune .spellbound-celestial__noise {
+    inset: -8% -440px;
+    animation: spellbound-celestial-stream 75s linear infinite;
+  }
+
+  /* Terminator shading: keeps the light source direction unambiguous */
+  .spellbound-celestial__shade {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 32% 10%, rgba(255, 255, 255, 0.16) 0%, transparent 24%),
+      radial-gradient(circle at 32% 10%, transparent 30%, rgba(0, 0, 0, 0.45) 60%, rgba(0, 0, 0, 0.92) 88%);
+  }
+
+  @keyframes spellbound-celestial-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes spellbound-celestial-stream {
+    from { transform: translateX(0); }
+    to { transform: translateX(420px); }
+  }
+  @keyframes spellbound-celestial-band-drift {
+    from { transform: translateY(calc(-1 * var(--band-shift, 172px))); }
+    to { transform: translateY(0); }
+  }
+
+  /* Atmospheric glow halo behind the sphere: slow breathing pulse.
+     Only opacity animates (cheap, GPU-composited). */
+  .spellbound-celestial__glow {
     position: absolute;
     left: 50%;
-    bottom: -550px;
-    width: 900px;
-    height: 900px;
+    bottom: -620px;
+    width: 920px;
+    height: 920px;
     border-radius: 50%;
-    transform: translateX(-50%) scaleX(0.89);
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+    box-shadow:
+      0 -30px 200px 50px var(--planet-glow),
+      0 0 100px 24px var(--planet-glow-soft);
+    animation: spellbound-celestial-breathe 9s ease-in-out infinite alternate;
+  }
+  @media (min-width: 750px) {
+    .spellbound-celestial__glow {
+      width: 1280px;
+      height: 1280px;
+      bottom: -880px;
+    }
+  }
+  @keyframes spellbound-celestial-breathe {
+    from { opacity: 0.45; }
+    to { opacity: 1; }
+  }
+
+  /* Saturn's ring: elegant tilted CSS ellipse centred on the sphere */
+  .spellbound-celestial__ring {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: -735px;
+    width: 1150px;
+    height: 1150px;
+    border-radius: 50%;
+    border: 28px solid rgba(232, 222, 200, 0.32);
+    box-shadow:
+      0 0 0 24px rgba(232, 222, 200, 0.1),
+      inset 0 0 0 12px rgba(232, 222, 200, 0.08);
+    transform: translateX(-50%) rotate(-14deg) scale(1.3, 0.34);
     z-index: 2;
     pointer-events: none;
   }
   @media (min-width: 750px) {
-    .spellbound-celestial__atmosphere {
-      width: 1200px;
-      height: 1200px;
-      bottom: -780px;
+    .spellbound-celestial__ring {
+      width: 1600px;
+      height: 1600px;
+      bottom: -1040px;
     }
   }
+  .spellbound-celestial--saturn .spellbound-celestial__ring { display: block; }
 
-  /* Dark overlay above the sphere horizon */
+  /* Dark seat above the sphere horizon */
   .spellbound-celestial__horizon {
     position: absolute;
     left: 50%;
@@ -144,11 +328,22 @@
     pointer-events: none;
   }
   @media (min-width: 750px) {
-    .spellbound-celestial__horizon {
-      bottom: -60px;
-    }
+    .spellbound-celestial__horizon { bottom: -60px; }
   }
-  /* Bottom fade to ensure no bright texture leaks */
+  /* Edge fades: melt the pure-black stage into the page background
+     (var(--spellbound-bg)) so there is no hard seam above or below. */
+  .spellbound-celestial::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, var(--spellbound-bg) 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+  /* Bottom fade also stops bright texture leaking past the stage edge */
   .spellbound-celestial::after {
     content: '';
     position: absolute;
@@ -156,131 +351,144 @@
     right: 0;
     bottom: 0;
     height: 120px;
-    background: linear-gradient(to top, #000 0%, #000 20%, transparent 100%);
+    background: linear-gradient(to top, var(--spellbound-bg) 0%, var(--spellbound-bg) 20%, transparent 100%);
     z-index: 3;
     pointer-events: none;
   }
 
-  /* Description text - positioned just above planet horizon */
+  /* ---------- Info block ---------- */
   .spellbound-celestial__info {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 160px;
+    bottom: 150px;
     width: 90%;
-    max-width: 620px;
+    max-width: 640px;
     text-align: center;
     z-index: 5;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: 300;
+    color: var(--spellbound-text);
+    padding: 24px 16px;
+    /* Gradient scrim: keeps copy legible over the planet glow */
+    background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.35) 55%, transparent 78%);
   }
   @media (min-width: 750px) {
-    .spellbound-celestial__info {
-      bottom: 190px;
-    }
+    .spellbound-celestial__info { bottom: 185px; }
   }
   .spellbound-celestial__type {
-    font-size: 10px;
-    letter-spacing: 5px;
-    margin: 0 0 6px 0;
-    font-weight: 300;
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-indent: 0.35em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin: 0 0 10px;
   }
   .spellbound-celestial__name {
-    font-size: 28px;
-    letter-spacing: 14px;
-    margin: 0 0 18px 0;
-    font-weight: 300;
-    line-height: 1.2;
-    text-transform: uppercase !important;
+    font-family: var(--font-heading--family, serif);
+    font-weight: 400;
+    font-size: 2.4rem;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    text-transform: uppercase;
+    line-height: 1.15;
+    color: var(--spellbound-text);
+    margin: 0 0 14px;
   }
   @media (min-width: 750px) {
-    .spellbound-celestial__name {
-      font-size: 34px;
-      letter-spacing: 16px;
-    }
+    .spellbound-celestial__name { font-size: 3.2rem; }
   }
   .spellbound-celestial__desc {
-    font-size: 10px;
-    letter-spacing: 3px;
-    line-height: 22px;
-    margin: 10px 0 14px;
-    font-weight: 300;
-    opacity: 0.85;
-    text-transform: uppercase;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    color: var(--spellbound-text-soft);
+    margin: 0 auto 22px;
+    max-width: 480px;
   }
   .spellbound-celestial__read-more {
+    display: inline-block;
+    font-family: var(--font-body--family, sans-serif);
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 5px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
     text-transform: uppercase;
-    text-decoration: none;
-    padding: 0 2px 5px 0;
-    border-bottom: 2px solid;
-    transition: all 0.2s;
+    color: var(--spellbound-text);
+    background: transparent;
+    border: 1px solid var(--spellbound-gold-deep);
+    border-radius: 2px;
+    padding: 12px 26px;
     cursor: pointer;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
   }
   .spellbound-celestial__read-more:hover {
-    padding: 0 10px 5px 10px;
+    color: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+    background: var(--spellbound-gold-glow);
+  }
+  .spellbound-celestial__read-more:focus-visible {
+    outline: none;
+    border-color: var(--spellbound-gold-bright);
+    box-shadow: 0 0 0 3px var(--spellbound-gold-glow);
   }
 
-  /* Moon elements */
+  /* ---------- Moons: small CSS gradient spheres on the orbit arcs ---------- */
   .spellbound-celestial__moon {
     position: absolute;
     z-index: 6;
     text-align: center;
-    color: #fff;
-    text-transform: uppercase;
+    color: var(--spellbound-text);
   }
   .spellbound-celestial__moon-sphere {
-    width: 70px;
-    height: 70px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background-size: auto 100%;
-    background-color: #444;
-    box-shadow: 0px -20px 20px 4px rgba(0,0,0,0.7) inset;
     margin: 0 auto 12px;
+    background: radial-gradient(circle at 30% 25%, var(--moon-hi) 0%, var(--moon-mid) 48%, var(--moon-lo) 85%);
+    box-shadow:
+      inset -12px -14px 24px rgba(0, 0, 0, 0.75),
+      0 0 18px 2px var(--planet-glow-soft);
   }
   @media (min-width: 750px) {
     .spellbound-celestial__moon-sphere {
-      width: 90px;
-      height: 90px;
+      width: 84px;
+      height: 84px;
     }
   }
   .spellbound-celestial__moon-label {
+    font-family: var(--font-body--family, sans-serif);
     font-size: 10px;
-    letter-spacing: 4px;
-    margin: 0 0 2px;
-    font-weight: 300;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin: 0 0 3px;
   }
   .spellbound-celestial__moon-name {
-    font-size: 16px;
-    letter-spacing: 5px;
+    font-family: var(--font-heading--family, serif);
+    font-size: 17px;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+    text-transform: uppercase;
+    color: var(--spellbound-text);
     margin: 0;
-    font-weight: 300;
   }
   @media (min-width: 750px) {
-    .spellbound-celestial__moon-name {
-      font-size: 22px;
-    }
+    .spellbound-celestial__moon-name { font-size: 21px; }
   }
 
-  /* Orbit trajectory lines - only top arcs visible via clip-path.
-     Each orbit is clipped to show only the top ~15% (the arc above the planet). */
+  /* Orbit trajectory arcs (dashed, only top arcs visible above the stage) */
   .spellbound-celestial__orbit {
     position: absolute;
-    border: 2px dashed rgba(255,255,255,0.2);
+    border: 1px dashed var(--spellbound-border);
     border-radius: 50%;
     z-index: 4;
     pointer-events: none;
   }
 
-  /* Moon positions - placed along visible orbit arcs */
-  /* Phobos (pos2) upper-left, Deimos (pos1) right side */
+  /* Moon positions along the visible arcs */
   .spellbound-celestial__moon--pos1 { right: 20%; top: 25%; }
   .spellbound-celestial__moon--pos2 { left: 18%; top: 15%; }
   .spellbound-celestial__moon--pos3 { right: 22%; top: 130px; }
@@ -290,272 +498,386 @@
     .spellbound-celestial__moon--pos3 { right: 26%; top: 140px; }
   }
 
-  /* Orbit line positions - centered on planet center
-     Mobile: planet center at bottom:-190px. Orbit bottom = -190 - size/2
-     Desktop: planet center at bottom:-320px. Orbit bottom = -320 - size/2 */
-  /* Mobile: planet center at bottom -100px. Orbit bottom = -100 - size/2 */
+  /* Orbit arcs centred on the planet core.
+     Mobile sphere centre: bottom -160px. Desktop: bottom -240px. */
   .spellbound-celestial__orbit--1 {
     width: 2000px; height: 2000px;
-    left: 50%; bottom: -1100px;
+    left: 50%; bottom: -1160px;
     transform: translateX(-50%);
   }
   .spellbound-celestial__orbit--2 {
     width: 2200px; height: 2200px;
-    left: 50%; bottom: -1200px;
+    left: 50%; bottom: -1260px;
     transform: translateX(-50%);
   }
   .spellbound-celestial__orbit--3 {
     width: 2400px; height: 2400px;
-    left: 50%; bottom: -1300px;
+    left: 50%; bottom: -1360px;
     transform: translateX(-50%);
   }
   @media (min-width: 750px) {
-    /* Desktop: planet center at bottom -180px. Orbit bottom = -180 - size/2 */
-    .spellbound-celestial__orbit--1 { width: 2000px; height: 2000px; bottom: -1180px; }
-    .spellbound-celestial__orbit--2 { width: 2200px; height: 2200px; bottom: -1280px; }
-    .spellbound-celestial__orbit--3 { width: 2400px; height: 2400px; bottom: -1380px; }
+    .spellbound-celestial__orbit--1 { bottom: -1240px; }
+    .spellbound-celestial__orbit--2 { bottom: -1340px; }
+    .spellbound-celestial__orbit--3 { bottom: -1440px; }
   }
 
-  /* Planet-specific textures and glows */
-  .spellbound-celestial--mercury .spellbound-celestial__sphere {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
+  /* ---------- Per-planet palettes (sphere, glow, moons) ---------- */
+  .spellbound-celestial--mercury {
+    --planet-hi: #e3cdc6; --planet-mid: #8f7570; --planet-lo: #221715;
+    --planet-glow: rgba(214, 178, 168, 0.32); --planet-glow-soft: rgba(214, 178, 168, 0.14);
+    --moon-hi: #d8ccc6; --moon-mid: #857a74; --moon-lo: #1a1512;
   }
-  .spellbound-celestial--mercury .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px rgba(234,205,199,0.6) inset, 0 0 23px 4px rgba(234,205,199,0.6) inset, 0 -10px 130px 30px rgba(234,205,199,0.4);
+  .spellbound-celestial--venus {
+    --planet-hi: #f6e3bd; --planet-mid: #d9a35e; --planet-lo: #33200c;
+    --planet-glow: rgba(240, 200, 140, 0.35); --planet-glow-soft: rgba(240, 200, 140, 0.16);
+    --moon-hi: #e8d8b8; --moon-mid: #9a825c; --moon-lo: #1e150a;
   }
-  .spellbound-celestial--mercury .spellbound-celestial__type { color: #f7dad3; }
-  .spellbound-celestial--mercury .spellbound-celestial__read-more { color: #E8927C; border-color: #E8927C; }
-  .spellbound-celestial--mercury .spellbound-celestial__moon-label { color: #E8927C; }
+  .spellbound-celestial--earth {
+    --planet-hi: #b7dcec; --planet-mid: #35789e; --planet-lo: #06131f;
+    --planet-glow: rgba(122, 190, 224, 0.35); --planet-glow-soft: rgba(122, 190, 224, 0.16);
+    --moon-hi: #e6e3dd; --moon-mid: #8f8b84; --moon-lo: #1a1815;
+  }
+  .spellbound-celestial--mars {
+    --planet-hi: #eba57f; --planet-mid: #a8492b; --planet-lo: #230a04;
+    --planet-glow: rgba(226, 110, 74, 0.38); --planet-glow-soft: rgba(226, 110, 74, 0.16);
+    --moon-hi: #cfa58f; --moon-mid: #7c5a49; --moon-lo: #1c110b;
+  }
+  .spellbound-celestial--jupiter {
+    --planet-hi: #f2ddba; --planet-mid: #c08a52; --planet-lo: #2b1a0a;
+    --planet-glow: rgba(235, 190, 130, 0.35); --planet-glow-soft: rgba(235, 190, 130, 0.16);
+    --moon-hi: #e8d3ae; --moon-mid: #99764f; --moon-lo: #201409;
+  }
+  .spellbound-celestial--saturn {
+    --planet-hi: #f0e8d4; --planet-mid: #c4b28d; --planet-lo: #2d2517;
+    --planet-glow: rgba(232, 220, 190, 0.32); --planet-glow-soft: rgba(232, 220, 190, 0.14);
+    --moon-hi: #e9e2d2; --moon-mid: #9a8f78; --moon-lo: #1e1a12;
+  }
+  .spellbound-celestial--uranus {
+    --planet-hi: #ddf4f6; --planet-mid: #93cfd6; --planet-lo: #0e2c31;
+    --planet-glow: rgba(160, 220, 228, 0.32); --planet-glow-soft: rgba(160, 220, 228, 0.14);
+    --moon-hi: #d8ecee; --moon-mid: #7fa3a8; --moon-lo: #12201f;
+  }
+  .spellbound-celestial--neptune {
+    --planet-hi: #9dbcf4; --planet-mid: #2f5ec4; --planet-lo: #040c26;
+    --planet-glow: rgba(110, 150, 235, 0.38); --planet-glow-soft: rgba(110, 150, 235, 0.16);
+    --moon-hi: #cdd8f0; --moon-mid: #6d7fa8; --moon-lo: #10162a;
+  }
+  .spellbound-celestial--pluto {
+    --planet-hi: #eccfae; --planet-mid: #a97f5e; --planet-lo: #201208;
+    --planet-glow: rgba(224, 180, 140, 0.3); --planet-glow-soft: rgba(224, 180, 140, 0.14);
+    --moon-hi: #dcc4a8; --moon-mid: #8c705a; --moon-lo: #1a110a;
+  }
 
-  .spellbound-celestial--venus .spellbound-celestial__sphere {
-    background-image: url("https://nasa3d.arc.nasa.gov/shared_assets/images/ven0aaa2/ven0aaa2-copy-428-321.jpg");
-  }
-  .spellbound-celestial--venus .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px #ffcb9c inset, 0 0 23px 4px #ffcb9c inset, 0 -10px 130px 30px rgba(255,203,156,0.4);
-  }
-  .spellbound-celestial--venus .spellbound-celestial__type { color: #e99046; }
-  .spellbound-celestial--venus .spellbound-celestial__read-more { color: #b45d15; border-color: #b45d15; }
-  .spellbound-celestial--venus .spellbound-celestial__moon-label { color: #b45d15; }
-
+  /* Earth: soft continent tints layered under the lighting gradient */
   .spellbound-celestial--earth .spellbound-celestial__sphere {
-    background-image: url("https://img00.deviantart.net/04ef/i/2009/114/3/e/new_earth_texture_map_by_lightondesigns.jpg");
-  }
-  .spellbound-celestial--earth .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px #8cbaff inset, 0 0 23px 4px #8cbaff inset, 0 -10px 130px 30px rgba(140,186,255,0.4);
-  }
-  .spellbound-celestial--earth .spellbound-celestial__type { color: #7de9cc; }
-  .spellbound-celestial--earth .spellbound-celestial__read-more { color: #26daaa; border-color: #26daaa; }
-  .spellbound-celestial--earth .spellbound-celestial__moon-label { color: #26daaa; }
-
-  .spellbound-celestial--mars .spellbound-celestial__sphere {
-    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/mars_texture.jpg");
-  }
-  .spellbound-celestial--mars .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px #e86363 inset, 0 0 23px 4px #e86363 inset, 0 -10px 130px 30px rgba(229,95,69,0.5);
-  }
-  .spellbound-celestial--mars .spellbound-celestial__type { color: #f2ac9e; }
-  .spellbound-celestial--mars .spellbound-celestial__read-more { color: #e55f45; border-color: #e55f45; }
-  .spellbound-celestial--mars .spellbound-celestial__moon-label { color: #e55f45; }
-
-  .spellbound-celestial--jupiter .spellbound-celestial__sphere {
-    background-image: url("https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA07782_hires.jpg");
-  }
-  .spellbound-celestial--jupiter .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px rgba(234,205,199,0.6) inset, 0 0 23px 4px rgba(234,205,199,0.6) inset, 0 -10px 130px 30px rgba(234,205,199,0.4);
-  }
-  .spellbound-celestial--jupiter .spellbound-celestial__type { color: #ffc966; }
-  .spellbound-celestial--jupiter .spellbound-celestial__read-more { color: orange; border-color: orange; }
-  .spellbound-celestial--jupiter .spellbound-celestial__moon-label { color: orange; }
-
-  .spellbound-celestial--saturn .spellbound-celestial__sphere {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_saturn.jpg");
-  }
-  .spellbound-celestial--saturn .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px rgba(234,205,199,0.6) inset, 0 0 23px 4px rgba(234,205,199,0.6) inset, 0 -10px 130px 30px rgba(234,205,199,0.4);
-  }
-  .spellbound-celestial--saturn .spellbound-celestial__type { color: #d9cec0; }
-  .spellbound-celestial--saturn .spellbound-celestial__read-more { color: #b29d81; border-color: #b29d81; }
-  .spellbound-celestial--saturn .spellbound-celestial__moon-label { color: #b29d81; }
-
-  .spellbound-celestial--uranus .spellbound-celestial__sphere {
-    background-image: url("https://img00.deviantart.net/957c/i/2017/165/4/9/uranus_texture_map_by_jcpag2010-db7yjwb.png");
-  }
-  .spellbound-celestial--uranus .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px rgba(234,205,199,0.6) inset, 0 0 23px 4px rgba(234,205,199,0.6) inset, 0 -10px 130px 30px rgba(234,205,199,0.4);
-  }
-  .spellbound-celestial--uranus .spellbound-celestial__type { color: #d9eef2; }
-  .spellbound-celestial--uranus .spellbound-celestial__read-more { color: #8dcdd8; border-color: #8dcdd8; }
-  .spellbound-celestial--uranus .spellbound-celestial__moon-label { color: #8dcdd8; }
-
-  .spellbound-celestial--neptune .spellbound-celestial__sphere {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_neptune.jpg");
-  }
-  .spellbound-celestial--neptune .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px rgba(234,205,199,0.6) inset, 0 0 23px 4px rgba(234,205,199,0.6) inset, 0 -10px 130px 30px rgba(234,205,199,0.4);
-  }
-  .spellbound-celestial--neptune .spellbound-celestial__type { color: #a7c1f0; }
-  .spellbound-celestial--neptune .spellbound-celestial__read-more { color: #4f83e2; border-color: #4f83e2; }
-  .spellbound-celestial--neptune .spellbound-celestial__moon-label { color: #4f83e2; }
-
-  .spellbound-celestial--pluto .spellbound-celestial__sphere {
-    background-image: url("https://pre00.deviantart.net/4677/th/pre/f/2015/314/4/e/pluto_map__2015_nov_10__by_snowfall_the_cat-d918tlb.png");
-  }
-  .spellbound-celestial--pluto .spellbound-celestial__atmosphere {
-    box-shadow: 0 -590px 150px #000 inset, 0 0 130px 40px rgba(234,205,199,0.6) inset, 0 0 23px 4px rgba(234,205,199,0.6) inset, 0 -10px 130px 30px rgba(234,205,199,0.4);
-  }
-  .spellbound-celestial--pluto .spellbound-celestial__type { color: #ffc398; }
-  .spellbound-celestial--pluto .spellbound-celestial__read-more { color: #FF8732; border-color: #FF8732; }
-  .spellbound-celestial--pluto .spellbound-celestial__moon-label { color: #FF8732; }
-
-  /* Moon sphere textures */
-  .spellbound-celestial__moon-sphere--moon {
-    background-image: url("https://img2.cgtrader.com/items/702173/682fad2a11/92k-moon-color-map-3d-model.jpg");
-  }
-  .spellbound-celestial__moon-sphere--deimos,
-  .spellbound-celestial__moon-sphere--phoebos {
-    background-image: url("https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA07782_hires.jpg");
-  }
-  .spellbound-celestial__moon-sphere--io {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/7b/Io_highest_resolution_true_color.jpg");
-  }
-  .spellbound-celestial__moon-sphere--europa {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/e/e4/Europa-moon-with-ocean.jpg");
-  }
-  .spellbound-celestial__moon-sphere--ganymede {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/21/Ganymede_-_Perijove_34_Composite.png");
-  }
-  .spellbound-celestial__moon-sphere--titan {
-    background-image: url("https://pre00.deviantart.net/bea3/th/pre/i/2017/057/7/f/titan_texture_map_8k_by_fargetanik-db0f8m0.png");
-  }
-  .spellbound-celestial__moon-sphere--dione {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
-  }
-  .spellbound-celestial__moon-sphere--enceladus {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
-  }
-  .spellbound-celestial__moon-sphere--miranda {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
-  }
-  .spellbound-celestial__moon-sphere--ariel {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
-  }
-  .spellbound-celestial__moon-sphere--umbriel {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
-  }
-  .spellbound-celestial__moon-sphere--triton {
-    background-image: url("https://img00.deviantart.net/b934/i/2016/198/b/0/triton_texture_map_14k_by_fargetanik-daac9tm.png");
-  }
-  .spellbound-celestial__moon-sphere--proteus {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
-  }
-  .spellbound-celestial__moon-sphere--nereid {
-    background-image: url("https://www.solarsystemscope.com/images/textures/full/2k_makemake_fictional.jpg");
+    background:
+      radial-gradient(ellipse 34% 20% at 46% 14%, rgba(52, 128, 96, 0.5), transparent 70%),
+      radial-gradient(ellipse 30% 18% at 22% 26%, rgba(58, 140, 104, 0.42), transparent 70%),
+      radial-gradient(ellipse 26% 14% at 60% 30%, rgba(48, 118, 92, 0.35), transparent 70%),
+      radial-gradient(circle at 32% 12%, var(--planet-hi) 0%, var(--planet-mid) 34%, var(--planet-lo) 72%, #000 96%);
   }
 
-  /* Read More sliding panel */
+  /* Jupiter: banded caramel clouds */
+  .spellbound-celestial--jupiter .spellbound-celestial__bands {
+    display: block;
+    --band-shift: 172px;
+    background: repeating-linear-gradient(
+      178deg,
+      rgba(201, 141, 78, 0) 0px,
+      rgba(201, 141, 78, 0.55) 26px,
+      rgba(240, 217, 181, 0.5) 62px,
+      rgba(150, 92, 44, 0.6) 98px,
+      rgba(232, 196, 148, 0.45) 140px,
+      rgba(201, 141, 78, 0) 172px
+    );
+  }
+  /* Saturn: fainter bone-toned banding */
+  .spellbound-celestial--saturn .spellbound-celestial__bands {
+    display: block;
+    opacity: 0.6;
+    --band-shift: 160px;
+    background: repeating-linear-gradient(
+      179deg,
+      rgba(226, 214, 186, 0) 0px,
+      rgba(226, 214, 186, 0.4) 34px,
+      rgba(178, 160, 124, 0.42) 78px,
+      rgba(240, 232, 210, 0.35) 122px,
+      rgba(226, 214, 186, 0) 160px
+    );
+  }
+
+  /* Planet-tuned turbulence noise (inline SVG, no external requests) */
+  .spellbound-celestial--{{ planet_name }} .spellbound-celestial__noise {
+    opacity: {{ noise_opacity }};
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='{{ noise_freq }}' numOctaves='{{ noise_oct }}' seed='{{ noise_seed }}' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Slide-in facts panel (dark) ---------- */
   .spellbound-celestial__panel {
     position: absolute;
-    right: -420px;
+    right: 0;
     top: 0;
-    width: 360px;
+    width: min(380px, 92vw);
     height: 100%;
-    background: #fff;
-    color: #000;
+    background: var(--spellbound-surface-2);
+    border-left: 1px solid var(--spellbound-border);
+    color: var(--spellbound-text);
     z-index: 20;
     overflow-y: auto;
-    padding: 50px 40px;
-    transition: right 0.4s cubic-bezier(0.33, 0, 0, 1);
+    -webkit-overflow-scrolling: touch;
+    padding: 56px 36px 40px;
+    transform: translateX(calc(100% + 40px));
+    visibility: hidden;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s;
   }
   .spellbound-celestial__panel.is-open {
-    right: 0;
+    transform: none;
+    visibility: visible;
+    box-shadow: -30px 0 60px rgba(0, 0, 0, 0.55);
+  }
+  .spellbound-celestial__panel:focus {
+    outline: none;
   }
   .spellbound-celestial__panel-close {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 14px;
+    right: 14px;
     background: none;
-    border: none;
-    color: #000;
-    font-size: 24px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: var(--spellbound-text-soft);
+    font-size: 26px;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 4px 10px;
     line-height: 1;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .spellbound-celestial__panel-close:hover {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-celestial__panel-close:focus-visible {
+    outline: none;
+    color: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-deep);
+    box-shadow: 0 0 0 3px var(--spellbound-gold-glow);
   }
   .spellbound-celestial__panel h2 {
+    font-family: var(--font-heading--family, serif);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    font-weight: 300;
-    font-size: 20px;
-    letter-spacing: 3px;
+    color: var(--spellbound-text);
     margin: 0 0 8px;
   }
   .spellbound-celestial__panel h2::after {
     content: '';
     display: block;
-    width: 30px;
-    height: 2px;
-    background: #000;
-    margin-top: 8px;
-    margin-bottom: 24px;
+    width: 36px;
+    height: 1px;
+    background: var(--spellbound-gold-deep);
+    margin-top: 12px;
+    margin-bottom: 22px;
   }
   .spellbound-celestial__panel p {
-    color: #777;
-    font-size: 12px;
-    line-height: 20px;
+    color: var(--spellbound-text-soft);
+    font-size: 0.875rem;
+    line-height: 1.7;
     margin: 0 0 16px;
   }
   .spellbound-celestial__panel h3 {
-    font-size: 13px;
-    text-transform: uppercase;
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 12px;
     font-weight: 600;
-    margin: 28px 0 0;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin: 26px 0 0;
   }
   .spellbound-celestial__panel h3::after {
     content: '';
     display: block;
-    width: 30px;
-    height: 2px;
-    background: #000;
-    margin-top: 6px;
+    width: 26px;
+    height: 1px;
+    background: var(--spellbound-gold-deep);
+    margin-top: 8px;
     margin-bottom: 10px;
   }
 
-  /* Backdrop overlay when panel is open */
+  /* Backdrop while the panel is open */
   .spellbound-celestial__backdrop {
-    display: none;
     position: absolute;
     inset: 0;
     z-index: 15;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.55);
     cursor: pointer;
+    border: none;
+    padding: 0;
   }
-  .spellbound-celestial__panel.is-open ~ .spellbound-celestial__backdrop {
-    display: block;
-  }
+  .spellbound-celestial__backdrop[hidden] { display: none; }
 
-  /* Section label above */
+  /* Section micro-label */
   .spellbound-celestial__section-label {
     position: absolute;
-    top: 20px;
+    top: 26px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 6;
-    color: #f59e0b;
-    font-size: 9px;
-    letter-spacing: 0.6em;
+    color: var(--spellbound-gold);
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-indent: 0.4em;
     text-transform: uppercase;
-    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  /* ---------- Kindred products strip (below the stage) ---------- */
+  .spellbound-celestial-kindred {
+    background: var(--spellbound-bg);
+    padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem clamp(3.5rem, 7vw, 6rem);
+  }
+  .spellbound-celestial-kindred__inner {
+    max-width: 100rem;
+    margin: 0 auto;
+  }
+  .spellbound-celestial-kindred__eyebrow {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin: 0 0 0.75rem;
+  }
+  .spellbound-celestial-kindred__title {
+    font-family: var(--font-heading--family, serif);
+    font-weight: var(--font-heading--weight, 400);
+    font-size: clamp(1.875rem, 3.5vw, 3rem);
+    line-height: 1.1;
+    color: var(--spellbound-text);
+    margin: 0 0 clamp(2rem, 4vw, 3.25rem);
+  }
+  .spellbound-celestial-kindred__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 1rem;
+  }
+  @media (min-width: 990px) {
+    .spellbound-celestial-kindred__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 3rem 2rem;
+    }
+  }
+  .spellbound-celestial-kindred__card {
+    display: block;
+    text-decoration: none;
+  }
+  .spellbound-celestial-kindred__media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--spellbound-surface);
+    border: 1px solid var(--spellbound-border);
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .spellbound-celestial-kindred__media::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--spellbound-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+  }
+  .spellbound-celestial-kindred__card:hover .spellbound-celestial-kindred__media::after,
+  .spellbound-celestial-kindred__card:focus-visible .spellbound-celestial-kindred__media::after {
+    transform: scaleX(1);
+  }
+  .spellbound-celestial-kindred__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spellbound-celestial-kindred__card:hover .spellbound-celestial-kindred__image {
+    transform: scale(1.03);
+  }
+  .spellbound-celestial-kindred__badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+    z-index: 1;
+  }
+  .spellbound-celestial-kindred__card-title {
+    font-family: var(--font-heading--family, serif);
+    font-weight: var(--font-heading--weight, 400);
+    font-size: 1.25rem;
+    line-height: 1.25;
+    color: var(--spellbound-text);
+    margin: 0 0 0.35rem;
+    transition: color 0.3s ease;
+  }
+  .spellbound-celestial-kindred__card:hover .spellbound-celestial-kindred__card-title {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-celestial-kindred__price {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    color: var(--spellbound-text-soft);
+    margin: 0;
+  }
+  .spellbound-celestial-kindred__empty {
+    font-family: var(--font-heading--family, serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--spellbound-text-soft);
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-celestial__noise,
+    .spellbound-celestial__bands,
+    .spellbound-celestial__glow,
+    .spellbound-celestial__stars::after {
+      animation: none;
+    }
+    .spellbound-celestial__panel {
+      transition: none;
+    }
+    .spellbound-celestial-kindred__image,
+    .spellbound-celestial-kindred__media::after {
+      transition: none;
+    }
+    .spellbound-celestial-kindred__card:hover .spellbound-celestial-kindred__image {
+      transform: none;
+    }
   }
 </style>
 
 <section class="spellbound-celestial spellbound-celestial--{{ planet_name }}" data-planet="{{ planet_name }}">
   <span class="spellbound-celestial__section-label">Celestial Body</span>
 
+  <div class="spellbound-celestial__stars" aria-hidden="true"></div>
+
   {%- comment -%} Moons {%- endcomment -%}
   {%- case planet_name -%}
     {%- when 'earth' -%}
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--1"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--moon"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Moon</p>
       </div>
@@ -564,12 +886,12 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--1"></div>
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--2"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--deimos"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Deimos</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--phoebos"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Phobos</p>
       </div>
@@ -579,17 +901,17 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--2"></div>
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--io"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Io</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--europa"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Europa</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--ganymede"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Ganymede</p>
       </div>
@@ -599,17 +921,17 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--2"></div>
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--titan"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Titan</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--dione"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Dione</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--enceladus"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Enceladus</p>
       </div>
@@ -619,17 +941,17 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--2"></div>
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--miranda"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Miranda</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--ariel"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Ariel</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--umbriel"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Umbriel</p>
       </div>
@@ -639,40 +961,67 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--2"></div>
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--triton"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Triton</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--proteus"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Proteus</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
-        <div class="spellbound-celestial__moon-sphere spellbound-celestial__moon-sphere--nereid"></div>
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
         <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Nereid</p>
       </div>
+
+    {%- when 'pluto' -%}
+      <div class="spellbound-celestial__orbit spellbound-celestial__orbit--1"></div>
+      <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
+        <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
+        <p class="spellbound-celestial__moon-label">Moon</p>
+        <p class="spellbound-celestial__moon-name">Charon</p>
+      </div>
   {%- endcase -%}
 
-  <!-- Planet sphere -->
-  <div class="spellbound-celestial__sphere"></div>
-  <div class="spellbound-celestial__atmosphere"></div>
+  <!-- Atmospheric glow halo (breathing pulse) -->
+  <div class="spellbound-celestial__glow" aria-hidden="true"></div>
+
+  <!-- Planet sphere: gradients + bands + noise + terminator, all self-contained -->
+  <div class="spellbound-celestial__sphere" aria-hidden="true">
+    <div class="spellbound-celestial__bands"></div>
+    <div class="spellbound-celestial__noise"></div>
+    <div class="spellbound-celestial__shade"></div>
+  </div>
+  <div class="spellbound-celestial__ring" aria-hidden="true"></div>
   <div class="spellbound-celestial__horizon"></div>
 
   <!-- Planet info overlay -->
-  <div class="spellbound-celestial__info">
-    <h3 class="spellbound-celestial__type">{{ planet_type }}</h3>
+  <div class="spellbound-celestial__info" data-spellbound-reveal-group>
+    <p class="spellbound-celestial__type">{{ planet_type }}</p>
     <h2 class="spellbound-celestial__name">{{ planet_display }}</h2>
     <p class="spellbound-celestial__desc">{{ planet_desc }}</p>
-    <button class="spellbound-celestial__read-more" type="button">
+    <button
+      class="spellbound-celestial__read-more"
+      type="button"
+      aria-expanded="false"
+      aria-controls="{{ panel_id }}"
+    >
       Read More
     </button>
   </div>
 
-  <!-- Read More panel -->
-  <div class="spellbound-celestial__panel">
-    <button class="spellbound-celestial__panel-close" type="button" aria-label="Close">&times;</button>
+  <!-- Facts panel -->
+  <div
+    class="spellbound-celestial__panel"
+    id="{{ panel_id }}"
+    role="dialog"
+    aria-label="{{ planet_display }} facts"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <button class="spellbound-celestial__panel-close" type="button" aria-label="Close planet facts">&times;</button>
     <h2>{{ planet_display }}</h2>
     {%- case planet_name -%}
       {%- when 'mercury' -%}
@@ -749,8 +1098,73 @@
         <p>The moons are Charon, Hydra, Nix, Kerberos and Styx.</p>
     {%- endcase -%}
   </div>
-  <div class="spellbound-celestial__backdrop" onclick="document.querySelector('.spellbound-celestial__panel').classList.remove('is-open')"></div>
+  <div class="spellbound-celestial__backdrop" hidden></div>
 </section>
+
+{%- comment -%}
+  Kindred products: up to 4 other products sharing the same custom.planet
+  alignment (case-insensitive, list-metafield aware on both sides).
+  NOTE: Liquid for-loops cap at 50 iterations, so only the first 50
+  products of collections['all'] are scanned.
+{%- endcomment -%}
+{%- assign kindred_count = 0 -%}
+{%- capture kindred_cards -%}
+  {%- for kindred_product in collections['all'].products limit: 50 -%}
+    {%- if kindred_count >= 4 -%}{%- break -%}{%- endif -%}
+    {%- unless kindred_product.id == current_product.id -%}
+      {%- capture kindred_planet_raw -%}{%- render 'spellbound-metafield-value', value: kindred_product.metafields.custom.planet -%}{%- endcapture -%}
+      {%- assign kindred_planet_values = kindred_planet_raw | downcase | split: ',' -%}
+      {%- assign kindred_match = false -%}
+      {%- for kindred_planet_value in kindred_planet_values -%}
+        {%- assign kindred_planet_clean = kindred_planet_value | strip -%}
+        {%- if kindred_planet_clean == planet_name -%}
+          {%- assign kindred_match = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if kindred_match -%}
+        {%- assign kindred_count = kindred_count | plus: 1 -%}
+        <a href="{{ kindred_product.url }}" class="spellbound-celestial-kindred__card">
+          <div class="spellbound-celestial-kindred__media">
+            {%- if kindred_product.featured_image -%}
+              <img
+                src="{{ kindred_product.featured_image | image_url: width: 600 }}"
+                srcset="{{ kindred_product.featured_image | image_url: width: 300 }} 300w, {{ kindred_product.featured_image | image_url: width: 400 }} 400w, {{ kindred_product.featured_image | image_url: width: 600 }} 600w, {{ kindred_product.featured_image | image_url: width: 800 }} 800w"
+                sizes="(min-width: 990px) 25vw, 50vw"
+                alt="{{ kindred_product.featured_image.alt | default: kindred_product.title | escape }}"
+                class="spellbound-celestial-kindred__image"
+                loading="lazy"
+                width="{{ kindred_product.featured_image.width }}"
+                height="{{ kindred_product.featured_image.height }}"
+              >
+            {%- endif -%}
+            <div class="spellbound-celestial-kindred__badges">
+              {% render 'spellbound-badges', product: kindred_product %}
+            </div>
+          </div>
+          <h3 class="spellbound-celestial-kindred__card-title">{{ kindred_product.title | escape }}</h3>
+          <p class="spellbound-celestial-kindred__price">{{ kindred_product.price | money }}</p>
+        </a>
+      {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+<div class="spellbound-celestial-kindred">
+  <div class="spellbound-celestial-kindred__inner">
+    <header data-spellbound-reveal>
+      <p class="spellbound-celestial-kindred__eyebrow">Kindred Alignment</p>
+      <h2 class="spellbound-celestial-kindred__title">More under {{ planet_display | escape }}</h2>
+    </header>
+    {%- if kindred_count > 0 -%}
+      <div class="spellbound-celestial-kindred__grid" data-spellbound-reveal-group>
+        {{ kindred_cards }}
+      </div>
+    {%- else -%}
+      <p class="spellbound-celestial-kindred__empty" data-spellbound-reveal>This piece stands alone beneath {{ planet_display | escape }} tonight &mdash; new arrivals weekly.</p>
+    {%- endif -%}
+  </div>
+</div>
 
 <script src="{{ 'spellbound-celestial-body.js' | asset_url }}" defer></script>
 

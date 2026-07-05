@@ -1,12 +1,14 @@
 {% comment %}
-  Spellbound Product Lore - Celestial Correspondence with Planetary Pairs products
+  Spellbound Product Lore - Celestial Correspondence with "Pairs Well With" cross-sell.
+  Renders when the product has a planet OR an element metafield.
+  Cross-sell matches on shared planet (or shared element when no planet present).
 {% endcomment %}
 
 <style>
   .spellbound-lore {
     padding: 10rem 1.5rem;
-    background: linear-gradient(to bottom, #050505, #000000);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: linear-gradient(to bottom, var(--spellbound-bg), #000000);
+    border-bottom: 1px solid var(--spellbound-border);
     overflow: hidden;
   }
   @media (min-width: 1024px) {
@@ -24,9 +26,11 @@
     .spellbound-lore__inner { grid-template-columns: 1fr 1fr; }
   }
   .spellbound-lore__label {
-    color: #f59e0b;
-    font-size: 10px;
-    letter-spacing: 0.6em;
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    color: var(--spellbound-gold);
+    font-size: 11px;
+    letter-spacing: 0.5em;
     text-transform: uppercase;
     margin-bottom: 2.5rem;
     display: block;
@@ -41,59 +45,69 @@
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid var(--spellbound-gold-deep);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255,255,255,0.4);
+    color: var(--spellbound-gold);
     flex-shrink: 0;
+    box-shadow: 0 0 40px var(--spellbound-violet-glow);
   }
-  .spellbound-lore__planet-icon svg { width: 40px; height: 40px; }
+  .spellbound-lore__planet-icon svg { width: 28px; height: 28px; }
   .spellbound-lore__heading {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
     font-size: clamp(2.5rem, 4vw, 5rem);
-    color: #ffffff;
+    color: var(--spellbound-text);
     line-height: 1;
   }
   .spellbound-lore__heading em {
     font-family: var(--font-accent--family);
     font-style: italic;
+    color: var(--spellbound-gold-bright);
   }
   .spellbound-lore__description {
-    color: rgba(255,255,255,0.5);
+    color: var(--spellbound-text-soft);
     font-size: 1.125rem;
     line-height: 1.8;
     max-width: 32rem;
     margin-bottom: 3rem;
   }
   .spellbound-lore__explore {
-    font-size: 10px;
-    letter-spacing: 0.4em;
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: var(--spellbound-gold);
+    border-bottom: 1px solid var(--spellbound-gold-deep);
     padding-bottom: 0.5rem;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, border-color 0.3s ease;
   }
-  .spellbound-lore__explore:hover { color: #ffffff; }
+  .spellbound-lore__explore:hover {
+    color: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+  }
 
-  /* Planetary Pairs sidebar */
+  /* Pairs Well With sidebar */
   .spellbound-lore__pairs {
-    background: rgba(255,255,255,0.05);
+    background: var(--spellbound-surface);
     padding: 2.5rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(4px);
+    border: 1px solid var(--spellbound-border);
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
   }
   .spellbound-lore__pairs-title {
-    font-size: 10px;
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.28em;
+    color: var(--spellbound-gold);
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--spellbound-border);
   }
   .spellbound-lore__pairs-grid {
     display: grid;
@@ -105,46 +119,54 @@
     display: block;
   }
   .spellbound-lore__pair-card:hover .spellbound-lore__pair-title {
-    color: #fde68a;
+    color: var(--spellbound-gold-bright);
   }
   .spellbound-lore__pair-img {
     aspect-ratio: 1;
-    background: #000;
+    background: var(--spellbound-surface-2);
     overflow: hidden;
     margin-bottom: 1rem;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid var(--spellbound-border);
+    border-radius: 6px;
   }
   .spellbound-lore__pair-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%);
-    transition: filter 0.7s ease;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .spellbound-lore__pair-card:hover .spellbound-lore__pair-img img {
-    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+  .spellbound-lore__pair-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.5rem;
   }
   .spellbound-lore__pair-title {
-    color: #ffffff;
+    color: var(--spellbound-text);
     font-family: var(--font-heading--family);
-    font-size: 0.875rem;
+    font-size: 1.0625rem;
+    line-height: 1.2;
     transition: color 0.3s ease;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
   }
   .spellbound-lore__pair-price {
-    font-size: 9px;
-    color: rgba(255,255,255,0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+    font-family: var(--font-body--family);
+    font-size: 0.8125rem;
+    color: var(--spellbound-text-soft);
+    letter-spacing: 0.05em;
   }
   .spellbound-lore__pairs-empty {
     grid-column: 1 / -1;
     text-align: center;
     padding: 3rem 0;
-    color: rgba(255,255,255,0.15);
-    font-size: 10px;
+    color: var(--spellbound-text-faint);
+    font-family: var(--font-body--family);
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.28em;
   }
 </style>
 
@@ -170,66 +192,204 @@
   {%- capture planet_raw -%}{%- render 'spellbound-metafield-value', value: current_product.metafields.custom.planet -%}{%- endcapture -%}
   {%- assign planet_clean = planet_raw | strip -%}
   {%- if planet_clean != blank -%}
-    {%- assign planet_values = planet_clean | split: ', ' -%}
+    {%- assign planet_values = planet_clean | split: ',' -%}
   {%- endif -%}
 {%- endif -%}
 
-{%- capture element_clean -%}{%- render 'spellbound-metafield-value', value: current_product.metafields.custom.element -%}{%- endcapture -%}
-{%- assign element_clean = element_clean | strip -%}
+{%- comment -%} Handle element similarly so we can match on it when no planet is present {%- endcomment -%}
+{%- assign element_values = current_product.metafields.custom.element.value -%}
+{%- assign element_clean = '' -%}
+{%- if element_values.size > 0 -%}
+  {%- assign element_names = '' -%}
+  {%- for ev in element_values -%}
+    {%- assign ev_stripped = ev | strip -%}
+    {%- if ev_stripped != blank -%}
+      {%- if element_names == '' -%}
+        {%- assign element_names = ev_stripped -%}
+      {%- else -%}
+        {%- assign element_names = element_names | append: ', ' | append: ev_stripped -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign element_clean = element_names -%}
+{%- else -%}
+  {%- capture element_raw -%}{%- render 'spellbound-metafield-value', value: current_product.metafields.custom.element -%}{%- endcapture -%}
+  {%- assign element_clean = element_raw | strip -%}
+  {%- if element_clean != blank -%}
+    {%- assign element_values = element_clean | split: ',' -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- comment -%} Decide match mode: planet takes precedence; fall back to element {%- endcomment -%}
+{%- assign match_mode = '' -%}
+{%- if planet_clean != blank -%}
+  {%- assign match_mode = 'planet' -%}
+  {%- assign match_values = planet_values -%}
+{%- elsif element_clean != blank -%}
+  {%- assign match_mode = 'element' -%}
+  {%- assign match_values = element_values -%}
+{%- endif -%}
+
+{%- comment -%}
+  Derived display values — cap long planet/element run-on lists so headings,
+  descriptions and the explore link stay readable (user feedback: 10 planets
+  made the heading enormous). 1-2 values render in full; 3+ get shortened.
+{%- endcomment -%}
+{%- assign planet_arr = planet_clean | split: ',' -%}
+{%- assign planet_count = planet_arr.size -%}
+{%- assign planet_first = planet_arr[0] | strip -%}
+{%- assign planet_second = planet_arr[1] | strip -%}
+{%- assign planet_third = planet_arr[2] | strip -%}
+{%- assign planet_extra = planet_count | minus: 1 -%}
+{%- if planet_count > 3 -%}
+  {%- capture planet_display -%}{{ planet_first }}, {{ planet_second }}, {{ planet_third }} and more{%- endcapture -%}
+{%- elsif planet_count == 3 -%}
+  {%- capture planet_display -%}{{ planet_first }}, {{ planet_second }} &amp; {{ planet_third }}{%- endcapture -%}
+{%- elsif planet_count == 2 -%}
+  {%- capture planet_display -%}{{ planet_first }} &amp; {{ planet_second }}{%- endcapture -%}
+{%- else -%}
+  {%- assign planet_display = planet_first -%}
+{%- endif -%}
+{%- if planet_count >= 3 -%}
+  {%- assign planet_short = planet_first -%}
+{%- elsif planet_count == 2 -%}
+  {%- capture planet_short -%}{{ planet_first }} &amp; {{ planet_second }}{%- endcapture -%}
+{%- else -%}
+  {%- assign planet_short = planet_first -%}
+{%- endif -%}
+
+{%- assign element_arr = element_clean | split: ',' -%}
+{%- assign element_count = element_arr.size -%}
+{%- assign element_first = element_arr[0] | strip -%}
+{%- assign element_second = element_arr[1] | strip -%}
+{%- assign element_third = element_arr[2] | strip -%}
+{%- assign element_extra = element_count | minus: 1 -%}
+{%- if element_count > 3 -%}
+  {%- capture element_display -%}{{ element_first }}, {{ element_second }}, {{ element_third }} and more{%- endcapture -%}
+{%- elsif element_count == 3 -%}
+  {%- capture element_display -%}{{ element_first }}, {{ element_second }} &amp; {{ element_third }}{%- endcapture -%}
+{%- elsif element_count == 2 -%}
+  {%- capture element_display -%}{{ element_first }} &amp; {{ element_second }}{%- endcapture -%}
+{%- else -%}
+  {%- assign element_display = element_first -%}
+{%- endif -%}
+{%- if element_count >= 3 -%}
+  {%- assign element_short = element_first -%}
+{%- elsif element_count == 2 -%}
+  {%- capture element_short -%}{{ element_first }} &amp; {{ element_second }}{%- endcapture -%}
+{%- else -%}
+  {%- assign element_short = element_first -%}
+{%- endif -%}
+
+{%- assign pairs_limit = 3 -%}
 
 {% if planet_clean != blank or element_clean != blank %}
 <section class="spellbound-lore">
   <div class="spellbound-lore__inner">
-    <!-- Left: Planet info -->
-    <div>
+    <!-- Left: Celestial info -->
+    <div data-spellbound-reveal>
       <span class="spellbound-lore__label">Celestial Correspondence</span>
 
-      {% if planet_clean != blank %}
-        <div class="spellbound-lore__planet-header">
-          <div class="spellbound-lore__planet-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-          </div>
-          <h2 class="spellbound-lore__heading">Under <em>{{ planet_clean }}</em></h2>
+      <div class="spellbound-lore__planet-header">
+        <div class="spellbound-lore__planet-icon">
+          {%- comment -%} Astronomical symbol of the first planet, drawn in gold inside the ring {%- endcomment -%}
+          {%- assign planet_symbol = planet_first | downcase -%}
+          {%- case planet_symbol -%}
+            {%- when 'sun' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/></svg>
+            {%- when 'moon' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            {%- when 'mercury' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.75 3.25a3.25 3.25 0 0 0 6.5 0"/><circle cx="12" cy="10.5" r="3.75"/><path d="M12 14.25V21"/><path d="M9 17.75h6"/></svg>
+            {%- when 'venus' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8.75" r="5"/><path d="M12 13.75V21"/><path d="M8.75 17.75h6.5"/></svg>
+            {%- when 'mars' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10.5" cy="13.5" r="5.5"/><path d="M14.5 9.5 20 4"/><path d="M15 4h5v5"/></svg>
+            {%- when 'jupiter' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4.5a5.5 5.5 0 0 1 5.5 5.5c0 3.2-2.6 6-7 6"/><path d="M4.5 16H20"/><path d="M16.5 8.5V21"/></svg>
+            {%- when 'saturn' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3v11.5"/><path d="M6 6.5h6"/><path d="M9 12.5c3.8-2.6 7.3-.6 7.3 2.9 0 2.7-1.9 4.8-4.3 6.1"/></svg>
+            {%- when 'uranus' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="16.5" r="4.25"/><circle cx="12" cy="16.5" r="1" fill="currentColor" stroke="none"/><path d="M12 12.25V3"/><path d="M9.5 5.5 12 3l2.5 2.5"/></svg>
+            {%- when 'neptune' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6.5 4v3.25a5.5 5.5 0 0 0 11 0V4"/><path d="M12 3v18"/><path d="M8.5 17.5h7"/></svg>
+            {%- when 'pluto' -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.5 3v18"/><path d="M8.5 21h6.5"/><path d="M8.5 3h3.75a4.25 4.25 0 0 1 0 8.5H8.5"/></svg>
+            {%- else -%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg>
+          {%- endcase -%}
         </div>
-      {% endif %}
+        {% if planet_clean != blank %}
+          {%- if planet_count >= 3 -%}
+            <h2 class="spellbound-lore__heading">Under {{ planet_first }} <em>&amp; {{ planet_extra }} more skies</em></h2>
+          {%- elsif planet_count == 2 -%}
+            <h2 class="spellbound-lore__heading">Under <em>{{ planet_first }} &amp; {{ planet_second }}</em></h2>
+          {%- else -%}
+            <h2 class="spellbound-lore__heading">Under <em>{{ planet_first }}</em></h2>
+          {%- endif -%}
+        {% else %}
+          {%- if element_count >= 3 -%}
+            <h2 class="spellbound-lore__heading">Ruled by {{ element_first }} <em>&amp; {{ element_extra }} more</em></h2>
+          {%- elsif element_count == 2 -%}
+            <h2 class="spellbound-lore__heading">Ruled by <em>{{ element_first }} &amp; {{ element_second }}</em></h2>
+          {%- else -%}
+            <h2 class="spellbound-lore__heading">Ruled by <em>{{ element_first }}</em></h2>
+          {%- endif -%}
+        {% endif %}
+      </div>
 
       {% if section.settings.lore_description != blank %}
         <p class="spellbound-lore__description">{{ section.settings.lore_description }}</p>
       {% elsif planet_clean != blank %}
         <p class="spellbound-lore__description">
-          This artifact resonates with the energy of {{ planet_clean }}, channeling its celestial influence into the material plane.
-          {% if element_clean != blank %}Its {{ element_clean }} nature grounds this power in the tangible world.{% endif %}
+          This piece resonates with the energy of {{ planet_display }}, drawing its celestial influence gently into the everyday.
+          {% if element_clean != blank %}Its {{ element_display }} nature keeps that power grounded and close to hand.{% endif %}
+        </p>
+      {% else %}
+        <p class="spellbound-lore__description">
+          This piece carries the energy of {{ element_display }} — steady, elemental, and grounding, a quiet companion for your practice.
         </p>
       {% endif %}
 
-      {% if section.settings.explore_link != blank %}
+      {% if section.settings.explore_link != blank and planet_clean != blank %}
         <a href="{{ section.settings.explore_link }}" class="spellbound-lore__explore">
-          Explore All {{ planet_clean }} Artifacts
+          Explore all {{ planet_short }} pieces
+        </a>
+      {% elsif section.settings.explore_link != blank %}
+        <a href="{{ section.settings.explore_link }}" class="spellbound-lore__explore">
+          Explore all {{ element_short }} pieces
         </a>
       {% endif %}
     </div>
 
-    <!-- Right: Planetary Pairs products -->
-    <div class="spellbound-lore__pairs">
-      <h3 class="spellbound-lore__pairs-title">Planetary Pairs</h3>
+    <!-- Right: Pairs Well With products -->
+    <div class="spellbound-lore__pairs" data-spellbound-reveal>
+      <h3 class="spellbound-lore__pairs-title">Pairs Well With</h3>
       <div class="spellbound-lore__pairs-grid">
         {%- assign pairs_count = 0 -%}
 
-        {%- comment -%} Find products sharing any planet with current product {%- endcomment -%}
-        {%- if section.settings.collection != blank and planet_values.size > 0 -%}
+        {%- comment -%} Find products sharing the current planet (or element) {%- endcomment -%}
+        {%- if section.settings.collection != blank and match_values.size > 0 -%}
           {%- for related_product in collections[section.settings.collection].products -%}
             {%- if related_product.id == current_product.id -%}{%- continue -%}{%- endif -%}
-            {%- if pairs_count >= 2 -%}{%- break -%}{%- endif -%}
+            {%- if pairs_count >= pairs_limit -%}{%- break -%}{%- endif -%}
 
-            {%- assign related_planet_values = related_product.metafields.custom.planet.value -%}
+            {%- if match_mode == 'planet' -%}
+              {%- assign related_values = related_product.metafields.custom.planet.value -%}
+              {%- assign related_field = related_product.metafields.custom.planet -%}
+            {%- else -%}
+              {%- assign related_values = related_product.metafields.custom.element.value -%}
+              {%- assign related_field = related_product.metafields.custom.element -%}
+            {%- endif -%}
+
             {%- assign has_match = false -%}
 
-            {%- if related_planet_values.size > 0 -%}
-              {%- for rp in related_planet_values -%}
-                {%- assign rp_down = rp | strip | downcase -%}
-                {%- for cp in planet_values -%}
-                  {%- assign cp_down = cp | strip | downcase -%}
-                  {%- if rp_down == cp_down -%}
+            {%- if related_values.size > 0 -%}
+              {%- for rv in related_values -%}
+                {%- assign rv_down = rv | strip | downcase -%}
+                {%- for cv in match_values -%}
+                  {%- assign cv_down = cv | strip | downcase -%}
+                  {%- if rv_down == cv_down -%}
                     {%- assign has_match = true -%}
                     {%- break -%}
                   {%- endif -%}
@@ -237,11 +397,11 @@
                 {%- if has_match -%}{%- break -%}{%- endif -%}
               {%- endfor -%}
             {%- else -%}
-              {%- capture related_planet_raw -%}{%- render 'spellbound-metafield-value', value: related_product.metafields.custom.planet -%}{%- endcapture -%}
-              {%- assign related_planet_raw = related_planet_raw | strip | downcase -%}
-              {%- for cp in planet_values -%}
-                {%- assign cp_down = cp | strip | downcase -%}
-                {%- if related_planet_raw == cp_down -%}
+              {%- capture related_raw -%}{%- render 'spellbound-metafield-value', value: related_field -%}{%- endcapture -%}
+              {%- assign related_raw = related_raw | strip | downcase -%}
+              {%- for cv in match_values -%}
+                {%- assign cv_down = cv | strip | downcase -%}
+                {%- if related_raw == cv_down -%}
                   {%- assign has_match = true -%}
                   {%- break -%}
                 {%- endif -%}
@@ -261,6 +421,9 @@
                     >
                   {% endif %}
                 </div>
+                <div class="spellbound-lore__pair-badges">
+                  {% render 'spellbound-badges', product: related_product %}
+                </div>
                 <h4 class="spellbound-lore__pair-title">{{ related_product.title }}</h4>
                 <span class="spellbound-lore__pair-price">{{ related_product.price | money }}</span>
               </a>
@@ -271,7 +434,7 @@
 
         {%- if pairs_count == 0 -%}
           <div class="spellbound-lore__pairs-empty">
-            No planetary pairs discovered yet
+            No kindred pieces discovered yet
           </div>
         {%- endif -%}
       </div>
@@ -296,13 +459,13 @@
       "type": "url",
       "id": "explore_link",
       "label": "Explore collection link",
-      "info": "Link to browse more artifacts with the same planet"
+      "info": "Link to browse more pieces with the same planet or element"
     },
     {
       "type": "collection",
       "id": "collection",
-      "label": "Source collection for planetary pairs",
-      "info": "Products with the same planet metafield will appear as Planetary Pairs"
+      "label": "Source collection for pairs",
+      "info": "Products sharing this planet (or element) appear under Pairs Well With"
     }
   ],
   "presets": [

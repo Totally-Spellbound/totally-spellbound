@@ -8,7 +8,33 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "The Veil Is Thinning - Free Shipping on Orders Over $100",
+            "text": "Free UK Delivery on Orders Over £50",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "0.3em",
+            "case": "uppercase"
+          },
+          "blocks": {}
+        },
+        "announcement_clickcollect": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Free Click & Collect in Sutton-in-Ashfield",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "0.3em",
+            "case": "uppercase"
+          },
+          "blocks": {}
+        },
+        "announcement_veil": {
+          "type": "_announcement",
+          "settings": {
+            "text": "The Veil Is Thinning — New Arrivals Weekly",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -20,7 +46,9 @@
         }
       },
       "block_order": [
-        "announcement_BxgCk9"
+        "announcement_BxgCk9",
+        "announcement_clickcollect",
+        "announcement_veil"
       ],
       "name": "t:names.announcement_bar",
       "settings": {

@@ -31,6 +31,8 @@
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
     {{ 'spellbound-custom.css' | asset_url | stylesheet_tag }}
+    {{ 'spellbound-cart-drawer.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'spellbound-motion.js' | asset_url }}" defer></script>
 
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
