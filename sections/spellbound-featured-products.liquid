@@ -7,7 +7,6 @@
   .spellbound-featured {
     padding: clamp(4rem, 8vw, 7rem) 1.5rem;
     background: var(--spellbound-bg);
-    border-top: 1px solid var(--spellbound-border);
   }
   .spellbound-featured__inner {
     max-width: 100rem;
@@ -175,6 +174,7 @@
 </style>
 
 <section class="spellbound-featured">
+  {% render 'spellbound-ornament' %}
   <div class="spellbound-featured__inner">
     <div class="spellbound-featured__header" data-spellbound-reveal>
       <h2 class="spellbound-featured__title">{{ section.settings.heading | escape }}</h2>

@@ -10,8 +10,6 @@
     padding: clamp(6rem, 12vw, 11rem) 1.5rem;
     overflow: hidden;
     background: var(--spellbound-bg);
-    border-top: 1px solid var(--spellbound-border);
-    border-bottom: 1px solid var(--spellbound-border);
   }
   .spellbound-oracle__backdrop {
     position: absolute;
@@ -31,9 +29,9 @@
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(5, 5, 5, 0.92),
-      rgba(5, 5, 5, 0.55) 45%,
-      rgba(5, 5, 5, 0.92)
+      rgba(13, 11, 16, 0.92),
+      rgba(13, 11, 16, 0.55) 45%,
+      rgba(13, 11, 16, 0.92)
     );
   }
   .spellbound-oracle__content {
@@ -166,7 +164,7 @@
     display: inline-block;
     padding: 1.15rem 2.75rem;
     border-radius: 999px;
-    background: var(--spellbound-text);
+    background: var(--spellbound-gold);
     color: var(--spellbound-bg);
     font-size: 11px;
     font-weight: 700;
@@ -198,6 +196,7 @@
   data-spellbound-oracle
   data-base-url="{{ section.settings.collection_base_url | default: '/collections/all' }}"
 >
+  {% render 'spellbound-ornament' %}
   <div class="spellbound-oracle__backdrop" aria-hidden="true">
     {% if section.settings.image %}
       <img

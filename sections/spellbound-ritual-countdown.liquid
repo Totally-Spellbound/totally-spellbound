@@ -9,8 +9,6 @@
     position: relative;
     padding: clamp(5rem, 10vw, 8.5rem) 1.5rem;
     background: var(--spellbound-bg);
-    border-top: 1px solid var(--spellbound-border);
-    border-bottom: 1px solid var(--spellbound-border);
     overflow: hidden;
   }
   .spellbound-countdown__inner {
@@ -98,7 +96,7 @@
     margin-top: 3rem;
     padding: 1.15rem 2.75rem;
     border-radius: 999px;
-    background: var(--spellbound-text);
+    background: var(--spellbound-gold);
     color: var(--spellbound-bg);
     font-size: 11px;
     font-weight: 700;
@@ -159,6 +157,7 @@
 </style>
 
 <section class="spellbound-countdown" data-spellbound-countdown>
+  {% render 'spellbound-ornament' %}
   <div class="spellbound-countdown__inner">
     <div data-spellbound-reveal-group>
       {% if section.settings.label != blank %}

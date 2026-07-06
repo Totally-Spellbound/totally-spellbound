@@ -3,7 +3,7 @@
     "hero": {
       "type": "spellbound-hero",
       "settings": {
-        "image_asset": "spellbound-img-hero.jpg",
+        "image_asset": "spellbound-img-hero.webp",
         "label": "The Doors Are Open",
         "heading": "<p>Every crystal holds a <em>story</em>.</p>",
         "subheading": "Hand-picked crystals, tarot & curiosities from a real little shop in Nottinghamshire.",
@@ -186,39 +186,57 @@
       "blocks": {
         "intent_protection": {
           "type": "intention",
-          "settings": { "value": "Protection" }
+          "settings": {
+            "value": "Protection"
+          }
         },
         "intent_abundance": {
           "type": "intention",
-          "settings": { "value": "Abundance" }
+          "settings": {
+            "value": "Abundance"
+          }
         },
         "intent_love": {
           "type": "intention",
-          "settings": { "value": "Love" }
+          "settings": {
+            "value": "Love"
+          }
         },
         "intent_calm": {
           "type": "intention",
-          "settings": { "value": "Calm" }
+          "settings": {
+            "value": "Calm"
+          }
         },
         "elem_earth": {
           "type": "element",
-          "settings": { "value": "Earth" }
+          "settings": {
+            "value": "Earth"
+          }
         },
         "elem_air": {
           "type": "element",
-          "settings": { "value": "Air" }
+          "settings": {
+            "value": "Air"
+          }
         },
         "elem_fire": {
           "type": "element",
-          "settings": { "value": "Fire" }
+          "settings": {
+            "value": "Fire"
+          }
         },
         "elem_water": {
           "type": "element",
-          "settings": { "value": "Water" }
+          "settings": {
+            "value": "Water"
+          }
         },
         "elem_spirit": {
           "type": "element",
-          "settings": { "value": "Spirit" }
+          "settings": {
+            "value": "Spirit"
+          }
         }
       },
       "block_order": [

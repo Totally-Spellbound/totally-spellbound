@@ -9,7 +9,6 @@
     position: relative;
     padding: 5rem 1.5rem;
     background: var(--spellbound-bg);
-    border-top: 1px solid var(--spellbound-border);
   }
   .spellbound-discovery__atmosphere {
     position: absolute;
@@ -32,8 +31,8 @@
     background: linear-gradient(
       to bottom,
       var(--spellbound-bg) 0%,
-      rgba(5, 5, 5, 0) 32%,
-      rgba(5, 5, 5, 0) 68%,
+      rgba(13, 11, 16, 0) 32%,
+      rgba(13, 11, 16, 0) 68%,
       var(--spellbound-bg) 100%
     );
   }
@@ -175,9 +174,9 @@
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(5, 5, 5, 0.92) 0%,
-      rgba(5, 5, 5, 0.5) 35%,
-      rgba(5, 5, 5, 0) 65%
+      rgba(13, 11, 16, 0.92) 0%,
+      rgba(13, 11, 16, 0.5) 35%,
+      rgba(13, 11, 16, 0) 65%
     );
     pointer-events: none;
   }
@@ -302,6 +301,7 @@
 </style>
 
 <section class="spellbound-discovery">
+  {% render 'spellbound-ornament' %}
   {% if section.settings.atmosphere_asset != blank %}
     <div class="spellbound-discovery__atmosphere" aria-hidden="true">
       <img
