@@ -253,7 +253,7 @@
 .cart-drawer__dialog .cart-totals__total-label {
   font-family: var(--font-body--family, sans-serif);
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.3em;
   color: var(--spellbound-gold);
@@ -283,7 +283,7 @@
 .cart-drawer__dialog .cart-discount__label {
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--spellbound-text-soft);
   transition: color 0.25s ease;
@@ -323,7 +323,7 @@
   border-radius: 100px;
   text-transform: uppercase;
   font-family: var(--font-body--family, sans-serif);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.3em;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;

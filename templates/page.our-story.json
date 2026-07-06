@@ -18,8 +18,8 @@
           "settings": {
             "text": "{{ closest.page.content }}",
             "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
+            "max_width": "normal",
+            "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-primary--family)",
             "font_size": "",
@@ -39,7 +39,9 @@
           "blocks": {}
         }
       },
-      "block_order": ["content"],
+      "block_order": [
+        "content"
+      ],
       "settings": {
         "content_direction": "column",
         "gap": 32,
@@ -72,12 +74,34 @@
           }
         }
       },
-      "block_order": ["visit", "browse"],
+      "block_order": [
+        "visit",
+        "browse"
+      ],
       "settings": {
         "heading": "Come and say hello",
         "subheading": "The kettle's usually on."
       }
+    },
+    "handmade": {
+      "type": "spellbound-editorial",
+      "settings": {
+        "label": "Made By Hand",
+        "heading": "Engraved, printed & finished in the shop",
+        "body": "<p>Alongside the crystals and curiosities we source, we design and make our own pieces right here — laser-engraved altar boards, 3D-printed moon shelves, trinket dishes and keepsakes you won’t find anywhere else. If you’re after something a little different, this is where the magic is literally made.</p>",
+        "quote": "If you can dream it up, we can probably engrave it.",
+        "cta_label": "Shop Handmade",
+        "cta_link": "/collections/handmade",
+        "image_asset": "spellbound-img-cat-handmade.jpg",
+        "address_text": "",
+        "hours_text": ""
+      }
     }
   },
-  "order": ["hero", "main", "cards"]
+  "order": [
+    "hero",
+    "main",
+    "handmade",
+    "cards"
+  ]
 }

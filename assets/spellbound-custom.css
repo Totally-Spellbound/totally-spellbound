@@ -51,6 +51,7 @@
   --spellbound-gold-glow: rgba(212, 175, 55, 0.18);
   --spellbound-purple: #4b1e4e;
   --spellbound-purple-deep: #2a112b;
+  --spellbound-panel: #18131d;
   --spellbound-violet-glow: rgba(123, 63, 130, 0.22);
 
   /* Brand typography — override Horizon font variables (picker falls back to Cormorant) */
@@ -193,31 +194,47 @@ a.menu-list__link.menu-list__link {
 }
 
 /* Ornament divider (snippets/spellbound-ornament.liquid) — replaces old hairline
-   section borders with a brand flourish. Sits above absolute backdrops. */
+   section borders with a brand flourish. Absolutely positioned at the section's
+   top edge (host section must be position: relative) so it reads as a divider
+   BETWEEN sections rather than a header inside the content. */
 .spellbound-ornament {
-  position: relative;
+  position: absolute;
+  top: clamp(1.25rem, 2.5vw, 2rem);
+  left: 0;
+  right: 0;
   z-index: 1;
   display: flex;
   justify-content: center;
   color: var(--spellbound-gold);
-  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+  pointer-events: none;
 }
 .spellbound-ornament svg {
   width: min(340px, 70vw);
   height: auto;
 }
 
-/* Heading accent words: <em> inside display headings renders as lowercase
-   Cormorant Garamond italic in gold (Cinzel Decorative is caps-only), so the
-   contrast reads as intentional — same pattern across hero, oracle, editorial. */
+/* Heading accent words: <em> in display headings keeps the heading's Cinzel
+   caps (no lowercase italic switch) and is emphasised with gold instead. */
 h1 em,
 h2 em,
 h3 em,
 .spellbound-hero__heading em,
 .spellbound-oracle__question em {
-  font-family: var(--font-accent--family);
-  font-style: italic;
+  font-family: inherit;
+  font-style: normal;
   color: var(--spellbound-gold-bright);
+}
+
+/* Account popover (Shopify <shopify-account> shadow component): style the
+   exposed dialog part to match the cart drawer panel language. Fonts inherit
+   through the shadow boundary. */
+shopify-account::part(dialog) {
+  background: var(--spellbound-surface);
+  color: var(--spellbound-text);
+  border: 1px solid var(--spellbound-gold-deep);
+  border-radius: 12px;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.65);
+  font-family: var(--font-body--family);
 }
 
 /* Gradient overlay for images */
@@ -230,7 +247,7 @@ h3 em,
   display: inline-flex;
   align-items: center;
   font-family: var(--font-body--family);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   background: rgba(13, 11, 16, 0.82);
   backdrop-filter: blur(8px);
@@ -278,21 +295,33 @@ h3 em,
 /* Horizon component overrides */
 /* ========================= */
 
-/* Quick-add button: cream pill so the cart icon (painted with the scheme's
-   dark button-text variable) is always visible over product photos */
+/* Quick-add button: solid gold pill with cauldron icon + "Add" label.
+   !important beats Horizon's .button variable rules that were blanking the
+   background and leaving an invisible outline pill. */
 .quick-add .quick-add__button,
 quick-add-component .quick-add__button {
-  border: 1px solid var(--spellbound-gold);
-  background-color: var(--spellbound-gold);
-  color: #0d0b10;
   --color-primary-button-text: #0d0b10;
+  --icon-stroke-width: 1.4px;
+  border: 1px solid var(--spellbound-gold) !important;
+  background: var(--spellbound-gold) !important;
+  color: #0d0b10 !important;
+  border-radius: 100px;
+  font-family: var(--font-body--family);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 .quick-add .quick-add__button:hover,
 quick-add-component .quick-add__button:hover {
-  background-color: var(--spellbound-gold-bright);
-  border-color: var(--spellbound-gold-bright);
-  color: #0d0b10;
+  background: var(--spellbound-gold-bright) !important;
+  border-color: var(--spellbound-gold-bright) !important;
+  color: #0d0b10 !important;
+  box-shadow: 0 6px 24px var(--spellbound-gold-glow);
+}
+.quick-add__button .add-to-cart-text {
+  background: transparent !important;
 }
 
 /* ============ Header banner logo ============
@@ -370,20 +399,46 @@ quick-add-component .quick-add__button:hover {
   }
 }
 
-/* Product card text hierarchy: Cormorant title, quiet gold price */
+/* Unified product card (native Horizon grid = homepage featured cards):
+   rounded bordered gallery, fixed 4:5 cover imagery, Cinzel title, cream price. */
+product-card .card-gallery {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--spellbound-border);
+  aspect-ratio: 4 / 5;
+  background: var(--spellbound-surface);
+}
+product-card .card-gallery :is(slideshow-component, slideshow-container, slideshow-slide, slideshow-slides, .product-media-container, .product-media) {
+  height: 100%;
+}
+product-card .card-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Collection/search grid density: 5 per row by default, 6 when zoomed out */
+@media screen and (min-width: 990px) {
+  .main-collection-grid:not([product-grid-view='zoom-out']) {
+    --product-grid-columns-desktop: repeat(5, 1fr) !important;
+  }
+  .main-collection-grid[product-grid-view='zoom-out'] {
+    --product-grid-columns-desktop: repeat(6, 1fr) !important;
+  }
+}
 product-card a p,
 .product-card__link p {
   font-family: var(--font-heading--family);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   line-height: 1.35;
 }
 product-card .price,
 product-card [class*='price'] {
   font-family: var(--font-body--family);
-  font-size: 0.75rem;
+  font-size: 1.0625rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--spellbound-gold);
+  letter-spacing: 0.02em;
+  color: var(--spellbound-text);
 }
 
 /* Facet pill turns gold when it holds active selections */
@@ -395,7 +450,7 @@ product-card [class*='price'] {
 
 /* "More" overflow panel: contained dark card with row-style facet groups */
 .facets__overflow-list {
-  background: var(--spellbound-surface-2);
+  background: var(--spellbound-panel);
   border: 1px solid var(--spellbound-border);
   border-radius: 12px;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
@@ -460,10 +515,6 @@ product-card a p {
 product-card a:hover p {
   color: var(--spellbound-gold-bright);
 }
-product-card .price,
-product-card [class*='price'] {
-  color: var(--spellbound-text-soft);
-}
 
 /* ============================================== */
 /* Collection filters — unify Horizon facets with  */
@@ -491,7 +542,7 @@ product-card [class*='price'] {
   padding: 8px 16px;
   background: transparent;
   font-family: var(--font-body--family);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -521,15 +572,19 @@ details[open] > .facets__summary,
   font-weight: 600;
 }
 
-/* Dropdown panels as dark surface cards */
+/* Horizon puts .facets__panel on the always-visible <details> wrapper — keep it
+   invisible; the card treatment belongs on the floating dropdown content only. */
 .facets__panel {
-  background: var(--spellbound-surface-2);
-  border: 1px solid var(--spellbound-border);
-  border-radius: 12px;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
-  color: var(--spellbound-text);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 .facets__panel-content {
+  background: var(--spellbound-panel);
+  border: 1px solid var(--spellbound-border);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
   color: var(--spellbound-text-soft);
 }
 .facets__panel label,
@@ -546,7 +601,7 @@ details[open] > .facets__summary,
 
 /* Sort popover (uses popover colour scheme by default — force dark) */
 .sorting-filter__options {
-  background: var(--spellbound-surface-2) !important;
+  background: var(--spellbound-panel) !important;
   border: 1px solid var(--spellbound-border);
   border-radius: 12px;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
@@ -567,7 +622,7 @@ details[open] > .facets__summary,
   background: var(--spellbound-gold-glow);
   color: var(--spellbound-gold-bright);
   padding: 6px 12px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -579,7 +634,7 @@ details[open] > .facets__summary,
 .facets__clear,
 .facets__clear-all-link {
   color: var(--spellbound-gold);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -600,10 +655,60 @@ details[open] > .facets__summary,
   color: var(--spellbound-text);
 }
 
-/* Mobile facets drawer */
+/* Facets drawer (mobile + "More"): flat dark panel, groups as hairline-separated
+   accordion rows — no card-inside-card, no pill summaries. */
+dialog.facets--drawer {
+  background: var(--spellbound-panel);
+  color: var(--spellbound-text-soft);
+  border-left: 1px solid var(--spellbound-border);
+}
+.facets-drawer__title {
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  letter-spacing: 0.06em;
+  color: var(--spellbound-gold);
+}
+.facets-drawer__close {
+  color: var(--spellbound-text-soft);
+}
+.facets--drawer details.facets__panel {
+  border: none;
+  border-bottom: 1px solid var(--spellbound-border);
+  border-radius: 0;
+  background: transparent;
+  margin: 0;
+}
+.facets--drawer .facets__summary {
+  width: 100%;
+  justify-content: space-between;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 1.1rem 0.25rem;
+  color: var(--spellbound-text);
+}
+.facets--drawer .facets__summary:hover {
+  color: var(--spellbound-gold-bright);
+  border: none;
+}
+.facets--drawer details[open] > .facets__summary {
+  background: transparent;
+  border: none;
+  color: var(--spellbound-gold-bright);
+}
+.facets--drawer .facets__panel-content {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 0.25rem 1.25rem;
+}
+.facets--drawer .facets__panel label {
+  font-size: 1.0625rem;
+}
 .facets__drawer-actions {
   border-top: 1px solid var(--spellbound-border);
-  background: var(--spellbound-surface);
+  background: var(--spellbound-panel);
 }
 .facets__see-results {
   background: var(--spellbound-gold);
@@ -612,7 +717,7 @@ details[open] > .facets__summary,
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 12px;
 }
 .facets__see-results:hover {
   background: var(--spellbound-gold-bright);
@@ -624,12 +729,30 @@ details[open] > .facets__summary,
 /* ========================= */
 
 /* Product page price */
+.product-information .price,
 .product-information .price .money,
 .product-information .price__current .money {
   font-family: var(--font-heading--family);
-  font-weight: 300;
-  font-size: 1.875rem;
+  font-weight: 400;
+  font-size: 2.125rem;
   letter-spacing: 0.05em;
+  color: var(--spellbound-text);
+}
+
+/* Empty enrichment sections (no metafields → section renders only its <style>):
+   collapse the wrapper padding so they leave no blank gap. */
+.spellbound-section:not(:has(> :not(style):not(script):not(link))) {
+  padding: 0;
+}
+
+/* Sticky add-to-cart bar must paint above the sections that follow the main
+   product section (its wrapper is isolated, so it needs explicit stacking). */
+.shopify-section:has(> .product-information) {
+  z-index: 2;
+}
+.sticky-add-to-cart,
+.sticky-add-to-cart__bar {
+  z-index: 20;
 }
 
 /* Product page Add to Cauldron button */
@@ -641,7 +764,7 @@ details[open] > .facets__summary,
   font-weight: 700;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 12px;
   padding: 1.5rem 2rem;
   border: none;
   overflow: hidden;
@@ -655,11 +778,12 @@ details[open] > .facets__summary,
 }
 
 /* Product description: readable, no low-contrast italic */
-.product-information .rte p {
+.product-information .rte p,
+.product-information .rte li {
   font-style: normal;
   color: var(--spellbound-text-soft);
-  font-size: 0.9375rem;
-  line-height: 1.7;
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
 
 /* Square Wishlist app button styling (scoped to the app's own classes only) */
@@ -672,7 +796,7 @@ details[open] > .facets__summary,
   padding: 1.25rem !important;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -714,6 +838,12 @@ details[open] > .facets__summary,
   padding: 2rem 0;
 }
 
+/* Footer wrapper: no section padding — the footer owns its own spacing,
+   and wrapper padding reads as a stray grey band below the page. */
+.shopify-section:has(> .spellbound-footer) {
+  padding: 0 !important;
+}
+
 @media screen and (min-width: 750px) {
   .spellbound-section {
     padding: 3rem 0;
@@ -732,4 +862,51 @@ details[open] > .facets__summary,
   .spellbound-section--homepage {
     padding: 8rem 0;
   }
+}
+
+/* ============================================== */
+/* Ornate gold CTA — 9-slice border-image frame    */
+/* (recoloured to the logo's vertical gold from    */
+/* the MIT-licensed warcraftcn button texture)     */
+/* ============================================== */
+.spellbound-hero__cta--primary,
+.spellbound-oracle__cta,
+.spellbound-countdown__cta,
+.spellbound-extras__fallback-btn:not(.spellbound-extras__fallback-btn--ghost),
+.product-information .add-to-cart-button,
+.product-information button.add-to-cart-button,
+.spellbound-footer__form button,
+.facets__see-results {
+  border: 7px solid transparent !important;
+  border-image-source: url('spellbound-btn-gold.webp') !important;
+  border-image-slice: 16 fill !important;
+  border-image-repeat: stretch !important;
+  border-radius: 0 !important;
+  background: none !important;
+  color: var(--spellbound-gold-bright) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.3s ease;
+}
+.spellbound-hero__cta--primary:hover,
+.spellbound-oracle__cta:hover,
+.spellbound-countdown__cta:hover,
+.spellbound-extras__fallback-btn:not(.spellbound-extras__fallback-btn--ghost):hover,
+.product-information .add-to-cart-button:hover,
+.product-information button.add-to-cart-button:hover,
+.spellbound-footer__form button:hover,
+.facets__see-results:hover {
+  background: none !important;
+  color: #f8e29c !important;
+  filter: brightness(1.18);
+  box-shadow: 0 6px 26px var(--spellbound-gold-glow);
+}
+.spellbound-hero__cta--primary:active,
+.spellbound-oracle__cta:active,
+.spellbound-countdown__cta:active,
+.product-information .add-to-cart-button:active,
+.spellbound-footer__form button:active,
+.facets__see-results:active {
+  transform: scale(0.97);
+  filter: brightness(0.85);
 }

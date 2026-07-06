@@ -1,0 +1,440 @@
+{% comment %}
+  Spellbound Footer — full ecommerce footer: brand + social, explore links,
+  visit info, newsletter, policies, payment icons, copyright.
+  Brand Guidelines v1.0: Cinzel Decorative headings, Cormorant Garamond body,
+  gold on #0d0b10 with purple accents.
+{% endcomment %}
+
+<style>
+  .spellbound-footer {
+    position: relative;
+    background: linear-gradient(to bottom, var(--spellbound-bg), #08060b);
+    padding: clamp(5rem, 9vw, 7.5rem) 1.5rem 2.5rem;
+    color: var(--spellbound-text-soft);
+  }
+  .spellbound-footer__inner {
+    max-width: 100rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 750px) {
+    .spellbound-footer__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 3.5rem 2.5rem;
+    }
+  }
+  @media (min-width: 1200px) {
+    .spellbound-footer__inner {
+      grid-template-columns: 1.4fr 0.8fr 1fr 1.2fr;
+      gap: 4rem;
+    }
+  }
+  .spellbound-footer__logo {
+    display: block;
+    width: min(240px, 60vw);
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+  .spellbound-footer__blurb {
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 26rem;
+    margin: 0 0 1.75rem;
+  }
+  .spellbound-footer__social {
+    display: flex;
+    gap: 0.875rem;
+  }
+  .spellbound-footer__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--spellbound-gold-deep);
+    color: var(--spellbound-gold);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .spellbound-footer__social a:hover {
+    background: var(--spellbound-gold);
+    border-color: var(--spellbound-gold);
+    color: var(--spellbound-bg);
+  }
+  .spellbound-footer__social svg {
+    width: 18px;
+    height: 18px;
+  }
+  .spellbound-footer__heading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.125rem;
+    letter-spacing: 0.08em;
+    color: var(--spellbound-gold);
+    margin: 0 0 1.5rem;
+  }
+  .spellbound-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+  .spellbound-footer__links a {
+    font-size: 1.0625rem;
+    color: var(--spellbound-text-soft);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .spellbound-footer__links a:hover {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-footer__info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .spellbound-footer__info-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin: 0;
+  }
+  .spellbound-footer__info-item svg {
+    flex-shrink: 0;
+    width: 17px;
+    height: 17px;
+    margin-top: 0.3em;
+    color: var(--spellbound-gold);
+  }
+  .spellbound-footer__info-item a {
+    color: var(--spellbound-text-soft);
+    text-decoration: underline;
+    text-decoration-color: var(--spellbound-gold-deep);
+    text-underline-offset: 3px;
+    transition: color 0.3s ease;
+  }
+  .spellbound-footer__info-item a:hover {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-footer__news-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 0 1.25rem;
+  }
+  .spellbound-footer__form {
+    display: flex;
+    border: 1px solid var(--spellbound-border-strong);
+    border-radius: 999px;
+    overflow: hidden;
+    max-width: 26rem;
+    background: rgba(247, 241, 227, 0.04);
+    transition: border-color 0.3s ease;
+  }
+  .spellbound-footer__form:focus-within {
+    border-color: var(--spellbound-gold);
+  }
+  .spellbound-footer__form input[type='email'] {
+    flex: 1;
+    min-width: 0;
+    padding: 0.9rem 1.4rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--spellbound-text);
+    font-family: var(--font-body--family);
+    font-size: 1rem;
+  }
+  .spellbound-footer__form input[type='email']::placeholder {
+    color: var(--spellbound-text-faint);
+  }
+  .spellbound-footer__form button {
+    padding: 0.9rem 1.75rem;
+    border: none;
+    cursor: pointer;
+    background: var(--spellbound-gold);
+    color: var(--spellbound-bg);
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+  }
+  .spellbound-footer__form button:hover {
+    background: var(--spellbound-gold-bright);
+  }
+  .spellbound-footer__form-success {
+    margin: 0.875rem 0 0;
+    font-size: 1rem;
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-footer__form-error {
+    margin: 0.875rem 0 0;
+    font-size: 1rem;
+    color: #e08f8f;
+  }
+  .spellbound-footer__bottom {
+    max-width: 100rem;
+    margin: clamp(3rem, 6vw, 4.5rem) auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--spellbound-border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    text-align: center;
+  }
+  @media (min-width: 990px) {
+    .spellbound-footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+  .spellbound-footer__policies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.75rem;
+  }
+  .spellbound-footer__policies a {
+    font-size: 0.9375rem;
+    color: var(--spellbound-text-faint);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .spellbound-footer__policies a:hover {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-footer__payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .spellbound-footer__payments svg {
+    height: 24px;
+    width: auto;
+    opacity: 0.75;
+  }
+  .spellbound-footer__copyright {
+    font-size: 0.9375rem;
+    color: var(--spellbound-text-faint);
+    margin: 0;
+  }
+  .spellbound-footer__cat {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto -0.75rem;
+  }
+  .spellbound-footer__cat svg {
+    width: 130px;
+    height: auto;
+    opacity: 0.9;
+  }
+</style>
+
+<footer class="spellbound-footer">
+  {% render 'spellbound-ornament' %}
+  <div class="spellbound-footer__inner">
+    <div>
+      <img
+        src="{{ 'spellbound-logo-banner.png' | asset_url }}"
+        alt="{{ shop.name | escape }}"
+        class="spellbound-footer__logo"
+        width="480"
+        height="240"
+        loading="lazy"
+      >
+      <p class="spellbound-footer__blurb">{{ section.settings.blurb }}</p>
+      <div class="spellbound-footer__social">
+        {% if section.settings.facebook_url != blank %}
+          <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" aria-label="Totally Spellbound on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V13h2.7v8h3.4Z"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.instagram_url != blank %}
+          <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener" aria-label="Totally Spellbound on Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="4.6"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        {% endif %}
+        {% if section.settings.tiktok_url != blank %}
+          <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener" aria-label="Totally Spellbound on TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.3 1.9 1.5 3.4 3.4 3.7v3.1c-1.3 0-2.5-.4-3.4-1v6.4c0 3.4-2.4 5.8-5.6 5.8A5.6 5.6 0 0 1 5.4 15c0-3.2 2.5-5.6 5.8-5.5v3.2c-1.5-.2-2.7.8-2.7 2.3 0 1.4 1 2.4 2.4 2.4 1.5 0 2.5-1 2.5-2.7V3h3.2Z"/></svg>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <nav aria-label="Footer navigation">
+      <h2 class="spellbound-footer__heading">Explore</h2>
+      <ul class="spellbound-footer__links">
+        {% assign footer_menu = linklists[section.settings.menu] %}
+        {% if footer_menu != blank and footer_menu.links.size > 0 %}
+          {% for link in footer_menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        {% else %}
+          <li><a href="{{ routes.all_products_collection_url }}">Shop All</a></li>
+          <li><a href="/pages/our-story">Our Story</a></li>
+          <li><a href="/pages/visit-us">Visit Us</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="spellbound-footer__heading">The Shop</h2>
+      <div class="spellbound-footer__info">
+        <p class="spellbound-footer__info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>{{ section.settings.address }}</span>
+        </p>
+        <p class="spellbound-footer__info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.5V12l3 2"/></svg>
+          <span>{{ section.settings.hours }}</span>
+        </p>
+        {% if section.settings.email != blank %}
+          <p class="spellbound-footer__info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2.4"/><path d="m4 7 8 6 8-6"/></svg>
+            <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+          </p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div>
+      <h2 class="spellbound-footer__heading">Join the Coven</h2>
+      <p class="spellbound-footer__news-text">{{ section.settings.newsletter_text }}</p>
+      {% form 'customer', class: 'spellbound-footer__form-wrap' %}
+        {% if form.posted_successfully? %}
+          <p class="spellbound-footer__form-success">Welcome to the coven — you're on the list.</p>
+        {% else %}
+          <div class="spellbound-footer__form">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              placeholder="Your email address"
+              autocomplete="email"
+              required
+              aria-label="Email address"
+            >
+            <button type="submit">Join</button>
+          </div>
+          {% if form.errors %}
+            <p class="spellbound-footer__form-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="spellbound-footer__bottom">
+    <ul class="spellbound-footer__policies">
+      {% if shop.privacy_policy != blank %}<li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>{% endif %}
+      {% if shop.refund_policy != blank %}<li><a href="{{ shop.refund_policy.url }}">Refund Policy</a></li>{% endif %}
+      {% if shop.shipping_policy != blank %}<li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>{% endif %}
+      {% if shop.terms_of_service != blank %}<li><a href="{{ shop.terms_of_service.url }}">Terms of Service</a></li>{% endif %}
+    </ul>
+    <div class="spellbound-footer__payments" aria-label="Accepted payment methods">
+      {% for type in shop.enabled_payment_types %}
+        {{ type | payment_type_svg_tag }}
+      {% endfor %}
+    </div>
+    <p class="spellbound-footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+  </div>
+
+  <div class="spellbound-footer__cat" aria-hidden="true" title="The shop cat is asleep">
+    <svg viewBox="0 0 170 62" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#14101a" stroke="rgba(247, 241, 227, 0.22)" stroke-width="1">
+        <path d="M138 57 C156 57 160 50 158 43 C155 33 143 26 128 24 L122 23 C118 15 108 14 104 19 L101 23 C70 20 34 26 22 38 C12 48 18 57 36 57 Z"/>
+        <path d="M104 19 c-1-4 0-9 1-11 c4 1 7 4 8 8 Z"/>
+        <path d="M122 23 c2-4 5-8 8-9 c2 3 2 8 0 11 Z"/>
+        <path d="M34 55 c-12 0 -20-4 -18-9 c1-4 8-5 12-2 c3 2 4 6 10 7 Z"/>
+      </g>
+      <path d="M110 32 q3 3 6 0 M124 32 q3 3 6 0" fill="none" stroke="var(--spellbound-gold)" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M118 37.5 l1.6 1.4 -1.6 1.4 -1.6 -1.4 Z" fill="var(--spellbound-gold-deep)"/>
+      <g stroke="rgba(247, 241, 227, 0.35)" stroke-width="1" stroke-linecap="round" fill="none">
+        <path d="M146 16 q4 -3 0 -6 M152 20 q5 -3 1 -7 M150 26 q3 -2 1 -5"/>
+      </g>
+    </svg>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Spellbound Footer",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "Brand blurb",
+      "default": "A real little crystal and curiosity shop in Sutton-in-Ashfield. Every crystal, deck and charm is chosen by hand — and packed with the same care as if you'd walked through the door."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "108 Outram Street, Sutton-in-Ashfield NG17 4FS"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Opening hours",
+      "default": "Mon–Sat 10am–4pm · Closed Sundays"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact email"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Receive transmissions about new arrivals, rituals and exclusive offerings. No noise — just magic."
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "presets": [
+    {
+      "name": "Spellbound Footer"
+    }
+  ]
+}
+{% endschema %}

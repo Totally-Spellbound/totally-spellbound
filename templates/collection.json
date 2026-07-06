@@ -135,10 +135,15 @@
         "padding-block-start": 0,
         "padding-block-end": 16
       }
+    },
+    "collection_description": {
+      "type": "spellbound-collection-description",
+      "settings": {}
     }
   },
   "order": [
     "collection_header",
-    "main"
+    "main",
+    "collection_description"
   ]
 }

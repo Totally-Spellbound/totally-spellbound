@@ -18,8 +18,8 @@
           "settings": {
             "text": "{{ closest.page.content }}",
             "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
+            "max_width": "normal",
+            "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-primary--family)",
             "font_size": "",
@@ -39,7 +39,9 @@
           "blocks": {}
         }
       },
-      "block_order": ["content"],
+      "block_order": [
+        "content"
+      ],
       "settings": {
         "content_direction": "column",
         "gap": 32,
@@ -83,7 +85,9 @@
           "block_order": []
         }
       },
-      "block_order": ["contact_form_UwiCkQ"],
+      "block_order": [
+        "contact_form_UwiCkQ"
+      ],
       "name": "t:names.contact_form",
       "settings": {
         "content_direction": "column",
@@ -135,12 +139,35 @@
           }
         }
       },
-      "block_order": ["reach", "find"],
+      "block_order": [
+        "reach",
+        "find"
+      ],
       "settings": {
         "heading": "Prefer the direct route?",
         "subheading": "Call, email, or come and see us in person."
       }
+    },
+    "in_person": {
+      "type": "spellbound-editorial",
+      "settings": {
+        "label": "Prefer To Talk In Person?",
+        "heading": "The kettle’s usually on",
+        "body": "<p>Some questions are easier over the counter — bring the piece, the problem or the birth chart and we’ll figure it out together. You’ll find us on Outram Street, six days a week.</p>",
+        "quote": "Helpful like a conversation in the shop — never pushy.",
+        "cta_label": "Plan Your Visit",
+        "cta_link": "/pages/visit-us",
+        "image_asset": "spellbound-img-editorial.jpg",
+        "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
+        "hours_text": "Mon–Sat 10am–4pm · Closed Sundays"
+      }
     }
   },
-  "order": ["hero", "main", "form", "cards"]
+  "order": [
+    "hero",
+    "main",
+    "form",
+    "in_person",
+    "cards"
+  ]
 }

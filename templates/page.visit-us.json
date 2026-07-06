@@ -47,7 +47,12 @@
           }
         }
       },
-      "block_order": ["address", "hours", "contact", "collect"],
+      "block_order": [
+        "address",
+        "hours",
+        "contact",
+        "collect"
+      ],
       "settings": {
         "heading": "The practical bits",
         "subheading": "Everything you need to find your way to the shop."
@@ -62,8 +67,8 @@
           "settings": {
             "text": "{{ closest.page.content }}",
             "width": "100%",
-            "max_width": "narrow",
-            "alignment": "center",
+            "max_width": "normal",
+            "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-primary--family)",
             "font_size": "",
@@ -83,7 +88,9 @@
           "blocks": {}
         }
       },
-      "block_order": ["content"],
+      "block_order": [
+        "content"
+      ],
       "settings": {
         "content_direction": "column",
         "gap": 32,
@@ -91,7 +98,26 @@
         "padding-block-start": 16,
         "padding-block-end": 80
       }
+    },
+    "browse": {
+      "type": "spellbound-editorial",
+      "settings": {
+        "label": "What Awaits You",
+        "heading": "Shelves worth losing an hour to",
+        "body": "<p>Step through the door and you’ll find walls of hand-picked crystals, tarot and oracle decks, incense curling from the burners, preloved books on folklore and reiki, and our own handmade pieces. Come with a question — Alison loves helping you find the right piece, never the expensive one.</p>",
+        "quote": "Come in for one crystal, leave with a story.",
+        "cta_label": "Browse the Shelves Online",
+        "cta_link": "/collections/all",
+        "image_asset": "spellbound-img-cat-crystals.jpg",
+        "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
+        "hours_text": "Mon–Sat 10am–4pm · Closed Sundays"
+      }
     }
   },
-  "order": ["hero", "cards", "main"]
+  "order": [
+    "hero",
+    "cards",
+    "main",
+    "browse"
+  ]
 }

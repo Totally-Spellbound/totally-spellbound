@@ -1,0 +1,66 @@
+{% comment %}
+  Spellbound Collection Description — renders collection.description at the
+  bottom of collection pages so search engines can crawl it without it
+  crowding the header. Renders nothing when the collection has no description.
+{% endcomment %}
+
+<style>
+  .spellbound-collection-desc {
+    position: relative;
+    padding: clamp(3.5rem, 7vw, 6rem) 1.5rem;
+    background: var(--spellbound-bg);
+  }
+  .spellbound-collection-desc__inner {
+    max-width: 52rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .spellbound-collection-desc__heading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--spellbound-text);
+    margin: 0 0 1.5rem;
+  }
+  .spellbound-collection-desc__body {
+    font-size: 1.125rem;
+    line-height: 1.85;
+    color: var(--spellbound-text-soft);
+  }
+  .spellbound-collection-desc__body p {
+    margin: 0 0 1.25em;
+  }
+  .spellbound-collection-desc__body p:last-child {
+    margin-bottom: 0;
+  }
+  .spellbound-collection-desc__body a {
+    color: var(--spellbound-gold);
+  }
+</style>
+
+{%- if collection.description != blank -%}
+  <section class="spellbound-collection-desc">
+    {% render 'spellbound-ornament' %}
+    <div class="spellbound-collection-desc__inner">
+      <h2 class="spellbound-collection-desc__heading">About {{ collection.title | escape }}</h2>
+      <div class="spellbound-collection-desc__body">{{ collection.description }}</div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collection Description",
+  "tag": "section",
+  "class": "spellbound-section",
+  "settings": [],
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "presets": [
+    {
+      "name": "Collection Description"
+    }
+  ]
+}
+{% endschema %}

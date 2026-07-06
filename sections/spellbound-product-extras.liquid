@@ -58,7 +58,7 @@
     font-family: var(--font-body--family);
     font-weight: 600;
     color: var(--spellbound-gold);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     margin-bottom: 2rem;
@@ -71,7 +71,7 @@
     gap: 0.5rem;
     font-family: var(--font-body--family);
     font-weight: 600;
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--spellbound-gold-bright);
@@ -100,7 +100,7 @@
     display: block;
     font-family: var(--font-body--family);
     font-weight: 600;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--spellbound-gold);
     text-transform: uppercase;
     letter-spacing: 0.28em;
@@ -207,7 +207,99 @@
     {% endif %}
   </div>
 </div>
+{% else %}
+<div class="spellbound-product-extras" data-spellbound-reveal>
+  <div class="spellbound-extras__card spellbound-extras__card--fallback">
+    <span class="spellbound-extras__eyebrow">From the Shop Floor</span>
+    <p class="spellbound-extras__fallback-lead">
+      This piece hasn't been written into our grimoire yet &mdash; its planetary and
+      chakra correspondences are still being scribed.
+    </p>
+    <p class="spellbound-extras__fallback-copy">
+      What we can promise: every crystal, deck and curiosity here is chosen by hand
+      by Alison at our little shop in Sutton-in-Ashfield &mdash; nothing arrives on the
+      shelf without being held first. Want to know this piece's story? Ask us.
+    </p>
+    <div class="spellbound-extras__fallback-points">
+      <span>&#10022; Hand-picked in store</span>
+      <span>&#10022; Free UK delivery over &pound;50</span>
+      <span>&#10022; Free click &amp; collect</span>
+    </div>
+    <div class="spellbound-extras__fallback-actions">
+      <a href="/pages/contact" class="spellbound-extras__fallback-btn">Ask About This Piece</a>
+      <a href="/pages/visit-us" class="spellbound-extras__fallback-btn spellbound-extras__fallback-btn--ghost">Visit the Shop</a>
+    </div>
+  </div>
+</div>
 {% endif %}
+
+<style>
+  .spellbound-extras__card--fallback {
+    text-align: center;
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+  .spellbound-extras__fallback-lead {
+    font-family: var(--font-accent--family);
+    font-style: italic;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--spellbound-text);
+    margin: 1rem 0 1rem;
+  }
+  .spellbound-extras__fallback-copy {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--spellbound-text-soft);
+    margin: 0 0 1.75rem;
+  }
+  .spellbound-extras__fallback-points {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 2rem;
+    font-size: 0.9375rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--spellbound-gold);
+    margin-bottom: 2rem;
+  }
+  .spellbound-extras__fallback-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .spellbound-extras__fallback-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.95rem 2.2rem;
+    border-radius: 999px;
+    background: var(--spellbound-gold);
+    border: 1px solid var(--spellbound-gold);
+    color: var(--spellbound-bg);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .spellbound-extras__fallback-btn:hover {
+    background: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+  }
+  .spellbound-extras__fallback-btn--ghost {
+    background: transparent;
+    color: var(--spellbound-text);
+    border-color: var(--spellbound-border-strong);
+  }
+  .spellbound-extras__fallback-btn--ghost:hover {
+    background: transparent;
+    color: var(--spellbound-gold);
+    border-color: var(--spellbound-gold);
+  }
+</style>
 
 {% schema %}
 {
