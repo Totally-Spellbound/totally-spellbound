@@ -3,7 +3,7 @@
     "hero": {
       "type": "spellbound-page-hero",
       "settings": {
-        "image_asset": "spellbound-img-oracle.jpg",
+        "image_asset": "spellbound-img-contact.webp",
         "label": "Send Word",
         "title": "Contact",
         "intro": "Questions, requests, or wondering if something's in stock? Write to us — we'll answer like we would in the shop."
@@ -157,7 +157,7 @@
         "quote": "Helpful like a conversation in the shop — never pushy.",
         "cta_label": "Plan Your Visit",
         "cta_link": "/pages/visit-us",
-        "image_asset": "spellbound-img-editorial.jpg",
+        "image_asset": "spellbound-img-our-story.webp",
         "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
         "hours_text": "Mon–Sat 10am–4pm · Closed Sundays"
       }

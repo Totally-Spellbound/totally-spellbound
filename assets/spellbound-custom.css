@@ -199,12 +199,13 @@ a.menu-list__link.menu-list__link {
    BETWEEN sections rather than a header inside the content. */
 .spellbound-ornament {
   position: absolute;
-  top: clamp(1.25rem, 2.5vw, 2rem);
+  top: 0;
   left: 0;
   right: 0;
   z-index: 1;
   display: flex;
   justify-content: center;
+  translate: 0 -50%;
   color: var(--spellbound-gold);
   pointer-events: none;
 }
@@ -417,12 +418,13 @@ product-card .card-gallery img {
   object-fit: cover;
 }
 
-/* Collection/search grid density: 5 per row by default, 6 when zoomed out */
+/* Collection/search grid density: 4 per row by default, 6 when zoomed out.
+   The var is consumed by the inner .product-grid element (not the wrapper). */
 @media screen and (min-width: 990px) {
-  .main-collection-grid:not([product-grid-view='zoom-out']) {
-    --product-grid-columns-desktop: repeat(5, 1fr) !important;
+  .product-grid.product-grid--grid:not([product-grid-view='zoom-out']) {
+    --product-grid-columns-desktop: repeat(4, 1fr) !important;
   }
-  .main-collection-grid[product-grid-view='zoom-out'] {
+  .product-grid[product-grid-view='zoom-out'] {
     --product-grid-columns-desktop: repeat(6, 1fr) !important;
   }
 }
@@ -512,7 +514,12 @@ product-card a,
 product-card a p {
   color: var(--spellbound-text);
 }
-product-card a:hover p {
+product-card a[ref='productTitleLink'] p {
+  transition: color 0.3s ease;
+}
+/* Whole-card hover turns the title gold — same behaviour as the homepage
+   featured cards, where hovering anywhere on the card recolours the title */
+product-card:is(:hover, :focus-within) a[ref='productTitleLink'] p {
   color: var(--spellbound-gold-bright);
 }
 
@@ -885,8 +892,9 @@ dialog.facets--drawer {
   background: none !important;
   color: var(--spellbound-gold-bright) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.3s ease;
+  box-shadow: none !important;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.45));
+  transition: filter 0.2s ease, transform 0.1s ease;
 }
 .spellbound-hero__cta--primary:hover,
 .spellbound-oracle__cta:hover,
@@ -898,8 +906,8 @@ dialog.facets--drawer {
 .facets__see-results:hover {
   background: none !important;
   color: #f8e29c !important;
-  filter: brightness(1.18);
-  box-shadow: 0 6px 26px var(--spellbound-gold-glow);
+  box-shadow: none !important;
+  filter: brightness(1.18) drop-shadow(0 5px 14px rgba(0, 0, 0, 0.5));
 }
 .spellbound-hero__cta--primary:active,
 .spellbound-oracle__cta:active,
@@ -908,5 +916,83 @@ dialog.facets--drawer {
 .spellbound-footer__form button:active,
 .facets__see-results:active {
   transform: scale(0.97);
-  filter: brightness(0.85);
+  filter: brightness(0.85) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
+}
+
+/* Account popover: anchor under the account button (progressive enhancement —
+   browsers without CSS anchor positioning keep the component's default spot) */
+.account-button shopify-account {
+  anchor-name: --spellbound-account;
+}
+shopify-account::part(dialog) {
+  position-anchor: --spellbound-account;
+  top: calc(anchor(bottom) + 10px) !important;
+  right: anchor(right) !important;
+  left: auto !important;
+}
+
+/* PDP quantity selector: square dark panel to sit beside the ornate CTA */
+.product-information .quantity-selector {
+  border-radius: 2px;
+  background: var(--spellbound-panel);
+  border: 1px solid var(--spellbound-gold-deep);
+  color: var(--spellbound-text);
+}
+
+/* Header cart bubble: readable count */
+.cart-bubble {
+  min-width: 20px;
+  min-height: 20px;
+}
+.cart-bubble__background {
+  background: var(--spellbound-gold);
+}
+.cart-bubble__text {
+  color: #0d0b10 !important;
+  font-family: var(--font-body--family);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Native cards: match the homepage featured-card hover (gold underline sweep,
+   breathing room between image and text) */
+product-card .card-gallery::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--spellbound-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+product-card:is(:hover, :focus-within) .card-gallery::after {
+  transform: scaleX(1);
+}
+product-card .product-grid__card + *,
+product-card .card-gallery + * {
+  margin-top: 0.75rem;
+}
+
+/* Ghost (secondary) CTA: keep it quiet — same geometry as the ornate primary,
+   thin gold-tinted border, faint cream wash on hover */
+.spellbound-hero__cta--ghost,
+.spellbound-extras__fallback-btn--ghost {
+  border-radius: 2px;
+  border-color: var(--spellbound-border-strong);
+  background: rgba(247, 241, 227, 0.03);
+}
+.spellbound-hero__cta--ghost:hover,
+.spellbound-extras__fallback-btn--ghost:hover {
+  background: rgba(247, 241, 227, 0.08);
+  border-color: var(--spellbound-gold);
+  color: var(--spellbound-gold-bright);
+}
+
+/* Static pages: centre the prose column (text itself stays left-aligned) */
+.section-wrapper .section-content-wrapper > .text-block {
+  margin-inline: auto;
 }

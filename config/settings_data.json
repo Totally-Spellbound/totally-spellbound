@@ -364,7 +364,9 @@
           "selected_variant_hover_border_color": "#1a1a1a"
         }
       }
-    }
+    },
+    "product_card_carousel": true,
+    "show_second_image_on_hover": true
   },
   "presets": {
     "Default": {

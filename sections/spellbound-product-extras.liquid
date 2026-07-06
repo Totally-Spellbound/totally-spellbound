@@ -229,6 +229,49 @@
       <a href="/pages/contact" class="spellbound-extras__fallback-btn">Ask About This Piece</a>
       <a href="/pages/visit-us" class="spellbound-extras__fallback-btn spellbound-extras__fallback-btn--ghost">Visit the Shop</a>
     </div>
+
+    {%- liquid
+      assign xsell_col = blank
+      for c in product.collections
+        if c.handle != 'all' and c.all_products_count > 1
+          assign xsell_col = c
+          break
+        endif
+      endfor
+      if xsell_col == blank
+        assign xsell_col = collections['all']
+      endif
+    -%}
+    {%- if xsell_col != blank and xsell_col.products.size > 1 -%}
+      <div class="spellbound-extras__xsell">
+        <h3 class="spellbound-extras__xsell-title">
+          {%- if xsell_col.handle == 'all' -%}More From The Vault{%- else -%}More from {{ xsell_col.title | escape }}{%- endif -%}
+        </h3>
+        <div class="spellbound-extras__xsell-grid">
+          {%- assign shown = 0 -%}
+          {%- for xp in xsell_col.products limit: 8 -%}
+            {%- if xp.id != product.id and shown < 4 -%}
+              {%- assign shown = shown | plus: 1 -%}
+              <a href="{{ xp.url }}" class="spellbound-extras__xsell-card">
+                <span class="spellbound-extras__xsell-media">
+                  {%- if xp.featured_image -%}
+                    <img
+                      src="{{ xp.featured_image | image_url: width: 400 }}"
+                      alt="{{ xp.featured_image.alt | default: xp.title | escape }}"
+                      loading="lazy"
+                      width="{{ xp.featured_image.width }}"
+                      height="{{ xp.featured_image.height }}"
+                    >
+                  {%- endif -%}
+                </span>
+                <span class="spellbound-extras__xsell-name">{{ xp.title | escape }}</span>
+                <span class="spellbound-extras__xsell-price">{{ xp.price | money }}</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
 </div>
 {% endif %}
@@ -298,6 +341,66 @@
     background: transparent;
     color: var(--spellbound-gold);
     border-color: var(--spellbound-gold);
+  }
+  .spellbound-extras__xsell {
+    margin-top: 3rem;
+    padding-top: 2.25rem;
+    border-top: 1px solid var(--spellbound-border);
+  }
+  .spellbound-extras__xsell-title {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.25rem;
+    color: var(--spellbound-text);
+    margin: 0 0 1.5rem;
+  }
+  .spellbound-extras__xsell-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+    text-align: left;
+  }
+  @media (min-width: 750px) {
+    .spellbound-extras__xsell-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .spellbound-extras__xsell-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+  .spellbound-extras__xsell-media {
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--spellbound-border);
+    background: var(--spellbound-surface);
+  }
+  .spellbound-extras__xsell-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spellbound-extras__xsell-card:hover .spellbound-extras__xsell-media img {
+    transform: scale(1.04);
+  }
+  .spellbound-extras__xsell-name {
+    font-family: var(--font-heading--family);
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    color: var(--spellbound-text);
+  }
+  .spellbound-extras__xsell-card:hover .spellbound-extras__xsell-name {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-extras__xsell-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--spellbound-text-soft);
   }
 </style>
 

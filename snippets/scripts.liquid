@@ -240,12 +240,17 @@
   ></script>
 {% endif %}
 
-{% if template.name == 'index' or template.name == 'page' %}
+{% comment %} Product-card carousels need the slideshow component on any
+   template that renders product cards, not just index/page. {% endcomment %}
+{% if template.name == 'index' or template.name == 'page' or template.name == 'collection' or template.name == 'search' or template.name == 'product' %}
   <script
     src="{{ 'slideshow.js' | asset_url }}"
     type="module"
     fetchpriority="low"
   ></script>
+{% endif %}
+
+{% if template.name == 'index' or template.name == 'page' %}
   <script
     src="{{ 'layered-slideshow.js' | asset_url }}"
     type="module"
