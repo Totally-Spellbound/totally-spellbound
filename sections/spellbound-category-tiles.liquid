@@ -6,7 +6,7 @@
 
 <style>
   .spellbound-cattiles {
-    padding: 5rem 1.5rem;
+    padding: 5rem 1.5rem 3.5rem;
     background: var(--spellbound-bg);
   }
   @media (min-width: 990px) {
@@ -62,6 +62,7 @@
     background: var(--spellbound-surface);
     border: 1px solid var(--spellbound-border);
     text-decoration: none;
+    transition: border-color 0.3s ease;
   }
   .spellbound-cattiles__tile:hover {
     border-color: var(--spellbound-border-strong);
@@ -97,7 +98,7 @@
     height: 100%;
     object-fit: cover;
     transform: scale(1);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .spellbound-cattiles__tile:hover .spellbound-cattiles__image {
     transform: scale(1.03);
@@ -160,7 +161,7 @@
     background: var(--spellbound-gold-deep);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 2;
   }
   .spellbound-cattiles__tile:hover .spellbound-cattiles__accent {

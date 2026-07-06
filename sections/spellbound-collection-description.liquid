@@ -39,8 +39,8 @@
 </style>
 
 {%- if collection.description != blank -%}
+  {% render 'spellbound-ornament' %}
   <section class="spellbound-collection-desc">
-    {% render 'spellbound-ornament' %}
     <div class="spellbound-collection-desc__inner">
       <h2 class="spellbound-collection-desc__heading">About {{ collection.title | escape }}</h2>
       <div class="spellbound-collection-desc__body">{{ collection.description }}</div>

@@ -7,7 +7,7 @@
 <style>
   .spellbound-countdown {
     position: relative;
-    padding: clamp(5rem, 10vw, 8.5rem) 1.5rem;
+    padding: clamp(3.5rem, 7vw, 6rem) 1.5rem clamp(5rem, 10vw, 8.5rem);
     background: var(--spellbound-bg);
   }
   .spellbound-countdown__inner {
@@ -155,8 +155,8 @@
   }
 </style>
 
+{% render 'spellbound-ornament' %}
 <section class="spellbound-countdown" data-spellbound-countdown>
-  {% render 'spellbound-ornament' %}
   <div class="spellbound-countdown__inner">
     <div data-spellbound-reveal-group>
       {% if section.settings.label != blank %}

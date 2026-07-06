@@ -193,19 +193,14 @@ a.menu-list__link.menu-list__link {
   }
 }
 
-/* Ornament divider (snippets/spellbound-ornament.liquid) — replaces old hairline
-   section borders with a brand flourish. Absolutely positioned at the section's
-   top edge (host section must be position: relative) so it reads as a divider
-   BETWEEN sections rather than a header inside the content. */
+/* Ornament divider (snippets/spellbound-ornament.liquid) — an in-flow block
+   rendered BETWEEN sections (before the host <section> tag) so it behaves
+   consistently wherever it is placed. */
 .spellbound-ornament {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+  position: relative;
   display: flex;
   justify-content: center;
-  translate: 0 -50%;
+  padding: 0.75rem 0;
   color: var(--spellbound-gold);
   pointer-events: none;
 }
@@ -277,7 +272,7 @@ shopify-account::part(dialog) {
   height: 1px;
   background: var(--spellbound-gold-deep);
   transform: scaleX(0);
-  transition: transform 0.7s ease;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .group:hover .spellbound-accent-line {
   transform: scaleX(1);
@@ -939,10 +934,15 @@ shopify-account::part(dialog) {
   color: var(--spellbound-text);
 }
 
-/* Header cart bubble: readable count */
+/* Header cart bubble: readable count, nudged up-right off the cauldron.
+   The header action button clips overflow, so let the badge escape it. */
+.header-actions__action:has(.cart-bubble) {
+  overflow: visible;
+}
 .cart-bubble {
-  min-width: 20px;
-  min-height: 20px;
+  min-width: 21px;
+  min-height: 21px;
+  translate: 4px -4px;
 }
 .cart-bubble__background {
   background: var(--spellbound-gold);
@@ -950,8 +950,9 @@ shopify-account::part(dialog) {
 .cart-bubble__text {
   color: #0d0b10 !important;
   font-family: var(--font-body--family);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 /* Native cards: match the homepage featured-card hover (gold underline sweep,
@@ -966,7 +967,7 @@ product-card .card-gallery::after {
   background: var(--spellbound-gold);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 2;
 }
 product-card:is(:hover, :focus-within) .card-gallery::after {
@@ -992,7 +993,12 @@ product-card .card-gallery + * {
   color: var(--spellbound-gold-bright);
 }
 
-/* Static pages: centre the prose column (text itself stays left-aligned) */
+/* Static pages: centre the prose column (text itself stays left-aligned).
+   The rte block spans full width while its paragraphs carry the max-width,
+   so the paragraphs themselves need centring. */
 .section-wrapper .section-content-wrapper > .text-block {
+  margin-inline: auto;
+}
+.section-wrapper .section-content-wrapper > .text-block :is(p, ul, ol, h2, h3, h4, blockquote) {
   margin-inline: auto;
 }

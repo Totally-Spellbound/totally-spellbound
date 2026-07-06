@@ -9,7 +9,7 @@
   .spellbound-footer {
     position: relative;
     background: linear-gradient(to bottom, var(--spellbound-bg), #08060b);
-    padding: clamp(5rem, 9vw, 7.5rem) 1.5rem 2.5rem;
+    padding: clamp(3rem, 6vw, 5rem) 1.5rem 7.5rem;
     color: var(--spellbound-text-soft);
   }
   .spellbound-footer__inner {
@@ -232,14 +232,14 @@
     pointer-events: none;
   }
   .spellbound-footer__cat svg {
-    width: 150px;
+    width: 170px;
     height: auto;
     display: block;
   }
 </style>
 
+{% render 'spellbound-ornament' %}
 <footer class="spellbound-footer">
-  {% render 'spellbound-ornament' %}
   <div class="spellbound-footer__inner">
     <div>
       <img
@@ -350,25 +350,27 @@
   </div>
 
   <div class="spellbound-footer__cat" aria-hidden="true" title="The shop cat is asleep">
-    <svg viewBox="0 0 180 64" xmlns="http://www.w3.org/2000/svg">
-      <path d="M124 34 L125 16 L137 27 Z" fill="#1d1724"/>
-      <path d="M140 30 L152 15 L150 34 Z" fill="#1d1724"/>
-      <path d="M28 64 C18 64 13 55 17 46 C22 33 42 25 68 23 C94 21 116 24 130 30 C142 35 151 42 153 50 C155 58 148 64 138 64 Z" fill="#1d1724"/>
-      <circle cx="136" cy="44" r="17" fill="#1d1724"/>
-      <path d="M127 31 L127.5 22 L134 28 Z" fill="#2a2133"/>
-      <path d="M142 29 L149 19 L148 31 Z" fill="#2a2133"/>
-      <path d="M22 57 C8 57 2 61 12 62.5 C40 65 78 64 98 62" fill="none" stroke="#2a2133" stroke-width="8" stroke-linecap="round"/>
-      <path d="M118 64 C118 58.5 126 56 136 56 C146 56 155 58.5 155 64 Z" fill="#262031"/>
-      <path d="M127 45 q3.5 3 7 0 M140 45 q3.5 3 7 0" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M135.6 50.5 h3.2 l-1.6 2 Z" fill="rgba(212,175,55,0.75)"/>
-      <g stroke="rgba(247,241,227,0.28)" stroke-width="0.8" stroke-linecap="round" fill="none">
-        <path d="M120 48 l-8 -1 M120 50.5 l-8 1.5"/>
+    <svg viewBox="0 0 506 295" xmlns="http://www.w3.org/2000/svg">
+      <g filter="url(#spellbound-cat-glow)">
+        <path d="M8 78 L12 105 L34 158 L36 190 L47 212 L38 224 L37 238 L46 247 L49 235 L54 251 L65 251 L71 232 L97 216 L48 217 L65 209 L123 216 L84 228 L72 242 L71 251 L76 258 L80 258 L84 244 L86 258 L93 260 L97 245 L98 257 L103 261 L126 259 L127 244 L139 227 L158 215 L186 207 L229 207 L337 230 L374 229 L409 219 L379 234 L340 236 L239 216 L193 214 L154 225 L139 237 L133 249 L136 268 L169 285 L224 294 L316 295 L369 288 L411 274 L442 249 L453 230 L458 206 L456 181 L438 135 L405 95 L354 65 L318 56 L280 55 L247 61 L210 77 L206 104 L220 127 L218 154 L214 126 L200 107 L200 57 L191 30 L182 31 L165 42 L134 71 L110 73 L82 85 L32 72 L15 72 Z" fill="#1d1724"/>
       </g>
-      <path d="M20 44 C26 32 45 26 68 24 C94 22 112 25 126 30" fill="none" stroke="rgba(212,175,55,0.4)" stroke-width="1.2" stroke-linecap="round"/>
-      <g stroke="#d4af37" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
-        <path d="M157 26 h5 l-5 5 h5"/>
-        <path d="M165 14 h6.5 l-6.5 6.5 h6.5"/>
+      <path d="M123 189 L122 192 L118 195 L114 197 L107 199 L98 199 L92 197 L90 196 L89 191 L94 192 L99 194 L105 194 L112 192 L118 188 L121 187 Z" fill="#d4af37"/>
+      <path d="M159 188 L159 190 L158 193 L154 201 L153 202 L147 202 L141 199 L139 197 L138 197 L137 195 L144 189 L148 187 L151 186 L157 186 Z" fill="#d4af37"/>
+      <path d="M231 174 L231 177 L220 182 L201 188 L195 188 L200 184 L212 178 L218 176 Z" fill="#d4af37"/>
+      <path d="M236 156 L234 158 L222 166 L212 172 L200 178 L200 175 L207 169 L214 164 L219 161 L230 156 L233 155 Z" fill="#d4af37"/>
+      <path d="M191 151 L192 157 L190 161 L182 169 L173 173 L164 172 L164 170 L166 168 L169 167 L172 167 L180 163 L184 160 L187 157 Z" fill="#d4af37"/>
+      <path d="M331 120 L303 128 L280 142 L266 156 L255 172 L248 188 L244 202 L244 187 L251 167 L263 149 L274 138 L285 130 L306 121 L315 119 Z" fill="rgba(212,175,55,0.45)"/>
+      <path d="M23 86 L33 88 L46 94 L59 103 L66 111 L53 126 L49 132 L46 139 L44 141 L39 134 L30 114 L24 96 L22 88 Z" fill="rgba(212,175,55,0.75)"/>
+      <path d="M186 44 L188 46 L190 54 L192 72 L190 100 L182 94 L170 89 L164 88 L163 82 L168 71 L175 58 L184 45 Z" fill="rgba(212,175,55,0.75)"/>
+      <g stroke="#d4af37" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+        <path d="M79 60 h18 l-18 18 h18"/>
+        <path d="M109 34 h24 l-24 24 h24"/>
       </g>
+      <defs>
+        <filter id="spellbound-cat-glow" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="0" stdDeviation="7" flood-color="#d4af37" flood-opacity="0.28"/>
+        </filter>
+      </defs>
     </svg>
   </div>
 </footer>

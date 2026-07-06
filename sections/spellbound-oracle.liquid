@@ -7,7 +7,7 @@
 <style>
   .spellbound-oracle {
     position: relative;
-    padding: clamp(6rem, 12vw, 11rem) 1.5rem;
+    padding: clamp(4rem, 8vw, 7rem) 1.5rem clamp(6rem, 12vw, 11rem);
     background: var(--spellbound-bg);
   }
   .spellbound-oracle__backdrop {
@@ -190,13 +190,13 @@
   }
 </style>
 
+{% render 'spellbound-ornament' %}
 <section
   class="spellbound-oracle"
   id="oracle"
   data-spellbound-oracle
   data-base-url="{{ section.settings.collection_base_url | default: '/collections/all' }}"
 >
-  {% render 'spellbound-ornament' %}
   <div class="spellbound-oracle__backdrop" aria-hidden="true">
     {% if section.settings.image %}
       <img

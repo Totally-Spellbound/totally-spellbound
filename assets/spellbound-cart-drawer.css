@@ -112,9 +112,11 @@
 }
 
 .cart-drawer__dialog .cart-drawer__heading .cart-bubble__text {
-  color: var(--spellbound-bg);
+  color: #0d0b10 !important;
   font-family: var(--font-body--family, sans-serif);
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 /* Close button sits on the image band — keep it crisp */
@@ -194,7 +196,7 @@
 
 /* Quantity stepper: quiet pill, gold when focused */
 .cart-drawer__dialog .cart-items__quantity .quantity-selector {
-  background-color: var(--spellbound-surface-2);
+  background-color: var(--spellbound-panel);
   border: 1px solid var(--spellbound-border);
   border-radius: 100px;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
@@ -296,7 +298,7 @@
 
 .cart-drawer__dialog .cart-note__instructions,
 .cart-drawer__dialog .cart-discount__input {
-  background-color: var(--spellbound-surface-2);
+  background-color: var(--spellbound-panel);
   border: 1px solid var(--spellbound-border);
   color: var(--spellbound-text);
 }
@@ -394,4 +396,34 @@
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* Discount apply button: ornate gold frame, aligned with the input */
+.cart-drawer__dialog .cart-discount__form {
+  align-items: stretch;
+}
+.cart-drawer__dialog .cart-discount__input {
+  border-radius: 2px;
+  height: 46px;
+}
+.cart-drawer__dialog .cart-discount__button {
+  border: 6px solid transparent !important;
+  border-image-source: url('spellbound-btn-gold.webp') !important;
+  border-image-slice: 16 fill !important;
+  border-image-repeat: stretch !important;
+  border-radius: 0 !important;
+  background: none !important;
+  color: var(--spellbound-gold-bright) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+  height: 46px;
+  padding: 0 1.4rem;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
+  transition: filter 0.2s ease;
+}
+.cart-drawer__dialog .cart-discount__button:hover {
+  filter: brightness(1.18) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
 }

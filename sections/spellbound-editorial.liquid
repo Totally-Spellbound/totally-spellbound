@@ -6,7 +6,7 @@
 
 <style>
   .spellbound-story {
-    padding: clamp(4rem, 9vw, 7.5rem) 1.5rem;
+    padding: clamp(3rem, 6vw, 5rem) 1.5rem clamp(4rem, 9vw, 7.5rem);
     background: var(--spellbound-bg);
     position: relative;
   }
@@ -135,8 +135,8 @@
   }
 </style>
 
+{% render 'spellbound-ornament' %}
 <section class="spellbound-story">
-  {% render 'spellbound-ornament' %}
   <div class="spellbound-story__inner">
     <div class="spellbound-story__media" data-spellbound-reveal>
       <div class="spellbound-story__media-frame">
