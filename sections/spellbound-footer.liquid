@@ -224,12 +224,44 @@
   }
   .spellbound-footer__cat {
     position: absolute;
-    bottom: 0;
+    bottom: -14px;
     left: 50%;
     translate: -50% 0;
     display: flex;
     line-height: 0;
     pointer-events: none;
+  }
+  .spellbound-cat-z {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    animation: spellbound-cat-snore 3.6s ease-in-out infinite;
+  }
+  .spellbound-cat-z--2 {
+    animation-delay: 1.8s;
+  }
+  @keyframes spellbound-cat-snore {
+    0% {
+      opacity: 0;
+      transform: translate(-4px, 10px) scale(0.7);
+    }
+    20% {
+      opacity: 0.85;
+    }
+    65% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(10px, -22px) scale(1.15);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-cat-z {
+      animation: none;
+      opacity: 0.85;
+      transform: none;
+    }
   }
   .spellbound-footer__cat svg {
     width: 170px;
@@ -362,9 +394,9 @@
       <path d="M331 120 L303 128 L280 142 L266 156 L255 172 L248 188 L244 202 L244 187 L251 167 L263 149 L274 138 L285 130 L306 121 L315 119 Z" fill="rgba(212,175,55,0.45)"/>
       <path d="M23 86 L33 88 L46 94 L59 103 L66 111 L53 126 L49 132 L46 139 L44 141 L39 134 L30 114 L24 96 L22 88 Z" fill="rgba(212,175,55,0.75)"/>
       <path d="M186 44 L188 46 L190 54 L192 72 L190 100 L182 94 L170 89 L164 88 L163 82 L168 71 L175 58 L184 45 Z" fill="rgba(212,175,55,0.75)"/>
-      <g stroke="#d4af37" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
-        <path d="M79 60 h18 l-18 18 h18"/>
-        <path d="M109 34 h24 l-24 24 h24"/>
+      <g stroke="#d4af37" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path class="spellbound-cat-z" d="M79 60 h18 l-18 18 h18"/>
+        <path class="spellbound-cat-z spellbound-cat-z--2" d="M109 34 h24 l-24 24 h24"/>
       </g>
       <defs>
         <filter id="spellbound-cat-glow" x="-15%" y="-15%" width="130%" height="130%">
