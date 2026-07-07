@@ -1,72 +1,127 @@
 {% comment %}
-  Spellbound social proof strip - rendered under the buy buttons / "More
-  payment options" on the product page. Every claim here is verifiable:
-  Facebook recommend rating + follower base (facebook.com/totallyspellbound,
-  research 2026-03), real shop address, click & collect. No invented star
-  ratings - swap in an AggregateRating widget if/when a reviews app lands.
+  Spellbound buying signals - rendered under the buy buttons / "More
+  payment options" on the product page. Covers proof + risk reduction
+  (commercefieldkits.com 7-buying-signals framework): community proof,
+  delivery, returns, secure payment, click & collect.
+  Every claim is verifiable: Facebook recommend rating (research 2026-03),
+  30-day returns (live /policies/refund-policy), payment methods (checkout).
+  No invented star ratings - swap in an AggregateRating widget if/when a
+  reviews app lands.
 {% endcomment %}
 
-<div class="spellbound-social-proof">
+<div class="spellbound-buying-signals">
   <a
-    class="spellbound-social-proof__rating"
+    class="spellbound-buying-signals__rating"
     href="https://www.facebook.com/totallyspellbound"
     target="_blank"
     rel="noopener"
   >
-    <span class="spellbound-social-proof__stars" aria-hidden="true">
+    <span class="spellbound-buying-signals__stars" aria-hidden="true">
       {%- for i in (1..5) -%}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.5L12 16.8 6.1 20l1.3-6.5L2.5 8.9l6.6-.8Z"/></svg>
       {%- endfor -%}
     </span>
-    <span class="spellbound-social-proof__rating-text">100% of reviewers recommend us on Facebook</span>
+    <span class="spellbound-buying-signals__rating-text">100% of reviewers recommend us on Facebook</span>
   </a>
-  <p class="spellbound-social-proof__sub">
-    Trusted by a community of 1,000+ followers &middot; A real shop on Outram Street, Sutton-in-Ashfield
-  </p>
+
+  <ul class="spellbound-buying-signals__list">
+    <li>
+      <span class="spellbound-buying-signals__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v10H3Z"/><path d="M14 10h4l3 3v4h-7"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>
+      </span>
+      Free UK delivery over &pound;50
+    </li>
+    <li>
+      <span class="spellbound-buying-signals__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      </span>
+      <a href="{{ shop.refund_policy.url | default: '/policies/refund-policy' }}">30-day returns</a>
+    </li>
+    <li>
+      <span class="spellbound-buying-signals__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      </span>
+      Secure checkout - Apple Pay, Google Pay, Klarna &amp; all major cards
+    </li>
+    <li>
+      <span class="spellbound-buying-signals__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.5 12h-11Z"/><path d="M8.5 11V6.5a3.5 3.5 0 0 1 7 0V11"/></svg>
+      </span>
+      Free click &amp; collect
+    </li>
+  </ul>
 </div>
 
 {% stylesheet %}
-  .spellbound-social-proof {
+  .spellbound-buying-signals {
     width: 100%;
-    margin-block-start: 0.75rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--spellbound-border, rgba(212, 175, 55, 0.18));
-    border-radius: 8px;
-    background: var(--spellbound-gold-glow, rgba(212, 175, 55, 0.06));
-    text-align: center;
+    margin-block-start: 1.25rem;
+    padding-block-start: 1.25rem;
+    border-top: 1px solid var(--spellbound-border, rgba(212, 175, 55, 0.18));
   }
-  .spellbound-social-proof__rating {
-    display: inline-flex;
+  .spellbound-buying-signals__rating {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.75rem;
     text-decoration: none;
+    margin-block-end: 1rem;
   }
-  .spellbound-social-proof__stars {
+  .spellbound-buying-signals__stars {
     display: inline-flex;
-    gap: 0.15rem;
+    gap: 0.2rem;
     color: var(--spellbound-gold, #d4af37);
+    flex-shrink: 0;
   }
-  .spellbound-social-proof__stars svg {
-    width: 15px;
-    height: 15px;
+  .spellbound-buying-signals__stars svg {
+    width: 17px;
+    height: 17px;
   }
-  .spellbound-social-proof__rating-text {
-    font-size: 0.875rem;
-    letter-spacing: 0.04em;
+  .spellbound-buying-signals__rating-text {
+    font-size: 1.0625rem;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
     color: var(--spellbound-text, #f7f1e3);
+    transition: color 0.25s ease;
+  }
+  .spellbound-buying-signals__rating:hover .spellbound-buying-signals__rating-text {
+    color: var(--spellbound-gold-bright, #e6c55f);
+  }
+  .spellbound-buying-signals__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .spellbound-buying-signals__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    color: var(--spellbound-text-soft, rgba(247, 241, 227, 0.85));
+  }
+  .spellbound-buying-signals__list li a {
+    color: inherit;
     text-decoration: underline;
     text-decoration-color: var(--spellbound-border-strong, rgba(212, 175, 55, 0.4));
     text-underline-offset: 3px;
+    transition: color 0.25s ease;
   }
-  .spellbound-social-proof__rating:hover .spellbound-social-proof__rating-text {
+  .spellbound-buying-signals__list li a:hover {
     color: var(--spellbound-gold-bright, #e6c55f);
   }
-  .spellbound-social-proof__sub {
-    margin: 0.5rem 0 0;
-    font-size: 0.8125rem;
-    letter-spacing: 0.04em;
-    color: var(--spellbound-text-faint, rgba(247, 241, 227, 0.72));
+  .spellbound-buying-signals__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 21px;
+    height: 21px;
+    color: var(--spellbound-gold, #d4af37);
+  }
+  .spellbound-buying-signals__icon svg {
+    width: 100%;
+    height: 100%;
   }
 {% endstylesheet %}
