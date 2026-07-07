@@ -230,7 +230,33 @@
     translate: -50% 0;
     display: flex;
     line-height: 0;
-    pointer-events: none;
+    cursor: pointer;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .spellbound-cat-eyes-closed {
+    transition: opacity 0.2s ease;
+  }
+  .spellbound-footer__cat.is-awake .spellbound-cat-eyes-closed {
+    opacity: 0;
+  }
+  .spellbound-cat-eye {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    transform: scaleY(0.1);
+    transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .spellbound-footer__cat.is-awake .spellbound-cat-eye {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  .spellbound-cat-pupil {
+    transition: transform 0.12s ease-out;
+  }
+  .spellbound-footer__cat.is-awake .spellbound-cat-z {
+    animation: none;
+    opacity: 0;
   }
   .spellbound-cat-z {
     transform-box: fill-box;
@@ -262,6 +288,14 @@
       animation: none;
       opacity: 0.85;
       transform: none;
+    }
+    .spellbound-footer__cat.is-awake .spellbound-cat-z {
+      opacity: 0;
+    }
+    .spellbound-cat-eye,
+    .spellbound-cat-eyes-closed,
+    .spellbound-cat-pupil {
+      transition: none;
     }
   }
   .spellbound-footer__cat svg {
@@ -387,11 +421,33 @@
       <g filter="url(#spellbound-cat-glow)">
         <path d="M8 78 L12 105 L34 158 L36 190 L47 212 L38 224 L37 238 L46 247 L49 235 L54 251 L65 251 L71 232 L97 216 L48 217 L65 209 L123 216 L84 228 L72 242 L71 251 L76 258 L80 258 L84 244 L86 258 L93 260 L97 245 L98 257 L103 261 L126 259 L127 244 L139 227 L158 215 L186 207 L229 207 L337 230 L374 229 L409 219 L379 234 L340 236 L239 216 L193 214 L154 225 L139 237 L133 249 L136 268 L169 285 L224 294 L316 295 L369 288 L411 274 L442 249 L453 230 L458 206 L456 181 L438 135 L405 95 L354 65 L318 56 L280 55 L247 61 L210 77 L206 104 L220 127 L218 154 L214 126 L200 107 L200 57 L191 30 L182 31 L165 42 L134 71 L110 73 L82 85 L32 72 L15 72 Z" fill="#1d1724"/>
       </g>
-      <path d="M123 189 L122 192 L118 195 L114 197 L107 199 L98 199 L92 197 L90 196 L89 191 L94 192 L99 194 L105 194 L112 192 L118 188 L121 187 Z" fill="#d4af37"/>
+      <g class="spellbound-cat-eyes-closed">
+        <path d="M123 189 L122 192 L118 195 L114 197 L107 199 L98 199 L92 197 L90 196 L89 191 L94 192 L99 194 L105 194 L112 192 L118 188 L121 187 Z" fill="#d4af37"/>
+        <path d="M191 151 L192 157 L190 161 L182 169 L173 173 L164 172 L164 170 L166 168 L169 167 L172 167 L180 163 L184 160 L187 157 Z" fill="#d4af37"/>
+      </g>
       <path d="M159 188 L159 190 L158 193 L154 201 L153 202 L147 202 L141 199 L139 197 L138 197 L137 195 L144 189 L148 187 L151 186 L157 186 Z" fill="#d4af37"/>
+      <g class="spellbound-cat-eyes-open" aria-hidden="true">
+        <g class="spellbound-cat-eye">
+          <ellipse cx="106" cy="193" rx="15" ry="9.5" fill="#e6c55f" transform="rotate(-8 106 193)"/>
+          <g clip-path="url(#spellbound-cat-eyeclip-l)">
+            <g class="spellbound-cat-pupil">
+              <ellipse cx="106" cy="193" rx="4.6" ry="7.5" fill="#1d1724" transform="rotate(-8 106 193)"/>
+            </g>
+          </g>
+          <circle cx="100.5" cy="189.5" r="1.8" fill="#f7f1e3" opacity="0.9"/>
+        </g>
+        <g class="spellbound-cat-eye">
+          <ellipse cx="177" cy="163" rx="12" ry="8.5" fill="#e6c55f" transform="rotate(-25 177 163)"/>
+          <g clip-path="url(#spellbound-cat-eyeclip-r)">
+            <g class="spellbound-cat-pupil">
+              <ellipse cx="177" cy="163" rx="4" ry="6.8" fill="#1d1724" transform="rotate(-25 177 163)"/>
+            </g>
+          </g>
+          <circle cx="172.5" cy="159.5" r="1.5" fill="#f7f1e3" opacity="0.9"/>
+        </g>
+      </g>
       <path d="M231 174 L231 177 L220 182 L201 188 L195 188 L200 184 L212 178 L218 176 Z" fill="#d4af37"/>
       <path d="M236 156 L234 158 L222 166 L212 172 L200 178 L200 175 L207 169 L214 164 L219 161 L230 156 L233 155 Z" fill="#d4af37"/>
-      <path d="M191 151 L192 157 L190 161 L182 169 L173 173 L164 172 L164 170 L166 168 L169 167 L172 167 L180 163 L184 160 L187 157 Z" fill="#d4af37"/>
       <path d="M331 120 L303 128 L280 142 L266 156 L255 172 L248 188 L244 202 L244 187 L251 167 L263 149 L274 138 L285 130 L306 121 L315 119 Z" fill="rgba(212,175,55,0.45)"/>
       <path d="M23 86 L33 88 L46 94 L59 103 L66 111 L53 126 L49 132 L46 139 L44 141 L39 134 L30 114 L24 96 L22 88 Z" fill="rgba(212,175,55,0.75)"/>
       <path d="M186 44 L188 46 L190 54 L192 72 L190 100 L182 94 L170 89 L164 88 L163 82 L168 71 L175 58 L184 45 Z" fill="rgba(212,175,55,0.75)"/>
@@ -403,9 +459,175 @@
         <filter id="spellbound-cat-glow" x="-15%" y="-15%" width="130%" height="130%">
           <feDropShadow dx="0" dy="0" stdDeviation="7" flood-color="#d4af37" flood-opacity="0.28"/>
         </filter>
+        <clipPath id="spellbound-cat-eyeclip-l">
+          <ellipse cx="106" cy="193" rx="15" ry="9.5" transform="rotate(-8 106 193)"/>
+        </clipPath>
+        <clipPath id="spellbound-cat-eyeclip-r">
+          <ellipse cx="177" cy="163" rx="12" ry="8.5" transform="rotate(-25 177 163)"/>
+        </clipPath>
       </defs>
     </svg>
   </div>
+
+  <script>
+    (function () {
+      var cat = document.querySelector('.spellbound-footer__cat');
+      if (!cat) return;
+
+      var armed = false;
+      var stroked = 0;
+      var lastX = null;
+      var lastY = null;
+      var sleepTimer = null;
+      var audioCtx = null;
+      var purrMaster = null;
+
+      // Synthesized purr: looped brown noise, low-passed, amplitude-fluttered
+      // at ~24Hz with a slow breathing wobble. No audio asset needed.
+      function startPurr() {
+        try {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          if (!audioCtx) audioCtx = new AC();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          if (purrMaster) {
+            purrMaster.gain.cancelScheduledValues(audioCtx.currentTime);
+            purrMaster.gain.setTargetAtTime(0.16, audioCtx.currentTime, 0.25);
+            return;
+          }
+          var len = audioCtx.sampleRate * 2;
+          var buffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+          var data = buffer.getChannelData(0);
+          var lastOut = 0;
+          for (var i = 0; i < len; i++) {
+            var white = Math.random() * 2 - 1;
+            lastOut = (lastOut + 0.02 * white) / 1.02;
+            data[i] = lastOut * 3.5;
+          }
+          var src = audioCtx.createBufferSource();
+          src.buffer = buffer;
+          src.loop = true;
+          var lowpass = audioCtx.createBiquadFilter();
+          lowpass.type = 'lowpass';
+          lowpass.frequency.value = 240;
+          var flutter = audioCtx.createGain();
+          flutter.gain.value = 0.55;
+          var lfo = audioCtx.createOscillator();
+          lfo.frequency.value = 24;
+          var lfoDepth = audioCtx.createGain();
+          lfoDepth.gain.value = 0.45;
+          lfo.connect(lfoDepth);
+          lfoDepth.connect(flutter.gain);
+          var breath = audioCtx.createOscillator();
+          breath.frequency.value = 0.6;
+          var breathDepth = audioCtx.createGain();
+          breathDepth.gain.value = 6;
+          breath.connect(breathDepth);
+          breathDepth.connect(lfo.frequency);
+          purrMaster = audioCtx.createGain();
+          purrMaster.gain.value = 0;
+          src.connect(lowpass);
+          lowpass.connect(flutter);
+          flutter.connect(purrMaster);
+          purrMaster.connect(audioCtx.destination);
+          src.start();
+          lfo.start();
+          breath.start();
+          purrMaster.gain.setTargetAtTime(0.16, audioCtx.currentTime, 0.25);
+        } catch (e) {
+          /* no audio — the cat purrs silently */
+        }
+      }
+
+      function stopPurr() {
+        if (!purrMaster || !audioCtx) return;
+        purrMaster.gain.cancelScheduledValues(audioCtx.currentTime);
+        purrMaster.gain.setTargetAtTime(0, audioCtx.currentTime, 0.4);
+      }
+
+      var svg = cat.querySelector('svg');
+      var pupilEls = cat.querySelectorAll('.spellbound-cat-pupil');
+      var pupilTargets = [
+        { el: pupilEls[0], cx: 106, cy: 193, maxX: 8.5, maxY: 2.2 },
+        { el: pupilEls[1], cx: 177, cy: 163, maxX: 6.5, maxY: 2 }
+      ];
+      var cursorPos = null;
+      var pupilRaf = null;
+
+      function updatePupils() {
+        pupilRaf = null;
+        if (!cursorPos || !svg.getScreenCTM) return;
+        var ctm = svg.getScreenCTM();
+        if (!ctm) return;
+        var pt = svg.createSVGPoint();
+        pt.x = cursorPos[0];
+        pt.y = cursorPos[1];
+        var p = pt.matrixTransform(ctm.inverse());
+        pupilTargets.forEach(function (eye) {
+          if (!eye.el) return;
+          var dx = p.x - eye.cx;
+          var dy = p.y - eye.cy;
+          var len = Math.hypot(dx, dy) || 1;
+          var ease = Math.min(1, len / 60);
+          eye.el.style.transform =
+            'translate(' + (dx / len * eye.maxX * ease).toFixed(2) + 'px,' + (dy / len * eye.maxY * ease).toFixed(2) + 'px)';
+        });
+      }
+
+      document.addEventListener('pointermove', function (e) {
+        cursorPos = [e.clientX, e.clientY];
+        if (cat.classList.contains('is-awake') && pupilRaf === null) {
+          pupilRaf = requestAnimationFrame(updatePupils);
+        }
+      }, { passive: true });
+
+      function wake() {
+        cat.classList.add('is-awake');
+        cat.setAttribute('title', 'Prrrrrr…');
+        startPurr();
+        if (pupilRaf === null) pupilRaf = requestAnimationFrame(updatePupils);
+        clearTimeout(sleepTimer);
+        sleepTimer = setTimeout(goBackToSleep, 4000);
+      }
+
+      function goBackToSleep() {
+        cat.classList.remove('is-awake');
+        cat.setAttribute('title', 'The shop cat is asleep');
+        stopPurr();
+        pupilTargets.forEach(function (eye) {
+          if (eye.el) eye.el.style.transform = '';
+        });
+        armed = false;
+        stroked = 0;
+        lastX = lastY = null;
+      }
+
+      cat.addEventListener('pointerdown', function (e) {
+        armed = true;
+        stroked = 0;
+        lastX = e.clientX;
+        lastY = e.clientY;
+      });
+
+      cat.addEventListener('pointermove', function (e) {
+        if (!armed) return;
+        if (lastX !== null) {
+          stroked += Math.hypot(e.clientX - lastX, e.clientY - lastY);
+        }
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (stroked > 40) {
+          stroked = 0;
+          wake();
+        }
+      });
+
+      cat.addEventListener('pointerleave', function () {
+        lastX = lastY = null;
+        if (!cat.classList.contains('is-awake')) armed = false;
+      });
+    })();
+  </script>
 </footer>
 
 {% schema %}
