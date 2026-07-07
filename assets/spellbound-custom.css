@@ -748,8 +748,23 @@ dialog.facets--drawer {
 }
 
 /* Sticky add-to-cart bar must paint above the sections that follow the main
-   product section (its wrapper is isolated, so it needs explicit stacking). */
+   product section. Two halves to this:
+   1. Each custom product-page section gets isolation: isolate so its internal
+      z-indexes (celestial panel z-20, chakra nodes, kindred strip) stay
+      contained instead of leaking into the root stacking context.
+   2. The product-information wrapper needs position (z-index is a no-op on
+      statically positioned elements) and a z-index above those section units
+      but below the sticky header (--layer-sticky: 8). */
+.spellbound-celestial,
+.spellbound-chakra,
+.spellbound-kindred,
+.spellbound-lore,
+.spellbound-product-nav,
+.spellbound-product-extras {
+  isolation: isolate;
+}
 .shopify-section:has(> .product-information) {
+  position: relative;
   z-index: 2;
 }
 .sticky-add-to-cart,
