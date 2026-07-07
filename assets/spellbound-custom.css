@@ -772,6 +772,25 @@ dialog.facets--drawer {
   z-index: 20;
 }
 
+/* Celestial body section: kill the page-background gap above the black
+   stage so it merges seamlessly with the (dark) section before it. The
+   bottom keeps its padding - the stage's own gradient fades to page bg. */
+.shopify-section:has(> .spellbound-celestial) {
+  padding-top: 0;
+}
+.shopify-section:has(+ .shopify-section > .spellbound-celestial) {
+  padding-bottom: 0;
+}
+
+/* Quantity box stretches to match the gold Add to Cauldron button height */
+.product-information .product-form-buttons .quantity-selector-wrapper {
+  align-items: stretch;
+}
+.product-information .product-form-buttons .quantity-selector {
+  height: auto;
+  min-height: var(--height-buy-buttons);
+}
+
 /* Product page Add to Cauldron button */
 .product-information .add-to-cart-button,
 .product-information button.add-to-cart-button {

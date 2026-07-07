@@ -33,6 +33,26 @@
   .spellbound-collection-desc__body p:last-child {
     margin-bottom: 0;
   }
+  /* Lists: shrink-wrapped and centred as a block, text left-aligned inside,
+     gold star markers matching the policy-page treatment. */
+  .spellbound-collection-desc__body :is(ul, ol) {
+    display: table;
+    margin: 0.25em auto 1.5em;
+    padding-left: 1.4rem;
+    text-align: left;
+  }
+  .spellbound-collection-desc__body li {
+    margin-bottom: 0.6em;
+    padding-left: 0.35rem;
+  }
+  .spellbound-collection-desc__body ul li::marker {
+    content: '\2726\00a0\00a0';
+    color: var(--spellbound-gold);
+    font-size: 0.75em;
+  }
+  .spellbound-collection-desc__body ol li::marker {
+    color: var(--spellbound-gold);
+  }
   .spellbound-collection-desc__body a {
     color: var(--spellbound-gold);
   }

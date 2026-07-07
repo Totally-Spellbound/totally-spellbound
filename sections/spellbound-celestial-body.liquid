@@ -330,28 +330,17 @@
   @media (min-width: 750px) {
     .spellbound-celestial__horizon { bottom: -60px; }
   }
-  /* Edge fades: melt the pure-black stage into the page background
-     (var(--spellbound-bg)) so there is no hard seam above or below. */
-  .spellbound-celestial::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 120px;
-    background: linear-gradient(to bottom, var(--spellbound-bg) 0%, transparent 100%);
-    z-index: 3;
-    pointer-events: none;
-  }
-  /* Bottom fade also stops bright texture leaking past the stage edge */
+  /* Edge treatment: the stage starts pure black at the top so it merges
+     seamlessly with the (black) section above; only the bottom melts into
+     the page background (var(--spellbound-bg)). */
   .spellbound-celestial::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 120px;
-    background: linear-gradient(to top, var(--spellbound-bg) 0%, var(--spellbound-bg) 20%, transparent 100%);
+    height: 190px;
+    background: linear-gradient(to top, var(--spellbound-bg) 0%, var(--spellbound-bg) 14%, transparent 100%);
     z-index: 3;
     pointer-events: none;
   }
