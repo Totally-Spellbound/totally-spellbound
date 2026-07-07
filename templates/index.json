@@ -13,6 +13,52 @@
         "button2_link": "#oracle"
       }
     },
+    "trust": {
+      "type": "spellbound-trust-bar",
+      "blocks": {
+        "trust_packed": {
+          "type": "signal",
+          "settings": {
+            "title": "Hand-packed with care",
+            "text": "Every order is wrapped in our shop, not a warehouse.",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 11h22v16H5Z\"/><path d=\"M5 11l3-6h16l3 6\"/><path d=\"M16 5v6\"/><path d=\"M12 16h8\"/></svg>"
+          }
+        },
+        "trust_secure": {
+          "type": "signal",
+          "settings": {
+            "title": "Secure checkout",
+            "text": "Apple Pay, Google Pay, Klarna and all major cards.",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 4 26 8.2v6.8c0 6.8-4.3 11.4-10 13-5.7-1.6-10-6.2-10-13V8.2Z\"/><path d=\"m11.5 16 3 3 6-6\"/></svg>"
+          }
+        },
+        "trust_local": {
+          "type": "signal",
+          "settings": {
+            "title": "Independent & family-run",
+            "text": "A real shop on Outram Street, Sutton-in-Ashfield.",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 13v14h20V13\"/><path d=\"M4 8l2-4h20l2 4c0 2.2-1.8 4-4 4s-4-1.8-4-4c0 2.2-1.8 4-4 4s-4-1.8-4-4c0 2.2-1.8 4-4 4S4 10.2 4 8Z\"/><path d=\"M12 27v-8h8v8\"/></svg>",
+            "link": "/pages/visit-us"
+          }
+        },
+        "trust_help": {
+          "type": "signal",
+          "settings": {
+            "title": "Ask us anything",
+            "text": "Message us like you would over the counter.",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M27 6H5v16h6v5l6-5h10Z\"/><path d=\"M10 12h12\"/><path d=\"M10 16h7\"/></svg>",
+            "link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "trust_packed",
+        "trust_secure",
+        "trust_local",
+        "trust_help"
+      ],
+      "settings": {}
+    },
     "category_tiles": {
       "type": "spellbound-category-tiles",
       "blocks": {
@@ -172,13 +218,13 @@
       "settings": {
         "label": "Proudly Independent",
         "heading": "A real little shop in Sutton-in-Ashfield",
-        "body": "<p>Totally Spellbound isn’t a faceless warehouse — it’s Alison’s shop on Outram Street, where every crystal, deck and curiosity is chosen by hand. When you order online, it’s packed with the same care as if you’d walked through the door.</p>",
-        "quote": "Helpful like a conversation in the shop — never pushy.",
+        "body": "<p>Totally Spellbound isn’t a faceless warehouse - it’s Alison’s shop on Outram Street, where every crystal, deck and curiosity is chosen by hand. When you order online, it’s packed with the same care as if you’d walked through the door.</p>",
+        "quote": "Helpful like a conversation in the shop - never pushy.",
         "cta_label": "Plan Your Visit",
         "cta_link": "/pages/visit-us",
         "image_asset": "spellbound-img-our-story.webp",
         "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
-        "hours_text": "Mon–Sat 10am–4pm · Closed Sundays"
+        "hours_text": "Mon-Sat 10am-4pm · Closed Sundays"
       }
     },
     "oracle": {
@@ -259,7 +305,7 @@
       "type": "spellbound-ritual-countdown",
       "settings": {
         "label": "The Wheel Turns",
-        "heading": "Lammas — The First Harvest",
+        "heading": "Lammas - The First Harvest",
         "description": "The first harvest festival of the year falls on the 1st of August. Gather abundance while the wheel turns.",
         "target_date": "2026-08-01",
         "cta_label": "Shop the Harvest Ritual",
@@ -391,6 +437,7 @@
   },
   "order": [
     "hero",
+    "trust",
     "category_tiles",
     "featured",
     "intentions",

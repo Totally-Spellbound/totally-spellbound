@@ -6,7 +6,7 @@
         "image_asset": "spellbound-img-our-story.webp",
         "label": "Proudly Independent",
         "title": "Our Story",
-        "intro": "A real little shop in Sutton-in-Ashfield — no corporate warehouse, no endless aisles. Every crystal, deck and curiosity on our shelves is chosen by hand."
+        "intro": "A real little shop in Sutton-in-Ashfield - no corporate warehouse, no endless aisles. Every crystal, deck and curiosity on our shelves is chosen by hand."
       }
     },
     "main": {
@@ -58,7 +58,7 @@
           "settings": {
             "icon": "map-pin",
             "title": "Visit the shop",
-            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS. Open Monday - Saturday, 10am - 4pm — pop in for a browse, a chat, or a bit of guidance.",
+            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS. Open Monday - Saturday, 10am - 4pm - pop in for a browse, a chat, or a bit of guidance.",
             "link_label": "Plan your visit",
             "link": "/pages/visit-us"
           }
@@ -68,7 +68,7 @@
           "settings": {
             "icon": "sparkle",
             "title": "Browse the vault",
-            "body": "Hand-picked crystals, tarot and curiosities — many one-of-a-kind. The exact piece you see is the exact piece that arrives.",
+            "body": "Hand-picked crystals, tarot and curiosities - many one-of-a-kind. The exact piece you see is the exact piece that arrives.",
             "link_label": "Enter the Vault",
             "link": "/collections/all"
           }
@@ -88,7 +88,7 @@
       "settings": {
         "label": "Made By Hand",
         "heading": "Engraved, printed & finished in the shop",
-        "body": "<p>Alongside the crystals and curiosities we source, we design and make our own pieces right here — laser-engraved altar boards, 3D-printed moon shelves, trinket dishes and keepsakes you won’t find anywhere else. If you’re after something a little different, this is where the magic is literally made.</p>",
+        "body": "<p>Alongside the crystals and curiosities we source, we design and make our own pieces right here - laser-engraved altar boards, 3D-printed moon shelves, trinket dishes and keepsakes you won’t find anywhere else. If you’re after something a little different, this is where the magic is literally made.</p>",
         "quote": "If you can dream it up, we can probably engrave it.",
         "cta_label": "Shop Handmade",
         "cta_link": "/collections/handmade",

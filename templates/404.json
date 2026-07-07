@@ -33,7 +33,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Whatever you were seeking isn’t here — but the vault holds plenty of wonders.</p>",
+            "text": "<p>Whatever you were seeking isn’t here - but the vault holds plenty of wonders.</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",

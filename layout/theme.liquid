@@ -12,6 +12,16 @@
         type="image/png"
         href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
       >
+      <link
+        rel="apple-touch-icon"
+        href="{{ settings.favicon | image_url: width: 180, height: 180 }}"
+      >
+    {%- else -%}
+      <link rel="icon" type="image/svg+xml" href="{{ 'spellbound-favicon.svg' | asset_url }}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ 'spellbound-favicon-32.png' | asset_url }}">
+      <link rel="icon" type="image/png" sizes="96x96" href="{{ 'spellbound-favicon-96.png' | asset_url }}">
+      <link rel="icon" type="image/png" sizes="192x192" href="{{ 'spellbound-favicon-192.png' | asset_url }}">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ 'spellbound-apple-touch-icon.png' | asset_url }}">
     {%- endif -%}
 
     {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
@@ -25,6 +35,7 @@
     {% endif %}
 
     {%- render 'meta-tags' -%}
+    {%- render 'spellbound-structured-data' -%}
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}

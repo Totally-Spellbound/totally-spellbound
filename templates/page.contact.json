@@ -6,7 +6,7 @@
         "image_asset": "spellbound-img-contact.webp",
         "label": "Send Word",
         "title": "Contact",
-        "intro": "Questions, requests, or wondering if something's in stock? Write to us — we'll answer like we would in the shop."
+        "intro": "Questions, requests, or wondering if something's in stock? Write to us - we'll answer like we would in the shop."
       }
     },
     "main": {
@@ -153,13 +153,13 @@
       "settings": {
         "label": "Prefer To Talk In Person?",
         "heading": "The kettle’s usually on",
-        "body": "<p>Some questions are easier over the counter — bring the piece, the problem or the birth chart and we’ll figure it out together. You’ll find us on Outram Street, six days a week.</p>",
-        "quote": "Helpful like a conversation in the shop — never pushy.",
+        "body": "<p>Some questions are easier over the counter - bring the piece, the problem or the birth chart and we’ll figure it out together. You’ll find us on Outram Street, six days a week.</p>",
+        "quote": "Helpful like a conversation in the shop - never pushy.",
         "cta_label": "Plan Your Visit",
         "cta_link": "/pages/visit-us",
         "image_asset": "spellbound-img-our-story.webp",
         "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
-        "hours_text": "Mon–Sat 10am–4pm · Closed Sundays"
+        "hours_text": "Mon-Sat 10am-4pm · Closed Sundays"
       }
     }
   },

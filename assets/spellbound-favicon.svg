@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0d0b10"/>
+  <!-- crescent moon: gold disc cut by background disc -->
+  <path d="M 30 8 A 24 24 0 1 0 54 32 A 19.5 19.5 0 1 1 30 8 Z" fill="#d4af37"/>
+  <!-- four-point sparkle, echoing the logo ornament -->
+  <path d="M 44 12 L 46.4 19.6 L 54 22 L 46.4 24.4 L 44 32 L 41.6 24.4 L 34 22 L 41.6 19.6 Z" fill="#e6c55f"/>
+  <!-- small companion star -->
+  <path d="M 50 36 L 51.2 39.8 L 55 41 L 51.2 42.2 L 50 46 L 48.8 42.2 L 45 41 L 48.8 39.8 Z" fill="#e6c55f" opacity="0.85"/>
+</svg>

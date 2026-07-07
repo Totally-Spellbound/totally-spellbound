@@ -26,7 +26,7 @@
 {%- assign node_en = 'Crown,Third Eye,Throat,Heart,Solar Plexus,Sacral,Root' | split: ',' -%}
 {%- assign node_sa = 'Sahasrara,Ajna,Vishuddha,Anahata,Manipura,Svadhisthana,Muladhara' | split: ',' -%}
 {%- assign node_colours = '#cfc7f2,#7c6bd8,#4d9de5,#4dbd7c,#e5c04d,#f0883e,#e5484d' | split: ',' -%}
-{%- assign node_meanings = 'Connection and higher purpose — the quiet crown where self opens to spirit.|Intuition and inner vision — trusting the knowing that arrives before words.|Truth and clear expression — speaking honestly, gently, without fear.|Love, compassion and healing — the still centre where giving meets receiving.|Confidence and personal power — the steady fire that turns intention into action.|Creativity, pleasure and flow — the warm current behind joy and making.|Grounding, safety and belonging — deep roots for everything that grows above.' | split: '|' -%}
+{%- assign node_meanings = 'Connection and higher purpose - the quiet crown where self opens to spirit.|Intuition and inner vision - trusting the knowing that arrives before words.|Truth and clear expression - speaking honestly, gently, without fear.|Love, compassion and healing - the still centre where giving meets receiving.|Confidence and personal power - the steady fire that turns intention into action.|Creativity, pleasure and flow - the warm current behind joy and making.|Grounding, safety and belonging - deep roots for everything that grows above.' | split: '|' -%}
 
 {%- comment -%} Which nodes are attuned, plus display name + default detail {%- endcomment -%}
 {%- assign active_count = 0 -%}
@@ -187,7 +187,7 @@
     transform: scale(1.12);
   }
 
-  /* Smoke wisps drifting up from attuned nodes — CSS only, colour-matched aura */
+  /* Smoke wisps drifting up from attuned nodes - CSS only, colour-matched aura */
   .spellbound-chakra__node.is-attuned::before,
   .spellbound-chakra__node.is-attuned::after {
     content: '';
@@ -566,7 +566,7 @@
             data-chakra-colour="{{ node_colours[i] }}"
             data-chakra-url="{{ routes.collections_url }}/{{ slug }}-chakra"
             aria-pressed="{% if i == default_index %}true{% else %}false{% endif %}"
-            aria-label="{{ node_en[i] }} chakra — {{ node_sa[i] }}"
+            aria-label="{{ node_en[i] }} chakra - {{ node_sa[i] }}"
           >
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <circle cx="12" cy="12" r="3"></circle>

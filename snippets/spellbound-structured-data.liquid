@@ -1,0 +1,147 @@
+{% comment %}
+  Spellbound structured data (JSON-LD) for Google rich results.
+  - Store (LocalBusiness) entity on every page: business facts match the
+    Visit Us page (108 Outram Street) and the footer social links.
+  - WebSite + SearchAction on the homepage (sitelinks search box).
+  - BreadcrumbList on product and collection pages.
+  Product/Offer markup is emitted natively by Shopify (ProductGroup JSON-LD),
+  so it is intentionally not duplicated here.
+{% endcomment %}
+
+{%- liquid
+  assign org_description = 'Independent crystal and spiritual shop in Sutton-in-Ashfield, Nottinghamshire. Crystals, tarot, incense and handmade gifts - in store and online with UK delivery.'
+  assign org_logo = 'spellbound-logo-banner.png' | asset_url
+  assign logo_prefix = org_logo | slice: 0, 2
+  if logo_prefix == '//'
+    assign org_logo = 'https:' | append: org_logo
+  elsif logo_prefix != 'ht'
+    assign org_logo = request.origin | append: org_logo
+  endif
+  assign org_image = 'spellbound-og-default.jpg' | asset_url
+  assign image_prefix = org_image | slice: 0, 2
+  if image_prefix == '//'
+    assign org_image = 'https:' | append: org_image
+  elsif image_prefix != 'ht'
+    assign org_image = request.origin | append: org_image
+  endif
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "@id": "{{ request.origin }}/#store",
+    "name": {{ shop.name | json }},
+    "description": {{ org_description | json }},
+    "url": {{ request.origin | json }},
+    "logo": {{ org_logo | json }},
+    "image": {{ org_image | json }},
+    "email": "gothicwitches@gmail.com",
+    "telephone": "+44 7380 149004",
+    "currenciesAccepted": "GBP",
+    "priceRange": "£",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "108 Outram Street",
+      "addressLocality": "Sutton-in-Ashfield",
+      "addressRegion": "Nottinghamshire",
+      "postalCode": "NG17 4FS",
+      "addressCountry": "GB"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "10:00",
+        "closes": "16:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/totallyspellbound"
+    ]
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "{{ request.origin }}/#website",
+      "name": {{ shop.name | json }},
+      "url": {{ request.origin | json }},
+      "publisher": { "@id": "{{ request.origin }}/#store" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ request.origin }}/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'product' and product -%}
+  {%- liquid
+    assign crumb_collection = product.collections.first
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": {{ request.origin | json }}
+        }
+        {%- if crumb_collection -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ crumb_collection.title | json }},
+          "item": {{ request.origin | append: crumb_collection.url | json }}
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": {{ product.title | json }},
+          "item": {{ request.origin | append: product.url | json }}
+        }
+        {%- else -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ product.title | json }},
+          "item": {{ request.origin | append: product.url | json }}
+        }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'collection' and collection -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": {{ request.origin | json }}
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ collection.title | json }},
+          "item": {{ request.origin | append: collection.url | json }}
+        }
+      ]
+    }
+  </script>
+{%- endif -%}

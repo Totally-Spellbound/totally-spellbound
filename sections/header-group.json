@@ -34,7 +34,7 @@
         "announcement_veil": {
           "type": "_announcement",
           "settings": {
-            "text": "The Veil Is Thinning — New Arrivals Weekly",
+            "text": "The Veil Is Thinning - New Arrivals Weekly",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
