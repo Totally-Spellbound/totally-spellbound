@@ -1,0 +1,72 @@
+{% comment %}
+  Spellbound social proof strip - rendered under the buy buttons / "More
+  payment options" on the product page. Every claim here is verifiable:
+  Facebook recommend rating + follower base (facebook.com/totallyspellbound,
+  research 2026-03), real shop address, click & collect. No invented star
+  ratings - swap in an AggregateRating widget if/when a reviews app lands.
+{% endcomment %}
+
+<div class="spellbound-social-proof">
+  <a
+    class="spellbound-social-proof__rating"
+    href="https://www.facebook.com/totallyspellbound"
+    target="_blank"
+    rel="noopener"
+  >
+    <span class="spellbound-social-proof__stars" aria-hidden="true">
+      {%- for i in (1..5) -%}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.1 6.6.8-4.9 4.6 1.3 6.5L12 16.8 6.1 20l1.3-6.5L2.5 8.9l6.6-.8Z"/></svg>
+      {%- endfor -%}
+    </span>
+    <span class="spellbound-social-proof__rating-text">100% of reviewers recommend us on Facebook</span>
+  </a>
+  <p class="spellbound-social-proof__sub">
+    Trusted by a community of 1,000+ followers &middot; A real shop on Outram Street, Sutton-in-Ashfield
+  </p>
+</div>
+
+{% stylesheet %}
+  .spellbound-social-proof {
+    width: 100%;
+    margin-block-start: 0.75rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--spellbound-border, rgba(212, 175, 55, 0.18));
+    border-radius: 8px;
+    background: var(--spellbound-gold-glow, rgba(212, 175, 55, 0.06));
+    text-align: center;
+  }
+  .spellbound-social-proof__rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+  .spellbound-social-proof__stars {
+    display: inline-flex;
+    gap: 0.15rem;
+    color: var(--spellbound-gold, #d4af37);
+  }
+  .spellbound-social-proof__stars svg {
+    width: 15px;
+    height: 15px;
+  }
+  .spellbound-social-proof__rating-text {
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    color: var(--spellbound-text, #f7f1e3);
+    text-decoration: underline;
+    text-decoration-color: var(--spellbound-border-strong, rgba(212, 175, 55, 0.4));
+    text-underline-offset: 3px;
+  }
+  .spellbound-social-proof__rating:hover .spellbound-social-proof__rating-text {
+    color: var(--spellbound-gold-bright, #e6c55f);
+  }
+  .spellbound-social-proof__sub {
+    margin: 0.5rem 0 0;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    color: var(--spellbound-text-faint, rgba(247, 241, 227, 0.72));
+  }
+{% endstylesheet %}

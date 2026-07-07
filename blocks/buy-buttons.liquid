@@ -231,6 +231,8 @@
         </div>
       {%- endform -%}
     </product-form-component>
+    {% comment %} Spellbound: social proof under the buy buttons / "More payment options". {% endcomment %}
+    {% render 'spellbound-social-proof' %}
   {%- else -%}
     <div class="product-form-buttons">
       <button
