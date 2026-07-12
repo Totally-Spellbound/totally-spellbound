@@ -54,8 +54,8 @@ The work will also correct the verified Search image-loading defect, remove Home
 
 ## Implementation Decisions
 
-- The current live storefront and the most recent approved launch direction are the starting evidence. The older `DESIGN.md` is historical and must not be treated as current authority.
-- Before changing typography or palette tokens, reconcile the live Brand Guidelines reference with the current approved direction. If a newer client-approved guide exists outside the repository, add or summarise it in the repository and name one document as canonical.
+- The current live storefront is implementation evidence, not design approval. Generate a root `DESIGN.md` from approved Stitch screens with the repository's `design-md` skill and review it with Andrew before changing typography or palette tokens.
+- Root `DESIGN.md` is the sole design authority once approved. Reconcile the live Brand Guidelines reference against it and remove any unsupported claim of authority.
 - Keep Shopify Horizon's layout, section, block and theme-editor model. This is a design-system and responsive-composition upgrade, not a framework rewrite.
 - Preserve the Candlelight identity: dark cinematic surfaces, warm gold interactive accents, authored imagery, shop-specific language and selected expressive moments.
 - Define semantic typography roles for display, page title, section title, product title, body, price, metadata, form control and action. Expressive faces must not automatically flow into body, price, filter or field roles.

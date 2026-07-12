@@ -26,3 +26,7 @@ The repo uses the standard five-state engineering-skill vocabulary. See `docs/ag
 ### Domain docs
 
 This is a single-context repository with an optional root `CONTEXT.md` and system-wide ADRs under `docs/adr/`. See `docs/agents/domain.md`.
+
+### Design system
+
+The repository-owned `design-md` skill lives at `.agents/skills/design-md/`. Use it with approved Google Stitch screens to generate the canonical root `DESIGN.md`; review that document with Andrew before changing shared typography, palette or spacing.

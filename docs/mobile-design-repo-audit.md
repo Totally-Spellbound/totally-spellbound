@@ -15,7 +15,7 @@ Overall health is **C+**: the store is distinctive, working and much more author
 
 ### Purpose and maturity
 
-Totally Spellbound is a production Shopify storefront for an independent crystal, tarot and witchcraft shop. The project states its core value as guiding customers to suitable products thoughtfully (`.planning/STATE.md:18-21`), and the launch brief identifies Alison and the real Sutton-in-Ashfield shop, its catalogue, shipping and intended conversational voice (`.planning/phases/03-launch/DIRECTION.md:9-23`). The repo is beyond prototype stage: it contains complete Home, Collection, Product, Cart, Search, content and error-page compositions (`.planning/phases/03-launch/DIRECTION.md:103-124`), live app embeds (`config/settings_data.json:72-91`) and Shopify CLI deployment scripts (`package.json:6-11`).
+Totally Spellbound is a production Shopify storefront for an independent crystal, tarot and witchcraft shop. The repo is beyond prototype stage: it contains complete Home, Collection, Product, Cart, Search, content and error-page compositions, live app embeds (`config/settings_data.json:72-91`) and Shopify CLI deployment scripts (`package.json:6-11`).
 
 ### Stack
 
@@ -23,7 +23,7 @@ Totally Spellbound is a production Shopify storefront for an independent crystal
 - **Presentation:** Liquid, JSON templates, CSS and vanilla JavaScript. The root layout composes Shopify styles, fonts, theme variables, custom brand CSS and the shared motion script before rendering section groups (`layout/theme.liquid:37-59`).
 - **Data:** Shopify products, collections, metafields, theme settings and app embeds. There is no local application server or database in this repo.
 - **Tooling:** Shopify CLI only; `package.json` contains scripts but no package dependencies (`package.json:1-12`; `package-lock.json:1-11`).
-- **Runtime targets:** Shopify CDN/storefront, theme editor, touch and desktop browsers. The canonical release checklist calls for 1440px and 390px verification (`.planning/phases/03-launch/DIRECTION.md:141-146`).
+- **Runtime targets:** Shopify CDN/storefront, theme editor, touch and desktop browsers. The mobile upgrade spec expands verification across 320px, 390px and 430px (`docs/specs/mobile-storefront-design-upgrade.md:102-119`).
 
 ### Architecture sketch
 
@@ -59,8 +59,8 @@ main storefront DOM
 | `assets/` | Horizon CSS/JS, custom brand CSS/JS, fonts, logo and cinematic image fallbacks. |
 | `config/` | Theme settings, active palette/type choices and app embeds (`config/settings_data.json:2-91`). |
 | `locales/` | Storefront and editor translations. |
-| `.planning/` | Product/design history. Its state file identifies the current launch direction (`.planning/STATE.md:23-28`). |
 | `docs/` | Project context and this audit. |
+| `.agents/skills/` | Repository-owned agent skills shared through the open Agent Skills format. |
 
 ### Main page flow
 
@@ -79,7 +79,7 @@ main storefront DOM
 
 ### What surprised me
 
-The named `DESIGN.md` is deliberately obsolete. `.planning/STATE.md:23-28` says its amethyst direction was dropped and names `.planning/phases/03-launch/DIRECTION.md` as canonical. The live stylesheet then claims a different “Brand Guidelines v1.0 (May 2024)” and changes the fonts and colours again (`assets/spellbound-custom.css:1-4`, `assets/spellbound-custom.css:37-65`). No Brand Guidelines v1.0 file exists in the repository, so I could not verify which later decisions were intentional.
+The removed legacy planning framework contained two conflicting design directions. The live stylesheet then claimed a third authority, “Brand Guidelines v1.0 (May 2024)”, with different fonts and colours (`assets/spellbound-custom.css:1-4`, `assets/spellbound-custom.css:37-65`). No copy of that guide exists in the repository, so I could not verify which later decisions were intentional. The current design system must be extracted from approved Stitch screens into a root `DESIGN.md` using the repository's `design-md` skill.
 
 ## Audit Report
 
@@ -101,10 +101,10 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 
 #### High
 
-##### 1. The design system has two competing authorities
+##### 1. The live design system has no tracked authority
 
 - **Type:** Fact.
-- **Found:** The launch direction calls itself the single source of truth and specifies Cormorant headings, Inter body/UI and a `#050505`/`#e5a94d` palette (`.planning/phases/03-launch/DIRECTION.md:1-7`, `.planning/phases/03-launch/DIRECTION.md:25-67`). The active CSS instead declares Brand Guidelines v1.0, Cinzel Decorative headings, Cormorant Garamond body and a `#0d0b10`/`#d4af37` palette (`assets/spellbound-custom.css:1-4`, `assets/spellbound-custom.css:37-65`). Theme settings add a third layer by selecting Cormorant for all four font roles (`config/settings_data.json:3-34`).
+- **Found:** The active CSS declares Brand Guidelines v1.0, Cinzel Decorative headings, Cormorant Garamond body and a `#0d0b10`/`#d4af37` palette (`assets/spellbound-custom.css:1-4`, `assets/spellbound-custom.css:37-65`), but no tracked copy of that guide exists. Theme settings select Cormorant for all four font roles (`config/settings_data.json:3-34`). The old planning framework contained earlier conflicting directions and has since been removed.
 - **Why it matters:** A designer or agent can follow the written brief exactly and still move the live site in the wrong direction. Tokens, accessibility decisions and future polish cannot be reviewed consistently until this is settled.
 - **Severity:** High.
 
@@ -190,7 +190,7 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 ##### 13. There is no automated safety net for a live storefront
 
 - **Type:** Fact.
-- **Found:** `package.json` provides Theme Check but no test or build-verification script (`package.json:6-11`), and the repository has no GitHub Actions workflow. The only documented verification is a manual checklist (`.planning/phases/03-launch/DIRECTION.md:141-146`).
+- **Found:** `package.json` provides Theme Check but no test or build-verification script (`package.json:6-11`), and the repository has no GitHub Actions workflow. The mobile upgrade spec records the intended manual verification seam (`docs/specs/mobile-storefront-design-upgrade.md:102-119`).
 - **Why it matters:** Regressions such as Search eager loading, 390px overflow and theme-editor listener duplication can ship even when the theme renders. A small Shopify-native gate would catch syntax and standards regressions without introducing a heavy test stack.
 - **Severity:** Medium.
 
@@ -242,11 +242,11 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 | Performance | The main verified defect is Search eager loading. Responsive-image fallbacks and the large logo are secondary mobile payload costs. |
 | Dependencies | Runtime dependency exposure is low because this is a native theme. The unpinned development MCP and stale CLI setup are small reproducibility concerns. |
 | DevEx & operations | Setup is short and deployment is Shopify-native, but there is no CI gate, warning policy, performance budget or recorded mobile release evidence. |
-| Documentation | The README is serviceable. Design authority is not: the canonical direction and live “Brand Guidelines v1.0” disagree, and the latter is absent. |
+| Documentation | The README is serviceable. Design authority is not: the live CSS names an absent “Brand Guidelines v1.0”, and no root `DESIGN.md` records the approved system. |
 
 ### Strengths to preserve
 
-- **It does not look like generic AI-generated storefront work.** The candlelit photography, gold restraint, shop-specific language and custom Oracle/celestial/chakra material form a recognisable world. The canonical voice is concrete and grounded in the real shop (`.planning/phases/03-launch/DIRECTION.md:86-101`).
+- **It does not look like generic AI-generated storefront work.** The candlelit photography, gold restraint, shop-specific language and custom Oracle/celestial/chakra material form a recognisable world across the live templates and sections.
 - **Accessibility fundamentals are unusually good for a visual theme.** The audited pages had alt text and explicit image dimensions, Home achieved 100 Lighthouse Accessibility, focus styles exist on bespoke CTAs (`sections/spellbound-hero.liquid:138-140`), and shared motion respects reduced-motion preferences (`assets/spellbound-motion.js:31-43`).
 - **The primary purchase action is clear and physically generous.** Add to Cauldron has strong contrast, large padding and a stable hierarchy (`assets/spellbound-custom.css:794-807`).
 - **Failure handling in custom JavaScript is thoughtful.** The countdown rejects invalid data and stops its timer (`assets/spellbound-countdown.js:9-22`, `assets/spellbound-countdown.js:43-81`); the local wishlist catches malformed storage (`assets/spellbound-wishlist.js:7-12`).
@@ -257,7 +257,7 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 
 ### Theme 1: establish one design authority
 
-**Target state:** one tracked design document names the current palette, font files, type roles, spacing rhythm, target sizes, drawer behaviour and accessibility rules. `settings_data.json`, custom tokens and component styles all resolve to it. The obsolete amethyst document is clearly archived, and Brand Guidelines v1.0 is either added or its reference removed.
+**Target state:** a root `DESIGN.md`, generated from approved Stitch screens with the repository's `design-md` skill, names the current palette, font files, type roles, spacing rhythm, target sizes, drawer behaviour and accessibility rules. `settings_data.json`, custom tokens and component styles all resolve to it. The untracked Brand Guidelines reference is either substantiated or removed.
 
 **Principle:** design tokens are a contract, not a historical note. Visual polish becomes cheap only when everyone is evaluating the same system.
 
@@ -295,7 +295,7 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 
 ### Definition of done
 
-- One canonical design guide is tracked and linked from `.planning/STATE.md`; no active file claims a conflicting authority.
+- One canonical root `DESIGN.md` is tracked; no active file claims a conflicting authority.
 - At 320, 390 and 430px, all core pages have `scrollWidth <= clientWidth`, including at 200% text zoom.
 - Body/UI type and display type have explicit roles; long copy is at least 16px with roughly 1.5 line-height; product prices, filters and fields do not use decorative display type.
 - No interactive target falls below WCAG 2.2’s 24px floor without a documented spacing exception; primary navigation, filters, quantity, gallery, cart and checkout controls have practical 44px hit regions.
@@ -341,7 +341,7 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 | ID | Task | Description and affected areas | Acceptance criteria | Effort | Change risk | Depends on |
 | --- | --- | --- | --- | --- | --- | --- |
-| M0.1 | Record the mobile release matrix | Turn the existing 390px checklist into a short manual record for Home, Collection, Product, Cart, Search, Story, Visit, Contact and 404. Include 320/390/430, landscape, 200% text zoom and reduced motion. Affects `.planning/phases/03-launch/DIRECTION.md` or a new `docs/release-checklist.md`. | A release can show pass/fail evidence for every page/state; console and network errors are recorded; no spawned browser remains open. | M | Low | None |
+| M0.1 | Record the mobile release matrix | Turn the existing 390px audit into `docs/release-checklist.md` for Home, Collection, Product, Cart, Search, Story, Visit, Contact and 404. Include 320/390/430, landscape, 200% text zoom and reduced motion. | A release can show pass/fail evidence for every page/state; console and network errors are recorded; no spawned browser remains open. | M | Low | None |
 | M0.2 | Add Theme Check CI | Add a minimal GitHub Actions workflow that installs current Shopify CLI and runs `npm run check`. Decide whether the existing 28 warnings are fixed first or stored as a temporary baseline. Affects `.github/workflows/`, `package.json`. | Every pull request runs Theme Check; new warnings fail; the documented local command matches CI. | M | Low | None |
 | M0.3 | Capture performance baselines | Record Lighthouse mobile results and request counts for Home, Search and Product before changes. Affects `docs/` only. | Baseline includes profile, date, URL, key scores, eager/lazy image counts and screenshots. | S | None | None |
 
@@ -349,7 +349,7 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 | ID | Task | Description and affected areas | Acceptance criteria | Effort | Change risk | Depends on |
 | --- | --- | --- | --- | --- | --- | --- |
-| M1.1 | Resolve the canonical design system | Decide whether the 2026 Candlelight direction or the absent Brand Guidelines v1.0 governs. Merge the approved palette, type roles, font files, spacing and accessibility rules into one tracked guide; mark old documents historical. Affects `.planning/STATE.md`, `.planning/phases/02-design-system/DESIGN.md`, `.planning/phases/03-launch/DIRECTION.md`, possibly a supplied brand guide. | One document is named canonical; live tokens can be traced to it; no active file claims a conflicting font or palette. | M | Low | None |
+| M1.1 | Resolve the canonical design system | Use the repository's `design-md` skill on approved Stitch screens, review the output with Andrew, and commit the result as root `DESIGN.md`. Reconcile live tokens and remove the unsupported Brand Guidelines reference. | `DESIGN.md` is canonical; live tokens can be traced to it; no active file claims a conflicting font or palette. | M | Low | None |
 | M1.2 | Fix Search eager-loading logic | Group the intended Liquid condition explicitly so only the first appropriate card image is eager, while alternate and below-fold images stay lazy. Affects `snippets/card-gallery.liquid`. | Blank Search and a populated query show the same products; no more than the agreed above-fold first images are eager; carousel variants and hover images still work; Theme Check passes. | S | Medium | M0.3 |
 | M1.3 | Remove Home horizontal overflow | Clip the countdown glow at the correct section boundary without clipping its visible frame or focus outlines. Affects `sections/spellbound-ritual-countdown.liquid`. | `scrollWidth <= clientWidth` at 320/390/430 and 200% zoom; glow still reads as intended; reduced-motion state remains correct. | S | Low | M0.1 |
 
@@ -389,11 +389,11 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 #### A. Resolve the canonical design system
 
-1. Put the 2026 launch direction and the referenced Brand Guidelines v1.0 side by side. If the latter exists outside the repo, add an approved copy or a tracked summary.
-2. Ask the owner to choose the actual heading, body and UI faces. Record font licences/files, palette values, text contrast floor, spacing scale and mobile type bounds.
-3. Make one token table the source of truth. Map each live variable in `assets/spellbound-custom.css:37-65` and each setting in `config/settings_data.json:3-34` to it.
-4. Mark the amethyst `DESIGN.md` historical rather than deleting useful context.
-5. Gotcha: do not blindly restore Inter because an older file says so. The later CSS may reflect a real client decision; the missing evidence is the defect.
+1. Use the repository's `design-md` skill to synthesize approved Stitch screens into a root `DESIGN.md`.
+2. Review that document with Andrew and record the approved heading, body and UI faces, font files, palette, contrast floor, spacing scale and mobile type bounds.
+3. Map each live variable in `assets/spellbound-custom.css:37-65` and each setting in `config/settings_data.json:3-34` to the approved system.
+4. Remove or correct live comments that claim an untracked design authority.
+5. Gotcha: do not infer approval from the current CSS alone. It records what was implemented, not necessarily what Andrew wants to keep.
 
 #### B. Build the mobile type and spacing foundation
 
@@ -413,7 +413,7 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 ## Open Questions
 
-1. Where is **Brand Guidelines v1.0 (May 2024)**, and did the client explicitly approve Cinzel Decorative plus Cormorant Garamond after the 5 July 2026 Candlelight brief? This decides the type and palette target.
+1. Which Stitch project and screens are the approved source for the root `DESIGN.md`? This decides the type and palette target.
 2. Is the primary mobile customer profile mostly Alison’s existing local audience, social-media discovery traffic, or both? That affects how much first-screen space should go to story versus product discovery.
 3. Does Shopify Inbox produce meaningful enquiries or sales? If so, it should be repositioned carefully; if not, removing the launcher from small screens may be the better trade.
 4. Should blank Search act as a curated discovery page, or should it remain empty until a query is entered?
