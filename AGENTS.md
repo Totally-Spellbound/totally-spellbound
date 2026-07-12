@@ -29,4 +29,4 @@ This is a single-context repository with an optional root `CONTEXT.md` and syste
 
 ### Design system
 
-The repository-owned `design-md` skill lives at `.agents/skills/design-md/`. Use it with approved Google Stitch screens to generate the canonical root `DESIGN.md`; review that document with Andrew before changing shared typography, palette or spacing.
+The repository-owned `design-md` skill lives at `.agents/skills/design-md/`. Use the live storefront and its measured styles as the source for the canonical root `DESIGN.md`; review that document with Andrew before changing shared typography, palette or spacing. Stitch screens may supplement the website when Andrew supplies them.

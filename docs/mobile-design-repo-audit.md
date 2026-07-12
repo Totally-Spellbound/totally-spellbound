@@ -79,7 +79,7 @@ main storefront DOM
 
 ### What surprised me
 
-The removed legacy planning framework contained two conflicting design directions. The live stylesheet then claimed a third authority, “Brand Guidelines v1.0 (May 2024)”, with different fonts and colours (`assets/spellbound-custom.css:1-4`, `assets/spellbound-custom.css:37-65`). No copy of that guide exists in the repository, so I could not verify which later decisions were intentional. The current design system must be extracted from approved Stitch screens into a root `DESIGN.md` using the repository's `design-md` skill.
+The removed legacy planning framework contained two conflicting design directions. The live stylesheet then claimed a third authority, “Brand Guidelines v1.0 (May 2024)”, with different fonts and colours (`assets/spellbound-custom.css:1-4`, `assets/spellbound-custom.css:37-65`). No copy of that guide exists in the repository, so I could not verify which later decisions were intentional. The current system is now recorded in root `DESIGN.md`, extracted from the live storefront and its measured styles.
 
 ## Audit Report
 
@@ -257,7 +257,7 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 
 ### Theme 1: establish one design authority
 
-**Target state:** a root `DESIGN.md`, generated from approved Stitch screens with the repository's `design-md` skill, names the current palette, font files, type roles, spacing rhythm, target sizes, drawer behaviour and accessibility rules. `settings_data.json`, custom tokens and component styles all resolve to it. The untracked Brand Guidelines reference is either substantiated or removed.
+**Target state:** root `DESIGN.md`, extracted from the live storefront using the repository's `design-md` structure, names the current palette, font files, type roles, spacing rhythm, target sizes, drawer behaviour and accessibility rules. `settings_data.json`, custom tokens and component styles all resolve to it. The untracked Brand Guidelines reference is removed.
 
 **Principle:** design tokens are a contract, not a historical note. Visual polish becomes cheap only when everyone is evaluating the same system.
 
@@ -349,7 +349,7 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 | ID | Task | Description and affected areas | Acceptance criteria | Effort | Change risk | Depends on |
 | --- | --- | --- | --- | --- | --- | --- |
-| M1.1 | Resolve the canonical design system | Use the repository's `design-md` skill on approved Stitch screens, review the output with Andrew, and commit the result as root `DESIGN.md`. Reconcile live tokens and remove the unsupported Brand Guidelines reference. | `DESIGN.md` is canonical; live tokens can be traced to it; no active file claims a conflicting font or palette. | M | Low | None |
+| M1.1 | Resolve the canonical design system | Review the live-site-derived root `DESIGN.md` with Andrew. Reconcile live tokens and remove the unsupported Brand Guidelines reference. | `DESIGN.md` is canonical; live tokens can be traced to it; no active file claims a conflicting font or palette. | M | Low | None |
 | M1.2 | Fix Search eager-loading logic | Group the intended Liquid condition explicitly so only the first appropriate card image is eager, while alternate and below-fold images stay lazy. Affects `snippets/card-gallery.liquid`. | Blank Search and a populated query show the same products; no more than the agreed above-fold first images are eager; carousel variants and hover images still work; Theme Check passes. | S | Medium | M0.3 |
 | M1.3 | Remove Home horizontal overflow | Clip the countdown glow at the correct section boundary without clipping its visible frame or focus outlines. Affects `sections/spellbound-ritual-countdown.liquid`. | `scrollWidth <= clientWidth` at 320/390/430 and 200% zoom; glow still reads as intended; reduced-motion state remains correct. | S | Low | M0.1 |
 
@@ -389,8 +389,8 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 #### A. Resolve the canonical design system
 
-1. Use the repository's `design-md` skill to synthesize approved Stitch screens into a root `DESIGN.md`.
-2. Review that document with Andrew and record the approved heading, body and UI faces, font files, palette, contrast floor, spacing scale and mobile type bounds.
+1. Use the live storefront, computed styles and repository source to maintain root `DESIGN.md`.
+2. Review that document with Andrew and confirm the heading, body and UI faces, font files, palette, contrast floor, spacing scale and mobile type bounds.
 3. Map each live variable in `assets/spellbound-custom.css:37-65` and each setting in `config/settings_data.json:3-34` to the approved system.
 4. Remove or correct live comments that claim an untracked design authority.
 5. Gotcha: do not infer approval from the current CSS alone. It records what was implemented, not necessarily what Andrew wants to keep.
@@ -413,7 +413,7 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 ## Open Questions
 
-1. Which Stitch project and screens are the approved source for the root `DESIGN.md`? This decides the type and palette target.
+1. Does the live-site-derived `DESIGN.md` capture the intended type and palette, or is any current implementation detail accidental?
 2. Is the primary mobile customer profile mostly Alison’s existing local audience, social-media discovery traffic, or both? That affects how much first-screen space should go to story versus product discovery.
 3. Does Shopify Inbox produce meaningful enquiries or sales? If so, it should be repositioned carefully; if not, removing the launcher from small screens may be the better trade.
 4. Should blank Search act as a curated discovery page, or should it remain empty until a query is entered?

@@ -54,7 +54,7 @@ The work will also correct the verified Search image-loading defect, remove Home
 
 ## Implementation Decisions
 
-- The current live storefront is implementation evidence, not design approval. Generate a root `DESIGN.md` from approved Stitch screens with the repository's `design-md` skill and review it with Andrew before changing typography or palette tokens.
+- The current live storefront and its measured styles are the source for root `DESIGN.md`. Review the extracted system with Andrew before changing typography or palette tokens; supplied Stitch screens may add evidence but are not required.
 - Root `DESIGN.md` is the sole design authority once approved. Reconcile the live Brand Guidelines reference against it and remove any unsupported claim of authority.
 - Keep Shopify Horizon's layout, section, block and theme-editor model. This is a design-system and responsive-composition upgrade, not a framework rewrite.
 - Preserve the Candlelight identity: dark cinematic surfaces, warm gold interactive accents, authored imagery, shop-specific language and selected expressive moments.
