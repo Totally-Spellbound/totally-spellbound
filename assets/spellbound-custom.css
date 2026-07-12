@@ -950,32 +950,19 @@ dialog.facets--drawer {
   color: var(--spellbound-text-soft);
 }
 
-/* Section base — reusable for all spellbound sections */
-.spellbound-section {
-  padding: var(--spellbound-space-8) 0;
-}
-
-/* Footer wrapper: no section padding — the footer owns its own spacing,
-   and wrapper padding reads as a stray grey band below the page. */
-.shopify-section:has(> .spellbound-footer) {
-  padding: 0 !important;
+/* Custom sections own their internal rhythm. Keep the Shopify wrapper neutral
+   so its padding cannot stack with the section and create empty page bands. */
+.shopify-section.spellbound-section {
+  padding: 0;
 }
 
 @media screen and (min-width: 750px) {
-  .spellbound-section {
-    padding: var(--spellbound-space-12) 0;
-  }
-
   .spellbound-section--homepage {
     padding: calc(var(--spellbound-space-16) + var(--spellbound-space-8)) 0;
   }
 }
 
 @media screen and (min-width: 990px) {
-  .spellbound-section {
-    padding: 4rem 0;
-  }
-
   .spellbound-section--homepage {
     padding: 8rem 0;
   }

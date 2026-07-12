@@ -9,13 +9,13 @@
   .spellbound-product-extras {
     position: relative;
     z-index: 1;
-    padding: 0 1.5rem 2rem;
+    padding: clamp(2rem, 6vw, 4rem) 1.5rem 2rem;
     max-width: var(--narrow-page-width, 90rem);
     margin: 0 auto;
   }
   @media (min-width: 1024px) {
     .spellbound-product-extras {
-      padding: 0 var(--padding-lg, 2rem) 2rem;
+      padding-inline: var(--padding-lg, 2rem);
     }
   }
 

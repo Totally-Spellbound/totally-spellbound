@@ -31,6 +31,7 @@ Use this matrix for every storefront release. Record the date, commit, developme
 - [ ] `document.documentElement.scrollWidth <= document.documentElement.clientWidth`.
 - [ ] Focus is visible and is not covered by the header, chat launcher or sticky controls.
 - [ ] Text does not clip, overlap controls or become an unreadably narrow column.
+- [ ] Section boundaries have one spacing owner; no empty wrapper band or doubled vertical padding appears between sections.
 - [ ] Images keep their subject and useful controls remain available without hover.
 - [ ] Navigation drawer remains `100dvh`; record its measured width separately.
 
