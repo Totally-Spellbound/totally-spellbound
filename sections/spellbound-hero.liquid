@@ -223,6 +223,54 @@
     }
   }
 
+  @media screen and (max-width: 749px) {
+    .spellbound-hero {
+      min-height: 68svh;
+    }
+
+    .spellbound-hero__content {
+      padding: 5rem var(--spellbound-space-6) var(--spellbound-space-8);
+    }
+
+    .spellbound-hero__heading {
+      margin-bottom: var(--spellbound-space-3);
+    }
+
+    .spellbound-hero__subheading {
+      margin-bottom: var(--spellbound-space-4);
+      max-width: 29rem;
+    }
+
+    .spellbound-hero__actions {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spellbound-space-1);
+    }
+
+    .spellbound-hero__cta {
+      min-height: 44px;
+    }
+
+    .spellbound-hero__cta--primary {
+      padding: 0.9rem 2rem;
+    }
+
+    .spellbound-hero__cta--ghost {
+      padding: var(--spellbound-space-3) var(--spellbound-space-4);
+      border-color: transparent;
+      background: transparent;
+      color: var(--spellbound-text-soft);
+      text-decoration: underline;
+      text-decoration-color: var(--spellbound-border-strong);
+      text-underline-offset: 0.3em;
+    }
+
+    .spellbound-hero__cta--ghost:hover {
+      background: transparent;
+      text-decoration-color: var(--spellbound-gold);
+    }
+  }
+
   @media screen and (max-height: 640px) {
     .spellbound-hero__scroll {
       display: none;
