@@ -69,7 +69,7 @@ Use **Cormorant Garamond** for body copy, navigation, prices and controls. The l
 - Product price: `17px`, weight 600 in cards. PDP price may be larger, but it stays cream and easy to scan.
 - Long quotations: Cormorant Garamond italic in Soft Cream or stronger.
 
-The mobile upgrade may introduce a more neutral UI face if Andrew approves one. Until then, improve Cormorant’s size, weight and spacing rather than inventing a font.
+Cormorant Garamond remains the interface face for this mobile upgrade. Improve its size, weight and spacing where utility text needs more clarity; do not introduce a neutral UI font during this work.
 
 ### Functional uppercase text
 
