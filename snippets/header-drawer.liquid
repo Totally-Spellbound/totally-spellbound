@@ -857,6 +857,11 @@
     box-shadow: var(--shadow-drawer);
     flex-direction: column;
 
+    @media screen and (max-width: 749px) {
+      width: min(82vw, 320px);
+      max-width: 320px;
+    }
+
     @media screen and (min-width: 750px) {
       width: 25rem;
     }
