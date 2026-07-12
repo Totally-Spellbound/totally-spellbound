@@ -263,7 +263,7 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 
 ### Theme 2: separate atmosphere from utility
 
-**Target state:** expressive type is reserved for a small set of display moments; body copy, prices, filters, fields and metadata use a highly legible UI face. Mobile headings use bounded fluid sizes, body copy is 16–18px with appropriate leading, and tracked 11–12px capitals are restricted to short eyebrow labels.
+**Target state:** expressive type is reserved for a small set of display moments; body copy, prices, filters, fields and metadata use a highly legible UI face. Mobile headings use bounded fluid sizes, body copy is 16–18px with appropriate leading, and decorative eyebrow/kicker/overline labels above headings are removed entirely.
 
 **Principle:** the special typeface gains power when it is scarce. Shopping information should be read before it is admired.
 
@@ -309,7 +309,7 @@ The live theme was inspected at **390 × 844 CSS pixels** with touch/mobile emul
 
 These prompts translate first-party platform/accessibility guidance and established responsive-commerce research into concrete briefs for this site. They are meant to be used one at a time during design and implementation, not pasted as one giant request.
 
-1. **Rebuild the mobile type hierarchy around reading.** Inventory every type style on Home, Collection, Product, Cart, Search and 404. Reduce them to an approved display face and a legible body/UI face. Keep ordinary body and product-description copy at an effective 16–18px with about 1.5 line-height. Use bounded fluid display sizes so 390px still feels cinematic without one-word-per-line headings. Restrict 11–12px tracked capitals to short eyebrow labels; price, stock, shipping and action text must never inherit that micro style. Informed by [Apple Typography](https://developer.apple.com/design/human-interface-guidelines/typography), [USWDS Typography](https://designsystem.digital.gov/components/typography/) and [Carbon type sets](https://carbondesignsystem.com/elements/typography/type-sets/).
+1. **Rebuild the mobile type hierarchy around reading.** Inventory every type style on Home, Collection, Product, Cart, Search and 404. Reduce them to an approved display face and a legible body/UI face. Keep ordinary body and product-description copy at an effective 16–18px with about 1.5 line-height. Use bounded fluid display sizes so 390px still feels cinematic without one-word-per-line headings. Remove every decorative eyebrow, kicker or overline above a heading. Preserve small type only for functional information such as a form label, badge or status, never as automatic section-heading decoration. Informed by [Apple Typography](https://developer.apple.com/design/human-interface-guidelines/typography), [USWDS Typography](https://designsystem.digital.gov/components/typography/) and [Carbon type sets](https://carbondesignsystem.com/elements/typography/type-sets/).
 
 2. **Make every candlelit text layer pass at its worst frame.** Sample the brightest and darkest parts of every hero, editorial tile, category image and Ken Burns crop. Add a stable directional scrim or text surface wherever body copy cannot hold 4.5:1 through the full motion. Atmosphere may vary; reading contrast may not. Informed by [WCAG Contrast Minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) and [Apple Dark Mode](https://developer.apple.com/design/human-interface-guidelines/dark-mode).
 
@@ -397,7 +397,7 @@ Effort: **S** under 2 hours, **M** half-day, **L** 1–2 days, **XL** needs brea
 
 #### B. Build the mobile type and spacing foundation
 
-1. Inventory rendered roles: hero display, page title, section title, product title, body, price, metadata, eyebrow, field, filter and button.
+1. Inventory rendered roles: hero display, page title, section title, product title, body, price, metadata, field, filter and button. Record decorative eyebrows/kickers/overlines for removal rather than assigning them a token.
 2. Define semantic tokens for those roles, then use `clamp()` only for display/section scales. Keep body/UI stable enough to survive 200% zoom.
 3. Move price, filters, quantity, forms and utility links off the decorative display role. Keep Cinzel/Cormorant for selected moments approved in M1.1.
 4. Test with the longest real product names and content, not placeholder text, at 320/390/430 and 200% zoom.

@@ -1,6 +1,10 @@
 # Totally Spellbound — Style Reference
 > Shifting amethyst depths on frosted glass
 
+> **Historical document:** this amethyst direction is superseded by the current launch direction. Do not implement it as the active system.
+>
+> **Standing owner rule — no eyebrows:** never place a small uppercase, widely tracked “eyebrow”, “kicker” or “overline” above a heading as decorative hierarchy. This is a generic AI-layout tell and is not part of Totally Spellbound's visual language. If the words add meaning, make them part of the heading or supporting copy. If they do not, remove them. Functional badges, form labels and status text are separate patterns and must describe real information.
+
 **Theme:** dark
 **Derived from:** `refs/monopo-saigon/DESIGN.md` (structure, typography, spacing kept; palette swapped to purple/violet with warm gold accents)
 

@@ -50,6 +50,7 @@ The work will also correct the verified Search image-loading defect, remove Home
 34. As a developer, I want Theme Check to run automatically, so that new syntax and standards warnings cannot be merged unnoticed.
 35. As a developer, I want a recorded performance baseline for Home, Search and Product, so that visual improvements do not hide a payload regression.
 36. As a maintainer, I want custom presentation code split only where the upgrade touches real hotspots, so that the work improves maintainability without turning into a Horizon rewrite.
+37. As the owner, I want decorative eyebrow, kicker and overline labels removed from section headings, so that the storefront does not carry a generic AI-generated design tell.
 
 ## Implementation Decisions
 
@@ -57,7 +58,8 @@ The work will also correct the verified Search image-loading defect, remove Home
 - Before changing typography or palette tokens, reconcile the live Brand Guidelines reference with the current approved direction. If a newer client-approved guide exists outside the repository, add or summarise it in the repository and name one document as canonical.
 - Keep Shopify Horizon's layout, section, block and theme-editor model. This is a design-system and responsive-composition upgrade, not a framework rewrite.
 - Preserve the Candlelight identity: dark cinematic surfaces, warm gold interactive accents, authored imagery, shop-specific language and selected expressive moments.
-- Define semantic typography roles for display, page title, section title, product title, body, price, metadata, eyebrow, form control and action. Expressive faces must not automatically flow into body, price, filter or field roles.
+- Define semantic typography roles for display, page title, section title, product title, body, price, metadata, form control and action. Expressive faces must not automatically flow into body, price, filter or field roles.
+- Never use a decorative eyebrow, kicker or overline above a heading. Remove existing instances during the relevant page slice. If their wording carries meaning, integrate it into the heading or supporting copy; otherwise delete it. Functional badges, form labels and status text remain valid when they communicate real information.
 - Use bounded fluid sizing for display and section headings. Keep ordinary body and product-description copy in the 16–18px range with suitable leading, subject to visual testing with real content and text enlargement.
 - Use a small shared spacing scale and proximity rules. Space inside a content group must be tighter than space between page modules.
 - Recompose Home's mobile hero around one primary action and reduce mobile brand chrome enough to reveal that the page continues into shopping content.

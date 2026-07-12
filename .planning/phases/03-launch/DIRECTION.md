@@ -61,9 +61,8 @@ Old amber #f59e0b / #fde68a / rgba(245,158,11,x) must reach ZERO occurrences rep
 ## 3. Typography
 - Headings: Cormorant (cormorant_n3), accents/italics cormorant_i4. Body/UI: Inter (inter_n4/n6). KEEP.
 - Product title on PDP and card titles: heading font (Cormorant), NOT body font.
-- Card/product link text colour: --spellbound-text (white), never gold. Gold is for labels,
-  eyebrows, prices may be gold-deep… no: prices stay white; eyebrow labels/badges/active states gold.
-- Micro-labels: Inter 600, 11–12px, uppercase, letter-spacing 0.25–0.4em, colour --spellbound-gold.
+- Card/product link text colour: --spellbound-text (white), never gold. Prices stay white; gold is reserved for functional badges, active states and links.
+- **NO EYEBROWS, KICKERS OR OVERLINES.** Never place a small uppercase, widely tracked line above a heading as decorative hierarchy. It is a generic AI-layout tell and is not part of this brand. If the words add meaning, integrate them into the heading or supporting copy. If they do not, remove them. Functional badges, form labels and status text are allowed only when they convey real information.
 - Long italic quotes: Cormorant italic, ≥ --spellbound-text-soft.
 
 ## 4. Motion language (subtle, premium — never gimmicky)
@@ -86,7 +85,7 @@ Old amber #f59e0b / #fde68a / rgba(245,158,11,x) must reach ZERO occurrences rep
 ## 6. Voice & copy bank (use, extend in same register)
 - Announcement rotation: "Free UK delivery on orders over £50" · "Free click & collect in
   Sutton-in-Ashfield" · "The veil is thinning — new arrivals weekly"
-- Hero eyebrow: "The doors are open" · H1: "Every crystal holds a story." · sub: "Hand-picked
+- Hero opening: H1: "Every crystal holds a story." · sub: "Hand-picked
   crystals, tarot & curiosities from a real little shop in Nottinghamshire." CTAs: "Enter the Vault" / "Find your intention"
 - Featured: "New Manifestations". Categories: "Browse the Collections". Intentions: "Shop by Intention —
   what do you seek?"
