@@ -1,7 +1,7 @@
 {% comment %}
   Spellbound Page Hero - compact cinematic page header for content pages.
   Dim cover backdrop (image picker with theme-asset fallback), scrim fading
-  into the page background, gold micro-label, Cormorant page title, soft intro.
+  into the page background, page title and soft intro.
   Candlelight tokens only (no hardcoded accent hex).
 {% endcomment %}
 
@@ -45,29 +45,19 @@
     margin: 0 auto;
     padding: clamp(4.5rem, 10vw, 7rem) 1.5rem clamp(2rem, 5vw, 3.25rem);
   }
-  .spellbound-page-hero__label {
-    display: block;
-    font-family: var(--font-body--family);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--spellbound-gold);
-    margin-bottom: 1rem;
-  }
   .spellbound-page-hero__title {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    line-height: 1.05;
+    font-family: var(--spellbound-type-display-family);
+    font-weight: 400;
+    font-size: var(--spellbound-type-page-title-size);
+    line-height: var(--spellbound-leading-display);
     color: var(--spellbound-text);
     margin: 0;
     text-wrap: balance;
   }
   .spellbound-page-hero__intro {
-    font-family: var(--font-body--family);
-    font-size: 1.0625rem;
-    line-height: 1.7;
+    font-family: var(--spellbound-type-reading-family);
+    font-size: var(--spellbound-type-description-size);
+    line-height: var(--spellbound-leading-body);
     color: var(--spellbound-text-soft);
     max-width: 40rem;
     margin: 1.125rem 0 0;
@@ -104,9 +94,6 @@
   </div>
 
   <div class="spellbound-page-hero__content" data-spellbound-reveal-group>
-    {% if section.settings.label != blank %}
-      <span class="spellbound-page-hero__label">{{ section.settings.label | escape }}</span>
-    {% endif %}
     {%- liquid
       assign hero_title = section.settings.title
       if page.title != blank
@@ -139,12 +126,6 @@
       "label": "Fallback image asset",
       "default": "spellbound-img-hero.jpg",
       "info": "Theme asset filename used when no image is picked."
-    },
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Micro-label",
-      "default": "Totally Spellbound"
     },
     {
       "type": "text",

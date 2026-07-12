@@ -44,15 +44,6 @@
     position: relative;
     z-index: 1;
   }
-  .spellbound-collection-header__label {
-    display: block;
-    color: var(--spellbound-gold);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
   .spellbound-collection-header__row {
     display: flex;
     flex-direction: column;
@@ -67,9 +58,9 @@
     }
   }
   .spellbound-collection-header__title {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-family: var(--spellbound-type-display-family);
+    font-weight: 400;
+    font-size: var(--spellbound-type-page-title-size);
     color: var(--spellbound-text);
     letter-spacing: -0.02em;
     line-height: 1;
@@ -158,10 +149,6 @@
   {%- endif -%}
 
   <div class="spellbound-collection-header__inner" data-spellbound-reveal-group>
-    {%- if section.settings.label != blank -%}
-      <span class="spellbound-collection-header__label">{{ section.settings.label }}</span>
-    {%- endif -%}
-
     <div class="spellbound-collection-header__row">
       <h1 class="spellbound-collection-header__title">
         {%- if collection != blank -%}
@@ -199,12 +186,6 @@
       "id": "background_image_asset",
       "label": "Background asset filename",
       "info": "Fallback theme asset (e.g. spellbound-img-vault.jpg) used when no background image is picked"
-    },
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Label",
-      "default": "The Vault"
     },
     {
       "type": "text",

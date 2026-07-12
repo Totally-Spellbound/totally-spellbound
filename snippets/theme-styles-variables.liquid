@@ -326,11 +326,11 @@
         if preset_name == 'paragraph'
           assign preset_font = '--font-body--family'
           assign preset_style = '--font-body--style'
-          assign preset_weight = '400'
+          assign preset_weight = '--font-body--weight'
           assign preset_case = '--font-body--case'
           assign preset_letter_spacing = 'body-normal'
 
-          echo '--font-[preset_name]--weight: [preset_weight];' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
+          echo '--font-[preset_name]--weight: var([preset_weight]);' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
           echo '--font-[preset_name]--letter-spacing: var(--letter-spacing--[preset_letter_spacing]);' | replace: '[preset_name]', preset_name | replace: '[preset_letter_spacing]', preset_letter_spacing
         else
           assign preset_font_id = 'type_font_[preset_name]' | replace: '[preset_name]', preset_name

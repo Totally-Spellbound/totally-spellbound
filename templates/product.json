@@ -287,7 +287,6 @@
     "kindred_intention": {
       "type": "spellbound-kindred",
       "settings": {
-        "label": "Shared Intention",
         "heading": "Charms with the same purpose",
         "match_field": "intention",
         "collection": "all",
@@ -297,7 +296,6 @@
     "kindred_handmade": {
       "type": "spellbound-kindred",
       "settings": {
-        "label": "From Our Workbench",
         "heading": "More made by our own hands",
         "match_field": "handmade",
         "collection": "handmade",

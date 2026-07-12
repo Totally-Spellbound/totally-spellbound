@@ -4,7 +4,6 @@
       "type": "spellbound-page-hero",
       "settings": {
         "image_asset": "spellbound-img-contact.webp",
-        "label": "Send Word",
         "title": "Contact",
         "intro": "Questions, requests, or wondering if something's in stock? Write to us - we'll answer like we would in the shop."
       }
@@ -151,7 +150,6 @@
     "in_person": {
       "type": "spellbound-editorial",
       "settings": {
-        "label": "Prefer To Talk In Person?",
         "heading": "The kettle’s usually on",
         "body": "<p>Some questions are easier over the counter - bring the piece, the problem or the birth chart and we’ll figure it out together. You’ll find us on Outram Street, six days a week.</p>",
         "quote": "Helpful like a conversation in the shop - never pushy.",

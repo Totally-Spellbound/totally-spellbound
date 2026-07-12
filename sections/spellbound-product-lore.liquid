@@ -24,16 +24,6 @@
   @media (min-width: 1024px) {
     .spellbound-lore__inner { grid-template-columns: 1fr 1fr; }
   }
-  .spellbound-lore__label {
-    font-family: var(--font-body--family);
-    font-weight: 600;
-    color: var(--spellbound-gold);
-    font-size: 12px;
-    letter-spacing: 0.5em;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-    display: block;
-  }
   .spellbound-lore__planet-header {
     display: flex;
     align-items: center;
@@ -145,17 +135,19 @@
   }
   .spellbound-lore__pair-title {
     color: var(--spellbound-text);
-    font-family: var(--font-heading--family);
-    font-size: 1.0625rem;
-    line-height: 1.2;
+    font-family: var(--spellbound-type-reading-family);
+    font-size: var(--spellbound-type-product-title-size);
+    font-weight: 600;
+    line-height: var(--spellbound-leading-product-title);
     transition: color 0.3s ease;
     margin-bottom: 0.35rem;
   }
   .spellbound-lore__pair-price {
-    font-family: var(--font-body--family);
-    font-size: 0.8125rem;
-    color: var(--spellbound-text-soft);
-    letter-spacing: 0.05em;
+    font-family: var(--spellbound-type-reading-family);
+    font-size: var(--spellbound-type-price-size);
+    font-weight: 600;
+    color: var(--spellbound-text);
+    letter-spacing: 0.02em;
   }
   .spellbound-lore__pairs-empty {
     grid-column: 1 / -1;
@@ -287,8 +279,6 @@
   <div class="spellbound-lore__inner">
     <!-- Left: Celestial info -->
     <div data-spellbound-reveal>
-      <span class="spellbound-lore__label">Celestial Correspondence</span>
-
       <div class="spellbound-lore__planet-header">
         <div class="spellbound-lore__planet-icon">
           {%- comment -%} Astronomical symbol of the first planet, drawn in gold inside the ring {%- endcomment -%}

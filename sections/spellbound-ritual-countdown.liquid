@@ -26,18 +26,10 @@
       padding: 0 1.5rem;
     }
   }
-  .spellbound-countdown__label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.35em;
-    color: var(--spellbound-gold);
-    text-transform: uppercase;
-    margin: 0 0 1.5rem;
-  }
   .spellbound-countdown__heading {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: clamp(2.75rem, 4.5vw, 4.5rem);
+    font-family: var(--spellbound-type-display-family);
+    font-weight: 400;
+    font-size: var(--spellbound-type-section-title-size);
     color: var(--spellbound-text);
     margin: 0 0 1.5rem;
     line-height: 1.05;
@@ -160,9 +152,6 @@
 <section class="spellbound-countdown" data-spellbound-countdown>
   <div class="spellbound-countdown__inner">
     <div data-spellbound-reveal-group>
-      {% if section.settings.label != blank %}
-        <p class="spellbound-countdown__label">{{ section.settings.label }}</p>
-      {% endif %}
       {% if section.settings.heading != blank %}
         <h2 class="spellbound-countdown__heading">{{ section.settings.heading }}</h2>
       {% endif %}
@@ -231,12 +220,6 @@
   "tag": "section",
   "class": "spellbound-section",
   "settings": [
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Label",
-      "default": "The Wheel of the Year"
-    },
     {
       "type": "text",
       "id": "heading",
