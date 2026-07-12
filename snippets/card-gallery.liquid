@@ -12,6 +12,26 @@
   assign product = closest.product
   assign block_settings = block.settings
   assign image_sizes = '(min-width: 750px) 50vw, 100vw'
+  assign eager_load_first_media = false
+
+  # Theme blocks cannot receive the parent product-loop index, so locate the first visible Search products by ID.
+  if request.page_type == 'search'
+    if search.results_count > 0
+      assign early_search_products = search.results | where: 'object_type', 'product'
+    else
+      assign empty_state_collection = settings.empty_state_collection | default: collections.all
+      assign early_search_products = empty_state_collection.products
+    endif
+
+    for early_search_product in early_search_products limit: 2
+      if early_search_product.id == product.id
+        assign eager_load_first_media = true
+        break
+      endif
+    endfor
+  elsif section.index == null or section.index < 5
+    assign eager_load_first_media = true
+  endif
 
   # Check if product has badges and determine position
   assign has_badges = false
@@ -134,9 +154,11 @@
             continue
           endif
 
-          if forloop.first and section.index == null or section.index < 5
-            assign loading = 'eager'
-            assign sizes = image_sizes
+          if forloop.first
+            if eager_load_first_media
+              assign loading = 'eager'
+              assign sizes = image_sizes
+            endif
           endif
 
           assign class = 'product-media-container media-fit product-media-container--[media_type]' | replace: '[media_type]', media.media_type

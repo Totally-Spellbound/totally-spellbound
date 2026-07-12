@@ -34,3 +34,14 @@ Counts come from the rendered HTML returned for the same routes. `Unset` means t
 | Product | 84 | 0 | 47 | 37 | 26 |
 
 Repeat the same three routes and profile after work that changes shared assets, image loading or first-viewport composition. Record a fresh row rather than replacing this baseline.
+
+## Search loading follow-up
+
+Recorded on 12 July 2026 after ticket #3, using the same development theme at a 390px CSS viewport.
+
+| Search state | Image elements | `eager` | `lazy` | Unset |
+| --- | ---: | ---: | ---: | ---: |
+| Blank `/search` | 134 | 2 | 131 | 1 |
+| Populated `/search?q=crystal&type=product` | 39 | 2 | 36 | 1 |
+
+In both states, the eager images are the first media for the first two visible products. Alternate media and later product cards remain lazy. Collection keeps its existing loading behaviour. Network and Lighthouse measurements remain part of the complete release gate rather than this rendered declaration check.
