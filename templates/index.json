@@ -426,8 +426,11 @@
       ],
       "settings": {
         "title": "Written in the Stars",
+        "description": "Shop by your zodiac sign to discover crystals, rituals and curiosities chosen for you.",
         "columns": 6,
-        "atmosphere_asset": "spellbound-img-zodiac.jpg"
+        "atmosphere_asset": "spellbound-img-zodiac.jpg",
+        "layout_style": "zodiac",
+        "centre_header": true
       }
     }
   },

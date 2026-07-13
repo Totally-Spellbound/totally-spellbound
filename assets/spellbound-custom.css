@@ -1283,6 +1283,22 @@ product-card .card-gallery + * {
   line-height: var(--spellbound-leading-description);
   color: var(--spellbound-text-soft);
 }
+
+.spellbound-discovery__intro {
+  max-width: 38rem;
+  margin: 1.25rem auto 0;
+  color: var(--spellbound-text-soft);
+  font-family: var(--spellbound-type-reading-family);
+  font-size: clamp(1rem, 1.8vw, 1.1875rem);
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .spellbound-discovery__header:not(.spellbound-discovery__header--centre) .spellbound-discovery__intro {
+    margin-inline: 0;
+  }
+}
 .shopify-policy__body p {
   margin: 0 0 1.25em;
 }

@@ -105,6 +105,18 @@
     outline: 2px solid var(--spellbound-gold);
     outline-offset: 3px;
   }
+  @media (max-width: 1023px) {
+    .spellbound-countdown__content {
+      text-align: center;
+    }
+    .spellbound-countdown__description,
+    .spellbound-countdown__expired {
+      margin-inline: auto;
+    }
+    .spellbound-countdown__timer {
+      justify-content: center;
+    }
+  }
   .spellbound-countdown__visual {
     position: relative;
     width: 100%;
@@ -151,7 +163,7 @@
 {% render 'spellbound-ornament' %}
 <section class="spellbound-countdown" data-spellbound-countdown>
   <div class="spellbound-countdown__inner">
-    <div data-spellbound-reveal-group>
+    <div class="spellbound-countdown__content" data-spellbound-reveal-group>
       {% if section.settings.heading != blank %}
         <h2 class="spellbound-countdown__heading">{{ section.settings.heading }}</h2>
       {% endif %}

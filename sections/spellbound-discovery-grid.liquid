@@ -479,6 +479,264 @@
       font-size: clamp(1.05rem, 1.25vw, 1.3rem);
     }
   }
+
+  .spellbound-discovery--zodiac { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .spellbound-discovery--zodiac .spellbound-discovery__atmosphere img {
+    opacity: 0.26;
+    object-position: center;
+  }
+  .spellbound-discovery--zodiac .spellbound-discovery__atmosphere::after {
+    background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--spellbound-bg) 18%, transparent), color-mix(in srgb, var(--spellbound-bg) 80%, transparent) 72%), linear-gradient(to bottom, var(--spellbound-bg), transparent 22%, transparent 78%, var(--spellbound-bg));
+  }
+  .spellbound-discovery__stage--zodiac {
+    position: relative;
+    padding-top: 0.75rem;
+  }
+  .spellbound-discovery__zodiac-map,
+  .spellbound-discovery__zodiac-centre {
+    display: none;
+  }
+  .spellbound-discovery__grid--zodiac {
+    position: relative;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 0.5rem;
+    row-gap: 2.25rem;
+  }
+  .spellbound-discovery__grid--zodiac::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    inset-block: 3rem;
+    inset-inline-start: 50%;
+    inline-size: 1px;
+    background: linear-gradient(to bottom, transparent, var(--spellbound-gold-deep) 8%, var(--spellbound-gold-deep) 92%, transparent);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card {
+    z-index: 1;
+    min-width: 0;
+    min-height: 10.5rem;
+    overflow: visible;
+    border: 0;
+    background: none;
+    isolation: isolate;
+    transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(even) {
+    translate: 0 1.5rem;
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 8% 2%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--spellbound-gold-glow), transparent 66%);
+    opacity: 0;
+    transform: scale(0.82);
+    transition: opacity 300ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card:is(:hover, :focus-visible)::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card:focus-visible {
+    border-radius: 50%;
+    outline-offset: 0.15rem;
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card-content {
+    min-height: 10.5rem;
+    padding: 1rem 0.35rem;
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-content {
+    transform: translateY(-0.3rem);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card-icon {
+    position: relative;
+    width: 4.25rem;
+    height: 4.25rem;
+    margin-bottom: 1.35rem;
+    border-color: var(--spellbound-gold);
+    background: radial-gradient(circle, color-mix(in srgb, var(--spellbound-purple-deep) 82%, transparent), color-mix(in srgb, var(--spellbound-bg) 90%, transparent) 70%);
+    box-shadow: inset 0 0 0 0.28rem color-mix(in srgb, var(--spellbound-bg) 82%, transparent), inset 0 0 0 calc(0.28rem + 1px) var(--spellbound-gold-deep), 0 0 1.5rem color-mix(in srgb, var(--spellbound-gold) 8%, transparent);
+    transition: color 300ms ease, border-color 300ms ease, filter 300ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card-icon::before {
+    content: '';
+    position: absolute;
+    inset: -0.65rem;
+    border: 1px solid color-mix(in srgb, var(--spellbound-gold) 42%, transparent);
+    border-right-color: transparent;
+    border-radius: 50%;
+    transform: rotate(-24deg);
+    transition: border-color 300ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card-icon::after {
+    content: '';
+    position: absolute;
+    top: -0.78rem;
+    left: calc(50% - 0.15rem);
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    background: var(--spellbound-gold-bright);
+    box-shadow: 0 5.55rem 0 color-mix(in srgb, var(--spellbound-gold-bright) 72%, transparent);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-icon {
+    color: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+    filter: drop-shadow(0 0 0.9rem var(--spellbound-gold-glow));
+    transform: scale(1.04);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-icon::before {
+    border-color: var(--spellbound-gold);
+    border-left-color: transparent;
+    transform: rotate(20deg);
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card-name {
+    width: 100%;
+    margin: 0;
+    color: var(--spellbound-text);
+    font-size: clamp(0.95rem, 4.3vw, 1.2rem);
+    line-height: 1.15;
+    letter-spacing: 0.055em;
+    overflow-wrap: normal;
+    text-wrap: balance;
+    transition: color 250ms ease;
+  }
+  .spellbound-discovery__grid--zodiac .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-name {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-discovery__grid--zodiac :is(.spellbound-discovery__card-topline, .spellbound-discovery__card-accent) {
+    display: none;
+  }
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .spellbound-discovery__grid--zodiac {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 1rem;
+      row-gap: 2.5rem;
+    }
+    .spellbound-discovery__grid--zodiac::before {
+      display: none;
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(even) {
+      translate: 0;
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(3n + 2) {
+      translate: 0 1.75rem;
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card-name {
+      font-size: 1.2rem;
+    }
+  }
+  @media (min-width: 1200px) {
+    .spellbound-discovery--zodiac .spellbound-discovery__header {
+      margin-bottom: 0;
+    }
+    .spellbound-discovery__stage--zodiac {
+      min-height: 48rem;
+      padding-top: 0;
+    }
+    .spellbound-discovery__zodiac-map {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      color: var(--spellbound-gold);
+      pointer-events: none;
+    }
+    .spellbound-discovery__zodiac-orbit,
+    .spellbound-discovery__zodiac-axis {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1;
+      opacity: 0.28;
+    }
+    .spellbound-discovery__zodiac-orbit {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 1400ms cubic-bezier(0.16, 1, 0.3, 1) 160ms;
+    }
+    .spellbound-discovery__zodiac-map.is-visible .spellbound-discovery__zodiac-orbit {
+      stroke-dashoffset: 0;
+    }
+    .spellbound-discovery__zodiac-axis {
+      stroke-dasharray: 2 10;
+      opacity: 0.16;
+    }
+    .spellbound-discovery__zodiac-star {
+      fill: currentColor;
+      opacity: 0.72;
+    }
+    .spellbound-discovery__zodiac-centre {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: 9rem;
+      height: 9rem;
+      color: var(--spellbound-gold);
+      border: 1px solid color-mix(in srgb, var(--spellbound-gold) 32%, transparent);
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--spellbound-purple-deep) 50%, transparent), color-mix(in srgb, var(--spellbound-bg) 68%, transparent) 68%);
+      box-shadow: inset 0 0 0 0.65rem color-mix(in srgb, var(--spellbound-bg) 40%, transparent), 0 0 4rem color-mix(in srgb, var(--spellbound-gold) 8%, transparent);
+      translate: -50% -50%;
+      pointer-events: none;
+    }
+    .spellbound-discovery__zodiac-centre svg {
+      width: 4.5rem;
+      height: 4.5rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1;
+    }
+    .spellbound-discovery__grid--zodiac {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      display: block;
+    }
+    .spellbound-discovery__grid--zodiac::before {
+      display: none;
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card {
+      position: absolute;
+      width: clamp(8.5rem, 10vw, 10.5rem);
+      min-height: 8.75rem;
+      translate: -50% -50%;
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(even) {
+      translate: -50% -50%;
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card-content {
+      min-height: 8.75rem;
+      padding: 0.75rem 0.35rem;
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card-name {
+      font-size: clamp(1rem, 1.2vw, 1.22rem);
+    }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(1) { left: 50%; top: 12%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(2) { left: 72%; top: 16%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(3) { left: 87%; top: 31%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(4) { left: 91%; top: 50%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(5) { left: 87%; top: 69%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(6) { left: 72%; top: 84%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(7) { left: 50%; top: 88%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(8) { left: 28%; top: 84%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(9) { left: 13%; top: 69%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(10) { left: 9%; top: 50%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(11) { left: 13%; top: 31%; }
+    .spellbound-discovery__grid--zodiac .spellbound-discovery__card:nth-child(12) { left: 28%; top: 16%; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .spellbound-discovery__card,
     .spellbound-discovery__card-image,
@@ -489,17 +747,14 @@
     .spellbound-discovery__card-name,
     .spellbound-discovery__card-topline,
     .spellbound-discovery__card-accent,
-    .spellbound-discovery__constellation-path {
-      transition: none;
+    .spellbound-discovery__constellation-path,
+    .spellbound-discovery__zodiac-orbit {
+      transition: none !important;
+      transform: none !important;
     }
-    .spellbound-discovery__constellation-path {
+    .spellbound-discovery__constellation-path,
+    .spellbound-discovery__zodiac-orbit {
       stroke-dashoffset: 0;
-    }
-    .spellbound-discovery__card:hover {
-      transform: none;
-    }
-    .spellbound-discovery__card:hover .spellbound-discovery__card-image {
-      transform: none;
     }
   }
 </style>
@@ -535,13 +790,11 @@
     </div>
   {% endif %}
   <div class="spellbound-discovery__inner">
-    <header
-      class="spellbound-discovery__header{% if section.settings.centre_header %} spellbound-discovery__header--centre{% endif %}"
-      data-spellbound-reveal
-    >
+    <header class="spellbound-discovery__header{% if section.settings.centre_header %} spellbound-discovery__header--centre{% endif %}" data-spellbound-reveal>
       {% if section.settings.title != blank %}
         <h2 class="spellbound-discovery__title">{{ section.settings.title }}</h2>
       {% endif %}
+      {% if section.settings.description != blank %}<p class="spellbound-discovery__intro">{{ section.settings.description | escape }}</p>{% endif %}
       {% if section.settings.title != blank %}
         <div class="spellbound-discovery__divider" aria-hidden="true">
           <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -551,7 +804,7 @@
       {% endif %}
     </header>
 
-    <div class="spellbound-discovery__stage{% if section.settings.layout_style == 'constellation' %} spellbound-discovery__stage--constellation{% endif %}">
+    <div class="spellbound-discovery__stage{% if section.settings.layout_style == 'constellation' %} spellbound-discovery__stage--constellation{% elsif section.settings.layout_style == 'zodiac' %} spellbound-discovery__stage--zodiac{% endif %}">
       {% if section.settings.layout_style == 'constellation' %}
         <svg
           class="spellbound-discovery__constellation-map"
@@ -569,8 +822,32 @@
           <circle class="spellbound-discovery__constellation-star" cx="1130" cy="155" r="2.5"/>
         </svg>
       {% endif %}
+      {% if section.settings.layout_style == 'zodiac' %}
+        <svg
+          class="spellbound-discovery__zodiac-map"
+          viewBox="0 0 1200 700"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          data-spellbound-reveal
+        >
+          <ellipse class="spellbound-discovery__zodiac-orbit" pathLength="1" cx="600" cy="350" rx="530" ry="292"/>
+          <ellipse class="spellbound-discovery__zodiac-orbit" pathLength="1" cx="600" cy="350" rx="430" ry="232"/>
+          <path class="spellbound-discovery__zodiac-axis" d="M70 350H1130M600 58V642"/>
+          <circle class="spellbound-discovery__zodiac-star" cx="600" cy="58" r="3"/>
+          <circle class="spellbound-discovery__zodiac-star" cx="1130" cy="350" r="3"/>
+          <circle class="spellbound-discovery__zodiac-star" cx="600" cy="642" r="3"/>
+          <circle class="spellbound-discovery__zodiac-star" cx="70" cy="350" r="3"/>
+        </svg>
+        <div class="spellbound-discovery__zodiac-centre" aria-hidden="true" data-spellbound-reveal>
+          <svg viewBox="0 0 72 72">
+            <circle cx="36" cy="36" r="10"/>
+            <path d="M36 7v10M36 55v10M7 36h10M55 36h10M15.5 15.5l7 7M49.5 49.5l7 7M56.5 15.5l-7 7M22.5 49.5l-7 7"/>
+            <path d="M47.5 30.5A14 14 0 1 0 47.5 49 15 15 0 0 1 47.5 30.5Z"/>
+          </svg>
+        </div>
+      {% endif %}
       <div
-        class="spellbound-discovery__grid spellbound-discovery__grid--cols-{{ section.settings.columns }}{% if section.settings.layout_style == 'constellation' %} spellbound-discovery__grid--constellation{% endif %}"
+        class="spellbound-discovery__grid spellbound-discovery__grid--cols-{{ section.settings.columns }}{% if section.settings.layout_style == 'constellation' %} spellbound-discovery__grid--constellation{% elsif section.settings.layout_style == 'zodiac' %} spellbound-discovery__grid--zodiac{% endif %}"
         data-spellbound-reveal-group
       >
         {% for block in section.blocks %}
@@ -630,6 +907,7 @@
       "label": "Title",
       "default": "The Elements"
     },
+    { "type": "textarea", "id": "description", "label": "Description" },
     {
       "type": "range",
       "id": "columns",
@@ -645,7 +923,8 @@
       "label": "Layout style",
       "options": [
         { "value": "grid", "label": "Grid" },
-        { "value": "constellation", "label": "Constellation" }
+        { "value": "constellation", "label": "Constellation" },
+        { "value": "zodiac", "label": "Zodiac wheel" }
       ],
       "default": "grid"
     },
