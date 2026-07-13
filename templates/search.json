@@ -41,6 +41,7 @@
       "settings": {
         "alignment": "flex-start",
         "color_scheme": "scheme-1",
+        "prompt": "Search by crystal, intention or practice. Try “amethyst”, “protection” or “tarot”.",
         "padding-block-start": 40,
         "padding-block-end": 0
       }
@@ -161,6 +162,7 @@
         }
       },
       "settings": {
+        "discovery_title": "A few places to begin",
         "layout_type": "grid",
         "product_card_size": "medium",
         "mobile_product_card_size": "small",

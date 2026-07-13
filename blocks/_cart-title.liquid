@@ -26,6 +26,11 @@
       {%- if block_settings.show_count -%}{% render 'cart-bubble' %}{%- endif -%}
     {%- endif -%}
   </h1>
+  {%- if cart.empty? or force_empty -%}
+    <p class="cart-title__empty-message">
+      {{ block_settings.empty_message }}
+    </p>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -34,6 +39,22 @@
     display: inline-flex;
     align-items: center;
     gap: var(--gap-sm);
+  }
+
+  .cart-title__empty-message {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cart-title__empty-message {
+      display: block;
+      max-width: 34rem;
+      margin: var(--margin-md) auto 0;
+      color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
+      font-family: var(--font-paragraph--family);
+      font-size: var(--font-size--md);
+      line-height: 1.6;
+    }
   }
 
   .cart-title .cart-bubble {
@@ -79,6 +100,12 @@
       "id": "show_count",
       "label": "t:settings.cart_count",
       "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "empty_message",
+      "label": "t:settings.text",
+      "default": "Nothing has been added yet. Browse the shop when you’re ready to find something that speaks to you."
     },
     {
       "type": "header",

@@ -1,7 +1,7 @@
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div class="section section--page-width color-{{ section.settings.color_scheme }}">
   <div
-    class="spacing-style search-page__header"
+    class="spacing-style search-page__header{% unless search.performed %} search-page__header--blank{% endunless %}"
     style="
       --horizontal-alignment: {{ section.settings.alignment }};
       {% render 'spacing-style', settings: section.settings %}
@@ -18,9 +18,35 @@
     {% endcapture %}
 
     {% content_for 'block', id: 'heading', type: '_heading', text: heading_text %}
+    {% unless search.performed %}
+      <p class="search-page__prompt">
+        {{ section.settings.prompt }}
+      </p>
+    {% endunless %}
     {% content_for 'block', id: 'search', type: '_search-input' %}
   </div>
 </div>
+
+{% stylesheet %}
+  .search-page__prompt {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .search-page__prompt {
+      display: block;
+      max-width: 42rem;
+      margin: var(--margin-md) 0 0;
+      color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
+      font-size: var(--font-size--md);
+      line-height: 1.6;
+    }
+
+    .search-page__header--blank search-page-input-component {
+      margin-block-start: var(--margin-xl);
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -51,6 +77,12 @@
       "id": "color_scheme",
       "label": "t:settings.color_scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "textarea",
+      "id": "prompt",
+      "label": "t:settings.text",
+      "default": "Search by crystal, intention or practice. Try “amethyst”, “protection” or “tarot”."
     },
     {
       "type": "header",

@@ -9,6 +9,7 @@
           "settings": {
             "title": "Your Cauldron",
             "show_count": true,
+            "empty_message": "Nothing has been added yet. Browse the shop when you’re ready to find something that speaks to you.",
             "type_preset": "h4",
             "alignment": "left",
             "padding-block-start": 0,
@@ -26,6 +27,7 @@
             "image_ratio": "portrait",
             "dividers": true,
             "vendor": false,
+            "empty_button_label": "Browse the shop",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,

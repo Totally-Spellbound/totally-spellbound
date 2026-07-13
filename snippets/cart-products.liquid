@@ -47,8 +47,11 @@
       class="button cart-items__empty-button"
       href="{{ settings.empty_cart_button_link | default: routes.all_products_collection_url }}"
     >
-      <span class="button-text">
+      <span class="button-text cart-items__empty-button-label--default">
         {{ 'actions.continue_shopping' | t }}
+      </span>
+      <span class="button-text cart-items__empty-button-label--mobile">
+        {{ block_settings.empty_button_label }}
       </span>
     </a>
   {%- else -%}
@@ -402,6 +405,20 @@
     align-items: center;
     margin-block-start: 0;
     text-align: center;
+  }
+
+  .cart-items__empty-button-label--mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cart-page--empty .cart-items__empty-button-label--default {
+      display: none;
+    }
+
+    .cart-page--empty .cart-items__empty-button-label--mobile {
+      display: inline;
+    }
   }
 
   .cart-drawer:not(:has(.cart-form)) .cart-items__wrapper {
