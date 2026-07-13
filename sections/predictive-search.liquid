@@ -420,6 +420,26 @@
     }
   }
 
+  .predictive-search-results__card--product .resource-card__title {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+
+  .predictive-search-results__card--product .resource-card__media {
+    overflow: hidden;
+    border: 1px solid var(--spellbound-border);
+    border-radius: var(--spellbound-radius-card-media);
+  }
+
+  .predictive-search-results__card--product .resource-card__content {
+    flex: 1;
+  }
+
+  .predictive-search-results__card--product .resource-card__content > div[ref='priceContainer'] {
+    margin-block-start: auto;
+  }
+
   .predictive-search-results__card:not(.predictive-search-results__card--product) {
     padding: var(--padding-sm);
     border: var(--border-width-sm) solid var(--color-border);
