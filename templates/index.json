@@ -4,6 +4,7 @@
       "type": "spellbound-hero",
       "settings": {
         "image_asset": "spellbound-img-hero.webp",
+        "mobile_image_asset": "spellbound-img-hero-mobile.webp",
         "heading": "<p>Every crystal holds a <em>story</em>.</p>",
         "subheading": "Hand-picked crystals, tarot & curiosities from a real little shop in Nottinghamshire.",
         "button_label": "Enter the Vault",
