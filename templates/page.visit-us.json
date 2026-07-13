@@ -95,7 +95,10 @@
         "gap": 32,
         "color_scheme": "",
         "padding-block-start": 16,
-        "padding-block-end": 80
+        "padding-block-end": 80,
+        "mobile_padding_override": true,
+        "mobile_padding_block_start": 16,
+        "mobile_padding_block_end": 48
       }
     },
     "browse": {

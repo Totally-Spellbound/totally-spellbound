@@ -72,7 +72,7 @@
       <img
         src="{{ 'spellbound-logo-banner.png' | asset_url }}"
         alt="{{ shop.name }}"
-        class="header-logo__image"
+        class="header-logo__image header-logo__image--fallback"
         width="942"
         height="292"
         style="--header-logo-image-width: {{ asset_logo_width }}px; --header-logo-image-width-mobile: {{ asset_logo_width_mobile }}px; --header-logo-image-height: {{ asset_logo_height }}px; --header-logo-image-height-mobile: {{ asset_logo_height_mobile }}px;"
@@ -149,6 +149,13 @@
     @media screen and (min-width: 750px) {
       height: var(--header-logo-image-height);
       width: var(--header-logo-image-width);
+    }
+
+    &.header-logo__image--fallback {
+      @media screen and (min-width: 750px) and (max-width: 989px) {
+        height: 60px;
+        width: 114px;
+      }
     }
   }
 

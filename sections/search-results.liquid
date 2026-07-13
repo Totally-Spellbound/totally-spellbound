@@ -7,7 +7,7 @@
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 
 <results-list
-  class="section product-grid-container spacing-style color-{{ section.settings.color_scheme }}"
+  class="section product-grid-container spacing-style color-{{ section.settings.color_scheme }}{% unless search.performed %} search-results--discovery{% endunless %}"
   style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
   section-id="{{ section.id }}"
   infinite-scroll="{{ section.settings.enable_infinite_scroll }}"
@@ -24,18 +24,27 @@
     {% endif %}
 
     {% paginate search.results by products_per_page %}
+      {% assign render_product_limit = products_per_page %}
+
       {% if search.results_count > 0 %}
         {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: search.results_count %}
         {% assign products = search.results | where: 'object_type', 'product' %}
       {% else %}
         {% assign collection = settings.empty_state_collection | default: collections.all %}
-        {% assign default_title = 'content.search_results_resource_products' | t %}
-        {% assign title = settings.empty_state_collection.title | default: default_title %}
         {% assign products = collection.products %}
+
+        {% if search.performed %}
+          {% assign default_title = 'content.search_results_resource_products' | t %}
+          {% assign title = settings.empty_state_collection.title | default: default_title %}
+          {% assign render_product_limit = products.size %}
+        {% else %}
+          {% assign title = section.settings.discovery_title %}
+          {% assign render_product_limit = 8 %}
+        {% endif %}
       {% endif %}
 
       {% capture children %}
-        {% for product in products %}
+        {% for product in products limit: render_product_limit %}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -60,6 +69,15 @@
   </div>
 </results-list>
 
+{% stylesheet %}
+  @media screen and (max-width: 749px) {
+    .search-results--discovery .main-collection-grid__title {
+      margin-block: 0 var(--margin-xl);
+      font-size: var(--font-size--lg);
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.search_results",
@@ -67,6 +85,12 @@
     {
       "type": "paragraph",
       "content": "t:content.edit_empty_state_collection_in_theme_settings"
+    },
+    {
+      "type": "text",
+      "id": "discovery_title",
+      "label": "t:settings.heading",
+      "default": "A few places to begin"
     },
     {
       "type": "select",

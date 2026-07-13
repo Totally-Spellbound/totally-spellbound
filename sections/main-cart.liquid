@@ -14,7 +14,7 @@
       class="section color-{{ section.settings.color_scheme }} section--{{ section.settings.section_width }}"
     >
       <div
-        class="cart-page spacing-style{% if cart.empty? %} cart-page--empty{% endif %}"
+        class="cart-page cart-page--empty spacing-style"
         style="{% render 'spacing-style', settings: section.settings %}"
       >
         <div class="cart-page__title">
@@ -94,6 +94,30 @@
 
   .cart-page__title + .cart-page__items {
     margin-block-start: var(--margin-lg);
+  }
+
+  @media screen and (max-width: 749px) {
+    .cart-page--empty {
+      justify-content: flex-start;
+      max-width: 42rem;
+      margin-inline: auto;
+    }
+
+    .cart-page--empty .cart-page__title {
+      margin-top: 0;
+    }
+
+    .cart-page--empty .cart-page__more-blocks:has(> *) {
+      margin-top: var(--margin-3xl);
+    }
+
+    .cart-page__more-blocks:not(:has(> *)) {
+      display: none;
+    }
+
+    .cart-page--empty .cart-page__title + .cart-page__items {
+      margin-block-start: var(--margin-xl);
+    }
   }
 
   @media screen and (min-width: 750px) {

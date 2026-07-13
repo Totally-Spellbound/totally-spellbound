@@ -10,10 +10,15 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    min-height: 300px;
-    height: clamp(300px, 45vh, 480px);
+    min-height: clamp(230px, 32svh, 280px);
     overflow: hidden;
     background: var(--spellbound-bg);
+  }
+  @media (min-width: 990px) {
+    .spellbound-page-hero {
+      min-height: 300px;
+      height: clamp(300px, 45vh, 480px);
+    }
   }
   .spellbound-page-hero__media {
     position: absolute;
@@ -43,7 +48,12 @@
     width: 100%;
     max-width: 72rem;
     margin: 0 auto;
-    padding: clamp(4.5rem, 10vw, 7rem) 1.5rem clamp(2rem, 5vw, 3.25rem);
+    padding: clamp(3rem, 10vw, 4.5rem) 1.5rem 1.5rem;
+  }
+  @media (min-width: 990px) {
+    .spellbound-page-hero__content {
+      padding: clamp(4.5rem, 10vw, 7rem) 1.5rem clamp(2rem, 5vw, 3.25rem);
+    }
   }
   .spellbound-page-hero__title {
     font-family: var(--spellbound-type-display-family);

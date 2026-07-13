@@ -351,9 +351,8 @@
   .spellbound-chakra__detail-en {
     font-family: var(--font-body--family);
     font-weight: 600;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
     color: var(--spellbound-gold);
   }
   .spellbound-chakra__detail-meaning {
@@ -421,16 +420,16 @@
   }
 
   /* ---- Kindred artifacts ---- */
-  .spellbound-chakra__kindred-label {
+  .spellbound-chakra__kindred-heading {
     margin: 0 0 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--spellbound-gold-deep);
-    font-family: var(--font-body--family);
+    font-family: var(--spellbound-type-reading-family);
     font-weight: 600;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: var(--spellbound-gold);
+    font-size: 1.5rem;
+    line-height: var(--spellbound-leading-heading);
+    letter-spacing: 0;
+    color: var(--spellbound-text);
   }
   .spellbound-chakra__grid {
     display: grid;
@@ -635,7 +634,7 @@
       </p>
 
       <div class="spellbound-chakra__kindred">
-        <p class="spellbound-chakra__kindred-label">Kindred Artifacts</p>
+        <h3 class="spellbound-chakra__kindred-heading">Kindred Artifacts</h3>
 
         {%- assign kindred_count = 0 -%}
         {%- capture kindred_cards -%}
