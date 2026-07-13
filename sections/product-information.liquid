@@ -327,6 +327,32 @@
     }
   }
 
+  @media screen and (max-width: 749px) {
+    .product-information .product-inventory__status {
+      min-height: 2rem;
+      color: var(--spellbound-text-soft);
+      font-family: var(--spellbound-type-reading-family);
+      font-size: 1rem;
+      line-height: var(--spellbound-leading-interface);
+    }
+
+    .product-information .media-gallery__mobile-controls[thumbnails] {
+      margin-block-start: var(--gap-xs);
+    }
+
+    .product-information .media-gallery__mobile-controls[thumbnails] .slideshow-controls__thumbnails {
+      justify-content: flex-start;
+      margin-inline: 0;
+      padding-inline: var(--focus-outline-offset);
+    }
+  }
+
+  @media screen and (max-width: 749px) and (orientation: landscape) {
+    .product-information .product-media-container.constrain-height {
+      max-height: max(15rem, calc(100svh - 8rem));
+    }
+  }
+
   /* Small mobile - hide text content and compare price */
   @media screen and (max-width: 389px) {
     .sticky-add-to-cart__bar {

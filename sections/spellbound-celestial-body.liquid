@@ -44,13 +44,6 @@
 
 {%- if planet_found -%}
 
-{%- comment -%} Planet type {%- endcomment -%}
-{%- if planet_name == 'pluto' -%}
-  {%- assign planet_type = 'Dwarf Planet' -%}
-{%- else -%}
-  {%- assign planet_type = 'Planet' -%}
-{%- endif -%}
-
 {%- comment -%} Planet descriptions {%- endcomment -%}
 {%- case planet_name -%}
   {%- when 'mercury' -%}
@@ -363,16 +356,6 @@
   @media (min-width: 750px) {
     .spellbound-celestial__info { bottom: 185px; }
   }
-  .spellbound-celestial__type {
-    font-family: var(--font-body--family, sans-serif);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-    text-indent: 0.35em;
-    text-transform: uppercase;
-    color: var(--spellbound-gold);
-    margin: 0 0 10px;
-  }
   .spellbound-celestial__name {
     font-family: var(--font-heading--family, serif);
     font-weight: 400;
@@ -445,22 +428,11 @@
       height: 84px;
     }
   }
-  .spellbound-celestial__moon-label {
-    font-family: var(--font-body--family, sans-serif);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.3em;
-    text-indent: 0.3em;
-    text-transform: uppercase;
-    color: var(--spellbound-gold);
-    margin: 0 0 3px;
-  }
   .spellbound-celestial__moon-name {
-    font-family: var(--font-heading--family, serif);
-    font-size: 17px;
-    letter-spacing: 0.22em;
-    text-indent: 0.22em;
-    text-transform: uppercase;
+    font-family: var(--spellbound-type-reading-family);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     color: var(--spellbound-text);
     margin: 0;
   }
@@ -675,11 +647,11 @@
     margin: 0 0 16px;
   }
   .spellbound-celestial__panel h3 {
-    font-family: var(--font-body--family, sans-serif);
-    font-size: 12px;
+    font-family: var(--spellbound-type-reading-family);
+    font-size: 1.125rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    line-height: var(--spellbound-leading-heading);
+    letter-spacing: 0;
     color: var(--spellbound-gold);
     margin: 26px 0 0;
   }
@@ -840,7 +812,6 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--1"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Moon</p>
       </div>
 
@@ -849,12 +820,10 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--2"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Deimos</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Phobos</p>
       </div>
 
@@ -864,17 +833,14 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Io</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Europa</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Ganymede</p>
       </div>
 
@@ -884,17 +850,14 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Titan</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Dione</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Enceladus</p>
       </div>
 
@@ -904,17 +867,14 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Miranda</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Ariel</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Umbriel</p>
       </div>
 
@@ -924,17 +884,14 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--3"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Triton</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos2">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Proteus</p>
       </div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos3">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Nereid</p>
       </div>
 
@@ -942,7 +899,6 @@
       <div class="spellbound-celestial__orbit spellbound-celestial__orbit--1"></div>
       <div class="spellbound-celestial__moon spellbound-celestial__moon--pos1">
         <div class="spellbound-celestial__moon-sphere" aria-hidden="true"></div>
-        <p class="spellbound-celestial__moon-label">Moon</p>
         <p class="spellbound-celestial__moon-name">Charon</p>
       </div>
   {%- endcase -%}
@@ -961,7 +917,6 @@
 
   <!-- Planet info overlay -->
   <div class="spellbound-celestial__info" data-spellbound-reveal-group>
-    <p class="spellbound-celestial__type">{{ planet_type }}</p>
     <h2 class="spellbound-celestial__name">{{ planet_display }}</h2>
     <p class="spellbound-celestial__desc">{{ planet_desc }}</p>
     <button

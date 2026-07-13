@@ -752,13 +752,12 @@
 
   /* Mobile thumbnails styling */
   @media screen and (max-width: 749px) {
-    .media-gallery__mobile-controls[thumbnails] {
-      --thumbnail-width: 44px;
-    }
-
     .media-gallery__mobile-controls[thumbnails] .slideshow-controls__thumbnail {
-      width: var(--thumbnail-width);
+      width: min(var(--thumbnail-width), 16vw);
+      min-width: var(--minimum-touch-target);
+      min-height: var(--minimum-touch-target);
       height: auto;
+      aspect-ratio: 1;
     }
   }
 
