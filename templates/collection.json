@@ -3,7 +3,6 @@
     "collection_header": {
       "type": "spellbound-collection-header",
       "settings": {
-        "label": "The Vault",
         "fallback_title": "All Artifacts",
         "quote": ""
       }

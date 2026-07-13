@@ -41,14 +41,13 @@
     position: relative;
     z-index: 1;
   }
-  .spellbound-oracle__label {
-    display: block;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--spellbound-gold);
-    margin-bottom: 1.25rem;
+  .spellbound-oracle__title {
+    font-family: var(--spellbound-type-display-family);
+    font-weight: 400;
+    font-size: var(--spellbound-type-section-title-size);
+    line-height: var(--spellbound-leading-heading);
+    color: var(--spellbound-text);
+    margin: 0 0 var(--spellbound-space-4);
   }
   .spellbound-oracle__intro {
     color: var(--spellbound-text-soft);
@@ -221,7 +220,7 @@
   </div>
 
   <div class="spellbound-oracle__content" data-spellbound-reveal>
-    <span class="spellbound-oracle__label">Consult the Oracle</span>
+    <h2 class="spellbound-oracle__title">Consult the Oracle</h2>
     <p class="spellbound-oracle__intro">Let intuition choose for you. Answer two small questions and the Oracle will draw the crystals meant for your path.</p>
 
     <!-- Step 0: Choose Intention -->

@@ -4,7 +4,6 @@
       "type": "spellbound-hero",
       "settings": {
         "image_asset": "spellbound-img-hero.webp",
-        "label": "The Doors Are Open",
         "heading": "<p>Every crystal holds a <em>story</em>.</p>",
         "subheading": "Hand-picked crystals, tarot & curiosities from a real little shop in Nottinghamshire.",
         "button_label": "Enter the Vault",
@@ -126,8 +125,7 @@
         "tile_handmade"
       ],
       "settings": {
-        "title": "Browse the Collections",
-        "subtitle": "Curiosities, sorted"
+        "title": "Browse the Collections"
       }
     },
     "featured": {
@@ -207,7 +205,6 @@
       ],
       "settings": {
         "title": "Shop by Intention",
-        "subtitle": "What do you seek?",
         "columns": 6,
         "atmosphere_asset": "spellbound-img-hero.jpg",
         "centre_header": true
@@ -216,7 +213,6 @@
     "editorial": {
       "type": "spellbound-editorial",
       "settings": {
-        "label": "Proudly Independent",
         "heading": "A real little shop in Sutton-in-Ashfield",
         "body": "<p>Totally Spellbound isn’t a faceless warehouse - it’s Alison’s shop on Outram Street, where every crystal, deck and curiosity is chosen by hand. When you order online, it’s packed with the same care as if you’d walked through the door.</p>",
         "quote": "Helpful like a conversation in the shop - never pushy.",
@@ -304,7 +300,6 @@
     "countdown": {
       "type": "spellbound-ritual-countdown",
       "settings": {
-        "label": "The Wheel Turns",
         "heading": "Lammas - The First Harvest",
         "description": "The first harvest festival of the year falls on the 1st of August. Gather abundance while the wheel turns.",
         "target_date": "2026-08-01",
@@ -429,7 +424,6 @@
       ],
       "settings": {
         "title": "Written in the Stars",
-        "subtitle": "Shop by zodiac",
         "columns": 6,
         "atmosphere_asset": "spellbound-img-zodiac.jpg"
       }

@@ -33,10 +33,8 @@
           type="radio"
           class="column-options__option-input"
           name="grid-mobile"
-          value="default"
-          checked
-          aria-label="{{ 'content.grid_view.default_view' | t }}"
-          data-grid-layout="mobile-option"
+          value="mobile-double"
+          aria-label="2 {{ 'content.grid_view.grid_fieldset' | t }}"
           on:change="results-list/updateLayout"
         >
         <span class="column-picker column-picker-mobile--double">
@@ -53,7 +51,6 @@
           class="column-options__option-input"
           checked
           aria-label="{{ 'content.grid_view.default_view' | t }}"
-          data-grid-layout="desktop-default-option"
           on:change="results-list/updateLayout"
           data-skip-node-update
         >

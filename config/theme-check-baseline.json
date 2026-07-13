@@ -1,0 +1,154 @@
+{
+  "shopifyCliVersion": "4.4.0",
+  "recordedAt": "2026-07-12",
+  "offenseCount": 28,
+  "offenses": [
+    {
+      "severity": "warning",
+      "path": "blocks/_card.liquid",
+      "check": "UnrecognizedRenderSnippetArguments",
+      "message": "Unknown argument 'background_video_loop' in render tag for snippet 'background-media'.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "blocks/_collection-card-image.liquid",
+      "check": "ValidRenderSnippetArgumentTypes",
+      "message": "Type mismatch for argument 'image_source': expected object, got boolean",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "blocks/_hotspot-product.liquid",
+      "check": "UnrecognizedRenderSnippetArguments",
+      "message": "Unknown argument 'block' in render tag for snippet 'price'.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "sections/media-with-content.liquid",
+      "check": "ValidScopedCSSClass",
+      "message": "CSS class 'disable-section-top-offset' may be defined outside the scope of this file.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "sections/product-information.liquid",
+      "check": "ValidScopedCSSClass",
+      "message": "CSS class 'add-to-cart-icon' may be defined outside the scope of this file.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "sections/slideshow.liquid",
+      "check": "ValidScopedCSSClass",
+      "message": "CSS class 'disable-section-top-offset' may be defined outside the scope of this file.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "sections/spellbound-homepage.liquid",
+      "check": "ValidScopedCSSClass",
+      "message": "CSS class 'page-width' may be defined outside the scope of this file.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/blog-comment-form.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'comment' used.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/cart-products.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'block' used.",
+      "count": 2
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/cart-summary.liquid",
+      "check": "ValidScopedCSSClass",
+      "message": "CSS class 'details' may be defined outside the scope of this file.",
+      "count": 2
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/divider.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'block' used.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/filter-remove-buttons.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'is_first_filter' used.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/header-actions.liquid",
+      "check": "UnrecognizedRenderSnippetArguments",
+      "message": "Unknown argument 'drawer_context' in render tag for snippet 'cart-products'.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/jumbo-text.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'block' used.",
+      "count": 2
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/localization-form.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'back' used.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/product-media-gallery-content.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'block' used.",
+      "count": 2
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/product-media-gallery-content.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'section' used.",
+      "count": 2
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/quantity-selector.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'block' used.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/search-modal.liquid",
+      "check": "ValidScopedCSSClass",
+      "message": "CSS class 'predictive-search' may be defined outside the scope of this file.",
+      "count": 1
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/variant-main-picker.liquid",
+      "check": "UndefinedObject",
+      "message": "Unknown object 'section' used.",
+      "count": 3
+    },
+    {
+      "severity": "warning",
+      "path": "snippets/video.liquid",
+      "check": "UnusedDocParam",
+      "message": "The parameter 'section_id' is defined but not used in this file.",
+      "count": 1
+    }
+  ]
+}

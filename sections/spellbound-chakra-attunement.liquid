@@ -397,21 +397,12 @@
 
   /* ---- Main column (right) ---- */
   .spellbound-chakra__main { flex: 1; min-width: 0; }
-  .spellbound-chakra__eyebrow {
-    margin: 0 0 1.25rem;
-    font-family: var(--font-body--family);
-    font-weight: 600;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.35em;
-    color: var(--spellbound-gold);
-  }
   .spellbound-chakra__heading {
     margin: 0 0 1.25rem;
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight, 300);
-    font-size: clamp(2.4rem, 4vw, 4rem);
-    line-height: 1.05;
+    font-family: var(--spellbound-type-display-family);
+    font-weight: 400;
+    font-size: var(--spellbound-type-section-title-size);
+    line-height: var(--spellbound-leading-display);
     letter-spacing: -0.02em;
     color: var(--spellbound-text);
   }
@@ -499,11 +490,11 @@
   }
   .spellbound-chakra__card-title {
     margin: 0 0 0.25rem;
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight, 300);
-    font-size: 1.2rem;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    font-family: var(--spellbound-type-reading-family);
+    font-weight: 600;
+    font-size: var(--spellbound-type-product-title-size);
+    line-height: var(--spellbound-leading-product-title);
+    letter-spacing: 0;
     color: var(--spellbound-text);
     transition: color 0.3s ease;
   }
@@ -512,10 +503,11 @@
   }
   .spellbound-chakra__card-price {
     margin: 0;
-    font-family: var(--font-body--family);
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    color: var(--spellbound-text-soft);
+    font-family: var(--spellbound-type-reading-family);
+    font-size: var(--spellbound-type-price-size);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--spellbound-text);
   }
   .spellbound-chakra__kindred-empty {
     margin: 0;
@@ -636,7 +628,6 @@
     </div>
 
     <div class="spellbound-chakra__main" data-spellbound-reveal-group>
-      <p class="spellbound-chakra__eyebrow">Chakra Attunement</p>
       <h2 class="spellbound-chakra__heading">Attuning the <em>{{ active_display | escape }}</em></h2>
       <p class="spellbound-chakra__copy">
         {{ active_display | escape }} energy runs through this piece. Trace the column of seven lights,

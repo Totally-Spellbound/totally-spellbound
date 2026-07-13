@@ -1,0 +1,22 @@
+name: Theme Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: theme-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  theme-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out theme
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Reject new Theme Check warnings
+        run: npm run check:ci

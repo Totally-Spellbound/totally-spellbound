@@ -4,7 +4,6 @@
       "type": "spellbound-page-hero",
       "settings": {
         "image_asset": "spellbound-img-visit-us.webp",
-        "label": "Find Us",
         "title": "Visit Us",
         "intro": "You'll find us on Outram Street in the heart of Sutton-in-Ashfield - pop in for a browse, a chat, or a bit of guidance."
       }
@@ -102,7 +101,6 @@
     "browse": {
       "type": "spellbound-editorial",
       "settings": {
-        "label": "What Awaits You",
         "heading": "Shelves worth losing an hour to",
         "body": "<p>Step through the door and you’ll find walls of hand-picked crystals, tarot and oracle decks, incense curling from the burners, preloved books on folklore and reiki, and our own handmade pieces. Come with a question - Alison loves helping you find the right piece, never the expensive one.</p>",
         "quote": "Come in for one crystal, leave with a story.",

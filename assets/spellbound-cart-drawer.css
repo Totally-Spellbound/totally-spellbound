@@ -1,6 +1,6 @@
 /* ============================================================
    Totally Spellbound — "Your Cauldron" cart drawer
-   Candlelight design system (see .planning/phases/03-launch/DIRECTION.md)
+   Totally Spellbound design system
    Every rule is scoped under .cart-drawer__dialog so nothing
    leaks to the cart page or other dialogs.
    ============================================================ */
@@ -83,7 +83,7 @@
   background-color: var(--spellbound-surface);
 }
 
-/* "Your Cauldron" — Cormorant with a gold underline flourish */
+/* "Your Cauldron" is one of the drawer's selected display moments. */
 .cart-drawer__dialog .cart-drawer__heading {
   position: relative;
   font-family: var(--font-heading--family, Georgia, serif);
@@ -159,13 +159,13 @@
   overflow: hidden;
 }
 
-/* Cormorant item titles */
+/* Line-item names stay in the product-title role for quick comparison. */
 .cart-drawer__dialog .cart-items__title {
-  font-family: var(--font-heading--family, Georgia, serif);
-  font-weight: 400;
-  font-size: 1.1875rem;
-  line-height: 1.25;
-  letter-spacing: 0.02em;
+  font-family: var(--spellbound-type-reading-family);
+  font-weight: 600;
+  font-size: var(--spellbound-type-product-title-size);
+  line-height: var(--spellbound-leading-product-title);
+  letter-spacing: 0;
   color: var(--spellbound-text);
   transition: color 0.25s ease;
 }
@@ -251,7 +251,7 @@
   border-color: var(--spellbound-border);
 }
 
-/* Micro-label: "Estimated total" */
+/* Estimated total label */
 .cart-drawer__dialog .cart-totals__total-label {
   font-family: var(--font-body--family, sans-serif);
   font-weight: 600;
@@ -261,12 +261,12 @@
   color: var(--spellbound-gold);
 }
 
-/* Cormorant amount */
+/* Total amount uses the price role. */
 .cart-drawer__dialog .cart-totals__total-value {
-  font-family: var(--font-heading--family, Georgia, serif);
-  font-weight: 400;
+  font-family: var(--spellbound-type-reading-family);
+  font-weight: 600;
   font-size: 1.75rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
   color: var(--spellbound-text);
   font-variant-numeric: tabular-nums;
 }

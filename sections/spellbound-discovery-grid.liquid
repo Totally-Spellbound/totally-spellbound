@@ -48,7 +48,7 @@
     margin: 0 auto;
   }
   .spellbound-discovery__header {
-    margin-bottom: 3rem;
+    margin-bottom: var(--spellbound-module-gap);
     text-align: center;
   }
   @media (min-width: 768px) {
@@ -56,7 +56,7 @@
       text-align: left;
     }
     .spellbound-discovery__header {
-      margin-bottom: 4rem;
+      margin-bottom: var(--spellbound-space-16);
     }
   }
   .spellbound-discovery__divider {
@@ -86,20 +86,11 @@
       margin-right: 0;
     }
   }
-  .spellbound-discovery__subtitle {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--spellbound-gold);
-    margin-bottom: 1rem;
-  }
   .spellbound-discovery__title {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-    line-height: 1.1;
+    font-family: var(--spellbound-type-display-family);
+    font-weight: 400;
+    font-size: var(--spellbound-type-section-title-size);
+    line-height: var(--spellbound-leading-heading);
     color: var(--spellbound-text);
     margin: 0;
   }
@@ -316,13 +307,10 @@
       class="spellbound-discovery__header{% if section.settings.centre_header %} spellbound-discovery__header--centre{% endif %}"
       data-spellbound-reveal
     >
-      {% if section.settings.subtitle != blank %}
-        <span class="spellbound-discovery__subtitle">{{ section.settings.subtitle }}</span>
-      {% endif %}
       {% if section.settings.title != blank %}
         <h2 class="spellbound-discovery__title">{{ section.settings.title }}</h2>
       {% endif %}
-      {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      {% if section.settings.title != blank %}
         <div class="spellbound-discovery__divider" aria-hidden="true">
           <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
             <path d="M6 0 7.35 4.65 12 6 7.35 7.35 6 12 4.65 7.35 0 6 4.65 4.65Z"/>
@@ -390,12 +378,6 @@
       "id": "title",
       "label": "Title",
       "default": "The Elements"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Foundational Forces"
     },
     {
       "type": "range",

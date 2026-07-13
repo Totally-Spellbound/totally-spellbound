@@ -74,23 +74,13 @@
     text-align: center;
   }
 
-  .spellbound-hero__label {
-    margin: 0 0 1.25rem;
-    font-family: var(--font-body--family, serif);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--spellbound-gold);
-  }
-
   .spellbound-hero__heading {
     margin: 0 auto 1.25rem;
     max-width: 16ch;
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight, 300);
-    font-size: clamp(2.75rem, 6vw, 5.5rem);
-    line-height: 1.05;
+    font-family: var(--spellbound-type-display-family);
+    font-weight: 400;
+    font-size: var(--spellbound-type-display-size);
+    line-height: var(--spellbound-leading-display);
     color: var(--spellbound-text);
     text-wrap: balance;
   }
@@ -104,9 +94,9 @@
   .spellbound-hero__subheading {
     margin: 0 auto 2.25rem;
     max-width: 34rem;
-    font-family: var(--font-body--family, serif);
-    font-size: clamp(1rem, 1.4vw, 1.125rem);
-    line-height: 1.6;
+    font-family: var(--spellbound-type-reading-family);
+    font-size: clamp(var(--spellbound-type-body-size), 1.4vw, var(--spellbound-type-description-size));
+    line-height: var(--spellbound-leading-body);
     color: var(--spellbound-text-soft);
   }
 
@@ -233,6 +223,54 @@
     }
   }
 
+  @media screen and (max-width: 749px) {
+    .spellbound-hero {
+      min-height: 68svh;
+    }
+
+    .spellbound-hero__content {
+      padding: 5rem var(--spellbound-space-6) var(--spellbound-space-8);
+    }
+
+    .spellbound-hero__heading {
+      margin-bottom: var(--spellbound-space-3);
+    }
+
+    .spellbound-hero__subheading {
+      margin-bottom: var(--spellbound-space-4);
+      max-width: 29rem;
+    }
+
+    .spellbound-hero__actions {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spellbound-space-1);
+    }
+
+    .spellbound-hero__cta {
+      min-height: 44px;
+    }
+
+    .spellbound-hero__cta--primary {
+      padding: 0.9rem 2rem;
+    }
+
+    .spellbound-hero__cta--ghost {
+      padding: var(--spellbound-space-3) var(--spellbound-space-4);
+      border-color: transparent;
+      background: transparent;
+      color: var(--spellbound-text-soft);
+      text-decoration: underline;
+      text-decoration-color: var(--spellbound-border-strong);
+      text-underline-offset: 0.3em;
+    }
+
+    .spellbound-hero__cta--ghost:hover {
+      background: transparent;
+      text-decoration-color: var(--spellbound-gold);
+    }
+  }
+
   @media screen and (max-height: 640px) {
     .spellbound-hero__scroll {
       display: none;
@@ -293,9 +331,6 @@
   <div class="spellbound-hero__scrim"></div>
 
   <div class="spellbound-hero__content" data-spellbound-reveal-group>
-    {%- if section.settings.label != blank -%}
-      <p class="spellbound-hero__label">{{ section.settings.label }}</p>
-    {%- endif -%}
     {%- if section.settings.heading != blank -%}
       <h1 class="spellbound-hero__heading">
         {{- section.settings.heading | replace: '<p>', '<span>' | replace: '</p>', '</span>' -}}
@@ -349,12 +384,6 @@
       "label": "Fallback asset filename",
       "default": "spellbound-img-hero.jpg",
       "info": "Theme asset used when no image is picked"
-    },
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Label text",
-      "default": "The Doors Are Open"
     },
     {
       "type": "richtext",

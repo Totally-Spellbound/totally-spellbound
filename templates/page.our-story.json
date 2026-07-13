@@ -4,7 +4,6 @@
       "type": "spellbound-page-hero",
       "settings": {
         "image_asset": "spellbound-img-our-story.webp",
-        "label": "Proudly Independent",
         "title": "Our Story",
         "intro": "A real little shop in Sutton-in-Ashfield - no corporate warehouse, no endless aisles. Every crystal, deck and curiosity on our shelves is chosen by hand."
       }
@@ -86,7 +85,6 @@
     "handmade": {
       "type": "spellbound-editorial",
       "settings": {
-        "label": "Made By Hand",
         "heading": "Engraved, printed & finished in the shop",
         "body": "<p>Alongside the crystals and curiosities we source, we design and make our own pieces right here - laser-engraved altar boards, 3D-printed moon shelves, trinket dishes and keepsakes you won’t find anywhere else. If you’re after something a little different, this is where the magic is literally made.</p>",
         "quote": "If you can dream it up, we can probably engrave it.",

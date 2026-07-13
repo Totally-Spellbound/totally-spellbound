@@ -293,6 +293,10 @@
           </span>
 
           {{ 'actions.show_filters' | t }}
+          {% if block_settings.enable_sorting %}
+            <span aria-hidden="true">/</span>
+            {{ 'actions.sort' | t }}
+          {% endif %}
 
           {% if total_active_values > 0 %}
             <div

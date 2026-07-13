@@ -1,8 +1,7 @@
 {% comment %}
   Spellbound Footer - full ecommerce footer: brand + social, explore links,
   visit info, newsletter, policies, payment icons, copyright.
-  Brand Guidelines v1.0: Cinzel Decorative headings, Cormorant Garamond body,
-  gold on #0d0b10 with purple accents.
+  Uses the semantic roles and palette defined in DESIGN.md.
 {% endcomment %}
 
 <style>
@@ -17,7 +16,7 @@
     max-width: 100rem;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 3rem;
   }
   @media (min-width: 750px) {
@@ -69,8 +68,8 @@
     height: 18px;
   }
   .spellbound-footer__heading {
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
+    font-family: var(--spellbound-type-reading-family);
+    font-weight: 600;
     font-size: 1.125rem;
     letter-spacing: 0.08em;
     color: var(--spellbound-gold);
