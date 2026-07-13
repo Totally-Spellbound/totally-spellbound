@@ -1,6 +1,6 @@
 {% comment %}
-  Renders Totally Spellbound metafield badges for a product card.
-  Shows the ruling element (neutral badge) and first intention (gold badge).
+  Renders Totally Spellbound metafield sigils for a product card.
+  Shows the ruling element and first intention as compact labelled icons.
   Values normalised via spellbound-metafield-value (handles list metafields).
 
   Accepts:
@@ -17,9 +17,9 @@
   {%- assign intention_first = intention_value | split: ',' | first | strip -%}
 
   {%- if element_first != blank -%}
-    <span class="spellbound-badge">{{ element_first | escape }}</span>
+    {% render 'spellbound-sigil', label: element_first, kind: 'element' %}
   {%- endif -%}
   {%- if intention_first != blank -%}
-    <span class="spellbound-badge spellbound-badge--gold">{{ intention_first | escape }}</span>
+    {% render 'spellbound-sigil', label: intention_first, kind: 'intention' %}
   {%- endif -%}
 {%- endif -%}

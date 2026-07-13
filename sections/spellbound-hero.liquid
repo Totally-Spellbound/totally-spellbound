@@ -12,9 +12,15 @@
   .spellbound-hero {
     position: relative;
     display: flex;
-    align-items: flex-end;
-    min-height: 92vh;
-    min-height: 92svh;
+    align-items: stretch;
+    min-height: max(
+      75vh,
+      calc(var(--header-height, 4.5rem) + var(--header-group-height, 0px) + 22rem)
+    );
+    min-height: max(
+      75svh,
+      calc(var(--header-height, 4.5rem) + var(--header-group-height, 0px) + 22rem)
+    );
     overflow: hidden;
     background: var(--spellbound-bg);
   }
@@ -52,6 +58,14 @@
     z-index: 1;
     background:
       linear-gradient(
+        to right,
+        rgba(13, 11, 16, 0.94) 0%,
+        rgba(13, 11, 16, 0.82) 28%,
+        rgba(13, 11, 16, 0.56) 48%,
+        rgba(13, 11, 16, 0.14) 72%,
+        rgba(13, 11, 16, 0) 86%
+      ),
+      linear-gradient(
         to top,
         var(--spellbound-bg) 0%,
         rgba(13, 11, 16, 0.72) 22%,
@@ -75,8 +89,11 @@
   .spellbound-hero__content {
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    padding: 6rem clamp(1.5rem, 5vw, 5rem) clamp(3rem, 9svh, 6rem);
+    padding: calc(var(--header-height, 4.5rem) + var(--header-group-height, 0px)) clamp(1.5rem, 5vw, 5rem) 0;
     text-align: center;
   }
 
@@ -229,12 +246,25 @@
     }
   }
 
-  @media screen and (max-width: 749px) {
-    .spellbound-hero {
-      min-height: 68svh;
-      align-items: flex-start;
+  @media screen and (min-width: 990px) {
+    .spellbound-hero__heading {
+      max-width: 13.5ch;
+      font-size: clamp(3rem, 5vw, 5rem);
     }
 
+    .spellbound-hero__subheading {
+      max-width: 30rem;
+      font-size: clamp(1.125rem, 1.35vw, 1.25rem);
+      font-weight: 500;
+      color: var(--spellbound-text);
+    }
+
+    .spellbound-hero__cta--ghost {
+      background: rgba(13, 11, 16, 0.48);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
     .spellbound-hero__media {
       transform-origin: center top;
     }
@@ -256,8 +286,7 @@
     }
 
     .spellbound-hero__content {
-      padding: max(clamp(7rem, 15svh, 8.5rem), calc(var(--header-height, 4.5rem) + 1.25rem)) 1.25rem
-        var(--spellbound-space-6);
+      padding-inline: 1.25rem;
     }
 
     .spellbound-hero__heading {
@@ -314,6 +343,10 @@
 
 {%- liquid
   assign hero_alt = section.settings.heading | strip_html | strip
+  assign desktop_image_asset = section.settings.image_asset | default: 'spellbound-img-hero-desktop.webp'
+  assign desktop_image_asset_1600 = desktop_image_asset | replace: '.webp', '-1600.webp'
+  assign desktop_image_asset_2400 = desktop_image_asset | replace: '.webp', '-2400.webp'
+  assign desktop_image_asset_3200 = desktop_image_asset | replace: '.webp', '-3200.webp'
   assign mobile_image_asset = section.settings.mobile_image_asset | default: 'spellbound-img-hero-mobile.webp'
   assign mobile_image_asset_600 = mobile_image_asset | replace: '.webp', '-600.webp'
   assign mobile_image_asset_900 = mobile_image_asset | replace: '.webp', '-900.webp'
@@ -361,12 +394,21 @@
           >
         {%- else -%}
           <img
-            src="{{ section.settings.image_asset | asset_url }}"
+            src="{{ desktop_image_asset | asset_url }}"
+            {% if desktop_image_asset == 'spellbound-img-hero-desktop.webp' %}
+              srcset="
+                {{ desktop_image_asset_1600 | asset_url }} 1600w,
+                {{ desktop_image_asset_2400 | asset_url }} 2400w,
+                {{ desktop_image_asset_3200 | asset_url }} 3200w,
+                {{ desktop_image_asset | asset_url }} 5126w
+              "
+              sizes="100vw"
+            {% endif %}
             alt="{{ hero_alt | escape }}"
             class="spellbound-hero__media"
             loading="eager"
             fetchpriority="high"
-            width="5504"
+            width="5126"
             height="3072"
           >
         {%- endif -%}
@@ -427,8 +469,8 @@
       "type": "text",
       "id": "image_asset",
       "label": "Fallback asset filename",
-      "default": "spellbound-img-hero.jpg",
-      "info": "Theme asset used when no image is picked"
+      "default": "spellbound-img-hero-desktop.webp",
+      "info": "Desktop theme asset used when no image is picked"
     },
     {
       "type": "text",

@@ -272,13 +272,228 @@
     transform: scaleX(1);
     background: var(--spellbound-gold);
   }
+
+  /* Constellation mode turns compact discovery cards into a single connected
+     composition. The links keep generous rectangular hit areas, while the
+     visible objects are sigil medallions rather than another row of boxes. */
+  .spellbound-discovery--constellation {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+  }
+  .spellbound-discovery--constellation .spellbound-discovery__atmosphere img {
+    opacity: 0.22;
+    object-position: center 58%;
+  }
+  .spellbound-discovery--constellation .spellbound-discovery__atmosphere::after {
+    background:
+      radial-gradient(circle at 50% 48%, rgba(13, 11, 16, 0.16), rgba(13, 11, 16, 0.72) 72%),
+      linear-gradient(to bottom, var(--spellbound-bg), transparent 26%, transparent 72%, var(--spellbound-bg));
+  }
+  .spellbound-discovery__stage {
+    position: relative;
+  }
+  .spellbound-discovery__constellation-map {
+    display: none;
+  }
+  .spellbound-discovery__grid--constellation {
+    position: relative;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 0.75rem;
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card {
+    min-width: 0;
+    min-height: 13.5rem;
+    overflow: visible;
+    border: 0;
+    background: none;
+    isolation: isolate;
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 6% -5% -3%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--spellbound-gold-glow), transparent 67%);
+    opacity: 0;
+    transform: scale(0.86);
+    transition: opacity 300ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card:is(:hover, :focus-visible)::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card:focus-visible {
+    border-radius: 0.75rem;
+    outline-offset: 0.3rem;
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card-content {
+    min-height: 13.5rem;
+    padding: 1.25rem 0.5rem;
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-content {
+    transform: translateY(-0.35rem);
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card-icon {
+    position: relative;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 1.65rem;
+    border-color: var(--spellbound-gold);
+    background: rgba(13, 11, 16, 0.66);
+    box-shadow:
+      inset 0 0 0 0.3rem rgba(13, 11, 16, 0.8),
+      inset 0 0 0 calc(0.3rem + 1px) var(--spellbound-gold-deep),
+      0 0 2rem rgba(212, 175, 55, 0.08);
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card-icon::before {
+    content: '';
+    position: absolute;
+    inset: -0.7rem;
+    border: 1px solid var(--spellbound-gold-deep);
+    transform: rotate(45deg);
+    transition: border-color 300ms ease, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card-icon::after {
+    content: '';
+    position: absolute;
+    top: -0.85rem;
+    left: calc(50% - 0.16rem);
+    width: 0.32rem;
+    height: 0.32rem;
+    border-radius: 50%;
+    background: var(--spellbound-gold-bright);
+    box-shadow: 0 6.2rem 0 var(--spellbound-gold-bright);
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-icon {
+    color: var(--spellbound-gold-bright);
+    border-color: var(--spellbound-gold-bright);
+    background: rgba(42, 17, 43, 0.72);
+    filter: drop-shadow(0 0 1rem var(--spellbound-gold-glow));
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-icon::before {
+    border-color: var(--spellbound-gold);
+    transform: rotate(50deg) scale(1.04);
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card-name {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    color: var(--spellbound-text);
+    font-size: clamp(0.96875rem, 4vw, 1.25rem);
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    overflow-wrap: normal;
+    text-wrap: balance;
+    transition: color 250ms ease;
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card:is(:hover, :focus-visible) .spellbound-discovery__card-name {
+    color: var(--spellbound-gold-bright);
+  }
+  .spellbound-discovery__grid--constellation .spellbound-discovery__card-desc {
+    max-width: 18ch;
+    color: var(--spellbound-text-soft);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+  }
+  .spellbound-discovery__grid--constellation :is(.spellbound-discovery__card-topline, .spellbound-discovery__card-accent) {
+    display: none;
+  }
+  @media (max-width: 359px) {
+    .spellbound-discovery__grid--constellation {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem;
+    }
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card,
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card-content {
+      min-height: 12.5rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .spellbound-discovery__grid--constellation {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem 1.25rem;
+    }
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card-name {
+      font-size: 1.25rem;
+    }
+  }
+  @media (min-width: 1200px) {
+    .spellbound-discovery--constellation .spellbound-discovery__header {
+      margin-bottom: 2rem;
+    }
+    .spellbound-discovery__stage--constellation {
+      padding-block: 1rem 3.75rem;
+    }
+    .spellbound-discovery__constellation-map {
+      position: absolute;
+      z-index: 0;
+      inset: -0.5rem 1.5rem auto;
+      display: block;
+      width: calc(100% - 3rem);
+      height: 17rem;
+      overflow: visible;
+      color: var(--spellbound-gold);
+      pointer-events: none;
+    }
+    .spellbound-discovery__constellation-path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      opacity: 0.38;
+      transition: stroke-dashoffset 1200ms cubic-bezier(0.16, 1, 0.3, 1) 180ms;
+    }
+    .spellbound-discovery__constellation-map.is-visible .spellbound-discovery__constellation-path {
+      stroke-dashoffset: 0;
+    }
+    .spellbound-discovery__constellation-star {
+      fill: currentColor;
+      opacity: 0.74;
+    }
+    .spellbound-discovery__grid--constellation {
+      z-index: 1;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: clamp(0.5rem, 1.3vw, 1.1rem);
+    }
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card:nth-child(1),
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card:nth-child(6) {
+      margin-top: 3.75rem;
+    }
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card:nth-child(2),
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card:nth-child(5) {
+      margin-top: 1.6rem;
+    }
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card:nth-child(3),
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card:nth-child(4) {
+      margin-top: 0;
+    }
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card-content {
+      min-height: 14rem;
+      padding-inline: 0.75rem;
+    }
+    .spellbound-discovery__grid--constellation .spellbound-discovery__card-name {
+      font-size: clamp(1.05rem, 1.25vw, 1.3rem);
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .spellbound-discovery__card,
     .spellbound-discovery__card-image,
     .spellbound-discovery__card-icon,
+    .spellbound-discovery__card-icon::before,
+    .spellbound-discovery__card::before,
+    .spellbound-discovery__card-content,
+    .spellbound-discovery__card-name,
     .spellbound-discovery__card-topline,
-    .spellbound-discovery__card-accent {
+    .spellbound-discovery__card-accent,
+    .spellbound-discovery__constellation-path {
       transition: none;
+    }
+    .spellbound-discovery__constellation-path {
+      stroke-dashoffset: 0;
     }
     .spellbound-discovery__card:hover {
       transform: none;
@@ -290,16 +505,33 @@
 </style>
 
 {% render 'spellbound-ornament' %}
-<section class="spellbound-discovery">
+<section class="spellbound-discovery spellbound-discovery--{{ section.settings.layout_style }}">
   {% if section.settings.atmosphere_asset != blank %}
     <div class="spellbound-discovery__atmosphere" aria-hidden="true">
-      <img
-        src="{{ section.settings.atmosphere_asset | asset_url }}"
-        alt=""
-        width="968"
-        height="545"
-        loading="lazy"
-      >
+      {% if section.settings.atmosphere_asset == 'spellbound-img-hero-desktop.webp' %}
+        <img
+          src="{{ 'spellbound-img-hero-desktop-1600.webp' | asset_url }}"
+          srcset="
+            {{ 'spellbound-img-hero-desktop-960.webp' | asset_url }} 960w,
+            {{ 'spellbound-img-hero-desktop-1600.webp' | asset_url }} 1600w,
+            {{ 'spellbound-img-hero-desktop-2400.webp' | asset_url }} 2400w
+          "
+          sizes="100vw"
+          alt=""
+          width="5126"
+          height="3072"
+          loading="lazy"
+          decoding="async"
+        >
+      {% else %}
+        <img
+          src="{{ section.settings.atmosphere_asset | asset_url }}"
+          alt=""
+          width="968"
+          height="545"
+          loading="lazy"
+        >
+      {% endif %}
     </div>
   {% endif %}
   <div class="spellbound-discovery__inner">
@@ -319,50 +551,69 @@
       {% endif %}
     </header>
 
-    <div
-      class="spellbound-discovery__grid spellbound-discovery__grid--cols-{{ section.settings.columns }}"
-      data-spellbound-reveal-group
-    >
-      {% for block in section.blocks %}
-        {% liquid
-          assign has_image = false
-          if block.settings.image != blank
-            assign has_image = true
-          endif
-        %}
-        <a
-          class="spellbound-discovery__card{% if has_image %} spellbound-discovery__card--image{% endif %}"
-          {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
-          {{ block.shopify_attributes }}
+    <div class="spellbound-discovery__stage{% if section.settings.layout_style == 'constellation' %} spellbound-discovery__stage--constellation{% endif %}">
+      {% if section.settings.layout_style == 'constellation' %}
+        <svg
+          class="spellbound-discovery__constellation-map"
+          viewBox="0 0 1200 270"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          data-spellbound-reveal
         >
-          <span class="spellbound-discovery__card-topline" aria-hidden="true"></span>
-          {% if has_image %}
-            <img
-              class="spellbound-discovery__card-image"
-              src="{{ block.settings.image | image_url: width: 800 }}"
-              srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 800 }} 800w"
-              sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-              alt="{{ block.settings.image.alt | default: block.settings.card_title | escape }}"
-              width="{{ block.settings.image.width }}"
-              height="{{ block.settings.image.height }}"
-              loading="lazy"
-            >
-            <div class="spellbound-discovery__card-gradient"></div>
-          {% endif %}
-          <div class="spellbound-discovery__card-content">
-            {% if block.settings.icon != blank %}
-              <div class="spellbound-discovery__card-icon" aria-hidden="true">
-                {{ block.settings.icon }}
-              </div>
+          <path class="spellbound-discovery__constellation-path" pathLength="1" d="M70 155 C145 140 195 120 275 110 S430 82 510 88 S690 88 770 88 S940 100 1010 110 S1090 140 1130 155"/>
+          <circle class="spellbound-discovery__constellation-star" cx="70" cy="155" r="2.5"/>
+          <circle class="spellbound-discovery__constellation-star" cx="275" cy="110" r="2.5"/>
+          <circle class="spellbound-discovery__constellation-star" cx="510" cy="88" r="2.5"/>
+          <circle class="spellbound-discovery__constellation-star" cx="770" cy="88" r="2.5"/>
+          <circle class="spellbound-discovery__constellation-star" cx="1010" cy="110" r="2.5"/>
+          <circle class="spellbound-discovery__constellation-star" cx="1130" cy="155" r="2.5"/>
+        </svg>
+      {% endif %}
+      <div
+        class="spellbound-discovery__grid spellbound-discovery__grid--cols-{{ section.settings.columns }}{% if section.settings.layout_style == 'constellation' %} spellbound-discovery__grid--constellation{% endif %}"
+        data-spellbound-reveal-group
+      >
+        {% for block in section.blocks %}
+          {% liquid
+            assign has_image = false
+            if block.settings.image != blank
+              assign has_image = true
+            endif
+          %}
+          <a
+            class="spellbound-discovery__card{% if has_image %} spellbound-discovery__card--image{% endif %}"
+            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <span class="spellbound-discovery__card-topline" aria-hidden="true"></span>
+            {% if has_image %}
+              <img
+                class="spellbound-discovery__card-image"
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
+                alt="{{ block.settings.image.alt | default: block.settings.card_title | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+              <div class="spellbound-discovery__card-gradient"></div>
             {% endif %}
-            <h3 class="spellbound-discovery__card-name">{{ block.settings.card_title }}</h3>
-            {% if block.settings.description != blank %}
-              <span class="spellbound-discovery__card-desc">{{ block.settings.description }}</span>
-            {% endif %}
-          </div>
-          <span class="spellbound-discovery__card-accent" aria-hidden="true"></span>
-        </a>
-      {% endfor %}
+            <div class="spellbound-discovery__card-content">
+              {% if block.settings.icon != blank %}
+                <div class="spellbound-discovery__card-icon" aria-hidden="true">
+                  {{ block.settings.icon }}
+                </div>
+              {% endif %}
+              <h3 class="spellbound-discovery__card-name">{{ block.settings.card_title }}</h3>
+              {% if block.settings.description != blank %}
+                <span class="spellbound-discovery__card-desc">{{ block.settings.description }}</span>
+              {% endif %}
+            </div>
+            <span class="spellbound-discovery__card-accent" aria-hidden="true"></span>
+          </a>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
@@ -387,6 +638,16 @@
       "max": 7,
       "step": 1,
       "default": 5
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Layout style",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "constellation", "label": "Constellation" }
+      ],
+      "default": "grid"
     },
     {
       "type": "text",

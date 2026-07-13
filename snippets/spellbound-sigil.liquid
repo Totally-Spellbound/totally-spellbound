@@ -1,0 +1,63 @@
+{% comment %}
+  Renders one compact product correspondence sigil.
+
+  Accepts:
+  - label: {String} visible value from a product metafield
+  - kind: {String} "element" or "intention"
+{% endcomment %}
+
+{%- assign sigil_label = label | strip -%}
+{%- assign sigil_handle = sigil_label | handleize -%}
+
+{%- if sigil_label != blank -%}
+  <span
+    class="spellbound-badge spellbound-badge--{{ kind | escape }} spellbound-badge--{{ sigil_handle }}"
+    role="img"
+    aria-label="{% if kind == 'element' %}Ruling element: {% else %}Intention: {% endif %}{{ sigil_label | escape }}"
+    data-label="{{ sigil_label | escape }}"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      {%- case sigil_handle -%}
+        {%- when 'fire' -%}
+          <path d="M13.2 2.4c.5 3-1.6 4.3-1.6 6.4 0 1.1.7 2 1.7 2.4-.1-1.8 1-3.2 2.2-4.3 2.4 2.1 3.6 4.5 3.1 7.2-.6 3.7-3.2 6.2-6.7 6.2-3.8 0-6.7-2.8-6.7-6.7 0-3.7 2.4-6.9 8-11.2Z"/>
+          <path d="M12 12.1c1.4 1.3 2.2 2.6 2.1 4.1-.1 1.4-1 2.5-2.3 2.5-1.5 0-2.5-1.1-2.5-2.6 0-1.4.9-2.7 2.7-4Z"/>
+        {%- when 'water' -%}
+          <path d="M12 2.7s6 6.7 6 11.1a6 6 0 0 1-12 0c0-4.4 6-11.1 6-11.1Z"/>
+          <path d="M8.8 14.1c.2 1.8 1.3 2.8 3.1 3.1"/>
+        {%- when 'air' -%}
+          <path d="M3.2 8.2h11.6c2.4 0 2.4-3.4.1-3.4-1 0-1.7.5-2.1 1.3M3.2 12h15.5c2.7 0 2.7-3.8.2-3.8-1 0-1.8.5-2.2 1.3M3.2 15.8h10.2c2.5 0 2.5 3.4.1 3.4-1 0-1.7-.5-2.1-1.3"/>
+        {%- when 'earth' -%}
+          <path d="m3.2 18.5 6.1-10 3.1 4.4 2.2-3.2 6.2 8.8H3.2Z"/>
+          <path d="M3.5 21h17"/>
+        {%- when 'spirit' -%}
+          <path d="m12 2.8 1.7 5.5 5.5 1.7-5.5 1.7-1.7 5.5-1.7-5.5L4.8 10l5.5-1.7L12 2.8Z"/>
+          <path d="m18.6 16 .7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7.7-2.1Z"/>
+        {%- when 'protection' -%}
+          <path d="M12 2.8 19 5v5.6c0 4.4-2.7 7.7-7 10.6-4.3-2.9-7-6.2-7-10.6V5l7-2.2Z"/>
+          <path d="m8.6 11.8 2.1 2.1 4.7-4.8"/>
+        {%- when 'love' -%}
+          <path d="M20.4 8.3c0 5-8.4 10.3-8.4 10.3S3.6 13.3 3.6 8.3c0-2.4 1.8-4.1 4.1-4.1 1.8 0 3.4 1.1 4.3 2.6.9-1.5 2.5-2.6 4.3-2.6 2.3 0 4.1 1.7 4.1 4.1Z"/>
+        {%- when 'calm' -%}
+          <path d="M18.7 15.6A8 8 0 0 1 8.4 5.3 8 8 0 1 0 18.7 15.6Z"/>
+          <path d="m17 4 .5 1.6 1.6.5-1.6.5-.5 1.6-.5-1.6-1.6-.5 1.6-.5L17 4Z"/>
+        {%- when 'healing' -%}
+          <path d="M12 3.2v17.6M3.2 12h17.6"/>
+          <path d="M5.8 5.8c3.4.2 5.9 2.7 6.2 6.2M18.2 18.2c-3.4-.2-5.9-2.7-6.2-6.2"/>
+        {%- when 'manifestation' -%}
+          <circle cx="12" cy="12" r="3.2"/>
+          <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/>
+        {%- when 'abundance' -%}
+          <path d="M12 20.8v-8.5M12 15c-4.6 0-7-2.5-7-6.5 4.3 0 7 2.2 7 6.5ZM12 12.4c.1-4.3 2.6-6.7 7-6.7.1 4.2-2.5 6.6-7 6.7Z"/>
+        {%- when 'focus' -%}
+          <path d="M2.8 12s3.4-5.5 9.2-5.5 9.2 5.5 9.2 5.5-3.4 5.5-9.2 5.5S2.8 12 2.8 12Z"/>
+          <circle cx="12" cy="12" r="2.6"/>
+        {%- when 'energy-cleansing' -%}
+          <path d="m12 2.8 1.7 5.5 5.5 1.7-5.5 1.7-1.7 5.5-1.7-5.5L4.8 10l5.5-1.7L12 2.8Z"/>
+          <path d="m18.5 15.8.7 2.2 2.2.7-2.2.7-.7 2.2-.7-2.2-2.2-.7 2.2-.7.7-2.2ZM5.5 15l.5 1.5 1.5.5-1.5.5L5.5 19 5 17.5 3.5 17l1.5-.5.5-1.5Z"/>
+        {%- else -%}
+          <path d="m12 2.8 6.4 5.1-2.5 10.2-3.9 3.1-3.9-3.1L5.6 7.9 12 2.8Z"/>
+          <path d="m5.6 7.9 6.4 4 6.4-4M12 11.9v9.3"/>
+      {%- endcase -%}
+    </svg>
+  </span>
+{%- endif -%}

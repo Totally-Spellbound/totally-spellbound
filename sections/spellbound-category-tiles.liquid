@@ -34,10 +34,20 @@
     color: var(--spellbound-text);
     margin: 0;
   }
+  @media (max-width: 749px) {
+    .spellbound-cattiles__title-line {
+      display: block;
+    }
+  }
   .spellbound-cattiles__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+  }
+  @media (max-width: 359px) {
+    .spellbound-cattiles__grid {
+      grid-template-columns: 1fr;
+    }
   }
   @media (min-width: 990px) {
     .spellbound-cattiles__grid {
@@ -48,12 +58,22 @@
   .spellbound-cattiles__tile {
     position: relative;
     display: block;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
     background: var(--spellbound-surface);
     border: 1px solid var(--spellbound-border);
     text-decoration: none;
     transition: border-color 0.3s ease;
+  }
+  @media (min-width: 750px) {
+    .spellbound-cattiles__tile {
+      aspect-ratio: 4 / 5;
+    }
+  }
+  @media (max-width: 359px) {
+    .spellbound-cattiles__tile {
+      aspect-ratio: 4 / 5;
+    }
   }
   .spellbound-cattiles__tile:hover {
     border-color: var(--spellbound-border-strong);
@@ -99,9 +119,9 @@
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(13, 11, 16, 0.92) 0%,
-      rgba(13, 11, 16, 0.55) 32%,
-      rgba(13, 11, 16, 0) 65%
+      rgba(13, 11, 16, 0.97) 0%,
+      rgba(13, 11, 16, 0.76) 38%,
+      rgba(13, 11, 16, 0.12) 72%
     );
     pointer-events: none;
   }
@@ -121,26 +141,29 @@
   .spellbound-cattiles__tile-title {
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
-    font-size: 1.1rem;
-    line-height: 1.2;
+    font-size: clamp(1.2rem, 5.4vw, 1.4rem);
+    line-height: 1.18;
     color: var(--spellbound-text);
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.4rem;
   }
   @media (min-width: 990px) {
     .spellbound-cattiles__tile-title {
-      font-size: 1.4rem;
+      font-size: clamp(1.5rem, 1.65vw, 1.75rem);
     }
   }
   .spellbound-cattiles__tile-desc {
     display: block;
-    font-size: 0.75rem;
-    line-height: 1.45;
-    color: var(--spellbound-text-soft);
+    font-family: var(--spellbound-type-reading-family);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--spellbound-text);
     margin: 0;
   }
   @media (min-width: 990px) {
     .spellbound-cattiles__tile-desc {
-      font-size: 0.85rem;
+      font-size: 1.0625rem;
+      line-height: 1.5;
     }
   }
   .spellbound-cattiles__accent {
@@ -174,7 +197,14 @@
   <div class="spellbound-cattiles__inner">
     <header class="spellbound-cattiles__header" data-spellbound-reveal>
       {% if section.settings.title != blank %}
-        <h2 class="spellbound-cattiles__title">{{ section.settings.title }}</h2>
+        <h2 class="spellbound-cattiles__title">
+          {% if section.settings.title == 'Browse the Collections' %}
+            <span class="spellbound-cattiles__title-line">Browse</span>
+            <span class="spellbound-cattiles__title-line">the Collections</span>
+          {% else %}
+            {{ section.settings.title }}
+          {% endif %}
+        </h2>
       {% endif %}
     </header>
 
