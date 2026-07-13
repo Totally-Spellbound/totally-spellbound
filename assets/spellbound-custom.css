@@ -182,8 +182,7 @@ button.shopify-payment-button__button--unbranded {
 }
 .price,
 .money,
-[class*='__price'],
-[class*='price'] .money {
+product-price {
   font-family: var(--spellbound-type-reading-family);
   line-height: var(--spellbound-leading-interface);
 }
@@ -515,74 +514,6 @@ product-card [class*='price'] {
 }
 .product-grid-container .product-grid product-card product-price {
   margin-block-start: auto;
-}
-
-@media screen and (max-width: 749px) {
-  .product-grid-container .product-grid[product-grid-view='default'] {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(100%, var(--spellbound-product-card-min-width)), 1fr)
-    );
-  }
-
-  .product-grid-container .product-grid[product-grid-view='mobile-double'] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .product-grid-container
-    .product-grid:not([product-grid-view='zoom-out'])
-    :is(.product-card, .product-grid__card)
-    :is(h4, .h4) {
-    display: block;
-    overflow: visible;
-    text-overflow: clip;
-    -webkit-line-clamp: unset;
-  }
-
-  results-list .facets-toggle__button,
-  results-list .column-options__option {
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  results-list .column-options__option {
-    align-items: center;
-    justify-content: center;
-  }
-
-  .product-grid-container .card-gallery slideshow-arrows {
-    inset: var(--spellbound-space-1);
-    mix-blend-mode: normal;
-  }
-
-  .product-grid-container .card-gallery slideshow-arrows .slideshow-control {
-    position: relative;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    opacity: 1;
-    color: var(--spellbound-text);
-    background: transparent;
-    border: 0;
-    animation: none;
-  }
-
-  .product-grid-container .card-gallery slideshow-arrows .slideshow-control::before {
-    content: '';
-    position: absolute;
-    inset: 7px;
-    border: 1px solid var(--spellbound-border-strong);
-    border-radius: 50%;
-    background: rgba(13, 11, 16, 0.84);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  }
-
-  .product-grid-container .card-gallery slideshow-arrows .slideshow-control .svg-wrapper {
-    position: relative;
-    z-index: 1;
-    width: 14px;
-    height: 14px;
-  }
 }
 
 /* Facet pill turns gold when it holds active selections */

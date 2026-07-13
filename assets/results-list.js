@@ -1,26 +1,30 @@
 import { mediaQueryLarge, requestIdleCallback, startViewTransition } from '@theme/utilities';
 import PaginatedList from '@theme/paginated-list';
 
-// Two 12rem card floors plus the 12px mobile grid gap.
-const mobileDoubleColumnQuery = window.matchMedia('(min-width: 396px)');
-
 /**
  * A custom element that renders a pagniated results list
  */
 export default class ResultsList extends PaginatedList {
+  #gridResizeObserver = new ResizeObserver(() => this.#syncAutomaticMobileControl());
+
   connectedCallback() {
     super.connectedCallback();
 
     mediaQueryLarge.addEventListener('change', this.#handleMediaQueryChange);
-    mobileDoubleColumnQuery.addEventListener('change', this.#handleMobileDensityChange);
     this.#syncLayout(mediaQueryLarge.matches ? 'desktop' : 'mobile');
+    this.#gridResizeObserver.observe(this);
     this.setAttribute('initialized', '');
+  }
+
+  updatedCallback() {
+    super.updatedCallback();
+    this.#syncAutomaticMobileControl();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     mediaQueryLarge.removeEventListener('change', this.#handleMediaQueryChange);
-    mobileDoubleColumnQuery.removeEventListener('change', this.#handleMobileDensityChange);
+    this.#gridResizeObserver.disconnect();
   }
 
   /**
@@ -78,31 +82,25 @@ export default class ResultsList extends PaginatedList {
     this.#syncLayout(event.matches ? 'desktop' : 'mobile');
   };
 
-  #handleMobileDensityChange = () => {
-    const storedLayout = sessionStorage.getItem('product-grid-view-mobile');
-    if (mediaQueryLarge.matches || (storedLayout && storedLayout !== 'default')) return;
-
-    this.#syncLayout('mobile');
-  };
-
   /** @param {'desktop' | 'mobile'} viewport */
   #syncLayout(viewport) {
     const storedLayout = sessionStorage.getItem(`product-grid-view-${viewport}`);
-    const value = viewport === 'desktop'
-      ? storedLayout || 'default'
-      : storedLayout && storedLayout !== 'default'
-        ? storedLayout
-        : this.#defaultMobileLayout;
+    const value = storedLayout && storedLayout !== 'default' ? storedLayout : 'default';
     const inputName = viewport === 'desktop' ? 'grid' : 'grid-mobile';
     const targetElement = this.querySelector(`input[name="${inputName}"][value="${value}"]`);
-    if (!(targetElement instanceof HTMLInputElement)) return;
-
-    targetElement.checked = true;
     this.#setLayout(value);
+    if (targetElement instanceof HTMLInputElement) targetElement.checked = true;
+    if (viewport === 'mobile' && value === 'default') this.#syncAutomaticMobileControl();
   }
 
-  get #defaultMobileLayout() {
-    return mobileDoubleColumnQuery.matches ? 'mobile-double' : 'mobile-single';
+  #syncAutomaticMobileControl() {
+    const { grid } = this.refs;
+    if (mediaQueryLarge.matches || !grid || grid.getAttribute('product-grid-view') !== 'default') return;
+
+    const columnCount = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+    const value = columnCount > 1 ? 'mobile-double' : 'mobile-single';
+    const targetElement = this.querySelector(`input[name="grid-mobile"][value="${value}"]`);
+    if (targetElement instanceof HTMLInputElement) targetElement.checked = true;
   }
 }
 
