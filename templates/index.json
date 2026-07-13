@@ -68,7 +68,8 @@
             "card_title": "Crystals & Stones",
             "description": "Points, spheres, clusters & one-of-a-kind pieces",
             "link": "/collections/crystals-stones",
-            "image_asset": "spellbound-img-cat-crystals.jpg"
+            "image_asset": "spellbound-img-collection-crystals-portrait-1200.webp",
+            "image_asset_small": "spellbound-img-collection-crystals-portrait-600.webp"
           }
         },
         "tile_tarot": {
@@ -77,7 +78,8 @@
             "card_title": "Tarot & Oracle",
             "description": "Decks and card holders to guide your path",
             "link": "/collections/tarot-oracle",
-            "image_asset": "spellbound-img-cat-tarot.jpg"
+            "image_asset": "spellbound-img-collection-tarot-portrait-1200.webp",
+            "image_asset_small": "spellbound-img-collection-tarot-portrait-600.webp"
           }
         },
         "tile_incense": {
@@ -86,7 +88,8 @@
             "card_title": "Incense & Burners",
             "description": "Cones, holders and backflow burners",
             "link": "/collections/incense-burners",
-            "image_asset": "spellbound-img-cat-incense.jpg"
+            "image_asset": "spellbound-img-collection-incense-portrait-1200.webp",
+            "image_asset_small": "spellbound-img-collection-incense-portrait-600.webp"
           }
         },
         "tile_books": {
@@ -95,7 +98,8 @@
             "card_title": "Books & Guides",
             "description": "Preloved wisdom on crystals, reiki & folklore",
             "link": "/collections/books-guides",
-            "image_asset": "spellbound-img-cat-books.jpg"
+            "image_asset": "spellbound-img-collection-books-portrait-1200.webp",
+            "image_asset_small": "spellbound-img-collection-books-portrait-600.webp"
           }
         },
         "tile_altar": {
@@ -104,7 +108,8 @@
             "card_title": "Altar & Home",
             "description": "Coasters, dishes, trinket boxes & decor",
             "link": "/collections/altar-home",
-            "image_asset": "spellbound-img-cat-altar.jpg"
+            "image_asset": "spellbound-img-collection-altar-portrait-1200.webp",
+            "image_asset_small": "spellbound-img-collection-altar-portrait-600.webp"
           }
         },
         "tile_handmade": {
@@ -113,7 +118,8 @@
             "card_title": "Handmade by Us",
             "description": "Laser-engraved & 3D-printed in our shop",
             "link": "/collections/handmade",
-            "image_asset": "spellbound-img-cat-handmade.jpg"
+            "image_asset": "spellbound-img-collection-handmade-portrait-1200.webp",
+            "image_asset_small": "spellbound-img-collection-handmade-portrait-600.webp"
           }
         }
       },
