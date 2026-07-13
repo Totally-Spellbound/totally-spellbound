@@ -9,7 +9,7 @@
     position: relative;
     overflow: hidden;
     background: linear-gradient(to bottom, var(--spellbound-bg), #08060b);
-    padding: clamp(3rem, 6vw, 5rem) 1.5rem 7.5rem;
+    padding: clamp(2.5rem, 6vw, 5rem) 1.5rem 7rem;
     color: var(--spellbound-text-soft);
   }
   .spellbound-footer__inner {
@@ -17,7 +17,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 3rem;
+    gap: 2rem;
   }
   @media (min-width: 750px) {
     .spellbound-footer__inner {
@@ -51,8 +51,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 1px solid var(--spellbound-gold-deep);
     color: var(--spellbound-gold);
@@ -66,6 +66,15 @@
   .spellbound-footer__social svg {
     width: 18px;
     height: 18px;
+  }
+  @media (min-width: 990px) {
+    .spellbound-footer {
+      padding: clamp(3rem, 6vw, 5rem) 1.5rem 7.5rem;
+    }
+    .spellbound-footer__social a {
+      width: 42px;
+      height: 42px;
+    }
   }
   .spellbound-footer__heading {
     font-family: var(--spellbound-type-reading-family);
@@ -81,9 +90,12 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.875rem;
+    gap: 0;
   }
   .spellbound-footer__links a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 1.0625rem;
     color: var(--spellbound-text-soft);
     text-decoration: none;
@@ -91,6 +103,14 @@
   }
   .spellbound-footer__links a:hover {
     color: var(--spellbound-gold-bright);
+  }
+  @media (min-width: 990px) {
+    .spellbound-footer__links {
+      gap: 0.875rem;
+    }
+    .spellbound-footer__links a {
+      min-height: 0;
+    }
   }
   .spellbound-footer__info {
     display: flex;
@@ -113,6 +133,9 @@
     color: var(--spellbound-gold);
   }
   .spellbound-footer__info-item a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: var(--spellbound-text-soft);
     text-decoration: underline;
     text-decoration-color: var(--spellbound-gold-deep);
@@ -121,6 +144,11 @@
   }
   .spellbound-footer__info-item a:hover {
     color: var(--spellbound-gold-bright);
+  }
+  @media (min-width: 990px) {
+    .spellbound-footer__info-item a {
+      min-height: 0;
+    }
   }
   .spellbound-footer__news-text {
     font-size: 1rem;
@@ -139,7 +167,6 @@
     background: rgba(247, 241, 227, 0.04);
     border: 1px solid var(--spellbound-border-strong);
     border-radius: 2px;
-    outline: none;
     color: var(--spellbound-text);
     font-family: var(--font-body--family);
     font-size: 1rem;
@@ -195,9 +222,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5rem 1.75rem;
+    gap: 0 1.75rem;
   }
   .spellbound-footer__policies a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     font-size: 0.9375rem;
     color: var(--spellbound-text-faint);
     text-decoration: none;
@@ -205,6 +235,14 @@
   }
   .spellbound-footer__policies a:hover {
     color: var(--spellbound-gold-bright);
+  }
+  @media (min-width: 990px) {
+    .spellbound-footer__policies {
+      gap: 0.5rem 1.75rem;
+    }
+    .spellbound-footer__policies a {
+      min-height: 0;
+    }
   }
   .spellbound-footer__payments {
     display: flex;

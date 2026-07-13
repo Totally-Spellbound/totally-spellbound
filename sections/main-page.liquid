@@ -17,6 +17,17 @@
   </div>
 </div>
 
+{% if section.settings.mobile_padding_override %}
+  {% style %}
+    @media screen and (max-width: 989px) {
+      #shopify-section-{{ section.id }} .section-content-wrapper {
+        padding-block-start: {{ section.settings.mobile_padding_block_start }}px;
+        padding-block-end: {{ section.settings.mobile_padding_block_end }}px;
+      }
+    }
+  {% endstyle %}
+{% endif %}
+
 {% schema %}
 {
   "name": "t:names.page",
@@ -88,6 +99,34 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_override",
+      "label": "Use custom mobile vertical padding",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_block_start",
+      "label": "Mobile top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "visible_if": "{{ section.settings.mobile_padding_override }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_block_end",
+      "label": "Mobile bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "visible_if": "{{ section.settings.mobile_padding_override }}"
     }
   ]
 }

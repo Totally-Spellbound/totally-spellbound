@@ -141,6 +141,12 @@ body {
   outline-offset: 2px;
 }
 
+.content-for-layout:has(.spellbound-page-hero) :is(a, button, input, select, textarea),
+.spellbound-footer :is(a, button, input) {
+  scroll-margin-block-start: calc(var(--header-height, 60px) + var(--spellbound-space-4));
+  scroll-margin-block-end: calc(var(--spellbound-space-16) + var(--spellbound-space-8));
+}
+
 /* Utility: image hover (grayscale-by-default DROPPED for contrast — colour always visible) */
 .spellbound-grayscale {
   filter: none;
