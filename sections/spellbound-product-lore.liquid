@@ -103,52 +103,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
   }
-  .spellbound-lore__pair-card {
-    text-decoration: none;
-    display: block;
-  }
-  .spellbound-lore__pair-card:hover .spellbound-lore__pair-title {
-    color: var(--spellbound-gold-bright);
-  }
-  .spellbound-lore__pair-img {
-    aspect-ratio: 1;
-    background: var(--spellbound-surface-2);
-    overflow: hidden;
-    margin-bottom: 1rem;
-    border: 1px solid var(--spellbound-border);
-    border-radius: 6px;
-  }
-  .spellbound-lore__pair-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .spellbound-lore__pair-card:hover .spellbound-lore__pair-img img {
-    transform: scale(1.05);
-  }
-  .spellbound-lore__pair-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin-bottom: 0.5rem;
-  }
-  .spellbound-lore__pair-title {
-    color: var(--spellbound-text);
-    font-family: var(--spellbound-type-reading-family);
-    font-size: var(--spellbound-type-product-title-size);
-    font-weight: 600;
-    line-height: var(--spellbound-leading-product-title);
-    transition: color 0.3s ease;
-    margin-bottom: 0.35rem;
-  }
-  .spellbound-lore__pair-price {
-    font-family: var(--spellbound-type-reading-family);
-    font-size: var(--spellbound-type-price-size);
-    font-weight: 600;
-    color: var(--spellbound-text);
-    letter-spacing: 0.02em;
-  }
   .spellbound-lore__pairs-empty {
     grid-column: 1 / -1;
     text-align: center;
@@ -398,24 +352,11 @@
             {%- endif -%}
 
             {%- if has_match -%}
-              <a href="{{ related_product.url }}" class="spellbound-lore__pair-card">
-                <div class="spellbound-lore__pair-img">
-                  {% if related_product.featured_image %}
-                    <img
-                      src="{{ related_product.featured_image | image_url: width: 400 }}"
-                      alt="{{ related_product.title | escape }}"
-                      loading="lazy"
-                      width="{{ related_product.featured_image.width }}"
-                      height="{{ related_product.featured_image.height }}"
-                    >
-                  {% endif %}
-                </div>
-                <div class="spellbound-lore__pair-badges">
-                  {% render 'spellbound-badges', product: related_product %}
-                </div>
-                <h4 class="spellbound-lore__pair-title">{{ related_product.title }}</h4>
-                <span class="spellbound-lore__pair-price">{{ related_product.price | money }}</span>
-              </a>
+              {% render 'product-card',
+                product: related_product,
+                mode: 'editorial',
+                image_sizes: '(min-width: 990px) 12vw, 50vw'
+              %}
               {%- assign pairs_count = pairs_count | plus: 1 -%}
             {%- endif -%}
           {%- endfor -%}

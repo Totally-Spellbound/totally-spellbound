@@ -1,6 +1,6 @@
 {% comment %}
-  Renders Totally Spellbound metafield sigils for a product card.
-  Shows the ruling element and first intention as compact labelled icons.
+  Renders shared Totally Spellbound product-card badges.
+  Shows sold-out status, ruling element and first intention.
   Values normalised via spellbound-metafield-value (handles list metafields).
 
   Accepts:
@@ -11,6 +11,12 @@
 {% endcomment %}
 
 {%- if product != blank -%}
+  {%- unless product.available -%}
+    <span class="product-badges__badge product-badges__badge--rectangle spellbound-product-card__availability">
+      {{ 'content.product_badge_sold_out' | t }}
+    </span>
+  {%- endunless -%}
+
   {%- capture element_value -%}{%- render 'spellbound-metafield-value', value: product.metafields.custom.element -%}{%- endcapture -%}
   {%- capture intention_value -%}{%- render 'spellbound-metafield-value', value: product.metafields.custom.intention -%}{%- endcapture -%}
   {%- assign element_first = element_value | split: ',' | first | strip -%}

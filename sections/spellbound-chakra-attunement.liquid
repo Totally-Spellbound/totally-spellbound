@@ -442,72 +442,6 @@
       gap: 2rem;
     }
   }
-  .spellbound-chakra__card {
-    display: block;
-    text-decoration: none;
-  }
-  .spellbound-chakra__card-media {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    background: var(--spellbound-surface);
-    border: 1px solid var(--spellbound-border);
-    margin-bottom: 1rem;
-  }
-  .spellbound-chakra__card-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .spellbound-chakra__card:hover .spellbound-chakra__card-media img {
-    transform: scale(1.03);
-  }
-  .spellbound-chakra__card-media::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2px;
-    background: var(--spellbound-gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .spellbound-chakra__card:hover .spellbound-chakra__card-media::after {
-    transform: scaleX(1);
-  }
-  .spellbound-chakra__card-badges {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
-  }
-  .spellbound-chakra__card-title {
-    margin: 0 0 0.25rem;
-    font-family: var(--spellbound-type-reading-family);
-    font-weight: 600;
-    font-size: var(--spellbound-type-product-title-size);
-    line-height: var(--spellbound-leading-product-title);
-    letter-spacing: 0;
-    color: var(--spellbound-text);
-    transition: color 0.3s ease;
-  }
-  .spellbound-chakra__card:hover .spellbound-chakra__card-title {
-    color: var(--spellbound-gold-bright);
-  }
-  .spellbound-chakra__card-price {
-    margin: 0;
-    font-family: var(--spellbound-type-reading-family);
-    font-size: var(--spellbound-type-price-size);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--spellbound-text);
-  }
   .spellbound-chakra__kindred-empty {
     margin: 0;
     padding: 1.25rem 0;
@@ -515,13 +449,6 @@
     font-style: italic;
     font-size: 1.1rem;
     color: var(--spellbound-text-soft);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .spellbound-chakra__card-media img,
-    .spellbound-chakra__card-media::after,
-    .spellbound-chakra__card-title {
-      transition: none;
-    }
   }
 </style>
 
@@ -659,24 +586,10 @@
                   {%- endfor -%}
                   {%- if kindred_matched -%}
                     {%- assign kindred_count = kindred_count | plus: 1 -%}
-                    <a href="{{ kindred_product.url }}" class="spellbound-chakra__card">
-                      <div class="spellbound-chakra__card-media">
-                        {%- if kindred_product.featured_image -%}
-                          <img
-                            src="{{ kindred_product.featured_image | image_url: width: 600 }}"
-                            alt="{{ kindred_product.featured_image.alt | default: kindred_product.title | escape }}"
-                            width="{{ kindred_product.featured_image.width }}"
-                            height="{{ kindred_product.featured_image.height }}"
-                            loading="lazy"
-                          >
-                        {%- endif -%}
-                        <div class="spellbound-chakra__card-badges">
-                          {% render 'spellbound-badges', product: kindred_product %}
-                        </div>
-                      </div>
-                      <h3 class="spellbound-chakra__card-title">{{ kindred_product.title | escape }}</h3>
-                      <p class="spellbound-chakra__card-price">{{ kindred_product.price | money }}</p>
-                    </a>
+                    {% render 'product-card',
+                      product: kindred_product,
+                      mode: 'editorial'
+                    %}
                   {%- endif -%}
                 {%- endif -%}
               {%- endunless -%}

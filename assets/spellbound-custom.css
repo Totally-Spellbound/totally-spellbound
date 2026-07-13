@@ -438,9 +438,7 @@ product-card .product-badges__badge--rectangle {
   text-transform: none;
   backdrop-filter: blur(8px);
 }
-.spellbound-product-card__badges,
-.spellbound-kindred__badges,
-.spellbound-lore__pair-badges {
+.spellbound-product-card__badges {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -614,6 +612,7 @@ product-card .card-gallery img {
   }
 }
 product-card a p,
+product-card .custom-typography > p,
 .product-card__link p {
   font-family: var(--spellbound-type-reading-family);
   font-size: var(--spellbound-type-product-title-size);

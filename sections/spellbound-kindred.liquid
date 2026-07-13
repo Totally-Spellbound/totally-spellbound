@@ -74,29 +74,7 @@
 
       {%- if is_match -%}
         {%- assign matched_count = matched_count | plus: 1 -%}
-        <a href="{{ p.url }}" class="spellbound-kindred__card">
-          <div class="spellbound-kindred__media">
-            {%- if p.featured_image -%}
-              <img
-                src="{{ p.featured_image | image_url: width: 600 }}"
-                srcset="{{ p.featured_image | image_url: width: 300 }} 300w, {{ p.featured_image | image_url: width: 400 }} 400w, {{ p.featured_image | image_url: width: 600 }} 600w, {{ p.featured_image | image_url: width: 800 }} 800w"
-                sizes="(min-width: 990px) 25vw, 50vw"
-                alt="{{ p.featured_image.alt | default: p.title | escape }}"
-                class="spellbound-kindred__image"
-                loading="lazy"
-                width="{{ p.featured_image.width }}"
-                height="{{ p.featured_image.height }}"
-              >
-            {%- endif -%}
-            <div class="spellbound-kindred__badges">
-              {% render 'spellbound-badges', product: p %}
-            </div>
-          </div>
-          <div class="spellbound-kindred__info">
-            <h3 class="spellbound-kindred__product-title">{{ p.title | escape }}</h3>
-            <p class="spellbound-kindred__price">{{ p.price | money }}</p>
-          </div>
-        </a>
+        {% render 'product-card', product: p, mode: 'editorial' %}
       {%- endif -%}
     {%- endfor -%}
   {%- endcapture -%}
@@ -135,92 +113,6 @@
       .spellbound-kindred__grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 3rem 2rem;
-      }
-    }
-    .spellbound-kindred__card {
-      display: block;
-      text-decoration: none;
-    }
-    .spellbound-kindred__media {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: var(--spellbound-surface);
-      border: 1px solid var(--spellbound-border);
-      border-radius: 10px;
-      margin-bottom: 1.25rem;
-    }
-    .spellbound-kindred__media::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 2px;
-      background: var(--spellbound-gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 2;
-    }
-    .spellbound-kindred__card:hover .spellbound-kindred__media::after,
-    .spellbound-kindred__card:focus-visible .spellbound-kindred__media::after {
-      transform: scaleX(1);
-    }
-    .spellbound-kindred__image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-    }
-    .spellbound-kindred__card:hover .spellbound-kindred__image {
-      transform: scale(1.03);
-      filter: brightness(1.05);
-    }
-    .spellbound-kindred__badges {
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.375rem;
-      z-index: 1;
-    }
-    .spellbound-kindred__info {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spellbound-group-gap);
-    }
-    .spellbound-kindred__product-title {
-      font-family: var(--spellbound-type-reading-family);
-      font-weight: 600;
-      font-size: var(--spellbound-type-product-title-size);
-      line-height: var(--spellbound-leading-product-title);
-      color: var(--spellbound-text);
-      margin: 0;
-      transition: color 0.3s ease;
-    }
-    .spellbound-kindred__card:hover .spellbound-kindred__product-title {
-      color: var(--spellbound-gold-bright);
-    }
-    .spellbound-kindred__price {
-      font-family: var(--spellbound-type-reading-family);
-      font-size: var(--spellbound-type-price-size);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--spellbound-text);
-      margin: 0;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .spellbound-kindred__image,
-      .spellbound-kindred__media::after,
-      .spellbound-kindred__product-title {
-        transition: none;
-      }
-      .spellbound-kindred__card:hover .spellbound-kindred__image {
-        transform: none;
-        filter: none;
       }
     }
   </style>

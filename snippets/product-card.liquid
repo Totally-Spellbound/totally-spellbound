@@ -4,11 +4,45 @@
   The product object is null or when placeholders are rendered.
 
   @param {object} product - The product object
-  @param {object} children - The children of the product card
+  @param {object} [children] - The children of the commerce product card
   @param {object} [block] - The block object
   @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
+  @param {string} [mode] - Card mode: commerce (default) or editorial
+  @param {string} [image_sizes] - Responsive image sizes for editorial cards
 {%- enddoc -%}
 
+{% if mode == 'editorial' %}
+  {% assign editorial_image_sizes = image_sizes | default: '(min-width: 990px) 25vw, 50vw' %}
+  {% if product != blank %}
+    <a
+      href="{{ product.url }}"
+      class="spellbound-product-card spellbound-product-card--editorial"
+      data-product-id="{{ product.id }}"
+    >
+      <span class="spellbound-product-card__media">
+        {% if product.featured_image %}
+          <img
+            src="{{ product.featured_image | image_url: width: 600 }}"
+            srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w"
+            sizes="{{ editorial_image_sizes }}"
+            alt="{{ product.featured_image.alt | default: product.title | escape }}"
+            class="spellbound-product-card__image"
+            loading="lazy"
+            width="{{ product.featured_image.width }}"
+            height="{{ product.featured_image.height }}"
+          >
+        {% endif %}
+        <span class="spellbound-product-card__badges">
+          {% render 'spellbound-badges', product: product %}
+        </span>
+      </span>
+      <div class="spellbound-product-card__info">
+        <h3 class="spellbound-product-card__title">{{ product.title | escape }}</h3>
+        <span class="spellbound-product-card__price">{{ product.price | money }}</span>
+      </div>
+    </a>
+  {% endif %}
+{% else %}
 {% assign block_settings = block.settings %}
 
 {% style %}
@@ -109,9 +143,129 @@
     {{ children }}
   </div>
 </product-card>
+{% endif %}
 
 {% stylesheet %}
   .product-card__placeholder-image svg {
     height: 100%;
+  }
+
+  .spellbound-product-card--editorial {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .spellbound-product-card__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin-block-end: var(--spellbound-space-4);
+    background: var(--spellbound-surface);
+    border: 1px solid var(--spellbound-border);
+    border-radius: var(--spellbound-radius-card-media);
+  }
+
+  .spellbound-product-card__media::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    height: 2px;
+    background: var(--spellbound-gold);
+    content: '';
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .spellbound-product-card--editorial:hover .spellbound-product-card__media::after,
+  .spellbound-product-card--editorial:focus-visible .spellbound-product-card__media::after {
+    transform: scaleX(1);
+  }
+
+  .spellbound-product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 450ms ease, transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .spellbound-product-card--editorial:hover .spellbound-product-card__image {
+    filter: brightness(1.05);
+    transform: scale(1.03);
+  }
+
+  .spellbound-product-card__badges {
+    position: absolute;
+    top: var(--spellbound-space-3);
+    left: var(--spellbound-space-3);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+  }
+
+  .spellbound-product-card__availability {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.35rem 0.65rem;
+    color: var(--spellbound-text);
+    font-family: var(--spellbound-type-reading-family);
+    font-size: var(--spellbound-type-action-size);
+    font-weight: var(--spellbound-type-action-weight);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgb(13 11 16 / 84%);
+    border: 1px solid var(--spellbound-border-strong);
+    border-radius: 999px;
+  }
+
+  .spellbound-product-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spellbound-group-gap);
+  }
+
+  .spellbound-product-card__title,
+  .spellbound-product-card__price {
+    color: var(--spellbound-text);
+    font-family: var(--spellbound-type-reading-family);
+  }
+
+  .spellbound-product-card__title {
+    margin: 0;
+    font-size: var(--spellbound-type-product-title-size);
+    font-weight: 600;
+    line-height: var(--spellbound-leading-product-title);
+    transition: color 300ms ease;
+  }
+
+  .spellbound-product-card--editorial:hover .spellbound-product-card__title {
+    color: var(--spellbound-gold-bright);
+  }
+
+  .spellbound-product-card__price {
+    font-size: var(--spellbound-type-price-size);
+    font-weight: 600;
+    line-height: var(--spellbound-leading-interface);
+    letter-spacing: 0.02em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spellbound-product-card__image,
+    .spellbound-product-card__media::after,
+    .spellbound-product-card__title {
+      transition: none;
+    }
+
+    .spellbound-product-card--editorial:hover .spellbound-product-card__image {
+      filter: none;
+      transform: none;
+    }
   }
 {% endstylesheet %}
