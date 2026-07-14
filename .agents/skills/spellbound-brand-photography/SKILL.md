@@ -5,7 +5,7 @@ description: Create or edit Totally Spellbound brand and marketing photography f
 
 # Spellbound brand photography
 
-Make the shop feel observed, not decorated. The camera has found a real independent British shop, home or workshop at a charged moment.
+The camera finds a real independent British shop, home or workshop at a charged moment.
 
 ## Art direction
 
