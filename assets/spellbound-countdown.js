@@ -30,6 +30,7 @@
     if (!timer) return;
 
     var expiredEl = root.querySelector('[data-countdown-expired]');
+    var hideWhenInactive = root.getAttribute('data-countdown-hide-inactive') === 'true';
     var daysEl = timer.querySelector('[data-countdown-days]');
     var hoursEl = timer.querySelector('[data-countdown-hours]');
     var minsEl = timer.querySelector('[data-countdown-mins]');
@@ -42,8 +43,12 @@
 
     var target = parseTargetDate(timer.getAttribute('data-countdown-target'));
 
-    /* Invalid or missing date: show zeros and never start an interval. */
+    /* Invalid or missing campaigns fail closed when the section opts in. */
     if (isNaN(target)) {
+      if (hideWhenInactive) {
+        root.hidden = true;
+        return;
+      }
       setValues(0, 0, 0);
       return;
     }
@@ -56,6 +61,10 @@
         intervalId = null;
       }
       setValues(0, 0, 0);
+      if (hideWhenInactive) {
+        root.hidden = true;
+        return;
+      }
       if (expiredEl && expiredEl.textContent.trim() !== '') {
         timer.hidden = true;
         expiredEl.hidden = false;
@@ -68,6 +77,7 @@
         expire();
         return;
       }
+      root.hidden = false;
       var totalMins = Math.floor(diff / 60000);
       var days = Math.floor(totalMins / 1440);
       var hours = Math.floor((totalMins % 1440) / 60);

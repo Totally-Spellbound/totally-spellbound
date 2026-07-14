@@ -111,13 +111,26 @@
       {% endif %}
     </div>
 
-    {%- assign featured_collection = section.settings.collection -%}
+    {%- liquid
+      assign featured_collection = section.settings.collection
+      assign featured_products = featured_collection.products
+      if section.settings.sort_newest_first
+        assign featured_products = featured_products | sort: 'published_at' | reverse
+      endif
+      assign products_shown = 0
+    -%}
     {% if featured_collection != blank and featured_collection.products.size > 0 %}
       <div class="spellbound-featured__grid" data-spellbound-reveal-group>
-        {% for product in featured_collection.products limit: section.settings.max_products %}
-          {% # theme-check-disable UniqueStaticBlockId %}
-            {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
-          {% # theme-check-enable UniqueStaticBlockId %}
+        {% for product in featured_products %}
+          {% if section.settings.available_only == false or product.available %}
+            {% # theme-check-disable UniqueStaticBlockId %}
+              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+            {% # theme-check-enable UniqueStaticBlockId %}
+            {% assign products_shown = products_shown | plus: 1 %}
+          {% endif %}
+          {% if products_shown >= section.settings.max_products %}
+            {% break %}
+          {% endif %}
         {% endfor %}
       </div>
     {% else %}
@@ -156,7 +169,19 @@
       "min": 2,
       "max": 12,
       "step": 1,
-      "default": 8
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "sort_newest_first",
+      "label": "Show newest products first",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "available_only",
+      "label": "Hide sold-out products",
+      "default": true
     },
     {
       "type": "url",

@@ -238,10 +238,12 @@
         "block_order": ["product-card-gallery", "product_title", "swatches", "price"]
       }
     },
-    "settings": {
+      "settings": {
         "heading": "New Manifestations",
         "collection": "all",
-        "max_products": 8,
+        "max_products": 4,
+        "sort_newest_first": true,
+        "available_only": true,
         "view_all_link": "shopify://collections/all"
       }
     },
@@ -412,6 +414,7 @@
         "heading": "Lammas - The First Harvest",
         "description": "The first harvest festival of the year falls on the 1st of August. Gather abundance while the wheel turns.",
         "target_date": "2026-08-01",
+        "hide_when_inactive": true,
         "cta_label": "Shop the Harvest Ritual",
         "cta_link": "/collections/intention-abundance",
         "image_asset": "spellbound-img-lammas.jpg"
@@ -545,11 +548,11 @@
     "hero",
     "trust",
     "category_tiles",
-    "featured",
-    "intentions",
-    "editorial",
     "oracle",
+    "featured",
     "countdown",
+    "editorial",
+    "intentions",
     "zodiac"
   ]
 }

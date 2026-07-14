@@ -265,6 +265,17 @@
   }
 
   @media screen and (max-width: 749px) {
+    .spellbound-hero {
+      min-height: max(
+        68vh,
+        calc(var(--header-height, 4.5rem) + var(--header-group-height, 0px) + 18rem)
+      );
+      min-height: max(
+        68svh,
+        calc(var(--header-height, 4.5rem) + var(--header-group-height, 0px) + 18rem)
+      );
+    }
+
     .spellbound-hero__media {
       transform-origin: center top;
     }

@@ -104,6 +104,21 @@
     border-color: var(--spellbound-gold-bright);
     color: var(--spellbound-bg);
   }
+  .spellbound-oracle__option:disabled,
+  .spellbound-oracle__option:disabled:hover {
+    background: transparent;
+    border-color: var(--spellbound-border);
+    color: var(--spellbound-text-soft);
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+  .spellbound-oracle__availability {
+    min-height: 1.5em;
+    margin: 1.25rem auto 0;
+    color: var(--spellbound-text-soft);
+    font-size: var(--spellbound-type-body-size);
+    line-height: var(--spellbound-leading-body);
+  }
   .spellbound-oracle__option:focus-visible,
   .spellbound-oracle__back:focus-visible,
   .spellbound-oracle__reset:focus-visible,
@@ -261,6 +276,7 @@
           {% endif %}
         {% endfor %}
       </div>
+      <p class="spellbound-oracle__availability" data-oracle-availability aria-live="polite"></p>
       <button type="button" class="spellbound-oracle__back" data-oracle-back="0">Go back</button>
     </div>
 

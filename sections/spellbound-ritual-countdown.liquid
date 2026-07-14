@@ -160,8 +160,13 @@
   }
 </style>
 
+<div
+  data-spellbound-countdown
+  data-countdown-hide-inactive="{% if request.design_mode %}false{% else %}{{ section.settings.hide_when_inactive }}{% endif %}"
+  {% if section.settings.hide_when_inactive and request.design_mode == false %}hidden{% endif %}
+>
 {% render 'spellbound-ornament' %}
-<section class="spellbound-countdown" data-spellbound-countdown>
+<section class="spellbound-countdown">
   <div class="spellbound-countdown__inner">
     <div class="spellbound-countdown__content" data-spellbound-reveal-group>
       {% if section.settings.heading != blank %}
@@ -225,6 +230,7 @@
     </div>
   </div>
 </section>
+</div>
 
 {% schema %}
 {
@@ -256,6 +262,12 @@
       "id": "expired_text",
       "label": "Message once the date passes",
       "default": "The harvest is upon us - blessed Lammas."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_when_inactive",
+      "label": "Hide when the date is missing or has passed",
+      "default": true
     },
     {
       "type": "text",
