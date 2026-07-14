@@ -30,3 +30,16 @@ This is a single-context repository with an optional root `CONTEXT.md` and syste
 ### Design system
 
 The repository-owned `design-md` skill lives at `.agents/skills/design-md/`. Use the live storefront and its measured styles as the source for the canonical root `DESIGN.md`; review that document with Andrew before changing shared typography, palette or spacing. Stitch screens may supplement the website when Andrew supplies them.
+
+## Project reference docs
+
+- `docs/metafields.md` - authoritative product metafield choice lists (custom fields are
+  fixed Choice lists, not free text; validate values against these).
+- `docs/brand.md`, `docs/tone-of-voice.md`, `docs/sales.md` - brand voice + product-copy
+  guidance for any customer-facing product text.
+
+## Related build: Product Enricher app
+
+Separate internal app (repo `totally-spellbound-product-enricher`, not this theme repo)
+that AI-enriches products and suggests navigation. Brief: `.planning/enricher-app/`
+(start with `README.md`). Consumes the reference docs above.
