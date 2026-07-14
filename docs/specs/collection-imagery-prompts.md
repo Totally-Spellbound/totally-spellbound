@@ -15,7 +15,13 @@ A geological still life inside a real independent British crystal shop: one larg
 ### 4:5
 
 ```text
-An intimate portrait-format geological tableau in a real independent British crystal shop: a tall amethyst cathedral rises through the frame, caught between a soft out-of-focus rose-quartz foreground and a dark cabinet of mineral specimens behind it. Camera slightly below the crystal, 65mm vintage cinema lens, compressed layers and very shallow depth of field. Narrow side light from a rain-streaked shop window skims the crystal facets; one candle behind the subject creates restrained amber halation through the edges. Photoreal, ARRI Alexa 35 colour response, Kodak Vision3 500T film emulation, fine 35mm grain, deep aubergine blacks and truthful mineral colour. No text, no labels, no logos, no magical beams, no generic fantasy styling.
+An intimate portrait-format geological still life in a real independent British crystal shop: a broad, low amethyst cluster lies diagonally across an open shallow collector's drawer, joined by a flat labradorite slab, smoky quartz points, a rose-quartz sphere and several small raw specimens. The group forms an irregular mineral landscape across the middle of the frame, with varied silhouettes and no single dominant upright form. Camera thirty degrees above counter height, 55mm vintage cinema lens, a soft crystal edge close to lens, the drawer and stones sharp in the middle plane, dark specimen cabinets receding behind. Narrow side light from a rain-streaked shop window skims the facets; one small candle creates restrained amber halation at the far edge. Photoreal, ARRI Alexa 35 colour response, Kodak Vision3 500T film emulation, fine 35mm grain, deep aubergine blacks and truthful mineral colour. The photograph reaches every edge. All markings remain indistinct; spirituality comes from the real objects and light.
+```
+
+Final refinement:
+
+```text
+Keep the exact collector's drawer, broad horizontal amethyst cluster, labradorite slab, rose-quartz sphere, smoky quartz pieces, dark cabinet, candle, rainy window, camera angle, depth, colour and lighting from the reference. Change only the large blurred upright quartz shape in the left foreground. Replace it with a low, shallow tarnished-brass dish of small tumbled stones, soft and out of focus, staying below the middle of the frame. Preserve the layered foreground and every other object. Photoreal ARRI Alexa 35 colour response, Kodak Vision3 500T character, fine grain and restrained halation. The image reaches every edge; all shapes remain low, varied and geologically believable.
 ```
 
 ## Tarot & Oracle
