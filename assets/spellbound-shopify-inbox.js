@@ -10,7 +10,8 @@
     const shopifyInbox = document.querySelector(shopifyInboxSelector);
     const shadowRoot = shopifyInbox?.shadowRoot;
 
-    if (!shadowRoot || shadowRoot.getElementById(styleId)) return false;
+    if (!shadowRoot) return false;
+    if (shadowRoot.getElementById(styleId)) return true;
 
     const style = document.createElement('style');
     style.id = styleId;

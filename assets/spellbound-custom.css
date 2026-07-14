@@ -992,8 +992,13 @@ dialog.facets--drawer {
   z-index: 20;
 }
 
+/* ========================= */
+/* Shopify Inbox              */
+/* ========================= */
+
 @media (max-width: 749px) {
-  #ShopifyChat {
+  /* The 48px launcher needs five extra pixels for the app's bottom clearance. */
+  #ShopifyChat[is-open='false'] {
     height: 53px !important;
   }
 }
