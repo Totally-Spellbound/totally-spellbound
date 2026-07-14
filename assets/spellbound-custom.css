@@ -992,6 +992,17 @@ dialog.facets--drawer {
   z-index: 20;
 }
 
+/* ========================= */
+/* Shopify Inbox              */
+/* ========================= */
+
+@media (max-width: 749px) {
+  /* The 48px launcher needs five extra pixels for the app's bottom clearance. */
+  #ShopifyChat[is-open='false'] {
+    height: 53px !important;
+  }
+}
+
 /* Celestial body section: kill the page-background gap above the black
    stage so it merges seamlessly with the (dark) section before it. The
    bottom keeps its padding - the stage's own gradient fades to page bg. */
