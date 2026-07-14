@@ -1,6 +1,6 @@
 # Collection imagery prompts
 
-Written for Lovart CLI and tested with Nano Banana Pro at 4K. Seedream 5 Pro accepts the same prompts, but its free queue was unavailable on 14 July 2026. The wide and portrait prompts are separate compositions, not crops.
+Written for Lovart CLI and tested with Nano Banana Pro at 4K. Seedream 5 Pro accepts the same prompts, but its free queue was unavailable on 14 July 2026. Wide and portrait each use a separate composition.
 
 Shared finish for the set: photoreal, ARRI Alexa 35 colour response, vintage cinema glass, Kodak Vision3 500T film emulation, restrained grain and halation, deep aubergine shadows, warm practical light, truthful product colour, no text, no logos, no generic fantasy decoration.
 

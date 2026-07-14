@@ -10,7 +10,7 @@ The camera finds a real independent British shop, home or workshop at a charged 
 ## Art direction
 
 - **Camera:** ARRI Alexa 35 colour response, vintage cinema glass and Kodak Vision3 500T emulation. Fine 35mm grain and restrained highlight halation.
-- **Composition:** one clear subject across three planes: a soft foreground edge, a sharp middle subject and a background with real depth. Use close observational angles rather than centred catalogue layouts.
+- **Composition:** one clear subject across three planes: a soft foreground edge, a sharp middle subject and a background with real depth. Use close observational angles with the subject off-centre.
 - **Light:** warm practicals, candles or task lamps shaped by cool rain-window or blue-hour fill. Shadows hold aubergine depth. Gold comes from light, brass and timber.
 - **Place:** lived-in shelves, worn benches and believable domestic corners. Keep dust, patina, paper fibres, mineral inclusions, wood grain, ash and tool marks.
 - **People:** cast distinctive real people. Age shows naturally in hands, hair and posture. Clothing is practical and idiosyncratic, with plum, mustard, worn linen, handmade jewellery and small prints. Keep faces outside frame unless the brief needs identity.
@@ -53,7 +53,7 @@ Complete when every required composition exists at 4K and no paid generation occ
 
 ### 4. Inspect at full size
 
-View every output. Check subject truth, hands, faces, object geometry, generated lettering, frame edges, repeated props and whether the light still feels photographic. Refine the nearest good image rather than starting over.
+View every output. Check subject truth, hands, faces, object geometry, generated lettering, frame edges, repeated props and whether the light still feels photographic. Refine the nearest good image first.
 
 Complete when every image survives a full-size visual pass and each human or product detail reads as intentional.
 
