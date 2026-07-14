@@ -122,6 +122,7 @@
   {%- assign header_image = collection.image -%}
 {%- endif -%}
 {%- assign header_asset = section.settings.background_image_asset -%}
+{%- assign header_asset_small = blank -%}
 
 {%- comment -%} Automatic atmospheric backdrop per collection handle {%- endcomment -%}
 {%- if header_image == blank and header_asset == blank -%}
@@ -129,24 +130,31 @@
   {%- assign zodiac_handles = 'aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces' | split: ',' -%}
   {%- case handle -%}
     {%- when 'crystals-stones' -%}
-      {%- assign header_asset = 'spellbound-img-cat-crystals.jpg' -%}
+      {%- assign header_asset = 'spellbound-img-collection-crystals-wide-2400.webp' -%}
+      {%- assign header_asset_small = 'spellbound-img-collection-crystals-wide-1200.webp' -%}
     {%- when 'tarot-oracle' -%}
-      {%- assign header_asset = 'spellbound-img-cat-tarot.jpg' -%}
+      {%- assign header_asset = 'spellbound-img-collection-tarot-wide-2400.webp' -%}
+      {%- assign header_asset_small = 'spellbound-img-collection-tarot-wide-1200.webp' -%}
     {%- when 'incense-burners' -%}
-      {%- assign header_asset = 'spellbound-img-cat-incense.jpg' -%}
+      {%- assign header_asset = 'spellbound-img-collection-incense-wide-2400.webp' -%}
+      {%- assign header_asset_small = 'spellbound-img-collection-incense-wide-1200.webp' -%}
     {%- when 'books-guides' -%}
-      {%- assign header_asset = 'spellbound-img-cat-books.jpg' -%}
+      {%- assign header_asset = 'spellbound-img-collection-books-wide-2400.webp' -%}
+      {%- assign header_asset_small = 'spellbound-img-collection-books-wide-1200.webp' -%}
     {%- when 'altar-home' -%}
-      {%- assign header_asset = 'spellbound-img-cat-altar.jpg' -%}
+      {%- assign header_asset = 'spellbound-img-collection-altar-wide-2400.webp' -%}
+      {%- assign header_asset_small = 'spellbound-img-collection-altar-wide-1200.webp' -%}
     {%- when 'handmade' -%}
-      {%- assign header_asset = 'spellbound-img-cat-handmade.jpg' -%}
+      {%- assign header_asset = 'spellbound-img-collection-handmade-wide-2400.webp' -%}
+      {%- assign header_asset_small = 'spellbound-img-collection-handmade-wide-1200.webp' -%}
     {%- else -%}
       {%- if zodiac_handles contains handle -%}
         {%- assign header_asset = 'spellbound-img-zodiac.jpg' -%}
       {%- elsif handle contains 'planet-' -%}
         {%- assign header_asset = 'spellbound-img-oracle.jpg' -%}
       {%- elsif handle contains '-chakra' or handle contains 'crystal-' -%}
-        {%- assign header_asset = 'spellbound-img-cat-crystals.jpg' -%}
+        {%- assign header_asset = 'spellbound-img-collection-crystals-wide-2400.webp' -%}
+        {%- assign header_asset_small = 'spellbound-img-collection-crystals-wide-1200.webp' -%}
       {%- else -%}
         {%- assign header_asset = 'spellbound-img-hero-desktop.webp' -%}
       {%- endif -%}
@@ -179,6 +187,18 @@
           decoding="async"
           width="5126"
           height="3072"
+        >
+      {%- elsif header_asset_small != blank -%}
+        <img
+          src="{{ header_asset_small | asset_url }}"
+          srcset="{{ header_asset_small | asset_url }} 1200w, {{ header_asset | asset_url }} 2400w"
+          sizes="100vw"
+          alt=""
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          width="2400"
+          height="1350"
         >
       {%- else -%}
         <img

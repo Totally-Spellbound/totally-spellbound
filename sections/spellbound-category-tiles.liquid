@@ -214,6 +214,7 @@
           assign tile_title = block.settings.card_title | default: ''
           assign tile_initial = tile_title | strip | slice: 0, 1 | upcase
           assign tile_asset = block.settings.image_asset | strip
+          assign tile_asset_small = block.settings.image_asset_small | strip
         %}
         <a
           class="spellbound-cattiles__tile"
@@ -236,15 +237,29 @@
                 loading="lazy"
               >
             {% elsif tile_asset != blank %}
-              <img
-                class="spellbound-cattiles__image"
-                src="{{ tile_asset | asset_url }}"
-                alt="{{ tile_title | escape }}"
-                width="900"
-                height="1125"
-                loading="lazy"
-                onerror="this.style.display='none'"
-              >
+              {% if tile_asset_small != blank %}
+                <img
+                  class="spellbound-cattiles__image"
+                  src="{{ tile_asset_small | asset_url }}"
+                  srcset="{{ tile_asset_small | asset_url }} 600w, {{ tile_asset | asset_url }} 1200w"
+                  sizes="(min-width: 990px) 33vw, 50vw"
+                  alt="{{ tile_title | escape }}"
+                  width="1200"
+                  height="1500"
+                  loading="lazy"
+                  onerror="this.style.display='none'"
+                >
+              {% else %}
+                <img
+                  class="spellbound-cattiles__image"
+                  src="{{ tile_asset | asset_url }}"
+                  alt="{{ tile_title | escape }}"
+                  width="900"
+                  height="1125"
+                  loading="lazy"
+                  onerror="this.style.display='none'"
+                >
+              {% endif %}
             {% endif %}
             <div class="spellbound-cattiles__scrim"></div>
           </div>
@@ -307,6 +322,12 @@
           "id": "image_asset",
           "label": "Fallback asset filename",
           "info": "Theme asset (e.g. spellbound-img-crystals.jpg) used when no image is picked"
+        },
+        {
+          "type": "text",
+          "id": "image_asset_small",
+          "label": "Small fallback asset filename",
+          "info": "Optional smaller theme asset used on narrow screens"
         }
       ]
     }
