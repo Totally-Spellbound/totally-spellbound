@@ -18,19 +18,6 @@
           },
           "blocks": {}
         },
-        "announcement_clickcollect": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Free Click & Collect in Sutton-in-Ashfield",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "0.3em",
-            "case": "uppercase"
-          },
-          "blocks": {}
-        },
         "announcement_veil": {
           "type": "_announcement",
           "settings": {
@@ -47,7 +34,6 @@
       },
       "block_order": [
         "announcement_BxgCk9",
-        "announcement_clickcollect",
         "announcement_veil"
       ],
       "name": "t:names.announcement_bar",

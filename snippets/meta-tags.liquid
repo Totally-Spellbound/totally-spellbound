@@ -17,7 +17,7 @@
 >
 
 {%- liquid
-  assign fallback_description = 'Independent crystal and spiritual shop in Sutton-in-Ashfield. Crystals, tarot, incense and handmade gifts - shop online with UK delivery or visit us on Outram Street.'
+  assign fallback_description = 'Independent online crystal and spiritual shop from Nottinghamshire. Crystals, tarot, incense and handmade gifts - shop online with UK delivery.'
   assign og_fallback_image = 'spellbound-og-default.jpg' | asset_url
   assign og_fallback_prefix = og_fallback_image | slice: 0, 2
   if og_fallback_prefix == '//'
@@ -140,7 +140,7 @@
 
 <title>
   {{ page_title }}
-  {%- if request.page_type == 'index' and page_title == shop.name %} | Crystals, Tarot &amp; Spiritual Gifts | Sutton-in-Ashfield{% endif -%}
+  {%- if request.page_type == 'index' and page_title == shop.name %} | Crystals, Tarot &amp; Spiritual Gifts{% endif -%}
   {%- if current_tags %} - tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} - Page {{ current_page }}{% endif -%}
   {%- unless page_title contains shop.name %} - {{ shop.name }}{% endunless -%}
