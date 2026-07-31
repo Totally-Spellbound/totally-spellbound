@@ -162,7 +162,7 @@
             src="{{ section.settings.image | image_url: width: 900 }}"
             srcset="{{ section.settings.image | image_url: width: 500 }} 500w, {{ section.settings.image | image_url: width: 750 }} 750w, {{ section.settings.image | image_url: width: 1100 }} 1100w"
             sizes="(min-width: 990px) 45vw, 100vw"
-            alt="{{ section.settings.image.alt | default: 'Inside Totally Spellbound, our shop in Sutton-in-Ashfield' | escape }}"
+            alt="{{ section.settings.image.alt | default: 'Inside the world of Totally Spellbound' | escape }}"
             class="spellbound-story__image"
             loading="lazy"
             width="{{ section.settings.image.width }}"
@@ -171,7 +171,7 @@
         {% elsif section.settings.image_asset != blank %}
           <img
             src="{{ section.settings.image_asset | asset_url }}"
-            alt="Inside Totally Spellbound, our shop in Sutton-in-Ashfield"
+            alt="Inside the world of Totally Spellbound"
             class="spellbound-story__image"
             loading="lazy"
             width="800"
@@ -233,25 +233,25 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "A real little shop in Sutton-in-Ashfield"
+      "default": "A real little shop, run by real people"
     },
     {
       "type": "richtext",
       "id": "body",
       "label": "Body text",
-      "default": "<p>Totally Spellbound is Alison's real little shop - no corporate warehouse, no endless aisles. Every crystal, deck and curiosity on our shelves is chosen by hand, and many are one-of-a-kind: the exact piece you see is the exact piece that arrives.</p><p>Pop in for a browse, a chat, or a bit of guidance - the kettle's usually on.</p>"
+      "default": "<p>Totally Spellbound is Alison's real little business - no corporate warehouse, no endless aisles. Every crystal, deck and curiosity we sell is chosen by hand, and many are one-of-a-kind: the exact piece you see is the exact piece that arrives.</p>"
     },
     {
       "type": "textarea",
       "id": "quote",
       "label": "Pull quote",
-      "default": "Helpful like a conversation in the shop - never pushy."
+      "default": "Helpful like a conversation over the counter - never pushy."
     },
     {
       "type": "text",
       "id": "cta_label",
       "label": "CTA label",
-      "default": "Plan Your Visit"
+      "default": "Our Story"
     },
     {
       "type": "url",
@@ -273,14 +273,12 @@
     {
       "type": "text",
       "id": "address_text",
-      "label": "Address",
-      "default": "108 Outram Street, Sutton-in-Ashfield NG17 4FS"
+      "label": "Address"
     },
     {
       "type": "text",
       "id": "hours_text",
-      "label": "Opening hours",
-      "default": "Mon-Sat 10am-4pm · Closed Sundays"
+      "label": "Opening hours"
     }
   ],
   "presets": [

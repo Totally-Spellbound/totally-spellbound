@@ -20,7 +20,7 @@
           "type": "signal",
           "settings": {
             "title": "Hand-packed with care",
-            "text": "Every order is wrapped in our shop, not a warehouse.",
+            "text": "Every order is wrapped by hand, not by a warehouse.",
             "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 11h22v16H5Z\"/><path d=\"M5 11l3-6h16l3 6\"/><path d=\"M16 5v6\"/><path d=\"M12 16h8\"/></svg>"
           }
         },
@@ -36,9 +36,9 @@
           "type": "signal",
           "settings": {
             "title": "Independent & family-run",
-            "text": "A real shop on Outram Street, Sutton-in-Ashfield.",
+            "text": "Alison's little Nottinghamshire business - online and at fairs.",
             "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 13v14h20V13\"/><path d=\"M4 8l2-4h20l2 4c0 2.2-1.8 4-4 4s-4-1.8-4-4c0 2.2-1.8 4-4 4s-4-1.8-4-4c0 2.2-1.8 4-4 4S4 10.2 4 8Z\"/><path d=\"M12 27v-8h8v8\"/></svg>",
-            "link": "/pages/visit-us"
+            "link": "/pages/our-story"
           }
         },
         "trust_help": {
@@ -324,14 +324,14 @@
     "editorial": {
       "type": "spellbound-editorial",
       "settings": {
-        "heading": "A real little shop in Sutton-in-Ashfield",
-        "body": "<p>Totally Spellbound isn’t a faceless warehouse - it’s Alison’s shop on Outram Street, where every crystal, deck and curiosity is chosen by hand. When you order online, it’s packed with the same care as if you’d walked through the door.</p>",
-        "quote": "Helpful like a conversation in the shop - never pushy.",
-        "cta_label": "Plan Your Visit",
-        "cta_link": "/pages/visit-us",
+        "heading": "A real little shop, run by real people",
+        "body": "<p>Totally Spellbound isn’t a faceless warehouse - it’s Alison’s little Nottinghamshire business, where every crystal, deck and curiosity is chosen by hand. Every order is packed with the same care as if you’d picked it off the shelf yourself, and you’ll still find us in person at craft fairs and events around the county.</p>",
+        "quote": "Helpful like a conversation over the counter - never pushy.",
+        "cta_label": "Our Story",
+        "cta_link": "/pages/our-story",
         "image_asset": "spellbound-img-our-story.webp",
-        "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
-        "hours_text": "Mon-Sat 10am-4pm · Closed Sundays"
+        "address_text": "",
+        "hours_text": ""
       }
     },
     "oracle": {

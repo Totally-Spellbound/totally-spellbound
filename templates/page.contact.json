@@ -5,7 +5,7 @@
       "settings": {
         "image_asset": "spellbound-img-contact.webp",
         "title": "Contact",
-        "intro": "Questions, requests, or wondering if something's in stock? Write to us - we'll answer like we would in the shop."
+        "intro": "Questions, requests, or wondering if something's in stock? Write to us - you'll get Alison, not a call centre."
       }
     },
     "main": {
@@ -134,10 +134,10 @@
           "type": "card",
           "settings": {
             "icon": "map-pin",
-            "title": "Find the Shop",
-            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS. Monday - Saturday, 10am - 4pm.",
-            "link_label": "Plan your visit",
-            "link": "/pages/visit-us"
+            "title": "Find Us at a Fair",
+            "body": "We're regulars at craft fairs and events around Nottinghamshire. Follow us on Facebook to see where we'll be next.",
+            "link_label": "Follow us on Facebook",
+            "link": "https://www.facebook.com/totallyspellbound"
           }
         }
       },
@@ -147,20 +147,20 @@
       ],
       "settings": {
         "heading": "Prefer the direct route?",
-        "subheading": "Call, email, or come and see us in person."
+        "subheading": "Call, email, or catch us at a fair."
       }
     },
     "in_person": {
       "type": "spellbound-editorial",
       "settings": {
-        "heading": "The kettle’s usually on",
-        "body": "<p>Some questions are easier over the counter - bring the piece, the problem or the birth chart and we’ll figure it out together. You’ll find us on Outram Street, six days a week.</p>",
-        "quote": "Helpful like a conversation in the shop - never pushy.",
-        "cta_label": "Plan Your Visit",
-        "cta_link": "/pages/visit-us",
+        "heading": "Catch us in person",
+        "body": "<p>Some questions are easier face to face - bring the piece, the problem or the birth chart and we’ll figure it out together. You’ll find us at craft fairs and events around Nottinghamshire throughout the year.</p>",
+        "quote": "Helpful like a conversation over the counter - never pushy.",
+        "cta_label": "Follow Us on Facebook",
+        "cta_link": "https://www.facebook.com/totallyspellbound",
         "image_asset": "spellbound-img-our-story.webp",
-        "address_text": "108 Outram Street, Sutton-in-Ashfield NG17 4FS",
-        "hours_text": "Mon-Sat 10am-4pm · Closed Sundays"
+        "address_text": "",
+        "hours_text": ""
       }
     }
   },

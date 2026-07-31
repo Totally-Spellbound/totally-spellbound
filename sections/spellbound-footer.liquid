@@ -385,23 +385,26 @@
         {% else %}
           <li><a href="{{ routes.all_products_collection_url }}">Shop All</a></li>
           <li><a href="/pages/our-story">Our Story</a></li>
-          <li><a href="/pages/visit-us">Visit Us</a></li>
           <li><a href="/pages/contact">Contact</a></li>
         {% endif %}
       </ul>
     </nav>
 
     <div>
-      <h2 class="spellbound-footer__heading">The Shop</h2>
+      <h2 class="spellbound-footer__heading">Get in Touch</h2>
       <div class="spellbound-footer__info">
-        <p class="spellbound-footer__info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <span>{{ section.settings.address }}</span>
-        </p>
-        <p class="spellbound-footer__info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.5V12l3 2"/></svg>
-          <span>{{ section.settings.hours }}</span>
-        </p>
+        {% if section.settings.address != blank %}
+          <p class="spellbound-footer__info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            <span>{{ section.settings.address }}</span>
+          </p>
+        {% endif %}
+        {% if section.settings.hours != blank %}
+          <p class="spellbound-footer__info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.5V12l3 2"/></svg>
+            <span>{{ section.settings.hours }}</span>
+          </p>
+        {% endif %}
         {% if section.settings.email != blank %}
           <p class="spellbound-footer__info-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2.4"/><path d="m4 7 8 6 8-6"/></svg>
@@ -677,7 +680,7 @@
       "type": "textarea",
       "id": "blurb",
       "label": "Brand blurb",
-      "default": "A real little crystal and curiosity shop in Sutton-in-Ashfield. Every crystal, deck and charm is chosen by hand - and packed with the same care as if you'd walked through the door."
+      "default": "A real little crystal and curiosity business from Nottinghamshire - online and at fairs. Every crystal, deck and charm is chosen by hand and packed with care."
     },
     {
       "type": "link_list",
@@ -688,19 +691,18 @@
     {
       "type": "text",
       "id": "address",
-      "label": "Address",
-      "default": "108 Outram Street, Sutton-in-Ashfield NG17 4FS"
+      "label": "Address"
     },
     {
       "type": "text",
       "id": "hours",
-      "label": "Opening hours",
-      "default": "Mon-Sat 10am-4pm · Closed Sundays"
+      "label": "Opening hours"
     },
     {
       "type": "text",
       "id": "email",
-      "label": "Contact email"
+      "label": "Contact email",
+      "default": "gothicwitches@gmail.com"
     },
     {
       "type": "textarea",

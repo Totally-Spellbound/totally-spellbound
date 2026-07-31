@@ -5,7 +5,7 @@
       "settings": {
         "image_asset": "spellbound-img-our-story.webp",
         "title": "Our Story",
-        "intro": "A real little shop in Sutton-in-Ashfield - no corporate warehouse, no endless aisles. Every crystal, deck and curiosity on our shelves is chosen by hand."
+        "intro": "A real little independent business from Nottinghamshire - no corporate warehouse, no endless aisles. Every crystal, deck and curiosity we sell is chosen by hand."
       }
     },
     "main": {
@@ -59,10 +59,10 @@
           "type": "card",
           "settings": {
             "icon": "map-pin",
-            "title": "Visit the shop",
-            "body": "108 Outram Street, Sutton-in-Ashfield, Nottinghamshire NG17 4FS. Open Monday - Saturday, 10am - 4pm - pop in for a browse, a chat, or a bit of guidance.",
-            "link_label": "Plan your visit",
-            "link": "/pages/visit-us"
+            "title": "Meet us in person",
+            "body": "We're out and about at craft fairs and events around Nottinghamshire - come for a browse, a chat, or a bit of guidance. Follow us on Facebook to see where we'll be next.",
+            "link_label": "Follow us on Facebook",
+            "link": "https://www.facebook.com/totallyspellbound"
           }
         },
         "browse": {
@@ -82,13 +82,13 @@
       ],
       "settings": {
         "heading": "Come and say hello",
-        "subheading": "The kettle's usually on."
+        "subheading": "Catch us at a fair, or browse the vault from your sofa."
       }
     },
     "handmade": {
       "type": "spellbound-editorial",
       "settings": {
-        "heading": "Engraved, printed & finished in the shop",
+        "heading": "Engraved, printed & finished by hand",
         "body": "<p>Alongside the crystals and curiosities we source, we design and make our own pieces right here - laser-engraved altar boards, 3D-printed moon shelves, trinket dishes and keepsakes you won’t find anywhere else. If you’re after something a little different, this is where the magic is literally made.</p>",
         "quote": "If you can dream it up, we can probably engrave it.",
         "cta_label": "Shop Handmade",
