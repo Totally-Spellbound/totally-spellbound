@@ -1,0 +1,6 @@
+
+# local cross-project handoffs (may contain secrets) — never commit
+inbox/
+
+# macOS finder metadata
+.DS_Store
